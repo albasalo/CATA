@@ -1,0 +1,96 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	font: 16px Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3 {
+	margin-top: 0px;
+}
+
+h1 {
+	font-size: 1.4em;
+}
+
+h2 {
+	font-size: 1.2em;
+}
+
+h3 {
+	font-size: 1.0em;
+}
+
+p, ol, ul {
+	margin-bottom: 1.8em;
+	line-height: normal;
+}
+
+#header {
+	height: 140px;
+	margin: 0px auto;
+	background: #0289C9;
+}
+
+#header a {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+#logo {
+	float: left;
+	padding-left: 90px;
+}
+
+#logo h1 {
+	margin: 0px;
+	line-height: normal;
+	font-weight: normal;
+	font-size: 1.8em;
+	color: #FFFFFF;
+}
+
+#logo h1 {
+	padding: 25px 0px 0px 0px;
+}
+
+#logo p {
+	margin: 0px;
+	font-size: 1.4em;
+	color: #FFFFFF;
+}
+
+#page {
+	width: 600px;
+	margin: auto auto;
+	padding: 30px 0px;
+}
+
+#content {
+	float: center;
+}
+
+.post {
+	margin: 0px 0px 30px 0px;
+}
+
+.post .title {
+	margin: 0px;
+	padding: 0px 0px 5px 0px;
+	border-bottom: #0B3E56 solid 1px;
+	color: #0B3E56;
+}
+
+.post .title a {
+	color: #232F01;
+}
+
+.post .entry {
+}
+
+.post .meta {
+	font-weight: bold;
+}
+
+.post .byline {
+	margin: 0px;
+}
