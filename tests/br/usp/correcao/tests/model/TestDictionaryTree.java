@@ -15,11 +15,11 @@ import br.usp.correcao.model.DictionaryEntry;
 import br.usp.correcao.model.DictionaryTree;
 import br.usp.correcao.tests.CorrecaoTestCase;
 
-public class DictionaryTreeTest extends CorrecaoTestCase {
+public class TestDictionaryTree extends CorrecaoTestCase {
 	
 	DictionaryTree tree;
 
-	public DictionaryTreeTest(String name) {
+	public TestDictionaryTree(String name) {
 		super(name);
 	}
 	
@@ -41,7 +41,7 @@ public class DictionaryTreeTest extends CorrecaoTestCase {
 		Pattern firstDelimiter = Pattern.compile("\t");
 		Pattern secondDelimiter = Pattern.compile(";");
 		
-		InputStream is = DictionaryTreeTest.class.getResourceAsStream(dicFile);
+		InputStream is = TestDictionaryTree.class.getResourceAsStream(dicFile);
 		Reader reader = new BufferedReader(new InputStreamReader(is));
 		BufferedReader br = new BufferedReader(reader);
 	    String line;
@@ -72,7 +72,7 @@ public class DictionaryTreeTest extends CorrecaoTestCase {
 		Pattern firstDelimiter = Pattern.compile("\t");
 		Pattern secondDelimiter = Pattern.compile(";");
 		
-		InputStream is = DictionaryTreeTest.class.getResourceAsStream(dicFile);
+		InputStream is = TestDictionaryTree.class.getResourceAsStream(dicFile);
 		Reader reader = new BufferedReader(new InputStreamReader(is));
 		BufferedReader br = new BufferedReader(reader);
 	    String line;
