@@ -4,9 +4,11 @@ public class DictionaryEntry {
 
 	private String error, suggestion;
 	private Type type;
+	private int length;
 	
 	public DictionaryEntry(String error, String suggestion, Type type) {
 		this.error = error;
+		this.length = error.getBytes().length;
 		this.suggestion = suggestion;
 		this.type = type;
 	}
@@ -33,6 +35,10 @@ public class DictionaryEntry {
 	
 	public void setType(Type type) {
 		this.type = type;
+	}
+	
+	public int getLength() {
+		return length;
 	}
 	
 }

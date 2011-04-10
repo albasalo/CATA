@@ -33,6 +33,7 @@ public class DictionaryTree {
 		String line;
 		Type type = null;
 	    try {
+	    	//FIXME melhorar o parsing
 	    	while ((line = br.readLine()) != null) {
 	    		if(line.equals("<error>")) {
 	    			type = Type.ERROR;
@@ -62,8 +63,8 @@ public class DictionaryTree {
 		dicTree.prepare();
 	}
 	
-	public Iterator<?> search(String text) {
-		return dicTree.search(text.getBytes());
+	public Iterator<?> search(byte[] text) {
+		return dicTree.search(text);
 	}
 
 }

@@ -30,13 +30,8 @@
 					<br>
 					${output}<br>
 					<ul>
-					<c:forEach items="${suggestions}" var="suggestion">
-					    <li> <b>Linha</b> ${suggestion.lineNum}:<br>
-						<p>
-						<b>${suggestion.suggestion.type.errorType}:</b> ${suggestion.suggestion.error}<br>
-						<b>Sugestão:</b> ${suggestion.suggestion.suggestion}
-						</p>
-					    </li>    
+					<c:forEach items="${text}" var="line">
+					    ${line.lineText}<br>
 					</c:forEach>
 					</ul>
 				</div>

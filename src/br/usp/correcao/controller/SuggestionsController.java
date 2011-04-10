@@ -9,8 +9,8 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 
-import br.usp.correcao.model.ErrorOccurrence;
-import br.usp.correcao.util.TextAnalyzer;
+import br.usp.correcao.model.Line;
+import br.usp.correcao.model.Text;
 
 
 @Resource
@@ -25,19 +25,19 @@ public class SuggestionsController {
 	@Post
 	@Path("/suggestions/results")
 	public void results(UploadedFile file) {
-		TextAnalyzer analyzer = new TextAnalyzer(file.getFile());
+		Text text = new Text(file.getFile());
 		
-		ArrayList<ErrorOccurrence> suggestions = null;
+		ArrayList<Line> analyzedText = null;
 		try {
-			suggestions = analyzer.getSuggestions();
+			analyzedText = text.analyzeText();
 		} catch (IOException e) {
 			//TODO
 		}
 		
-		if(!suggestions.isEmpty()) {
+		if(text.getErrorsFound() != 0) {
 			result.include("output", "Algumas sugestões para melhorar o estilo " +
 					"do texto enviado:");
-			result.include("suggestions", suggestions);
+			result.include("text", analyzedText);
 		}
 		else {
 			result.include("output", "Não há sugestões para o texto enviado.");

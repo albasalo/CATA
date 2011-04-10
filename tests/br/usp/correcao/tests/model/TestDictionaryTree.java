@@ -31,7 +31,7 @@ public class TestDictionaryTree extends CorrecaoTestCase {
 
 	@Test
 	public void testSearchEmpty() {
-		Iterator<?> searcher = tree.search("");
+		Iterator<?> searcher = tree.search("".getBytes());
 		assert(searcher != null && !searcher.hasNext());
 	}
 	
@@ -53,7 +53,7 @@ public class TestDictionaryTree extends CorrecaoTestCase {
 				if(entry != null) {
 					String[] errors = secondDelimiter.split(entry[0]);
 					for(String err : errors) {
-						Iterator<?> searcher = tree.search(err);
+						Iterator<?> searcher = tree.search(err.getBytes());
 						assert(searcher != null && searcher.hasNext() &&
 								((DictionaryEntry)searcher.next()).getError().equals(err));
 					}
@@ -84,7 +84,7 @@ public class TestDictionaryTree extends CorrecaoTestCase {
 				if(entry != null) {
 					String[] errors = secondDelimiter.split(entry[0]);
 					for(String err : errors) {
-						Iterator<?> searcher = tree.search("  " + err + "  ");
+						Iterator<?> searcher = tree.search(("  " + err + "  ").getBytes());
 						assert(searcher != null && searcher.hasNext() &&
 								((DictionaryEntry)searcher.next()).getError().equals(err));
 					}
@@ -99,9 +99,9 @@ public class TestDictionaryTree extends CorrecaoTestCase {
 	
 	@Test
 	public void testSearchMetadata() {
-		Iterator<?> searcher = tree.search("<error>");
+		Iterator<?> searcher = tree.search("<error>".getBytes());
 		assert(searcher != null && !searcher.hasNext());
-		searcher = tree.search("<warning>");
+		searcher = tree.search("<warning>".getBytes());
 		assert(searcher != null && !searcher.hasNext());
 	}
 

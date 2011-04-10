@@ -3,11 +3,12 @@ package br.usp.correcao.model;
 public class ErrorOccurrence {
 	
 	private DictionaryEntry suggestion;
-	private int lineNum;
+	private int firstIndex, lastIndex;
 	
-	public ErrorOccurrence(DictionaryEntry suggestion, int lineNum) {
+	public ErrorOccurrence(DictionaryEntry suggestion, int index) {
 		this.suggestion = suggestion;
-		this.lineNum = lineNum;
+		this.lastIndex = index;
+		this.firstIndex = index - suggestion.getLength();
 	}
 
 	public DictionaryEntry getSuggestion() {
@@ -17,13 +18,17 @@ public class ErrorOccurrence {
 	public void setSuggestion(DictionaryEntry suggestion) {
 		this.suggestion = suggestion;
 	}
-
-	public int getLineNum() {
-		return lineNum;
+	
+	public int getFirstIndex() {
+		return firstIndex;
 	}
 
-	public void setLineNum(int lineNum) {
-		this.lineNum = lineNum;
+	public int getLastIndex() {
+		return lastIndex;
+	}
+
+	public void setLastIndex(int index) {
+		this.lastIndex = index;
 	}
 
 }
