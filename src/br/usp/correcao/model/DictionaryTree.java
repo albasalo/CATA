@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 import org.arabidopsis.ahocorasick.AhoCorasick;
 
+
 public class DictionaryTree {
 	
 	private String dicFile;
@@ -29,15 +30,15 @@ public class DictionaryTree {
 		InputStream is = DictionaryTree.class.getResourceAsStream(dicFile);
 		Reader reader = new BufferedReader(new InputStreamReader(is));
 		BufferedReader br = new BufferedReader(reader);
-	    String line;
+		String line;
 	    try {
 	    	while ((line = br.readLine()) != null) {
 				String[] entry = firstDelimiter.split(line);
 				if(entry != null) {
 					String[] errors = secondDelimiter.split(entry[0]);
-					for(int i = 0; i < errors.length; i++) {
-						dicTree.add(errors[i].getBytes(),
-								new DictionaryEntry(errors[i].toLowerCase(), entry[1]));
+					for(String err : errors) {
+						dicTree.add(err.getBytes(),
+								new DictionaryEntry(err.toLowerCase(), entry[1]));
 					}
 				}
 	    	}

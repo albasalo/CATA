@@ -32,7 +32,7 @@
 					<c:forEach items="${suggestions}" var="suggestion">
 					    <li> <b>Linha</b> ${suggestion.lineNum}:<br>
 						<p>
-						<b>Termo inadequado:</b> ${suggestion.suggestion.error }<br>
+						<b>Termo inadequado:</b> ${suggestion.suggestion.error}<br>
 						<b>Sugestão:</b> ${suggestion.suggestion.suggestion}
 						</p>
 					    </li>    
