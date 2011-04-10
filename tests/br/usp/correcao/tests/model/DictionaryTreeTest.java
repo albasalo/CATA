@@ -47,6 +47,8 @@ public class DictionaryTreeTest extends CorrecaoTestCase {
 	    String line;
 	    try {
 	    	while ((line = br.readLine()) != null) {
+	    		if(line.equals("<error>") || line.equals("<warning>"))
+	    			continue;
 				String[] entry = firstDelimiter.split(line);
 				if(entry != null) {
 					String[] errors = secondDelimiter.split(entry[0]);
@@ -59,6 +61,7 @@ public class DictionaryTreeTest extends CorrecaoTestCase {
 	    	}	
 	    	is.close();
 	    } catch (IOException ioe) {
+	    	//TODO
 	    	ioe.printStackTrace();
 	    }
 	}
@@ -75,6 +78,8 @@ public class DictionaryTreeTest extends CorrecaoTestCase {
 	    String line;
 	    try {
 	    	while ((line = br.readLine()) != null) {
+	    		if(line.equals("<error>") || line.equals("<warning>"))
+	    			continue;
 				String[] entry = firstDelimiter.split(line);
 				if(entry != null) {
 					String[] errors = secondDelimiter.split(entry[0]);
@@ -87,8 +92,17 @@ public class DictionaryTreeTest extends CorrecaoTestCase {
 	    	}	
 	    	is.close();
 	    } catch (IOException ioe) {
+	    	//TODO
 	    	ioe.printStackTrace();
 	    }
+	}
+	
+	@Test
+	public void testSearchMetadata() {
+		Iterator<?> searcher = tree.search("<error>");
+		assert(searcher != null && !searcher.hasNext());
+		searcher = tree.search("<warning>");
+		assert(searcher != null && !searcher.hasNext());
 	}
 
 }

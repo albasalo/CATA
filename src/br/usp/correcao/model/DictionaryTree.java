@@ -31,14 +31,23 @@ public class DictionaryTree {
 		Reader reader = new BufferedReader(new InputStreamReader(is));
 		BufferedReader br = new BufferedReader(reader);
 		String line;
+		Type type = null;
 	    try {
 	    	while ((line = br.readLine()) != null) {
+	    		if(line.equals("<error>")) {
+	    			type = Type.ERROR;
+	    			continue;
+	    		}
+	    		if(line.equals("<warning>")) {
+	    			type = Type.WARNING;
+	    			continue;
+	    		}
 				String[] entry = firstDelimiter.split(line);
 				if(entry != null) {
 					String[] errors = secondDelimiter.split(entry[0]);
 					for(String err : errors) {
 						dicTree.add(err.getBytes(),
-								new DictionaryEntry(err.toLowerCase(), entry[1]));
+								new DictionaryEntry(err.toLowerCase(), entry[1], type));
 					}
 				}
 	    	}

@@ -1,17 +1,13 @@
+<error>
 a dependable system;um sistema dependente	um sistema no qual se pode confiar (depender)
 advice (AOP);conselho	adendo
 aspect	aspecto
 aspect weaver	combinador
-assembler	montador
-assembly language	linguagem de montagem
 assume;assuma	suponha, considere
 assumption	pressuposto, suposição, assunção
 audio	áudio
 Autonomic Computing;Computação Autonômica	Computação Autônoma
 binding	enlace, associação
-browser	navegador
-bug	erro
-checkpoint	ponto de salvaguarda
 cloud computing	computação na nuvem, computação em nuvem
 cluster	aglomerado, agrupamento
 concern (AOP)	interesse
@@ -29,12 +25,9 @@ default	padrão, valor padrão
 delay	atraso
 dependability;dependência	confiança no funcionamento
 deployment	implantação
-design	projeto (ou desenho)
-dummy-object	objeto fantoche
 dynamic binding	enlace dinâmico, associação
 early aspects	aspectos iniciais
 effective;efetivo	eficaz
-email	correio eletrônico, mensagem
 embedded;embebido	embutido (mais correto), mais usado
 eventually;eventualmente;possivelmente	mais cedo ou mais tarde, finalmente, futuramente
 eXtreme Programming	Programação eXtrema
@@ -44,27 +37,20 @@ file system	sistema de arquivos
 framework	arcabouço
 Grid	Grade
 hack	gambiarra
-hash function	função de espalhamento, função de resumo criptográfico ou, simplesmente, resumo criptográfico
-hash table	tabela de espalhamento, tabela de dispersão, tabela de hash
-hop	salto
 host	máquina, hospedeiro, computador
 idiom	expressão idiomática
 indentation	indentação, endentação
 inter-type declaration	declaração intertipos
-I/O	E/S
 job	tarefa
 join point	ponto de junção
 kernel	núcleo
 layout	leiaute, formato
-linker	ligador
 lock	bloqueio
-log	registro
 maintainability	manutenibilidade, manutenabilidade
 mandatory;mandatório	obrigatório
 membership service	serviço de pertinência
 middleware (plural);middlewares	sistemas de middleware
 mission critical systems;sistemas de missão crítica	sistemas críticos à missão
-multi-threaded	múltiplos fluxos de execução, múltiplas linhas de execução
 name space	espaço de nomes
 nested	aninhado, encaixado
 obliviousness	inconsciência
@@ -72,54 +58,40 @@ offset	deslocamento
 open source	código aberto
 overhead	custo adicional, carga extra, sobrecarga
 overlay network	rede sobreposta
-page fault	falta de página
 pair programming	programação em pares
 parser	analisador, analisador sintático
-patch	remendo, componente de atualização
 payload	carga útil
-peer	par
-peer-to-peer	par-a-par
 performance	desempenho
 pervasive computing;computação pervasiva	computação ubíqua
-pipe	duto
-polling	varredura, consulta periódica
 prefetching	transferência antecipada, busca antecipada
 principal	sujeito, entidade
 procedural;procedural	procedimental
-proxy	procurador, representante
 random;randômico	aleatório
 realistic;realístico	realista
 refactor	refatorar
 request	requisição, pedido
 requirements;requerimentos	requisitos
 reuse;reuso	reúso
-round-robin	rodízio
 router	roteador
 safety	segurança no funcionamento
 scattering (AOP)	espalhamento
 security	segurança, segurança no uso
 separation of concerns	separação de interesses
 serialization;serialização	seriação
-site	sítio
 software (plural);softwares	sistemas de software, programas
 stakeholders	interessados, partes interessadas
-starvation	inanição
 static/dynamic crosscutting	interesse transversal (ou entrecortante) estático/dinâmico
-string	cadeia de caracteres, cadeia
 switch	comutador [de pacotes]
 system under test;sistema sob teste	sistema em teste
 tangling	entrelaçamento
 technical debt;dívida técnica	débito técnico
-template	gabarito, modelo, molde
 testbed	ambiente de/para testes
 test-driven development	programação dirigida por testes
 test-first programming	programação com testes a priori
 the default value is X	por omissão, considera-se o valor X; o valor padrão é X
 theme	tema
-thread	fluxo de execução, linha de execução, processo leve
 throughput	vazão
 to check;checar	verificar
-to commit, commit	consolidar, consolidação, efetivar (protocolo de efetivação em duas fases)
 to crash	cair
 to crosscut	entrecortar
 to customize;customizar	personalizar, configurar, particularizar
@@ -136,8 +108,38 @@ to support;suportar	prover, dar suporte, implementar, incluir, comportar, contem
 to trace	rastrear
 to wrap	envolver, encapsular
 trace;traço	rastreamento, rastro
-trade-off	dicotomia (é melhor explicar a relação por extenso)
 unit tests;testes unitários	testes de unidade
 (wave) envelope;envelope (de onda)	envoltória (de onda)
 weaving (AOP)	combinação
 wrapper	invólucro, envólucro
+<warning>
+assembler	montador
+assembly language	linguagem de montagem
+browser	navegador
+bug	erro
+checkpoint	ponto de salvaguarda
+to commit, commit	consolidar, consolidação, efetivar (protocolo de efetivação em duas fases)
+design	projeto (ou desenho)
+dummy-object	objeto fantoche
+email	correio eletrônico, mensagem
+hash function	função de espalhamento, função de resumo criptográfico ou, simplesmente, resumo criptográfico
+hash table	tabela de espalhamento, tabela de dispersão, tabela de hash
+hop	salto
+I/O	E/S
+linker	ligador
+log	registro
+multi-threaded	múltiplos fluxos de execução, múltiplas linhas de execução
+page fault	falta de página
+patch	remendo, componente de atualização
+peer	par
+peer-to-peer	par-a-par
+pipe	duto
+polling	varredura, consulta periódica
+proxy	procurador, representante
+round-robin	rodízio
+site	sítio
+starvation	inanição
+string	cadeia de caracteres, cadeia
+template	gabarito, modelo, molde
+thread	fluxo de execução, linha de execução, processo leve
+trade-off	dicotomia (é melhor explicar a relação por extenso)
