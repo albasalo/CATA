@@ -27,8 +27,8 @@ public class Text {
 	    	while((inputLine = br.readLine()) != null) {
 	    		Line l = new Line(inputLine);
 	    		l.analyze();
-	    		errorsFound += l.getErrorsFound();
-	    		analyzedText.add(l);
+		    	errorsFound += l.getErrorsFound();
+		    	analyzedText.add(l);
 	    	}
 	    	br.close();
 	    	//TODO verificar isso
