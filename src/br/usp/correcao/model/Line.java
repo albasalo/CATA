@@ -36,6 +36,7 @@ public class Line {
 	}
 	
 	//FIXME tirar isso daqui - construir isso no jsp
+	// O que este metodo tem que fazer eh mapear os indices dos erros
 	public String getLineText() {
 		if(errors == null)
 			analyze();
@@ -50,15 +51,26 @@ public class Line {
 				int last = occurrence.getLastIndex();
 				for(i = 0, j = 0; i < originalLineBytes.length;) {
 					if(i == first) {
-						lineText += (new String(newLineBytes, 0, j) + "<font style=\"BACKGROUND-COLOR: #F0B0B0\">");
+						lineText += (new String(newLineBytes, 0, j)
+									+ "<span class=\"popupConf\"><span class=\"highlightedText\">");
+						if(occurrence.getSuggestion().getType() == Type.ERROR)
+							lineText += "<font style=\"background-color: #FF7373\">";
+						else
+							lineText += "<font style=\"background-color: #FFD34F\">";
 						for(j = 0; i != last; i++, j++)
 							newLineBytes[j] = originalLineBytes[i];
+						lineText += (new String(newLineBytes, 0, j) + "</font></span><span class=\"popup\">"
+										+ "<span class=\"popupContent\">"
+										+ "<b>&nbsp;" + occurrence.getSuggestion().getType().getErrorType().replaceAll(" ", "&nbsp;") + "&nbsp;</b> "
+										+ "&nbsp;<b>Sugestão:</b>&nbsp;"
+										+ occurrence.getSuggestion().getSuggestion().replaceAll(" ", "&nbsp;")
+										+ "&nbsp;</span></span>"
+										+ "</span>");
 						if(errorsIterator.hasNext()) {
 							occurrence = (ErrorOccurrence) errorsIterator.next();
 							first = occurrence.getFirstIndex();
 							last = occurrence.getLastIndex();
 						}
-						lineText += (new String(newLineBytes, 0, j) + "</font>");
 						j = 0;
 					}
 					else {
@@ -69,7 +81,7 @@ public class Line {
 				lineText += new String(newLineBytes, 0, j);
 			}
 			else
-				lineText = new String(originalLineBytes);
+				lineText += new String(originalLineBytes);
 		}
 		
 		return lineText;

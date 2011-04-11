@@ -11,6 +11,8 @@ public class Text {
 
 	private InputStream is;
 	private ArrayList<Line> analyzedText;
+	// TODO nao precisa necessariamente contar os erros
+	// no momento, o sistema so precisa saber se ocorreram erros
 	private int errorsFound;
 	
 	public Text(InputStream is) {

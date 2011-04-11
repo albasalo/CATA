@@ -1,7 +1,7 @@
 body {
 	margin: 0px;
 	padding: 0px;
-	font: 16px Arial, Helvetica, sans-serif;
+	font: 16px Helvetica, Arial, sans-serif;
 }
 
 h1, h2, h3 {
@@ -87,10 +87,35 @@ p, ol, ul {
 .post .entry {
 }
 
+.post .output {
+	margin-left: 20px;
+}
+
 .post .meta {
 	font-weight: bold;
 }
 
 .post .byline {
 	margin: 0px;
+}
+
+.popupConf {
+	position: relative;
+}
+
+.highlightedText {
+}
+
+.popup {
+	position: absolute;
+    display: none;
+	z-index: 20;
+	margin: 4px 4px;
+	background-color: #FFECB0;
+	border: 1px solid black;
+}
+
+.popupContent {
+	font-size: 14px;
+    font: Helvetica, Arial, sans-serif;
 }

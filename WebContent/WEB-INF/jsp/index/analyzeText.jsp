@@ -6,9 +6,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<style type="text/css">
-			<%@ include file="/css/style.css" %>
-		</style>
+		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<title>Enviando arquivo...</title>
 	</head>
 	
