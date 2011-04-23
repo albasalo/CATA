@@ -1,6 +1,5 @@
 package br.usp.correcao.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import br.com.caelum.vraptor.Path;
@@ -9,8 +8,8 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 
-import br.usp.correcao.model.Line;
-import br.usp.correcao.model.Text;
+import br.usp.correcao.model.AnalyzedLine;
+import br.usp.correcao.model.AnalyzedText;
 
 
 @Resource
@@ -22,18 +21,15 @@ public class SuggestionsController {
 		this.result = result;
 	}
 
+	//FIXME
 	@Post
 	@Path("/suggestions/results")
 	public void results(UploadedFile file) {
-		Text text = new Text(file.getFile());
 		
-		ArrayList<Line> analyzedText = null;
-		try {
-			analyzedText = text.analyzeText();
-		} catch (IOException e) {
-			//TODO
-		}
+		AnalyzedText text = new AnalyzedText(file.getFile());		
+		ArrayList<AnalyzedLine> analyzedText = text.getAnalyzedText();
 		
+		//FIXME Colocar as mensagens no JSP
 		if(text.getErrorsFound() != 0) {
 			result.include("output", "Algumas sugestões para melhorar o estilo " +
 					"do texto enviado:");

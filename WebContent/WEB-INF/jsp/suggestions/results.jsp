@@ -90,8 +90,41 @@
 					${output}<br>
 					<br>
 					<div class="output">
-						<c:forEach items="${text}" var="line">
-						${line.lineText}<br>
+						<c:forEach items="${text}" var="analyzedLine">
+							<c:forEach items="${analyzedLine.analyzedLine}" var="segment">
+								<c:choose>
+								<c:when test="${segment.brokenRule != null}">
+									<span class="popupConf">
+										<span class="highlightedText">
+											<c:set var="category" value="Erro" />
+											<c:choose>
+											<c:when test="${segment.brokenRule.category == category}">
+												<c:set var="color" value="#FF7373" />
+											</c:when>
+											<c:otherwise>
+												<c:set var="color" value="#FFD34F" />
+											</c:otherwise>
+											</c:choose>
+											<font style="background-color: ${color}">
+												<c:out value="${segment.text}"/>
+											</font>
+										</span>
+										<span class="popup">
+											<span class="popupContent">
+											&nbsp;<b>${segment.brokenRule.category}</b>&nbsp;<br>
+											&nbsp;<b>Tipo:</b>&nbsp;${segment.brokenRule.type}&nbsp;<br>
+											&nbsp;<b>Sugest&atilde;o:</b>&nbsp;${segment.brokenRule.suggestion}&nbsp;<br>
+											&nbsp;<a href="${segment.brokenRule.reference}">Refer&ecirc;ncia</a>&nbsp;
+											</span>
+										</span>
+									</span>
+								</c:when>
+								<c:otherwise>
+									<c:out value="${segment.text}"/>
+								</c:otherwise>
+								</c:choose>
+						</c:forEach>
+						<br>
 						</c:forEach>
 					</div>
 				</div>

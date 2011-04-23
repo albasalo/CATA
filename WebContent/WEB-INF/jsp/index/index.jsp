@@ -27,7 +27,7 @@
     						${error.message}<br />
 						</c:forEach>
 						
-						<form action="<c:url value="/analyzeText"/>" enctype="multipart/form-data" method="post">
+						<form action="<c:url value="/"/>" enctype="multipart/form-data" method="post">
 							<p>
 							Selecione um arquivo .txt para an&aacute;lise:<br>
 							<input type="file" name="file" size="40"><br>

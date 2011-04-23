@@ -110,7 +110,6 @@ p, ol, ul {
 	position: absolute;
     display: none;
 	z-index: 20;
-	margin: 4px 4px;
 	background-color: #FFECB0;
 	border: 1px solid black;
 }

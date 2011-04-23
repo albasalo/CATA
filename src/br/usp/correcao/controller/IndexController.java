@@ -31,15 +31,18 @@ public class IndexController {
 	}
 	
 	@Post
-	@Path("/analyzeText")
-	public void analyzeText(UploadedFile file) {
+	@Path("/")
+	public void index(UploadedFile file) {
+		//FIXME Colocar as mensagens no .jsp.
 		if(file == null)
 			validator.add(new ValidationMessage("", "error"));
 		else if(!file.getContentType().equals("text/plain")) {
-			validator.add(new ValidationMessage("O arquivo deve estar no formato .txt", "error"));
+			validator.add(new ValidationMessage(
+					"O arquivo deve estar no formato .txt", "error"));
 		}
 		validator.onErrorUsePageOf(IndexController.class).index();
 		
+		//result.redirectTo(SuggestionsController.class).results(file);
 		result.forwardTo(SuggestionsController.class).results(file);
 	}
 

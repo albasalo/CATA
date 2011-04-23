@@ -3,41 +3,43 @@ package br.usp.correcao.model;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.IOException;
+
 import java.util.ArrayList;
 
 
-public class Text {
+public class AnalyzedText {
 
 	private InputStream is;
-	private ArrayList<Line> analyzedText;
-	// TODO nao precisa necessariamente contar os erros
-	// no momento, o sistema so precisa saber se ocorreram erros
+	private ArrayList<AnalyzedLine> analyzedText;
 	private int errorsFound;
 	
-	public Text(InputStream is) {
+	public AnalyzedText(InputStream is) {
 		this.is = is;
 		this.analyzedText = null;
 		this.errorsFound = 0;
+		analyzeText();
 	}
 	
-	public ArrayList<Line> analyzeText() throws IOException {
-	    if(analyzedText == null) {
-	    	analyzedText = new ArrayList<Line>();
+	private void analyzeText() {
+    	try {
+	    	analyzedText = new ArrayList<AnalyzedLine>();
 	    	BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		    String inputLine;
 	    	while((inputLine = br.readLine()) != null) {
-	    		Line l = new Line(inputLine);
-	    		l.analyze();
+	    		AnalyzedLine l = new AnalyzedLine(inputLine);
 		    	errorsFound += l.getErrorsFound();
 		    	analyzedText.add(l);
 	    	}
-	    	br.close();
-	    	//TODO verificar isso
-	    	is.close();
-	    }
-    	
-	    return analyzedText;
+    		br.close();
+    		is.close();
+    	} catch(Exception e) {
+    		//TODO
+    		e.printStackTrace();
+    	}
+	}
+	
+	public ArrayList<AnalyzedLine> getAnalyzedText() {
+		return analyzedText;
 	}
 	
 	public int getErrorsFound() {

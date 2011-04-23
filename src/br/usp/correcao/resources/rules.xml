@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Rules>
+	<Rule>
+		<Category>Erro</Category>
+		<Type>Estrangeirismo</Type>
+		<Pattern>cluster</Pattern>
+		<Suggestion>aglomerado, agrupamento</Suggestion>
+		<Reference>http://www.ime.usp.br/~kon/ResearchStudents/traducao.html</Reference>
+	</Rule>
+	<Rule>
+		<Category>Erro</Category>
+		<Type>Estrangeirismo</Type>
+		<Pattern>core</Pattern>
+		<Suggestion>núcleo</Suggestion>
+		<Reference>http://www.ime.usp.br/~kon/ResearchStudents/traducao.html</Reference>
+	</Rule>
+	<Rule>
+		<Category>Erro</Category>
+		<Type>Estrangeirismo</Type>
+		<Pattern>delay</Pattern>
+		<Suggestion>atraso</Suggestion>
+		<Reference>http://www.ime.usp.br/~kon/ResearchStudents/traducao.html</Reference>
+	</Rule>
+</Rules>
