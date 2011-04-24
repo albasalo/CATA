@@ -21,4 +21,11 @@
 		<Suggestion>atraso</Suggestion>
 		<Reference>http://www.ime.usp.br/~kon/ResearchStudents/traducao.html</Reference>
 	</Rule>
+		<Rule>
+		<Category>Erro</Category>
+		<Type>Tradução Incorreta</Type>
+		<Pattern>testes unitários</Pattern>
+		<Suggestion>testes de unidade</Suggestion>
+		<Reference>http://www.ime.usp.br/~kon/ResearchStudents/traducao.html</Reference>
+	</Rule>
 </Rules>
