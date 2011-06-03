@@ -30,20 +30,24 @@ public class IndexController {
 	public void index() {
 	}
 	
+	@Get
+	@Path("/advice")
+	public void advice() {
+	}
+
 	@Post
-	@Path("/")
-	public void index(UploadedFile file) {
-		//FIXME Colocar as mensagens no .jsp.
+	@Path("/advice")
+	public void advice(UploadedFile file) {
+		//FIXME Colocar as mensagens no messages.properties.
 		if(file == null)
 			validator.add(new ValidationMessage("", "error"));
 		else if(!file.getContentType().equals("text/plain")) {
 			validator.add(new ValidationMessage(
 					"O arquivo deve estar no formato .txt", "error"));
 		}
-		validator.onErrorUsePageOf(IndexController.class).index();
+		validator.onErrorUsePageOf(IndexController.class).advice();
 		
 		//result.redirectTo(SuggestionsController.class).results(file);
 		result.forwardTo(SuggestionsController.class).results(file);
 	}
-
 }

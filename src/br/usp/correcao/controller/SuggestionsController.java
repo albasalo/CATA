@@ -29,10 +29,13 @@ public class SuggestionsController {
 		AnalyzedText text = new AnalyzedText(file.getFile());		
 		ArrayList<AnalyzedLine> analyzedText = text.getAnalyzedText();
 		
-		//FIXME Colocar as mensagens no JSP
+		result.include("numOfErrors", text.getErrorsFound());
+		
+		//FIXME Colocar as mensagens no message.properties
 		if(text.getErrorsFound() != 0) {
 			result.include("output", "Algumas sugestões para melhorar o estilo " +
 					"do texto enviado:");
+			result.include("fileName", file.getFileName());
 			result.include("text", analyzedText);
 		}
 		else {

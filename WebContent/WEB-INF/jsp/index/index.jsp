@@ -7,36 +7,76 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
-		<title>Sistema de An&aacute;lise e Corre&ccedil;&atilde;o de Estilo de Textos T&eacute;cnicos de Computa&ccedil;&atilde;o</title>
+		<link href="<c:url value='/css/coin-slider-styles.css'/>" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/coin-slider.min.js'/>"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#coin-slider').coinslider({ width: 565, navigation: true, delay: 5000 });
+		
+			});
+		</script>
+		<title>CATA: Collaborative Academic Text Advisor</title>
 	</head>
 
 	<body>
 		<div id="header">
-			<div id="logo">
-				<h1><a href="#">NOME</a></h1>
-				<p>Automa&ccedil;&atilde;o de corre&ccedil;&atilde;o de estilo de textos t&eacute;cnicos de computa&ccedil;&atilde;o</p>
+			<div id="header-content">
+				<div id="logo">
+					<a href="#" title='CATA'><b>C</b>ollaborative <b>A</b>cademic <b>T</b>ext <b>A</b>dvisor</a>
+				</div>
+				
+				<div id="menu" class="nav_bar">
+					<ul>
+					<li><a href='#' class='selected' title='Início'>Início</a></li>
+					<li><a href='#' title='Sobre'>Sobre</a></li>
+					<li><a href='/sistemacorrecao/advice' title='Advice'>Advice</a></li>
+					</ul>	
+				</div>
 			</div>
 		</div>
 		
 		<div id="page">
 			<div id="content">
-				<div class="post">
-					<h1 class="title">P&aacute;gina inicial</h1>
-					<div class="entry">
-						<c:forEach var="error" items="${errors}">
-    						${error.message}<br />
-						</c:forEach>
-						
-						<form action="<c:url value="/"/>" enctype="multipart/form-data" method="post">
-							<p>
-							Selecione um arquivo .txt para an&aacute;lise:<br>
-							<input type="file" name="file" size="40"><br>
-							</p>
-							<input type="submit" value="Enviar">
-						</form>
-					</div>
+				<h1>CATA: Collaborative Academic Text Advisor</h1>
+				Um verificador de estilo de textos acadêmicos de computação.<br />
+				<br />
+				
+				<div id='coin-slider'>
+					<a href="/sistemacorrecao/advice">
+						<img src="<c:url value='/css/images/txt-file.png'/>">
+						<span>
+							<b>Envie um arquivo .txt</b><br>
+							Selecione um arquivo de texto sem formatação e envie para verificação.
+						</span>
+					</a>
+					<a href="/sistemacorrecao/advice">
+						<img src="<c:url value='/css/images/advice.png'/>">
+						<span>
+							<b>Alternativas aos problemas de estilo</b><br>
+							CATA marca os problemas de estilo encontrados em seu texto e
+							oferece sugestões para corrigi-los.
+						</span>
+					</a>
+					<a href="http://www.github.com/albasalo/SistemaCorrecao" target="_blank">
+						<img src="<c:url value='/css/images/free-github.png'/>">
+						<span>
+							<b>CATA é software livre!</b><br>
+							O código-fonte do Sistema CATA está hospedado no GitHub.
+						</span>
+					</a>					
 				</div>
+				
 			</div>
+		</div>
+		
+		<div id="footer" align="center">
+			<ul>
+				<li><a href="#" title="Início" class="hover">Início</a>|</li>
+				<li><a href="#" title="Sobre">Sobre</a>|</li>
+				<li><a href="/sistemacorrecao/advice" title="Advice">Advice</a></li>
+			</ul><br/><br/>
+			<br class="spacer" />
 		</div>
 	</body>
 </html>
