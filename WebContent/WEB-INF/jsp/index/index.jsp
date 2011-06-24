@@ -70,13 +70,12 @@
 			</div>
 		</div>
 		
-		<div id="footer" align="center">
+		<div id="footer">
 			<ul>
 				<li><a href="#" title="Início" class="hover">Início</a>|</li>
 				<li><a href="#" title="Sobre">Sobre</a>|</li>
 				<li><a href="/sistemacorrecao/advice" title="Advice">Advice</a></li>
 			</ul><br/><br/>
-			<br class="spacer" />
 		</div>
 	</body>
 </html>

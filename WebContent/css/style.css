@@ -1,9 +1,9 @@
 body {
 	margin: 0px;
 	padding: 0px;
-	min-width: 910px;
+	min-width: 1000px;
 	background-color: #eeeeee;
-	font: 16px Helvetica, Arial, sans-serif;
+	font: 16px Helvetica, Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 h1, h2, h3 {
@@ -36,7 +36,7 @@ h3 {
 }
 
 #header-content {
-	width: 904px;	
+	width: 990px;	
 	margin: auto;
 }
 
@@ -55,20 +55,19 @@ h3 {
 }
 
 #logo b {
+	margin-left: 4px;	
 	font-size: 1.8em;
 	font-weight: bold;
-	margin-left: 4px;
 	color: #fff;
 }
 
 
 #menu {
+	float: right;	
 	position: relative;
-	width: 204px;
 	margin: auto;
 	height: auto;
-	float: right;
-	padding-top: 14px;
+	padding-top: 13px;
 }
 
 .nav_bar ul {
@@ -76,67 +75,39 @@ h3 {
 	padding: 0;
 	list-style-type: none;
 }
-.nav_bar ul li  {
+
+.nav_bar ul li, .nav_bar ul li a {
 	float: left;
-	width: 65px;
-	height: 23px;
 	text-align: center;
 	color: #fff;
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 14px;
+	font: 14px Helvetica, Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-weight: bold;
 	text-decoration: none;
-	margin-right: 3px;
-	padding-top: 3px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 6px;
 }
 
-.nav_bar ul li a {
+.nav_bar ul li a:hover, .nav_bar ul li a.selected {
 	float: left;
-	width: 65px;
-	height: 23px;
 	text-align: center;
 	color: #fff;
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 14px;
+	font: 14px Helvetica, Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-weight: bold;
 	text-decoration: none;
-	margin-right: 3px;
-	padding-top: 3px;
-}
-
-.nav_bar ul li a:hover {
-	float: left;
-	width: 65px;
-	height: 23px;
-	text-align: center;
-	color: #fff;
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 14px;
-	font-weight: bold;
-	text-decoration: none;
-	background: url(images/menu_selected.gif);
-	margin-right: 3px;
-	padding-top: 3px;
-}
-
-.nav_bar ul li a.selected {
-	float: left;
-	width: 65px;
-	height: 23px;
-	text-align: center;
-	color: #fff;
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 14px;
-	font-weight: bold;
-	text-decoration: none;
-	background: url(images/menu_selected.gif);
-	margin-right: 3px;
-	padding-top: 3x;
+	-moz-border-radius: 4px 4px 4px 4px;
+	-border-radius: 4px 4px 4px 4px;
+	background: none repeat scroll 0 0 #123348;	
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 6px;	
 }
 
 
 #page {	
-	width: 800px;
+	width: 900px;
 	margin: auto auto;
 	background-color: #ffffff;
 	border-style: solid;
@@ -191,8 +162,9 @@ h3 {
 .popupContent {
 }
 
+
 #footer {
-	width: 800px;
+	width: 1000px;
 	margin: auto;
 }
 
@@ -200,14 +172,14 @@ h3 {
 	display: inline;
 	color: #444444;
 	list-style-type: none;
-	font: 14px Helvetica, Arial, sans-serif;
+	font: 14px Helvetica, Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 #footer ul li a {
 	color: #444444;
 	padding: 0 8px;
 	text-decoration:none;
-	font: 14px Helvetica, Arial, sans-serif;
+	font: 14px Helvetica, Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 #footer ul li a:hover {
@@ -215,5 +187,5 @@ h3 {
 	background: #e0e0e0;
 	padding: 0 8px;
 	text-decoration:none;
-	font: 14px Helvetica, Arial, sans-serif;
+	font: 14px Helvetica, Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
