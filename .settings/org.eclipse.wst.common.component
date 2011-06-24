@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-modules id="moduleCoreId" project-version="1.5.0">
-<wb-module deploy-name="sistemacorrecao">
+<wb-module deploy-name="cata">
 <wb-resource deploy-path="/" source-path="/WebContent"/>
 <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/tests"/>
-        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/sistemacorrecao/lib/junit-4.9b2.jar">
+        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/cata/lib/junit-4.9b2.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/sistemacorrecao/lib/org.arabidopsis.ahocorasick-1.1.jar">
+        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/cata/lib/org.arabidopsis.ahocorasick-1.1.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-<property name="context-root" value="sistemacorrecao"/>
 <property name="java-output-path"/>
+        <property name="context-root" value="cata"/>
 </wb-module>
 </project-modules>

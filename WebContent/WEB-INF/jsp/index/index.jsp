@@ -30,7 +30,7 @@
 					<ul>
 					<li><a href='#' class='selected' title='Início'>Início</a></li>
 					<li><a href='#' title='Sobre'>Sobre</a></li>
-					<li><a href='/sistemacorrecao/advice' title='Advice'>Advice</a></li>
+					<li><a href="<c:url value='/advice'/>" title='Advice'>Advice</a></li>
 					</ul>	
 				</div>
 			</div>
@@ -43,14 +43,14 @@
 				<br />
 				
 				<div id='coin-slider'>
-					<a href="/sistemacorrecao/advice">
+					<a href="<c:url value='/advice'/>">
 						<img src="<c:url value='/css/images/txt-file.png'/>">
 						<span>
 							<b>Envie um arquivo .txt</b><br>
 							Selecione um arquivo de texto sem formatação e envie para verificação.
 						</span>
 					</a>
-					<a href="/sistemacorrecao/advice">
+					<a href="<c:url value='/advice'/>">
 						<img src="<c:url value='/css/images/advice.png'/>">
 						<span>
 							<b>Alternativas aos problemas de estilo</b><br>
@@ -70,12 +70,4 @@
 			</div>
 		</div>
 		
-		<div id="footer">
-			<ul>
-				<li><a href="#" title="Início" class="hover">Início</a>|</li>
-				<li><a href="#" title="Sobre">Sobre</a>|</li>
-				<li><a href="/sistemacorrecao/advice" title="Advice">Advice</a></li>
-			</ul><br/><br/>
-		</div>
-	</body>
-</html>
+<%@ include file="../footer.jsp"%>

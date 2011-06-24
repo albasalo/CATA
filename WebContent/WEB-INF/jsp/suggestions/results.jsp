@@ -77,14 +77,14 @@
 	<div id="header">
 		<div id="header-content">
 			<div id="logo">
-				<a href='/sistemacorrecao' title='CATA'><b>C</b>ollaborative <b>A</b>cademic <b>T</b>ext <b>A</b>dvisor</a>
+				<a href="<c:url value='/'/>" title='CATA'><b>C</b>ollaborative <b>A</b>cademic <b>T</b>ext <b>A</b>dvisor</a>
 			</div>
 			
 			<div id="menu" class="nav_bar">
 				<ul>
-				<li><a href='/sistemacorrecao' title='Início'>Início</a></li>
+				<li><a href="<c:url value='/'/>" title='Início'>Início</a></li>
 				<li><a href=# title='Sobre'>Sobre</a></li>
-				<li><a href='/sistemacorrecao/advice' title='Advice'>Advice</a></li>
+				<li><a href="<c:url value='/advice'/>" title='Advice'>Advice</a></li>
 				</ul>	
 			</div>
 		</div>
@@ -144,13 +144,4 @@
 		</div>
 	</div>
 	
-	<div id="footer" align="center">
-		<ul>
-			<li><a href="/sistemacorrecao" title="Início" class="hover">Início</a>|</li>
-			<li><a href="#" title="Sobre">Sobre</a>|</li>
-			<li><a href="/sistemacorrecao/advice" title="Advice">Advice</a></li>
-		</ul><br/><br/><br class="spacer" />
-	</div>
-</body>
-
-</html>
+<%@ include file="../footer.jsp"%>
