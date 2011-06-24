@@ -58,7 +58,7 @@
 							oferece sugestões para corrigi-los.
 						</span>
 					</a>
-					<a href="http://www.github.com/albasalo/SistemaCorrecao" target="_blank">
+					<a href="http://www.github.com/albasalo/CATA" target="_blank">
 						<img src="<c:url value='/css/images/free-github.png'/>">
 						<span>
 							<b>CATA é software livre!</b><br>
