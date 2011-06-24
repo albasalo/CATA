@@ -123,9 +123,19 @@
 									<div class="popupTop"></div>
 									<div class="popupMid">
 									<span class="popupContent">
-									&nbsp;<b>Problema:</b>&nbsp;${segment.brokenRule.type}&nbsp;<br>
-									&nbsp;<b>Sugest&atilde;o:</b>&nbsp;${segment.brokenRule.suggestion}&nbsp;<br>
-									&nbsp;<b>Refer&ecirc;ncia:</b>&nbsp;<a href="${segment.brokenRule.reference}" target="_blank">Tradução de Textos de Computação e Informática para o Português</a>&nbsp;
+									<table>
+										<tr>
+											<td><b>Problema:</b></td>
+											<td>${segment.brokenRule.type}</td>
+										</tr>
+										<tr>
+											<td><b>Sugestão:</b></td>
+											<td>${segment.brokenRule.suggestion}</td>									</tr>
+										<tr>
+											<td><b>Referência:&nbsp;</b></td>
+											<td><a href="${segment.brokenRule.reference}" target="_blank">Site do prof. Fabio Kon com dicas de tradução</a></td>
+										</tr>
+									</table>
 									</span>
 									</div>
 									<div class="popupBtm"></div>
