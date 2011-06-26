@@ -39,7 +39,7 @@
 					Selecione um arquivo .txt para an&aacute;lise:<br>
 					<input type="file" name="file" size="40"><br>
 					</p>
-					<input type="submit" value="Enviar">
+					<input class="button" type="submit" value="Enviar">
 				</form>
 				
 			</div>
