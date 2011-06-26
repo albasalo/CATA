@@ -31,6 +31,11 @@ public class IndexController {
 	}
 	
 	@Get
+	@Path("/about")
+	public void about() {
+	}
+	
+	@Get
 	@Path("/advice")
 	public void advice() {
 	}

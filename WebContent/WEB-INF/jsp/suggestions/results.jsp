@@ -83,7 +83,7 @@
 			<div id="menu" class="nav_bar">
 				<ul>
 				<li><a href="<c:url value='/'/>" title='Início'>Início</a></li>
-				<li><a href=# title='Sobre'>Sobre</a></li>
+				<li><a href="<c:url value='/about'/>" title='Sobre'>Sobre</a></li>
 				<li><a href="<c:url value='/advice'/>" title='Advice'>Advice</a></li>
 				</ul>	
 			</div>

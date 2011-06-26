@@ -7,21 +7,21 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
-		<title>Advice</title>
+		<title>Sobre</title>
 	</head>
-
+	
 	<body>
 		<div id="header">
 			<div id="header-content">
 				<div id="logo">
-					<a href="<c:url value='/'/>" title='CATA'><b>C</b>ollaborative <b>A</b>cademic <b>T</b>ext <b>A</b>dvisor</a>
+					<a href="#" title='CATA'><b>C</b>ollaborative <b>A</b>cademic <b>T</b>ext <b>A</b>dvisor</a>
 				</div>
 				
 				<div id="menu" class="nav_bar">
 					<ul>
 					<li><a href="<c:url value='/'/>" title='Início'>Início</a></li>
-					<li><a href="<c:url value='/about'/>" title='Sobre'>Sobre</a></li>
-					<li><a href='#' class='selected' title='Advice'>Advice</a></li>
+					<li><a href='#' class='selected' title='Sobre'>Sobre</a></li>
+					<li><a href="<c:url value='/advice'/>" title='Advice'>Advice</a></li>
 					</ul>	
 				</div>
 			</div>
@@ -29,20 +29,10 @@
 		
 		<div id="page">
 			<div id="content">
-				<h1>Verifique o estilo de seus textos</h1>
-				<c:forEach var="error" items="${errors}">
-  						<font style="color: #780000">${error.message}</font>
-				</c:forEach>
-				
-				<form action="<c:url value="/advice"/>" enctype="multipart/form-data" method="post">
-					<p>
-					Selecione um arquivo .txt para an&aacute;lise:<br>
-					<input type="file" name="file" size="40"><br>
-					</p>
-					<input type="submit" value="Enviar">
-				</form>
+				<h1>Sobre</h1>
+				TODO.
 				
 			</div>
-		</div>
-		
+		</div>	
+
 <%@ include file="../footer.jsp"%>
