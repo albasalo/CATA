@@ -39,7 +39,7 @@
 		<div id="page">
 			<div id="content">
 				<h1>CATA: Collaborative Academic Text Advisor</h1>
-				Um verificador de estilo de textos acadêmicos de computação.<br />
+				Um verificador de estilo para textos acadêmicos de Computação.<br />
 				<br />
 				
 				<div id='coin-slider'>

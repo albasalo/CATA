@@ -3,7 +3,7 @@ body {
 	padding: 0px;
 	min-width: 1000px;
 	background-color: #eeeeee;
-	font: 16px Helvetica, Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 16px Helvetica, "Helvetica Neue", Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 h1, h2, h3 {
@@ -20,8 +20,29 @@ h2 {
 
 h3 {
 	font-size: 1.1em;
+	margin: 0;
+	font-weight: normal;
 }
 
+a:link {
+	color: #2975a5;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #a946d4;
+	text-decoration: none;
+}
+
+a:active {
+	color: #2975a5;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #2975a5;
+	text-decoration: underline;
+}
 
 #header {
 	height: 60px;
@@ -80,7 +101,7 @@ h3 {
 	float: left;
 	text-align: center;
 	color: #fff;
-	font: 14px Helvetica, Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 14px Helvetica, "Helvetica Neue", Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-weight: bold;
 	text-decoration: none;
 	padding-top: 4px;
@@ -93,7 +114,7 @@ h3 {
 	float: left;
 	text-align: center;
 	color: #fff;
-	font: 14px Helvetica, Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 14px Helvetica, "Helvetica Neue", Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-weight: bold;
 	text-decoration: none;
 	-moz-border-radius: 4px 4px 4px 4px;
@@ -119,6 +140,7 @@ h3 {
 
 #content {
 	float: center;
+	text-align: justify;
 }
 
 #text {
@@ -172,14 +194,14 @@ h3 {
 	display: inline;
 	color: #444444;
 	list-style-type: none;
-	font: 14px Helvetica, Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 14px Helvetica, "Helvetica Neue", Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 #footer ul li a {
 	color: #444444;
 	padding: 0 8px;
 	text-decoration:none;
-	font: 14px Helvetica, Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 14px Helvetica, "Helvetica Neue", Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 #footer ul li a:hover {
@@ -187,5 +209,5 @@ h3 {
 	background: #e0e0e0;
 	padding: 0 8px;
 	text-decoration:none;
-	font: 14px Helvetica, Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font: 14px Helvetica, "Helvetica Neue", Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
