@@ -36,7 +36,7 @@
 				
 				<form action="<c:url value="/advice"/>" enctype="multipart/form-data" method="post">
 					<p>
-					Selecione um arquivo .txt para an&aacute;lise:<br>
+					Selecione um arquivo .txt para análise:<br>
 					<input type="file" name="file" size="40"><br>
 					</p>
 					<input class="button" type="submit" value="Enviar">

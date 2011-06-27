@@ -48,7 +48,7 @@
 					disponíveis a todos os demais usuários.
 				</p>
 				<p>
-				<h3>CATA é Software Livre</h3>
+					<h3>CATA é Software Livre</h3>
 					O código-fonte do Sistema CATA está hospedado no GitHub, acessível a partir deste
 					<a href="http://www.github.com/albasalo/CATA" target="_blank"/>link</a>.
 				</p>
