@@ -98,6 +98,19 @@ public class AnalyzedLine {
 	        	(Rule) (searchResult.getOutputs().iterator().next()), searchResult.getLastIndex()));
 	    }
 	    
+	    BrokenRule brokenRule = null;
+	    for(int i = errors.size() - 1; i >= 0; i--) {
+	    	if(brokenRule != null && errors.get(i).getFirstIndex() == brokenRule.getFirstIndex()) {
+	    		if(errors.get(i).getLastIndex() < brokenRule.getLastIndex()) {
+	    			errors.remove(errors.get(i));
+	    			continue;
+	    		}
+	    		else
+	    			errors.remove(brokenRule);
+	    	}
+	    	brokenRule = errors.get(i);
+	    }
+	    
 	    buildAnalyzedLine(inputLine, tokensBytes, tokensLength, errors.iterator());
 	}
 	
