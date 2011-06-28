@@ -9,10 +9,10 @@ import org.junit.Test;
 
 import br.usp.cata.model.Rule;
 import br.usp.cata.model.RulesTree;
-import br.usp.cata.tests.CorrecaoTestCase;
+import br.usp.cata.tests.CataTestCase;
 
 
-public class TestRulesTree extends CorrecaoTestCase {
+public class TestRulesTree extends CataTestCase {
 	
 	RulesTree tree;
 

@@ -6,9 +6,9 @@ import org.junit.Test;
 
 import br.usp.cata.component.Tree;
 import br.usp.cata.model.AnalyzedText;
-import br.usp.cata.tests.CorrecaoTestCase;
+import br.usp.cata.tests.CataTestCase;
 
-public class TestAnalyzedText extends CorrecaoTestCase {
+public class TestAnalyzedText extends CataTestCase {
 	
 	Tree tree;
 	AnalyzedText analyzedText;

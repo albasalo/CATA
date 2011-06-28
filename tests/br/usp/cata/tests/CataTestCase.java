@@ -8,10 +8,10 @@ import org.junit.After;
 import org.junit.Before;
 
 
-public abstract class CorrecaoTestCase extends TestCase
+public abstract class CataTestCase extends TestCase
 {
 	
-	public CorrecaoTestCase(final String name)
+	public CataTestCase(final String name)
 	{
 	    super(name);
 	}

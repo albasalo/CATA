@@ -2,7 +2,7 @@
  * Modificado de IndexController.java -
  * 	http://vraptor3.googlecode.com/files/vraptor-blank-project-3.3.1.zip
  */
-package br.usp.cata.controller;
+package br.usp.cata.web.controller;
 
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;

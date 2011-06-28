@@ -1,4 +1,4 @@
-package br.usp.cata.controller;
+package br.usp.cata.web.controller;
 
 import java.util.ArrayList;
 

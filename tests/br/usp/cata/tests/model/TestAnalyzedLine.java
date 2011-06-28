@@ -14,9 +14,9 @@ import br.usp.pcs.lta.cogroo.tools.tokenizer.CogrooTokenizer;
 import br.usp.cata.component.Tree;
 import br.usp.cata.model.AnalyzedLine;
 import br.usp.cata.model.AnalyzedSegment;
-import br.usp.cata.tests.CorrecaoTestCase;
+import br.usp.cata.tests.CataTestCase;
 
-public class TestAnalyzedLine extends CorrecaoTestCase {
+public class TestAnalyzedLine extends CataTestCase {
 	
 	SentenceDetectorME sentenceDetector;
 	CogrooTokenizer tokenizer;
