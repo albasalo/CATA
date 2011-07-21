@@ -6,8 +6,8 @@ import java.util.List;
 import org.hibernate.criterion.Criterion;
 
 
-public interface BasicDAO<ID extends Serializable, T>
-{
+public interface BasicDAO<ID extends Serializable, T> {
+	
     void save(T... objs);
 
     void delete(T... ts);
@@ -21,5 +21,5 @@ public interface BasicDAO<ID extends Serializable, T>
     List<T> findByCriteria(Criterion... criterion);
 
     List<T> findByExample(T exampleInstance, String... excludeProperty);
-
+    
 }

@@ -13,9 +13,9 @@ import br.com.caelum.vraptor.ioc.RequestScoped;
 
 @RequestScoped
 @Component
-public class AnnotationSessionFactoryCreator implements ComponentFactory<SessionFactory>
-{
-    private SessionFactory factory;
+public class AnnotationSessionFactoryCreator implements ComponentFactory<SessionFactory> {
+    
+	private SessionFactory factory;
 
     public AnnotationSessionFactoryCreator()
     {
@@ -35,4 +35,5 @@ public class AnnotationSessionFactoryCreator implements ComponentFactory<Session
     public void destroy() {
         factory.close();
     }
+    
 }

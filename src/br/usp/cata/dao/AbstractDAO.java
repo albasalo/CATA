@@ -13,9 +13,9 @@ import org.hibernate.criterion.Order;
 import br.com.caelum.vraptor.util.hibernate.SessionCreator;
 
 
-public abstract class AbstractDAO<ID extends Serializable, T> implements BasicDAO<ID,T>
-{
-    private final SessionCreator sessionCreator;
+public abstract class AbstractDAO<ID extends Serializable, T> implements BasicDAO<ID,T> {
+    
+	private final SessionCreator sessionCreator;
 
     private final Class<T> clazzEntity;
 
@@ -88,4 +88,5 @@ public abstract class AbstractDAO<ID extends Serializable, T> implements BasicDA
         crit.add(example);
         return crit.list();
     }
+    
 }
