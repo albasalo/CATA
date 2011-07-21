@@ -86,7 +86,7 @@ public abstract class AbstractDAO<ID extends Serializable, T> implements BasicDA
             example.excludeProperty(exclude);
             
         crit.add(example);
-        return crit.list();
+        return (List<T>)crit.list();
     }
     
 }

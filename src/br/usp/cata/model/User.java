@@ -10,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.usp.cata.service.CryptoService;
+
 @Entity
-public class User implements Serializable
-{
+public class User implements Serializable {
+	
 	private static final long serialVersionUID = 2412356395065413898L;
 
     @Id
@@ -99,5 +101,11 @@ public class User implements Serializable
 
 	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
-	} 
+	}
+	
+    public void setActivationKey() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(userID).append(registrationDate);
+        setActivationKey(CryptoService.md5(builder.toString()));
+    }
 }
