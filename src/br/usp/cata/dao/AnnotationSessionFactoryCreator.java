@@ -24,7 +24,6 @@ public class AnnotationSessionFactoryCreator implements ComponentFactory<Session
     @PostConstruct
     public void create() {
         final AnnotationConfiguration cfg = new AnnotationConfiguration();
-
         factory = cfg.buildSessionFactory();
     }
 
