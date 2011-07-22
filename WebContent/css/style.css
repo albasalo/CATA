@@ -24,6 +24,7 @@ h3 {
 	font-weight: normal;
 }
 
+/*Links*/
 a:link {
 	color: #2975a5;
 	text-decoration: none;
@@ -44,6 +45,7 @@ a:hover {
 	text-decoration: underline;
 }
 
+/* Header */ 
 #header {
 	height: 60px;
 	margin: auto;
@@ -82,7 +84,7 @@ a:hover {
 	color: #fff;
 }
 
-
+/* Menu */
 #menu {
 	float: right;	
 	position: relative;
@@ -142,11 +144,12 @@ a:hover {
 	margin: auto;
     -moz-box-shadow: 0 0 10px #333333;
     -webkit-box-shadow: 0 0 10px #333333;
-    border: 3px solid white;
+    border: 3px solid;
     border-color: #2975a5;
     padding: 20px;
 }
 
+/* Buttons */
 .button {
 	-webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
@@ -176,7 +179,7 @@ a:hover {
 	box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
 }
 
-
+/* Tooltip */
 .popupConf {
 	position: relative;
 }
@@ -209,7 +212,7 @@ a:hover {
 .popupContent {
 }
 
-
+/* Footer */
 #footer {
 	width: 1000px;
 	margin: auto;
@@ -236,3 +239,8 @@ a:hover {
 	text-decoration:none;
 	font: 14px Helvetica, "Helvetica Neue", Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
+
+/* Width */
+.width150 {width: 150px;}
+.width300 {width: 300px;}
+.width500 {width: 500px;}

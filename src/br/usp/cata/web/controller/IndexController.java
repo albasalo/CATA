@@ -70,7 +70,7 @@ public class IndexController {
     @Post
     @Path("/signup")
     @Transactional
-    public void signup(User newUser)
+    public void signup(User newUser, String password)
     {
     	newUserService.register(newUser);
     	result.forwardTo(IndexController.class).index();

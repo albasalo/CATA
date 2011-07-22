@@ -8,7 +8,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
-		<title>Crie uma conta</title>
+		<title>Cadastre-se</title>
 	</head>
 	<body>
 		<div id="header">
@@ -29,25 +29,33 @@
 		
 		<div id="page">
 			<div id="content">
-				<form id="create-post-form" action="<c:url value='/signup'/>" method="post">
-					<fieldset>
-					<legend>Crie uma conta</legend>
+				<center>
+				<form class="width500" action="<c:url value='/signup'/>" method="post">
+					<h2>Cadastre-se</h2>
 					<div class="single_form_element">
-						<label class="label" for="">Nome :</label>
-						<input class="input_border input_width required" type="text" maxlength=100 name="newUser.name" value="${newUser.name}"/>
+						<label class="label width150">Nome :</label>
+						<input class="input_border width300" type="text"
+							maxlength=100 name="newUser.name" value="${newUser.name}"/>
 					</div>
 					<div class="single_form_element">
-						<label class="label" for="">Email :</label>
-						<input class="input_border input_width required" type="text" maxlength=100 name="newUser.email" value="${newUser.email}"/>
+						<label class="label width150">E-mail :</label>
+						<input class="input_border width300" type="text"
+							maxlength=100 name="newUser.email" value="${newUser.email}"/>
 					</div>
 					<div class="single_form_element">
-						<label class="label" for="">Senha :</label>
-						<input class="input_border input_width required" type="password" maxlength=32 name="newUser.password" value="${newUser.password}"/>
+						<label class="label width150">Senha :</label>
+						<input class="input_border width300" type="password"
+							maxlength=32 name="newUser.password" value="${newUser.password}"/>
+					</div>
+					<div class="single_form_element">
+						<label class="label width150">Confirme a senha :</label>
+						<input class="input_border width300" type="password"
+							maxlength=32 name="password" value="${password}"/>
 					</div>
 					<br />
-					<input class="button" type="submit" value="Cadastrar minha conta">	
-					</fieldset>			
+					<input class="button" type="submit" value="Cadastrar minha conta">			
 				</form>		
+				</center>
 			</div>
 		</div>
 		
