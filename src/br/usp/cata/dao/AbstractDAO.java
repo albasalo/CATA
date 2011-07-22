@@ -25,9 +25,6 @@ public abstract class AbstractDAO<ID extends Serializable, T> implements BasicDA
         		getActualTypeArguments()[1];
     }
 
-    /*
-     * Somente implementacoes podem ter acesso a essa propriedade.
-     */
     protected Session getSession() {
         return sessionCreator.getInstance();
     }

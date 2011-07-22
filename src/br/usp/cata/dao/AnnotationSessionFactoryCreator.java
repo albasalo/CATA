@@ -9,6 +9,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.ComponentFactory;
 import br.com.caelum.vraptor.ioc.RequestScoped;
+import br.usp.cata.model.User;
 
 
 @RequestScoped
@@ -24,6 +25,7 @@ public class AnnotationSessionFactoryCreator implements ComponentFactory<Session
     @PostConstruct
     public void create() {
         final AnnotationConfiguration cfg = new AnnotationConfiguration();
+        cfg.addAnnotatedClass(User.class);
         factory = cfg.buildSessionFactory();
     }
 

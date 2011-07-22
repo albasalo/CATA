@@ -67,7 +67,7 @@ public class AnalyzedText {
 	    	
 	    	// FIXME Mudar para caminho relativo.
 			RuntimeConfigurationI config = 
-				new LegacyRuntimeConfiguration("/home/albasalo/CATA/src/br/usp/cata/resources");
+				new LegacyRuntimeConfiguration("/home/albasalo/git/CATA/src/br/usp/cata/resources");
 			SentenceDetectorME sentenceDetector = config.getSentenceDetector();
 			CogrooTokenizer tokenizer = config.getTokenizer();
 	    	
