@@ -9,6 +9,8 @@
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
 		<title>Cadastre-se</title>
+		<script type="text/javascript" src="<c:url value='js/jquery-1.2.6.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='js/signup-form.js'/>"></script>
 	</head>
 	<body>
 		<div id="header">
@@ -30,30 +32,68 @@
 		<div id="page">
 			<div id="content">
 				<center>
-				<form class="width500" action="<c:url value='/signup'/>" method="post">
+				<form id="custom_form" class="width500" action="<c:url value='/signup'/>" method="post">
 					<h2>Cadastre-se</h2>
-					<div class="single_form_element">
-						<label class="label width150">Nome :</label>
-						<input class="input_border width300" type="text"
-							maxlength=100 name="newUser.name" value="${newUser.name}"/>
-					</div>
-					<div class="single_form_element">
-						<label class="label width150">E-mail :</label>
-						<input class="input_border width300" type="text"
-							maxlength=100 name="newUser.email" value="${newUser.email}"/>
-					</div>
-					<div class="single_form_element">
-						<label class="label width150">Senha :</label>
-						<input class="input_border width300" type="password"
-							maxlength=32 name="newUser.password" value="${newUser.password}"/>
-					</div>
-					<div class="single_form_element">
-						<label class="label width150">Confirme a senha :</label>
-						<input class="input_border width300" type="password"
-							maxlength=32 name="password" value="${password}"/>
-					</div>
+					<table>
+						<tr>
+							<td class="align_top">
+								<div class="single_form_element">
+									<label class="label width150" for="name">Nome :</label>
+								</div>
+							</td>
+							<td>
+								<div class="single_form_element">
+									<input id="name" class="input_border width300" type="text"
+										maxlength=100 name="newUser.name" value="${newUser.name}"/>
+									<span id="nameInfo" class="description">Você poderá mudar este campo depois</span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="align_top">
+								<div class="single_form_element">
+									<label class="label width150" for="email">E-mail :</label>
+								</div>
+							</td>
+							<td>
+								<div class="single_form_element">
+									<input id="email" class="input_border width300" type="text"
+										maxlength=100 name="newUser.email" value="${newUser.email}"/>
+									<span id="emailInfo" class="description">Insira um endereço válido</span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="align_top">
+								<div class="single_form_element">
+									<label class="label width150" for="pass1">Senha :</label>
+								</div>
+							</td>
+							<td>
+								<div class="single_form_element">
+									<input id="pass1" class="input_border width300 right" type="password"
+										maxlength=32 name="newUser.password" value="${newUser.password}"/>
+									<span id="pass1Info" class="description">No mínimo 6 caracteres</span>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="align_top">
+								<div class="single_form_element">
+									<label class="label width150" for="pass2">Redigite a senha :</label>
+								</div>
+							</td>
+							<td>
+								<div class="single_form_element">
+									<input id="pass2" class="input_border width300" type="password"
+										maxlength=32 name="password" value="${password}"/>
+									<span id="pass2Info" class="description">Confirme sua senha</span>
+								</div>
+							</td>
+						</tr>
+					</table>
 					<br />
-					<input class="button" type="submit" value="Cadastrar minha conta">			
+					<input class="button" type="submit" value="Criar minha conta">		
 				</form>		
 				</center>
 			</div>
