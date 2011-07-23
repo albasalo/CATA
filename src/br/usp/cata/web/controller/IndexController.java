@@ -75,6 +75,15 @@ public class IndexController {
     	newUserService.register(newUser);
     	result.forwardTo(IndexController.class).index();
     }
+    
+    @Get
+    @Path("/signup/activate/{activationKey}")
+    @Transactional
+    public void activate(String activationKey)
+    {
+    	newUserService.activate(activationKey);
+    	result.redirectTo(IndexController.class).index();
+    }
 	
 	@Get
 	@Path("/advice")
