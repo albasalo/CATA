@@ -8,9 +8,19 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />		
 		<title>Cadastre-se</title>
 		<script type="text/javascript" src="<c:url value='js/jquery-1.2.6.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='js/signup-form.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='js/jquery.simplemodal.js'/>"></script>
+		<script type="text/javascript">
+			jQuery(function () {
+				if($('#basic-modal-content').length > 0) {
+					$('#basic-modal-content').modal();
+				}
+				return false;
+			});
+		</script>
 	</head>
 	<body>
 		<div id="header">
@@ -31,12 +41,15 @@
 		
 		<div id="page">
 			<div id="content">
+			
+				<%@ include file="../messages.jsp"%>
+			
 				<center>
 				<form id="custom_form" class="width500" action="<c:url value='/signup'/>" method="post">
 					<h2>Cadastre-se</h2>
 					<table>
 						<tr>
-							<td class="align_top">
+							<td class="align-top">
 								<div class="single_form_element">
 									<label class="label width150" for="name">Nome :</label>
 								</div>
@@ -50,7 +63,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="align_top">
+							<td class="align-top">
 								<div class="single_form_element">
 									<label class="label width150" for="email">E-mail :</label>
 								</div>
@@ -64,7 +77,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="align_top">
+							<td class="align-top">
 								<div class="single_form_element">
 									<label class="label width150" for="pass1">Senha :</label>
 								</div>
@@ -78,7 +91,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="align_top">
+							<td class="align-top">
 								<div class="single_form_element">
 									<label class="label width150" for="pass2">Redigite a senha :</label>
 								</div>

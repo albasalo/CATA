@@ -28,7 +28,7 @@ $(document).ready(function(){
 	});
 	
 	function validateName() {
-		if(name.val().length < 1) {
+		if(name.val().length == 0) {
 			name.removeClass("input_border");
 			name.addClass("error");
 			nameInfo.addClass("description_error");
@@ -78,21 +78,12 @@ $(document).ready(function(){
 		}
 	}
 	function validatePass2() {
-		if(pass2.val().length == 0) {
-			if(pass1.val().length == 0) {
-				pass2.removeClass("error");
-				pass2.addClass("input_border");
-				pass2Info.removeClass("description_error");
-				pass2Info.text("Confirme sua senha");
-				return true;
-			}
-			else {
-				pass2.removeClass("input_border");
-				pass2.addClass("error");
-				pass2Info.addClass("description_error");
-				pass2Info.text("Confirme sua senha");
-				return false;				
-			}
+		if(pass2.val().length == 0 && pass1.val().length == 0) {
+			pass2.removeClass("input_border");
+			pass2.addClass("error");
+			pass2Info.addClass("description_error");
+			pass2Info.text("Confirme sua senha");
+			return false;				
 		}
 		else if(pass1.val() != pass2.val()) {
 			pass2.removeClass("input_border");

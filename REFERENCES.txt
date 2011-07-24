@@ -356,7 +356,22 @@ Referências bibliográficas e bibliotecas usadas na construção deste projeto
 	
 	« Back to Commons Deed <./>
 	
+*Modal window para apresentar erros e mensagens
+	http://www.ericmmartin.com/projects/simplemodal-demos/
+	
+	SimpleModal Basic Modal Dialog
+	http://www.ericmmartin.com/projects/simplemodal/
+	http://code.google.com/p/simplemodal/
+	
+	Copyright (c) 2010 Eric Martin - http://ericmmartin.com
+	
+	Licensed under the MIT license:
+	   http://www.opensource.org/licenses/mit-license.php
+	Revision: $Id: basic.css 257 2010-07-27 23:06:56Z emartin24 $
+	
 // TODO Acrescentar as licenças!
 http://net.tutsplus.com/tutorials/javascript-ajax/build-a-better-tooltip-with-jquery-awesomeness/
 http://www.google.com/imgres?imgurl=http://lunenburg.org/github.png&imgrefurl=http://www.lunenburg.org/&usg=__brLPpTg1X_8bVKkMCqM-vrjIeCs=&h=300&w=300&sz=39&hl=en&start=19&zoom=1&tbnid=A25Xg-b7Tcj-3M:&tbnh=140&tbnw=140&ei=qjrkTZa1OYfpgQfZzJzQBg&prev=/search%3Fq%3Dgithub%26um%3D1%26hl%3Den%26client%3Dubuntu%26sa%3DN%26channel%3Dfs%26biw%3D1440%26bih%3D660%26tbm%3Disch&um=1&itbs=1&iact=hc&vpx=1022&vpy=238&dur=699&hovh=225&hovw=225&tx=118&ty=120&page=2&ndsp=19&ved=1t:429,r:11,s:19&biw=1440&bih=660
 http://workshop.rs/projects/coin-slider/
+http://www.webdeveloperjuice.com/2010/03/22/highly-customizable-yet-simple-form-validation-jquery-plugin/
+http://yensdesign.com/2009/01/how-validate-forms-both-sides-using-php-jquery/

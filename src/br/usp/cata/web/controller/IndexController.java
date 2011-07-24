@@ -72,6 +72,9 @@ public class IndexController {
     @Transactional
     public void signup(User newUser, String password)
     {
+    	// TODO validacoes
+        validator.onErrorRedirectTo(IndexController.class).signup();
+        
     	newUserService.register(newUser);
     	result.forwardTo(IndexController.class).index();
     }
