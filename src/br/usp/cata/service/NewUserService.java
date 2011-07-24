@@ -8,11 +8,20 @@ import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
 import br.usp.cata.dao.UserDAO;
 import br.usp.cata.model.Email;
+import br.usp.cata.model.EmailException;
 import br.usp.cata.model.User;
 
 @RequestScoped
 @Component
 public class NewUserService {
+	
+	public static enum SignupResult {
+		SUCCESS,
+		USER_ALREADY_REGISTERED_ACTIVE,
+		USER_ALREADY_REGISTERED_INACTIVE,
+		NO_EMAIL_SENT_INACTIVE,
+		NO_EMAIL_SENT
+	}
     
     private final UserDAO userDAO;
     private final EmailService emailService;
@@ -50,14 +59,37 @@ public class NewUserService {
         return emailService.buildEmail(subject, body, newUser.getEmail());
     }
 
-    public void register(final User newUser)  {
+    public SignupResult register(final User newUser)  {
     	
-        newUser.setActive(false);
-        newUser.setRegistrationDate(new Date());
-        newUser.setActivationKey();
+    	String email = newUser.getEmail();
+    	final User activeUser = userDAO.findByEmailAndStatus(email, true);
+    	if(activeUser != null)
+    		return SignupResult.USER_ALREADY_REGISTERED_ACTIVE;
+    	
+    	final User inactiveUser = userDAO.findByEmailAndStatus(email, false);
+    	if(inactiveUser != null) {
+    		try {
+				emailService.sendEmail(buildNewUserEmail(inactiveUser));
+			} catch (EmailException e) {
+				return SignupResult.NO_EMAIL_SENT_INACTIVE;
+			}
+    		return SignupResult.USER_ALREADY_REGISTERED_INACTIVE;
+    	}
+    	
+    	try {
+    		newUser.setPassword(CryptoService.md5(newUser.getPassword()));
+            newUser.setRegistrationDate(new Date());
+            newUser.setActivationKey();
+            newUser.setActive(false);
+            
+            emailService.sendEmail(buildNewUserEmail(newUser));
+        } catch(EmailException e ) {
+            return SignupResult.NO_EMAIL_SENT;
+        }
         
-        userDAO.save(newUser);
-        emailService.sendEmail(buildNewUserEmail(newUser));
+    	userDAO.save(newUser);
+        
+        return SignupResult.SUCCESS;
     }
     
     public void activate(String activationKey)

@@ -49,14 +49,15 @@ $(document).ready(function(){
 		if(filter.test(a)) {
 			email.removeClass("error");
 			email.addClass("input_border");
-			emailInfo.text("");
+			emailInfo.removeClass("description_error");
+			emailInfo.text("Uma confirmação será enviada para este endereço");
 			return true;
 		}
 		else {
 			email.removeClass("input_border");
 			email.addClass("error");
 			emailInfo.addClass("description_error");
-			emailInfo.text("Erro: E-mail inválido");
+			emailInfo.text("Este endereço não é válido");
 			return false;
 		}
 	}
@@ -78,7 +79,7 @@ $(document).ready(function(){
 		}
 	}
 	function validatePass2() {
-		if(pass2.val().length == 0 && pass1.val().length == 0) {
+		if(pass2.val().length == 0) {
 			pass2.removeClass("input_border");
 			pass2.addClass("error");
 			pass2Info.addClass("description_error");

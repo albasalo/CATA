@@ -9,20 +9,39 @@
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />		
-		<title>Cadastre-se</title>
-		<script type="text/javascript" src="<c:url value='js/jquery-1.2.6.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='js/jquery-1.4.1.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='js/signup-form.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript">
-			jQuery(function () {
-				if($('#basic-modal-content').length > 0) {
-					$('#basic-modal-content').modal();
+			$(document).ready(function() {
+				if($('#modal').length > 0) {
+				    $('#modal').fadeIn().css({ 'width': Number(450)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+				
+				    var popMargTop = ($('#modal').height() + 80) / 2;
+				    var popMargLeft = ($('#modal').width() + 80) / 2;
+				
+				    $('#modal').css({
+				        'margin-top' : -popMargTop,
+				        'margin-left' : -popMargLeft
+				    });
+				
+				    $('body').append('<div id="fade"></div>'); //Add the fade layer to bottom of the body tag.
+				    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn(); //Fade in the fade layer - .css({'filter' : 'alpha(opacity=80)'}) is used to fix the IE Bug on fading transparencies 
+				
+				    return false;
 				}
+			});
+			
+			$('a.close, #fade').live('click', function() { //When clicking on the close or fade layer...
+				$('#fade , .popup_block').fadeOut(function() {
+				    $('#fade, a.close').remove();  //fade them both out
+				});
 				return false;
 			});
 		</script>
+		<title>Cadastre-se</title>		
 	</head>
-	<body>
+	<body>	
 		<div id="header">
 			<div id="header-content">
 				<div id="logo">
@@ -39,11 +58,10 @@
 			</div>
 		</div>
 		
+		<%@ include file="../messages.jsp"%>
+		
 		<div id="page">
-			<div id="content">
-			
-				<%@ include file="../messages.jsp"%>
-			
+			<div id="content">			
 				<center>
 				<form id="custom_form" class="width500" action="<c:url value='/signup'/>" method="post">
 					<h2>Cadastre-se</h2>
@@ -51,7 +69,7 @@
 						<tr>
 							<td class="align-top">
 								<div class="single_form_element">
-									<label class="label width150" for="name">Nome :</label>
+									<label class="label width150" for="name">Nome* :</label>
 								</div>
 							</td>
 							<td>
@@ -65,21 +83,21 @@
 						<tr>
 							<td class="align-top">
 								<div class="single_form_element">
-									<label class="label width150" for="email">E-mail :</label>
+									<label class="label width150" for="email">E-mail* :</label>
 								</div>
 							</td>
 							<td>
 								<div class="single_form_element">
 									<input id="email" class="input_border width300" type="text"
 										maxlength=100 name="newUser.email" value="${newUser.email}"/>
-									<span id="emailInfo" class="description">Insira um endereço válido</span>
+									<span id="emailInfo" class="description">Uma confirmação será enviada para este endereço</span>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<td class="align-top">
 								<div class="single_form_element">
-									<label class="label width150" for="pass1">Senha :</label>
+									<label class="label width150" for="pass1">Senha* :</label>
 								</div>
 							</td>
 							<td>
@@ -93,7 +111,7 @@
 						<tr>
 							<td class="align-top">
 								<div class="single_form_element">
-									<label class="label width150" for="pass2">Redigite a senha :</label>
+									<label class="label width150" for="pass2">Redigite a senha* :</label>
 								</div>
 							</td>
 							<td>

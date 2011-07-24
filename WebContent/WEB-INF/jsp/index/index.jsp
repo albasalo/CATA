@@ -8,12 +8,41 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/coin-slider-styles.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/coin-slider.min.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('#coin-slider').coinslider({ width: 565, navigation: true, delay: 5000 });
 		
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				if($('#modal').length > 0) {
+				    $('#modal').fadeIn().css({ 'width': Number(500)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+				
+				    var popMargTop = ($('#modal').height() + 80) / 2;
+				    var popMargLeft = ($('#modal').width() + 80) / 2;
+				
+				    $('#modal').css({
+				        'margin-top' : -popMargTop,
+				        'margin-left' : -popMargLeft
+				    });
+				
+				    $('body').append('<div id="fade"></div>'); //Add the fade layer to bottom of the body tag.
+				    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn(); //Fade in the fade layer - .css({'filter' : 'alpha(opacity=80)'}) is used to fix the IE Bug on fading transparencies 
+				
+				    return false;
+				}
+			});
+			
+			$('a.close, #fade').live('click', function() { //When clicking on the close or fade layer...
+				$('#fade , .popup_block').fadeOut(function() {
+				    $('#fade, a.close').remove();  //fade them both out
+				});
+				return false;
 			});
 		</script>
 		<title>CATA: Collaborative Academic Text Advisor</title>
@@ -35,6 +64,8 @@
 				</div>
 			</div>
 		</div>
+		
+		<%@ include file="../messages.jsp"%>
 		
 		<div id="page">
 			<div id="content">

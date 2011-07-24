@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
@@ -11,10 +12,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.SessionScoped;
 import br.usp.cata.model.Email;
+import br.usp.cata.model.EmailException;
 
 
 @Component
@@ -35,34 +38,34 @@ public class EmailService implements Serializable {
     private static final String CONTEXT_ENV = "java:comp/env";
     private static final String CONTEXT_MAIL_SESSION = "mail/Session";
     private static final String SMTP_PROTOCOL = "smtp";
-    private static final String PLAIN_TEXTO = "text/html";
+    private static final String PLAIN_TEXT = "text/html";
 
     private final Session session;
     private final Transport transport;
 
-    // FIXME Exception
-    public EmailService() throws Exception {
+    public EmailService() throws EmailException {
 	    try {
 	    	final Context initCtx = new InitialContext();
 	    	final Context envCtx = (Context) initCtx.lookup(CONTEXT_ENV);
 		    this.session = (Session) envCtx.lookup(CONTEXT_MAIL_SESSION);
 		    this.transport = session.getTransport(SMTP_PROTOCOL);
-	    } catch (Exception e) {
-	    	throw e;
-	    }
-
+	    } catch( NamingException e) {
+            throw new EmailException(e);
+        } catch( NoSuchProviderException e) {
+            throw new EmailException(e);
+        }
     }
 
-    public EmailService(final Session session) throws Exception {
+    public EmailService(final Session session) throws EmailException {
     	try {
             this.session = session;
-            this.transport = session.getTransport( SMTP_PROTOCOL );
-    	} catch (Exception e) {
-    		throw e;
-    	}
+            this.transport = session.getTransport(SMTP_PROTOCOL);
+        } catch( NoSuchProviderException e) {
+            throw new EmailException(e);
+        }
     }
 
-    public void sendEmail(final Email email) {
+    public void sendEmail(final Email email) throws EmailException {
         try {
             final Message message = new MimeMessage(session);
             final int numberOfReceivers = email.getToAddresses().size();
@@ -75,17 +78,16 @@ public class EmailService implements Serializable {
             message.setRecipients(Message.RecipientType.TO, receiversAddresses);
 
             message.setSubject(email.getSubject());
-            message.setContent(email.getBody(), PLAIN_TEXTO);
+            message.setContent(email.getBody(), PLAIN_TEXT);
             message.setSentDate(new java.util.Date());
 
             transport.connect(email.getHostname(), email.getUser(), email.getPassword());
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
-
         } catch(AddressException e) {
-            e.printStackTrace();
+            throw new EmailException(e);
         } catch(MessagingException e) {
-            e.printStackTrace();
+            throw new EmailException(e);
         }
     }
 

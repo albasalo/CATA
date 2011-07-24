@@ -14,6 +14,7 @@ import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.ValidationMessage;
 import br.usp.cata.model.User;
 import br.usp.cata.service.NewUserService;
+import br.usp.cata.service.NewUserService.SignupResult;
 import br.usp.cata.service.UserService;
 import br.usp.cata.web.interceptors.IrrestrictAccess;
 import br.usp.cata.web.interceptors.Transactional;
@@ -24,10 +25,12 @@ import br.usp.cata.web.interceptors.Transactional;
 public class IndexController {
 
 	private final Result result;
-	private Validator validator;
-	private UserService userService;
-	private NewUserService newUserService;
-
+	private final Validator validator;
+	private final UserService userService;
+	private final NewUserService newUserService;
+	private final int PASSWORD_MIN_LENGTH = 6;
+	private final int PASSWORD_MAX_LENGTH = 32;
+	
 	public IndexController(Result result, Validator validator,
 			UserService userService, NewUserService newUserService) {
 		this.result = result;
@@ -72,11 +75,51 @@ public class IndexController {
     @Transactional
     public void signup(User newUser, String password)
     {
-    	// TODO validacoes
-        validator.onErrorRedirectTo(IndexController.class).signup();
+    	if(newUser.getName().equals(""))
+    		validator.add(new ValidationMessage(
+    				"O campo não pode ser vazio", "Nome"));
+    	if(newUser.getEmail().equals(""))
+    		validator.add(new ValidationMessage(
+    				"O campo não pode ser vazio", "E-mail"));
+    	if(newUser.getPassword().length() < PASSWORD_MIN_LENGTH)
+    		validator.add(new ValidationMessage(
+    				"A senha deve ter 6 caracteres no mínimo", "Senha"));
+    	if(newUser.getPassword().length() > PASSWORD_MAX_LENGTH)
+    		validator.add(new ValidationMessage(
+    				"A senha deve ter 32 caracteres no máximo", "Senha"));
+    	if(!newUser.getPassword().equals(password))
+        	validator.add(new ValidationMessage(
+        			"As senhas digitadas não são idênticas", "Senhas"));
         
-    	newUserService.register(newUser);
-    	result.forwardTo(IndexController.class).index();
+    	validator.onErrorRedirectTo(IndexController.class).signup();
+        
+    	SignupResult signupResult = newUserService.register(newUser);
+    	
+    	switch(signupResult) {
+    		case SUCCESS:
+    			result.include("messages", "Sua conta foi criada. " +
+    					"Um e-mail de ativação foi enviado para o endereço '" + newUser.getEmail() + "'.");
+    			break;
+    		case USER_ALREADY_REGISTERED_ACTIVE:
+    			validator.add(new ValidationMessage(
+            			"Já existe um usuário cadastrado com este e-mail no sistema", "E-mail"));
+    			break;
+    		case USER_ALREADY_REGISTERED_INACTIVE:
+    			result.include("messages",
+    					"Já existe um usuário cadastrado com este e-mail no sistema - mas está inativo. " + 
+    					"Um e-mail de ativação foi enviado para o endereço '" + newUser.getEmail() + "'.");
+    			break;
+    		case NO_EMAIL_SENT:
+    			validator.add(new ValidationMessage(
+    					"Não foi possível enviar o e-mail de ativação de conta para o endereço " + newUser.getEmail() + "." +
+    							"Tente novamente mais tarde ou use outro endereço de e-mail", "E-mail de ativação"));
+    		default:
+    			 throw new IllegalStateException("Unexpected signup result");
+    	}
+    	
+    	validator.onErrorRedirectTo(IndexController.class).signup();
+    	
+    	result.redirectTo(IndexController.class).index();
     }
     
     @Get
