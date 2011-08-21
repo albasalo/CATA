@@ -9,6 +9,7 @@ import br.com.caelum.vraptor.ioc.RequestScoped;
 import br.com.caelum.vraptor.util.hibernate.SessionCreator;
 import br.usp.cata.model.User;
 
+
 @Component
 @RequestScoped
 public class UserDAO extends AbstractDAO<Long,User> {
@@ -17,14 +18,14 @@ public class UserDAO extends AbstractDAO<Long,User> {
 		super(sessionCreator);
 	}
 
-	// FIXME Nao gosto de 'Status' no nome do metodo.
+	// FIXME Tirar status do nome do metodo
     public User findByEmailAndStatus(final String email, final boolean active) {
         final List<User> users = findByCriteria(Restrictions.and(
         		Restrictions.eq("email", email), Restrictions.eq("active", active)));
 
         if(users.size() > 1)
             throw new IllegalStateException(
-                "There is more than one user with the same e-mail address." + email);
+                "There is more than one user with the same e-mail address: " + email + ".");
         
         return (users.isEmpty() ? null : users.get(0));
     }
@@ -48,8 +49,9 @@ public class UserDAO extends AbstractDAO<Long,User> {
 
         if(users.size() > 1)
             throw new IllegalStateException(
-                "There is more than one user with the same activation key." + activationKey);
+                "There is more than one user with the same activation key: " + activationKey + ".");
 
         return (users.isEmpty() ? null : users.get(0));
     }
+    
 }

@@ -1,4 +1,4 @@
-package br.usp.cata.web.interceptors;
+package br.usp.cata.web.interceptor;
 
 import br.com.caelum.vraptor.Intercepts;
 import br.com.caelum.vraptor.Result;
@@ -29,17 +29,15 @@ public class LoginInterceptor implements Interceptor {
 
     public void intercept(InterceptorStack stack, ResourceMethod method,
     		Object resourceInstance) {
-        if(userSession.isAuthenticatedUser())
-            result.redirectTo(IndexController.class).index();
-        else if(wantsAccessToIrrestrictMethod(method))
+        if(userSession.isAuthenticatedUser() || wantsAccessToIrrestrictMethod(method))
             stack.next(method, resourceInstance);
         else
             result.redirectTo(IndexController.class).index();
     }
 
     private boolean wantsAccessToIrrestrictMethod(final ResourceMethod method ) {
-        return method.getMethod().isAnnotationPresent(IrrestrictAccess.class) ||
-        		method.getResource().getType().isAnnotationPresent(IrrestrictAccess.class);
+        return (method.getMethod().isAnnotationPresent(IrrestrictAccess.class) ||
+        		method.getResource().getType().isAnnotationPresent(IrrestrictAccess.class));
     }
 }
 

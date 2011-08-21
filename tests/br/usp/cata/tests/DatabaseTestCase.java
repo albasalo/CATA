@@ -25,7 +25,7 @@ public abstract class DatabaseTestCase extends CataTestCase
             annotationSessionFactoryCreator.create();
         }
         if(sessionCreator == null) {
-            sessionCreator = new SessionCreator( annotationSessionFactoryCreator.getInstance() );
+            sessionCreator = new SessionCreator(annotationSessionFactoryCreator.getInstance());
             sessionCreator.create();
         }
 

@@ -93,4 +93,5 @@ public class Email implements Serializable {
 	public void addReceiver(String receiverEmail) {
         this.toAddresses.add(receiverEmail);
     }
+	
 }

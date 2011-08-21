@@ -1,0 +1,27 @@
+#user-menu {
+	text-align: right;
+	width: 1020px;
+	margin: auto;
+}
+
+#user-menu ul {
+	margin: 0px;
+}
+
+#user-menu ul li {
+	display: inline;
+	color: #444444;
+	list-style-type: none;
+	font: 0.8em Helvetica, "Helvetica Neue", Arial, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+#user-menu ul li a {
+	color: #444444;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#user-menu ul li a:hover {
+	color: #444444;
+	text-decoration: underline;
+}

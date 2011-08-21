@@ -2,14 +2,9 @@
 	<div id="modal" class="popup_block">
 		<div class="error-messages">
 			<h2>Erro!</h2>
-			<table>
 				<c:forEach items="${errors}" var="error">
-					<tr>
-					<td class='align-top'><b><c:out value="${error.category}"/></b>: </td>
-					<td><c:out value="${error.message}"/></td>
-					</tr>
+					<b><c:out value="${error.category}"/></b>: <c:out value="${error.message}"/><br>
 				</c:forEach>
-			</table>
 		</div>
 	</div>
 </c:if>

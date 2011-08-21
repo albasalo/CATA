@@ -4,9 +4,11 @@ import java.util.List;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
+
 import br.usp.cata.dao.UserDAO;
 import br.usp.cata.model.User;
 import br.usp.cata.web.controller.UserSession;
+
 
 @RequestScoped
 @Component
@@ -25,7 +27,7 @@ public class UserService {
     }
 
     public void save(final User user) {
-        final String password = CryptoService.md5(user.getPassword());
+        final String password = CryptoService.generateMd5(user.getPassword());
 
         user.setPassword(password);
         userDAO.save(user);
@@ -40,7 +42,7 @@ public class UserService {
     }
 
     public boolean authenticate(final String email, String password) {
-        String encryptedPassword = CryptoService.md5(password);
+        String encryptedPassword = CryptoService.generateMd5(password);
 
         final User user = userDAO.findActiveUsersByEmailAndPassword(email, encryptedPassword);
 
@@ -51,10 +53,11 @@ public class UserService {
             userSession.setUser(user);
             success = true;
         }
+        
         return success;
     }
 
     public void deauthenticate() {
-        userSession.setUser( null );
+        userSession.setUser(null);
     }
 }

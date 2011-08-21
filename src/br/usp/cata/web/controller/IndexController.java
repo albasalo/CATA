@@ -16,8 +16,8 @@ import br.usp.cata.model.User;
 import br.usp.cata.service.NewUserService;
 import br.usp.cata.service.NewUserService.SignupResult;
 import br.usp.cata.service.UserService;
-import br.usp.cata.web.interceptors.IrrestrictAccess;
-import br.usp.cata.web.interceptors.Transactional;
+import br.usp.cata.web.interceptor.IrrestrictAccess;
+import br.usp.cata.web.interceptor.Transactional;
 
 
 @Resource
@@ -42,27 +42,53 @@ public class IndexController {
 	@Get
 	@Path("/")
 	public void index() {
+		if(userService.isAuthenticatedUser())
+			result.redirectTo(HomeController.class).index();
+	}
+    
+    @Post
+    @Path("/login")
+    @Transactional
+    public void login(User user) {
+    	
+    	if(user.getEmail().equals(""))
+    		validator.add(new ValidationMessage(
+    				"O campo não pode ser vazio", "E-mail"));
+    	if(user.getPassword().equals(""))
+    		validator.add(new ValidationMessage(
+    				"O campo não pode ser vazio", "Senha"));
+    	
+    	validator.onErrorRedirectTo(IndexController.class).index();
+
+        final boolean success = userService.authenticate(user.getEmail(), user.getPassword());
+
+        if(!success) {
+        	validator.add(new ValidationMessage("valores inválidos", "E-mail ou senha"));
+            validator.onErrorRedirectTo(IndexController.class).index();
+        }
+        
+        result.redirectTo(HomeController.class).index();
+    }
+
+	@Post
+	@Path("/advice")
+	public void advice(UploadedFile file) {
+		if(file == null)
+			validator.add(new ValidationMessage(
+    				"Selecione um arquivo no formato .txt", "Nenhum arquivo selecionado"));
+		else if(!file.getContentType().equals("text/plain")) {
+			validator.add(new ValidationMessage(
+					"O arquivo deve estar no formato .txt", "Formato do arquivo"));
+		}
+		validator.onErrorUsePageOf(IndexController.class).index();
+		
+		result.forwardTo(SuggestionsController.class).results(file);
 	}
 	
 	@Get
 	@Path("/about")
 	public void about() {
 	}
-	
-    @Post
-    @Path("/login")
-    @Transactional
-    public void login(User user) {
-
-        final boolean success = userService.authenticate(user.getEmail(), user.getPassword());
-
-        if(success)
-            result.redirectTo(IndexController.class).index();
-        else {
-        	validator.add(new ValidationMessage("Login ou senha inválidos", "error"));
-            validator.onErrorRedirectTo(getClass()).index();
-        }
-    }
     
     @Get
     @Path("/signup")
@@ -115,8 +141,7 @@ public class IndexController {
     							"Tente novamente mais tarde ou use outro endereço de e-mail", "E-mail de ativação"));
     		default:
     			 throw new IllegalStateException("Unexpected signup result");
-    	}
-    	
+    	}    	
     	validator.onErrorRedirectTo(IndexController.class).signup();
     	
     	result.redirectTo(IndexController.class).index();
@@ -127,27 +152,24 @@ public class IndexController {
     @Transactional
     public void activate(String activationKey)
     {
-    	newUserService.activate(activationKey);
+    	SignupResult activationResult = newUserService.activate(activationKey);
+    	
+    	switch(activationResult) {
+    		case SUCCESS:
+    			result.include("messages", "Sua conta foi ativada com sucesso.");
+    			break;
+    		case USER_ALREADY_REGISTERED_ACTIVE:
+    			result.include("messages", "Sua conta já está ativada.");
+    			break;
+    		case ACTIVATION_KEY_NOT_FOUND:
+    			validator.add(new ValidationMessage(
+        				"Não ocorreu ativação de nenhuma conta porque o link é inválido", "Link inválido"));
+    			break;
+    		default:
+    			throw new IllegalStateException("Unexpected activation result");
+    	}  	
+    	validator.onErrorRedirectTo(IndexController.class).index();
+    	
     	result.redirectTo(IndexController.class).index();
     }
-	
-	@Get
-	@Path("/advice")
-	public void advice() {
-	}
-
-	@Post
-	@Path("/advice")
-	public void advice(UploadedFile file) {
-		if(file == null)
-			validator.add(new ValidationMessage("", "error"));
-		else if(!file.getContentType().equals("text/plain")) {
-			validator.add(new ValidationMessage(
-					"O arquivo deve estar no formato .txt", "error"));
-		}
-		validator.onErrorUsePageOf(IndexController.class).advice();
-		
-		//result.redirectTo(SuggestionsController.class).results(file);
-		result.forwardTo(SuggestionsController.class).results(file);
-	}
 }

@@ -8,7 +8,7 @@
 	overflow: hidden;
 	zoom: 1;
 	position: relative;
-	width: 565px;
+	width: 950px;
 	margin: auto;
 }
 
@@ -40,14 +40,14 @@
 }
 
 .cs-title {
-	width: 545px;
+	width: 930px;
 	padding: 10px;
 	background-color: #000000;
 	color: #fff;
 }
 
 .cs-prev, .cs-next {
+	padding: 0px 10px;
 	background-color: #000000;
 	color: #fff;
-	padding: 0px 10px;
 }

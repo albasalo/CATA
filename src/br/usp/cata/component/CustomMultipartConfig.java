@@ -10,7 +10,7 @@ import br.com.caelum.vraptor.ioc.Component;
 public class CustomMultipartConfig extends DefaultMultipartConfig {
 	
     public long getSizeLimit() {
-        return 30 * 1024 * 1024; // 30MB
+        return 10 * 1024 * 1024; // 10MB
     }
     
 }

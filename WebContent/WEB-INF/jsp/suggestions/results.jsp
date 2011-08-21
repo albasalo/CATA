@@ -8,8 +8,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
+	<link href="<c:url value='/css/advice.css'/>" rel="stylesheet" type="text/css" />
 	
-	<title>Sugest&otilde;es de Estilo</title>
+	<title>Sugestões de Estilo</title>
     <script type="text/javascript" src="<c:url value='js/jquery-1.3.1.min.js'/>"></script>
     <script type="text/javascript">
 	    $(function () {
@@ -74,84 +75,64 @@
 
 
 <body>
-	<div id="header">
-		<div id="header-content">
-			<div id="logo">
-				<a href="<c:url value='/'/>" title='CATA'><b>C</b>ollaborative <b>A</b>cademic <b>T</b>ext <b>A</b>dvisor</a>
-			</div>
-			
-			<div id="menu" class="nav_bar">
-				<ul>
-				<li><a href="<c:url value='/'/>" title='Início'>Início</a></li>
-				<li><a href="<c:url value='/about'/>" title='Sobre'>Sobre</a></li>
-				<li><a href="<c:url value='/advice'/>" title='Advice'>Advice</a></li>
-				</ul>	
-			</div>
-		</div>
-	</div>
+	<%@ include file="../shared/header.jsp"%>
 	
 	<div id="page">
 		<div id="content">
-			<h1>Sugest&otilde;es</h1>
+			<h1>Sugestões</h1>
 			${output}<br>
 			<br>
-			<c:if test = "${numOfErrors != 0}">
-			<div id="text">
-				<b>Arquivo: <c:out value="${fileName}"/></b>
-				<br />
-				<br />
-				<c:forEach items="${text}" var="analyzedLine">
-					<c:forEach items="${analyzedLine.analyzedLine}" var="segment">
-						<c:choose>
-						<c:when test="${segment.brokenRule != null}">
-							<span class="popupConf">
-								<span class="highlightedText">
-									<c:set var="category" value="Erro" />
-									<c:choose>
-									<c:when test="${segment.brokenRule.category == category}">
-										<c:set var="color" value="#780000" />
-									</c:when>
-									<c:otherwise>
-										<c:set var="color" value="#ffcc33" />
-									</c:otherwise>
-									</c:choose>
-									<font style="color: ${color}">
-										<b><c:out value="${segment.text}"/></b>
-									</font>
-								</span>
-								<div class="popup">
-									<div class="popupTop"></div>
-									<div class="popupMid">
-									<span class="popupContent">
-									<table>
-										<tr>
-											<td><b>Problema:</b></td>
-											<td>${segment.brokenRule.type}</td>
-										</tr>
-										<tr>
-											<td><b>Sugestão:</b></td>
-											<td>${segment.brokenRule.suggestion}</td>									</tr>
-										<tr>
-											<td><b>Referência:&nbsp;</b></td>
-											<td><a href="${segment.brokenRule.reference}" target="_blank">Site do prof. Fabio Kon com dicas de tradução</a></td>
-										</tr>
-									</table>
+			<c:if test = "${numOfMistakes != 0}">
+				<div id="text">
+					<b>Arquivo: <c:out value="${fileName}"/></b>
+					<br />
+					<br />
+					<c:forEach items="${text}" var="checkedLine">
+						<c:forEach items="${checkedLine}" var="checkedSegment">
+							<c:choose>
+							<c:when test="${checkedSegment.mistakes != null}">
+								<span class="popupConf">
+									<span class="highlightedText">
+										<font style="color:#950000">
+											<b><c:out value="${checkedSegment.segment}"/></b>
+										</font>
 									</span>
+									<div class="popup">
+										<div class="popupTop"></div>
+										<div class="popupMid">
+										<span class="popupContent">
+										<table>
+											<c:forEach items="${checkedSegment.mistakes}" var="mistake">
+											<tr>
+												<td><b>Problema:</b></td>
+												<td>${mistake.brokenRule.patternSuggestionElement.pattern}</td>
+											</tr>
+											<tr>
+												<td><b>Sugestão:</b></td>
+												<td>${mistake.brokenRule.patternSuggestionElement.suggestion}</td>
+											</tr>
+											<tr>
+												<td><b>Referência:&nbsp;</b></td>
+												<td>${mistake.brokenRule.rule.source.description}</td>
+											</tr>
+											</c:forEach>
+										</table>
+										</span>
+										</div>
+										<div class="popupBtm"></div>
 									</div>
-									<div class="popupBtm"></div>
-								</div>
-							</span>
-						</c:when>
-						<c:otherwise>
-							<c:out value="${segment.text}"/>
-						</c:otherwise>
-						</c:choose>
-				</c:forEach>
-				<br>
-				</c:forEach>
-			</div>
+								</span>
+							</c:when>
+							<c:otherwise>
+								<c:out value="${checkedSegment.segment}"/>
+							</c:otherwise>
+							</c:choose>
+					</c:forEach>
+					<br>
+					</c:forEach>
+				</div>
 			</c:if>
 		</div>
 	</div>
 	
-<%@ include file="../footer.jsp"%>
+<%@ include file="../shared/footer.jsp"%>

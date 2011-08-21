@@ -1,0 +1,43 @@
+#text {
+	width: 900px;
+	margin: auto;
+    -moz-box-shadow: 0 0 10px #333333;
+    -webkit-box-shadow: 0 0 10px #333333;
+    border: 3px solid;
+    border-color: #2975a5;
+    padding: 20px;
+}
+
+
+/* Tooltip */
+.popupConf {
+	position: relative;
+}
+
+.highlightedText {
+}
+
+.popup {
+	position: absolute;
+	width: 480px;
+    display: none;
+	z-index: 20;
+}
+
+.popupMid {
+	padding: 0px 25px 0px 25px;
+	background: transparent url(images/tipMid.png) repeat-y;
+}
+
+.popupTop {
+	background: transparent url(images/tipTop.png) no-repeat top;
+	height: 32px;	
+}
+
+.popupBtm {
+	background: transparent url(images/tipBtm.png) no-repeat bottom;
+	height: 32px;		
+}
+
+.popupContent {
+}

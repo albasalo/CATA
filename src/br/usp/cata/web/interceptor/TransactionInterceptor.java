@@ -1,4 +1,4 @@
-package br.usp.cata.web.interceptors;
+package br.usp.cata.web.interceptor;
 
 import org.hibernate.Transaction;
 
@@ -8,6 +8,7 @@ import br.com.caelum.vraptor.interceptor.Interceptor;
 import br.com.caelum.vraptor.ioc.RequestScoped;
 import br.com.caelum.vraptor.resource.ResourceMethod;
 import br.com.caelum.vraptor.util.hibernate.SessionCreator;
+
 
 @RequestScoped
 @Intercepts(before = LoginInterceptor.class)
@@ -20,8 +21,8 @@ public class TransactionInterceptor implements Interceptor
     }
 
     public boolean accepts(final ResourceMethod method) {
-        return method.getMethod().isAnnotationPresent(Transactional.class) ||
-        		method.getResource().getType().isAnnotationPresent(Transactional.class);
+        return (method.getMethod().isAnnotationPresent(Transactional.class) ||
+        		method.getResource().getType().isAnnotationPresent(Transactional.class));
     }
 
     public void intercept(final InterceptorStack stack, final ResourceMethod method,

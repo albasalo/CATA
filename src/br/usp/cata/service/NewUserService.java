@@ -6,10 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
+
 import br.usp.cata.dao.UserDAO;
 import br.usp.cata.model.Email;
 import br.usp.cata.model.EmailException;
 import br.usp.cata.model.User;
+
 
 @RequestScoped
 @Component
@@ -20,7 +22,8 @@ public class NewUserService {
 		USER_ALREADY_REGISTERED_ACTIVE,
 		USER_ALREADY_REGISTERED_INACTIVE,
 		NO_EMAIL_SENT_INACTIVE,
-		NO_EMAIL_SENT
+		NO_EMAIL_SENT,
+		ACTIVATION_KEY_NOT_FOUND
 	}
     
     private final UserDAO userDAO;
@@ -40,8 +43,7 @@ public class NewUserService {
         				: httpServletRequest.getRequestURL().toString());
     }
     
-    private Email buildNewUserEmail(final User newUser) {
-        
+    private Email buildNewUserEmail(final User newUser) {        
     	final StringBuilder linkBuilder = new StringBuilder();
 	        linkBuilder.append("<a href='");
 	        linkBuilder.append(getActivationUrl());
@@ -59,9 +61,9 @@ public class NewUserService {
         return emailService.buildEmail(subject, body, newUser.getEmail());
     }
 
-    public SignupResult register(final User newUser)  {
-    	
+    public SignupResult register(final User newUser)  { 	
     	String email = newUser.getEmail();
+    	
     	final User activeUser = userDAO.findByEmailAndStatus(email, true);
     	if(activeUser != null)
     		return SignupResult.USER_ALREADY_REGISTERED_ACTIVE;
@@ -77,7 +79,7 @@ public class NewUserService {
     	}
     	
     	try {
-    		newUser.setPassword(CryptoService.md5(newUser.getPassword()));
+    		newUser.setPassword(CryptoService.generateMd5(newUser.getPassword()));
             newUser.setRegistrationDate(new Date());
             newUser.setActivationKey();
             newUser.setActive(false);
@@ -92,10 +94,18 @@ public class NewUserService {
         return SignupResult.SUCCESS;
     }
     
-    public void activate(String activationKey)
+    public SignupResult activate(String activationKey)
     {
     	final User userToBeActivated = userDAO.findByActivationKey(activationKey);
+    	
+    	if(userToBeActivated == null)
+    		return SignupResult.ACTIVATION_KEY_NOT_FOUND;
+    	else if(userToBeActivated.isActive())
+    		return SignupResult.USER_ALREADY_REGISTERED_ACTIVE;
+    	
     	userToBeActivated.setActive(true);
+    	
+    	return SignupResult.SUCCESS;
     }
 
 }

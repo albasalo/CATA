@@ -1,78 +1,153 @@
 package br.usp.cata.model;
 
-public class Rule {
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Set;
 
-	private String category;
-	private String type;
-	private String pattern, suggestion;
-	private int length;
-	private String reference;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+import br.usp.cata.model.Enums.Category;
+import br.usp.cata.model.Enums.Type;
+
+
+@Entity
+public class Rule implements Serializable {
+
+	private static final long serialVersionUID = 8581290083742L;
 	
-	/* O XML segue esse esquema. */
-	public static final String rulesTag = "Rule";
-	public static final String[] ruleProperties = 
-		{ "Category", "Type", "Pattern", "Suggestion", "Reference" };
+    @Id
+    @GeneratedValue
+    private Long ruleID;
 	
-	//FIXME verificar o array - tamanho etc.
-	public Rule(String[] properties) {
-		category = properties[0];
-		type = properties[1];
-		pattern = properties[2];
-		suggestion = properties[3];
-		reference = properties[4];
-		setLength();
-	}
+    @Column
+	private boolean defaultRule;
 	
-	/*
-	 * Importante: sempre chamar essa funcao ao setar 'pattern'.
-	 */
-	private void setLength() {
-		length = (" " + pattern + " ").getBytes().length;
+    @Column
+	private Type type;
+    
+    @Column
+	private Category category;
+    
+    @ManyToOne
+    @JoinColumn(name="lemmaID", referencedColumnName="patternSuggestionElementID")
+    @Cascade({CascadeType.ALL})
+	private PatternSuggestionElement lemmaElement;
+
+    @ManyToMany
+    @JoinColumn(name="exactMatchingElementID", referencedColumnName="patternSuggestionElementID")
+    @Cascade({CascadeType.ALL})
+	private Set<PatternSuggestionElement> exactMatchingElements;
+    
+    @Column
+	private String explanation;
+    
+    @ManyToOne
+    @JoinColumn(name="sourceID", referencedColumnName="sourceID")
+    @Cascade({CascadeType.ALL})
+	private Source source;
+    
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+	private Date date;
+    
+    @ManyToOne
+    @JoinColumn(name="userID", referencedColumnName="userID")
+    @Cascade({CascadeType.ALL})
+	private User user;
+    
+    public Rule() {
+    }
+
+	public Long getRuleID() {
+		return ruleID;
 	}
 
-	public String getCategory() {
-		return category;
+	public void setRuleID(Long ruleID) {
+		this.ruleID = ruleID;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public boolean isDefaultRule() {
+		return defaultRule;
 	}
 
-	public String getType() {
+	public void setDefaultRule(boolean defaultRule) {
+		this.defaultRule = defaultRule;
+	}
+
+	public Type getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 
-	public String getPattern() {
-		return pattern;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setPattern(String pattern) {
-		this.pattern = pattern;
-		setLength();
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
-	public String getSuggestion() {
-		return suggestion;
+	public PatternSuggestionElement getLemmaElement() {
+		return lemmaElement;
 	}
 
-	public void setSuggestion(String suggestion) {
-		this.suggestion = suggestion;
+	public void setLemmaElement(PatternSuggestionElement lemmaElement) {
+		this.lemmaElement = lemmaElement;
 	}
 
-	public String getReference() {
-		return reference;
+	public Set<PatternSuggestionElement> getExactMatchingElements() {
+		return exactMatchingElements;
 	}
 
-	public void setReference(String reference) {
-		this.reference = reference;
+	public void setExactMatchingElements(
+			Set<PatternSuggestionElement> exactMatchingElements) {
+		this.exactMatchingElements = exactMatchingElements;
 	}
 
-	public int getLength() {
-		return length;
+	public String getExplanation() {
+		return explanation;
+	}
+
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
+	}
+
+	public Source getSource() {
+		return source;
+	}
+
+	public void setSource(Source source) {
+		this.source = source;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }

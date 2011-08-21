@@ -1,0 +1,20 @@
+#login {
+	width: 340px;
+	margin-left: 25px;
+	float: left;
+}
+
+
+#advice {
+	width: 495px;
+	padding: 15px 15px;
+	margin-top: 32px;
+	margin-left: 15px;
+	margin-right: 30px;
+	float: right;
+	background-color: #a8c0cf;
+}
+
+#advice form {
+	margin: 10px 20px;
+}

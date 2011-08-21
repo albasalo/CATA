@@ -6,6 +6,7 @@ import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.SessionScoped;
 import br.usp.cata.model.User;
 
+
 @SessionScoped
 @Component
 public class UserSession implements Serializable {

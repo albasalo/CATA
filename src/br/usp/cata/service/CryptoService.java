@@ -4,9 +4,10 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+
 public class CryptoService {
 	
-    public static String md5(String text) {
+    public static String generateMd5(String text) {
         if(text == null)
             return null;
         

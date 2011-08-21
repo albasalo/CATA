@@ -13,16 +13,16 @@ import org.hibernate.criterion.Order;
 import br.com.caelum.vraptor.util.hibernate.SessionCreator;
 
 
-@SuppressWarnings(value = { "unchecked" })
+@SuppressWarnings(value = {"unchecked"})
 public abstract class AbstractDAO<ID extends Serializable, T> implements BasicDAO<ID,T> {
     
 	private final SessionCreator sessionCreator;
 
-    private final Class<T> clazzEntity;
+    private final Class<T> classEntity;
 
     protected AbstractDAO(final SessionCreator sessionCreator) {
         this.sessionCreator = sessionCreator;
-        this.clazzEntity = (Class<T>)((ParameterizedType)getClass().getGenericSuperclass()).
+        this.classEntity = (Class<T>)((ParameterizedType)getClass().getGenericSuperclass()).
         		getActualTypeArguments()[1];
     }
 
@@ -31,11 +31,11 @@ public abstract class AbstractDAO<ID extends Serializable, T> implements BasicDA
     }
 
     protected Criteria createCriteria() {
-        return getSession().createCriteria(clazzEntity);
+        return getSession().createCriteria(classEntity);
     }
 
-    public Class<T> getClazzEntity() {
-        return clazzEntity;
+    public Class<T> getClassEntity() {
+        return classEntity;
     }
 
     public void save(final T... objs) {
@@ -54,7 +54,7 @@ public abstract class AbstractDAO<ID extends Serializable, T> implements BasicDA
     }
 
     public T findById(final ID id) {
-        return (T)getSession().get(clazzEntity, id);
+        return (T)getSession().get(classEntity, id);
     }
 
     public List<T> findAll() {
@@ -67,9 +67,9 @@ public abstract class AbstractDAO<ID extends Serializable, T> implements BasicDA
 
     public List<T> findByCriteria(final Order order, final Criterion... criterion) {
         final Criteria crit = this.createCriteria();
-        for(Criterion c : criterion)
-            crit.add(c);
         
+        for(Criterion c : criterion)
+            crit.add(c);       
         if(order != null)
             crit.addOrder(order);
 
@@ -84,6 +84,7 @@ public abstract class AbstractDAO<ID extends Serializable, T> implements BasicDA
             example.excludeProperty(exclude);
             
         crit.add(example);
+        
         return (List<T>)crit.list();
     }
     

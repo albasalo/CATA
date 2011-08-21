@@ -15,6 +15,7 @@ $(document).ready(function(){
 	pass2.blur(validatePass2);
 	
 	name.keyup(validateName);
+	email.keyup(validateEmail);
 	pass1.keyup(validatePass1);
 	pass2.keyup(validatePass2);
 
