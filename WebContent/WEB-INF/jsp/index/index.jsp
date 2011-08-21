@@ -132,7 +132,7 @@
 						<center>
 							<input class="button" type="submit" value="Enviar">
 							<div class="small">
-								Por padrão, todas as regras cadastradas no Sistema serão aplicadas ao seu texto. Para
+								Por padrão, apenas algumas regras cadastradas no Sistema serão aplicadas ao seu texto. Para
 								configurar a análise de seus arquivos, use a opção<br>
 								<a href=#>Verificação Avançada</a>.
 							</div>
