@@ -17,7 +17,7 @@ public class PatternSuggestionElement implements Serializable {
 	@GeneratedValue
 	private Long patternSuggestionElementID;
 	
-	@Column(length=500)
+	@Column(length=1000)
 	private byte[] tokenizedPatternBytes;
 	
 	@Column(length=200)
