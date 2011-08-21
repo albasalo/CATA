@@ -123,7 +123,7 @@
 				</div>
 				
 				<div id="advice">
-					<h1>Verifique o estilo de seus textos</h1>
+					<h2>Verifique o estilo de seus textos</h2>
 					<form action="<c:url value="/advice"/>" enctype="multipart/form-data" method="post">
 						Selecione um arquivo .txt para análise:<br>
 						<div class="single_form_element">
