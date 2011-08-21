@@ -10,6 +10,7 @@
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.1.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/newsource-form.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("[name='newSource.type']").change(createForm);
@@ -139,7 +140,7 @@
 					<div id=fieldInfo" class="single_form_element">
 						<label class="label" for="info">Mais informações<span id="mandatoryInfo" style="display: none">*</span>:</label>
 						<br />
-						<textarea style="width: 600px; height: 100px !important" class="input_border" maxlength=400
+						<textarea id="info" style="width: 600px; height: 100px !important" class="input_border" maxlength=400
 							name="newSource.moreInformation"></textarea>
 					</div>		
 										
