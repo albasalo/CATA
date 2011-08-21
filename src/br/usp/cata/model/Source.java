@@ -15,8 +15,6 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import br.usp.cata.model.Enums.TypesOfSources;
-
 
 @Entity
 public class Source implements Serializable {

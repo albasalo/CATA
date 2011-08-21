@@ -17,9 +17,6 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import br.usp.cata.model.Enums.Categories;
-import br.usp.cata.model.Enums.TypesOfRules;
-
 
 @Entity
 public class Rule implements Serializable {
@@ -37,7 +34,7 @@ public class Rule implements Serializable {
 	private TypesOfRules type;
     
     @Column
-	private Categories category;
+	private RuleCategories category;
     
     @ManyToOne
     @JoinColumn(name="lemmaID", referencedColumnName="patternSuggestionElementID")
@@ -93,11 +90,11 @@ public class Rule implements Serializable {
 		this.type = type;
 	}
 
-	public Categories getCategory() {
+	public RuleCategories getCategory() {
 		return category;
 	}
 
-	public void setCategory(Categories category) {
+	public void setCategory(RuleCategories category) {
 		this.category = category;
 	}
 

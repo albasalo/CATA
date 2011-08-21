@@ -47,6 +47,12 @@ legend {
 	border: 2px solid #2975a5;
 }
 
+.single_form_element select {
+	width: 250px;
+	height: 32px;
+	font-size: 1.0em;
+}
+
 .single_form_element .error {
 	border: 2px solid #9d0505;
 	-moz-border-radius: 7px;
