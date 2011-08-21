@@ -31,7 +31,6 @@ legend {
 }
 
 .single_form_element input {
-	width: 285px;
 	height: 32px;
 	font-size: 1.0em;
 }
@@ -48,9 +47,13 @@ legend {
 }
 
 .single_form_element select {
-	width: 250px;
 	height: 32px;
 	font-size: 1.0em;
+	background-color: #fff;
+}
+
+.single_form_element textarea {
+	font-size: 1.0em;	
 }
 
 .single_form_element .error {

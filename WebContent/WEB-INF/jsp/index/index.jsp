@@ -106,12 +106,12 @@
 							<div class="single_form_element">
 								<label class="label" for="email">E-mail:</label>
 								<br />
-								<input id="email" class="input_border" type="text" maxlength=100 name="user.email"/>
+								<input id="email" class="input_border width285" type="text" maxlength=100 name="user.email"/>
 							</div>
 							<div class="single_form_element">
 								<label class="label" for="pass">Senha:</label>
 								<br />
-								<input id="pass" class="input_border" type="password" maxlength=100 name="user.password"/>
+								<input id="pass" class="input_border width285" type="password" maxlength=100 name="user.password"/>
 								<div class="small align-right"><a href=#>Esqueci a senha</a></div>
 							</div>
 							<center>

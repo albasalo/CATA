@@ -92,8 +92,9 @@ public class IndexController {
     
     @Get
     @Path("/signup")
-    public void signup()
-    {   	
+    public void signup() {
+		if(userService.isAuthenticatedUser())
+			result.redirectTo(HomeController.class).index();
     }
     
     @Post

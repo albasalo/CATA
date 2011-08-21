@@ -28,14 +28,14 @@ public class Source implements Serializable {
     @Column
     private TypesOfSources type;
     
-    @Column(length=300)
+    @Column(length=200)
     private String title;
     
     @Column(length=300)
     private String url;
     
-    @Column(length=200)
-    private String author;
+    @Column(length=300)
+    private String authors;
     
     @Column(length=100)
     private String publisher;
@@ -43,12 +43,15 @@ public class Source implements Serializable {
     @Column(length=100)
     private String institution;
     
-    @Column
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    @Column(length=20)
+    private String date;
     
     @Column(length=400)
     private String moreInformation;
+    
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date registrationDate;
     
     @ManyToOne
     @JoinColumn(name="userID", referencedColumnName="userID")
@@ -90,12 +93,12 @@ public class Source implements Serializable {
 		this.url = url;
 	}
 
-	public String getAuthor() {
-		return author;
+	public String getAuthors() {
+		return authors;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setAuthors(String authors) {
+		this.authors = authors;
 	}
 
 	public String getPublisher() {
@@ -114,11 +117,11 @@ public class Source implements Serializable {
 		this.institution = institution;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -136,6 +139,14 @@ public class Source implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Date getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(Date registrationDate) {
+		this.registrationDate = registrationDate;
 	}
 	
 }
