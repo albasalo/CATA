@@ -11,7 +11,7 @@
      mail.smtp.auth="true"
      mail.smtp.user="sistema.cata"
 	 mail.smtp.from="sistema.cata@gmail.com"
-     password="EMAIL PASSWORD HERE"
+     password="c@t@42tcc"
      mail.smtp.starttls.enable="true"
      mail.smtp.socketFactory.class="javax.net.ssl.SSLSocketFactory"
     />
