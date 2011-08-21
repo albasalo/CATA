@@ -124,7 +124,7 @@ public class IndexController {
     	switch(signupResult) {
     		case SUCCESS:
     			result.include("messages", "Sua conta foi criada. " +
-    					"Um e-mail de ativação foi enviado para o endereço '" + newUser.getEmail() + "'.");
+    					"Um e-mail de ativação foi enviado para o endereço " + newUser.getEmail() + ".");
     			break;
     		case USER_ALREADY_REGISTERED_ACTIVE:
     			validator.add(new ValidationMessage(
@@ -133,12 +133,13 @@ public class IndexController {
     		case USER_ALREADY_REGISTERED_INACTIVE:
     			result.include("messages",
     					"Já existe um usuário cadastrado com este e-mail no sistema - mas está inativo. " + 
-    					"Um e-mail de ativação foi enviado para o endereço '" + newUser.getEmail() + "'.");
+    					"Um e-mail de ativação foi enviado para o endereço " + newUser.getEmail() + ".");
     			break;
     		case NO_EMAIL_SENT:
     			validator.add(new ValidationMessage(
-    					"Não foi possível enviar o e-mail de ativação de conta para o endereço " + newUser.getEmail() + "." +
-    							"Tente novamente mais tarde ou use outro endereço de e-mail", "E-mail de ativação"));
+    					"Não foi possível enviar o e-mail de ativação de conta para o endereço " + newUser.getEmail() + ". " +
+    							"Tente novamente mais tarde ou use outro endereço de e-mail.", "E-mail de ativação"));
+    			break;
     		default:
     			 throw new IllegalStateException("Unexpected signup result");
     	}    	
