@@ -114,7 +114,7 @@
 					<legend>Cadastrar nova Referência</legend>
 					
 					<div class="single_form_element">
-						<label class="label" for="name">Tipo*:</label>
+						<label class="label" for="name">Tipo*</label>
 						<br />
 						<select id="selectType" name="newSource.type" class="input_border width250">
 							<c:forEach var="type" items="${typesOfSources}"  >
@@ -131,51 +131,51 @@
 					</div>
 					
 					<div id="fieldTitle" class="single_form_element" style="display: none">
-						<label class="label" for="title">Título*:</label>
+						<label class="label" for="title">Título*</label>
 						<br />
 						<input id="title" class="input_border width350" type="text" maxlength=200 name="newSource.title" />
 						<br />
 					</div>
 					
 					<div id="fieldURL" class="single_form_element" style="display: none">
-						<label class="label" for="url">URL (disponível em)*:</label>
+						<label class="label" for="url">URL (disponível em)*</label>
 						<br />
 						<input id="url" class="input_border width350" type="text" maxlength=300 name="newSource.url" />
 						<br />
 					</div>
 					
 					<div id="fieldAuthors" class="single_form_element" style="display: none">
-						<label class="label" for="authors">Autor(es)*:</label>
+						<label class="label" for="authors">Autor(es)*</label>
 						<br />
 						<input id="authors" class="input_border width350" type="text" maxlength=300 name="newSource.authors" />
 						<br />
 					</div>
 
 					<div id="fieldPublisher" class="single_form_element" style="display: none">
-						<label class="label" for="publisher">Editora:</label>
+						<label class="label" for="publisher">Editora</label>
 						<br />
 						<input id="publisher" class="input_border width350" type="text" maxlength=100 name="newSource.publisher" />
 						<br />
 					</div>	
 					
 					<div id="fieldInstitution" class="single_form_element" style="display: none">
-						<label class="label" for="institution">Instituição:</label>
+						<label class="label" for="institution">Instituição</label>
 						<br />
 						<input id="institution" class="input_border width350" type="text" maxlength=100 name="newSource.institution" />
 						<br />
 					</div>								
 					
 					<div id="fieldDate" class="single_form_element" style="display: none">
-						<label id="dateAcademic" class="label" for="date">Data:</label>
-						<label id="dateBook" class="label" for="date" style="display: none">Data de publicação:</label>
-						<label id="dateInternet" class="label" for="date" style="display: none">Data de acesso*:</label>
+						<label id="dateAcademic" class="label" for="date">Data</label>
+						<label id="dateBook" class="label" for="date" style="display: none">Data de publicação</label>
+						<label id="dateInternet" class="label" for="date" style="display: none">Data de acesso*</label>
 						<br />
 						<input id="date" class="input_border width250" type="text" maxlength=20 name="newSource.date" />
 						<br />
 					</div>			
 					
 					<div id=fieldInfo" class="single_form_element">
-						<label class="label" for="info">Mais informações<span id="mandatoryInfo" style="display: none">*</span>:</label>
+						<label class="label" for="info">Mais informações<span id="mandatoryInfo" style="display: none">*</span></label>
 						<br />
 						<textarea id="info" style="width: 600px; height: 100px !important" class="input_border" maxlength=400
 							name="newSource.moreInformation"></textarea>

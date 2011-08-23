@@ -1,9 +1,19 @@
 package br.usp.cata.model;
 
+import java.util.Arrays;
+import java.util.List;
 
-// TODO: mais categorias
+
 public enum TypesOfRules {
 	CLICHE,
+	FOREIGN_TERM,
 	POOR_TRANSLATION,
-	OTHER
+	OTHER;
+	
+	private final static List<String> typesOfRules = 
+		Arrays.asList("Clichê", "Estrangeirismo", "Tradução incorreta", "Outro");
+	
+	public String getTypeDescription() {
+		return typesOfRules.get(this.ordinal());
+	}
 }

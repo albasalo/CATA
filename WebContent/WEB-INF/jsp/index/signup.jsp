@@ -51,25 +51,25 @@
 				<fieldset>
 					<legend>Cadastre-se</legend>
 						<div class="single_form_element">
-							<label class="label" for="name">Nome*:</label>
+							<label class="label" for="name">Nome*</label>
 							<br />
 							<input id="name" class="input_border width285" type="text" maxlength=100 name="newUser.name" /><br />
 							<span id="nameInfo" class="description">Você poderá mudar este campo depois</span>
 						</div>
 						<div class="single_form_element">
-							<label class="label" for="email">E-mail*:</label>
+							<label class="label" for="email">E-mail*</label>
 							<br />
 							<input id="email" class="input_border width285" type="text" maxlength=100 name="newUser.email" /><br />
 							<span id="emailInfo" class="description">Uma confirmação será enviada para este endereço</span>
 						</div>
 						<div class="single_form_element">
-							<label class="label" for="pass1">Senha*:</label>
+							<label class="label" for="pass1">Senha*</label>
 							<br />
 							<input id="pass1" class="input_border width285" type="password" maxlength=32 name="newUser.password" /><br />
 							<span id="pass1Info" class="description">No mínimo 6 caracteres</span>
 						</div>
 						<div class="single_form_element">
-							<label class="label" for="pass2">Redigite a senha*:</label>
+							<label class="label" for="pass2">Redigite a senha*</label>
 							<br />
 							<input id="pass2" class="input_border width285" type="password" maxlength=32 name="password" /><br />
 							<span id="pass2Info" class="description">Confirme sua senha</span>

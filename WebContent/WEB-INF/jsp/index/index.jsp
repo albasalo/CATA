@@ -67,14 +67,14 @@
 				<br />
 				
 				<div id='coin-slider'>
-					<a href="<c:url value='/advice'/>">
-						<img src="<c:url value='/css/images/test.png'/>">
+					<a href="<c:url value='#'/>">
+						<img src="<c:url value='/css/images/txt-file.png'/>">
 						<span>
 							<b>Envie um arquivo .txt</b><br>
 							Selecione um arquivo de texto sem formatação e envie para verificação.
 						</span>
 					</a>
-					<a href="<c:url value='/advice'/>">
+					<a href="<c:url value='#'/>">
 						<img src="<c:url value='/css/images/test.png'/>">
 						<span>
 							<b>Alternativas aos problemas de estilo</b><br>
@@ -82,8 +82,8 @@
 							oferece sugestões para corrigi-los.
 						</span>
 					</a>
-					<a href="http://www.github.com/albasalo/CATA" target="_blank">
-						<img src="<c:url value='/css/images/test.png'/>">
+					<a href="<c:url value='/signup'/>">
+						<img src="<c:url value='/css/images/newrule.png'/>">
 						<span>
 							<b>Cadastre suas próprias sugestões de estilo</b><br>
 							Cadastrando-se no Sistema CATA você poderá inserir e modificar suas
@@ -91,7 +91,7 @@
 						</span>
 					</a>	
 					<a href="http://www.github.com/albasalo/CATA" target="_blank">
-						<img src="<c:url value='/css/images/test.png'/>">
+						<img src="<c:url value='/css/images/free-github.png'/>">
 						<span>
 							<b>CATA é software livre!</b><br>
 							O código-fonte do Sistema CATA está hospedado no GitHub.
@@ -104,12 +104,12 @@
 						<fieldset>
 						<legend>Entrar</legend>
 							<div class="single_form_element">
-								<label class="label" for="email">E-mail:</label>
+								<label class="label" for="email">E-mail</label>
 								<br />
 								<input id="email" class="input_border width285" type="text" maxlength=100 name="user.email"/>
 							</div>
 							<div class="single_form_element">
-								<label class="label" for="pass">Senha:</label>
+								<label class="label" for="pass">Senha</label>
 								<br />
 								<input id="pass" class="input_border width285" type="password" maxlength=100 name="user.password"/>
 								<div class="small align-right"><a href=#>Esqueci a senha</a></div>

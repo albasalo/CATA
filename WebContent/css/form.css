@@ -30,6 +30,11 @@ legend {
 	margin: 2px 5px 0 0;
 }
 
+.single_form_element .indent {
+	margin-top: 4px;
+	margin-left: 15px;
+}
+
 .single_form_element input {
 	height: 32px;
 	font-size: 1.0em;
@@ -71,6 +76,7 @@ legend {
 	color: #9d0505;
 }
 
+
 .small {
 	font-size: 0.8em;
 }
@@ -83,4 +89,16 @@ legend {
 .small a:hover, .small a.selected {
 	color: #123348;
 	font-weight: bold;
+}
+
+
+.change_form_element {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #535353
+}
+
+.change_form_element:hover {
+	color: #000;
+	cursor: pointer;
 }
