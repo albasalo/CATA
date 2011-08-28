@@ -37,12 +37,22 @@ public class Rule implements Serializable {
 	private RuleCategories category;
     
     @ManyToOne
-    @JoinColumn(name="lemmaID", referencedColumnName="patternSuggestionElementID")
+    @JoinColumn(name="lemmaElementID", referencedColumnName="patternSuggestionElementID")
     @Cascade({CascadeType.ALL})
 	private PatternSuggestionElement lemmaElement;
+    
+    @ManyToMany
+    @JoinColumn(name="lemmaElementsID", referencedColumnName="patternSuggestionElementID")
+    @Cascade({CascadeType.ALL})
+    private Set<PatternSuggestionElement> lemmaElements;
+    
+    @ManyToOne
+    @JoinColumn(name="exactMacthingElementID", referencedColumnName="patternSuggestionElementID")
+    @Cascade({CascadeType.ALL})
+	private PatternSuggestionElement exactMatchingElement;
 
     @ManyToMany
-    @JoinColumn(name="exactMatchingElementID", referencedColumnName="patternSuggestionElementID")
+    @JoinColumn(name="exactMatchingElementsID", referencedColumnName="patternSuggestionElementID")
     @Cascade({CascadeType.ALL})
 	private Set<PatternSuggestionElement> exactMatchingElements;
     
@@ -104,6 +114,22 @@ public class Rule implements Serializable {
 
 	public void setLemmaElement(PatternSuggestionElement lemmaElement) {
 		this.lemmaElement = lemmaElement;
+	}
+	
+	public Set<PatternSuggestionElement> getLemmaElements() {
+		return lemmaElements;
+	}
+	
+	public void setLemmaElements(Set<PatternSuggestionElement> lemmaElements) {
+		this.lemmaElements = lemmaElements;
+	}
+	
+	public PatternSuggestionElement getExactMatchingElement() {
+		return exactMatchingElement;
+	}
+	
+	public void setExactMatchingElement(PatternSuggestionElement exactMatchingElement) {
+		this.exactMatchingElement = exactMatchingElement;
 	}
 
 	public Set<PatternSuggestionElement> getExactMatchingElements() {

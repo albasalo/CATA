@@ -111,10 +111,6 @@
 												<td><b>Sugestão:</b></td>
 												<td>${mistake.brokenRule.patternSuggestionElement.suggestion}</td>
 											</tr>
-											<tr>
-												<td><b>Referência:&nbsp;</b></td>
-												<td>${mistake.brokenRule.rule.source.description}</td>
-											</tr>
 											</c:forEach>
 										</table>
 										</span>

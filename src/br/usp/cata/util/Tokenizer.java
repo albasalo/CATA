@@ -51,8 +51,7 @@ public class Tokenizer {
 					end = offSet + token.getSpan().getEnd();
 					
 					startToken = tokenizedText.size();
-					tokenBytes = (" " + line.substring(offSet + token.getSpan().getStart(),
-							offSet + token.getSpan().getEnd())).toLowerCase().getBytes();				
+					tokenBytes = (" " + line.substring(start, end)).toLowerCase().getBytes();				
 					for(byte tokenByte : tokenBytes)
 						tokenizedText.add(tokenByte);			
 					endToken = tokenizedText.size() + blankBytesLength;
@@ -65,6 +64,26 @@ public class Tokenizer {
 		}	
     	for(byte b : " ".getBytes())
     		tokenizedText.add(b);
+	}
+	
+	public byte[] tokenize(String text) {
+		String tokenizedText = "";
+		List<Sentence> sentences;
+		
+		sentences = sentenceDetector.detectSentences(text);
+		for(Sentence sentence : sentences)
+			tokenizer.tokenizeSentence(sentence);
+		
+		for(Sentence sentence : sentences) {
+			for(Token token : sentence.getTokens()) {
+				int offSet = sentence.getOffset();			
+				tokenizedText += (" " + text.substring(offSet + token.getSpan().getStart(),
+						offSet + token.getSpan().getEnd())).toLowerCase();				
+			}
+		}
+		tokenizedText += " ";
+	
+		return tokenizedText.getBytes();
 	}
 
 }

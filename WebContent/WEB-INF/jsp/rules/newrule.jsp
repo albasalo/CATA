@@ -13,25 +13,27 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				var counter = 0;
+				var counter = -1;
 				
 				$("#plus").click(function() {
-					counter = counter + 1;
-					$("#exactMatchingsDiv").append('<span id="exactMatching' + counter + '">' +
-							'<br /><label class="label">Padrão incorreto</label><br />' +
-							'<input class="input_border width400" type="text" maxlength=200 name="exactMatchings[' + counter + '].pattern"/><br/>' +
-							'<label class="label">Sugestão</label><br />' +
-							'<input class="input_border width400" type="text" maxlength=200 name="exactMatchings[' + counter + '].suggestion"/><br/>' +
-							'</span>');
+					if(counter < 200) {
+						counter = counter + 1;
+						$("#exactMatchingsDiv").append('<span id="exactMatching' + counter + '">' +
+								'<br /><label class="label">Padrão incorreto</label><br />' +
+								'<input class="input_border width450" type="text" maxlength=200 name="exactMatchings[' + counter + '].pattern"/><br/>' +
+								'<label class="label">Sugestão</label><br />' +
+								'<input class="input_border width450" type="text" maxlength=200 name="exactMatchings[' + counter + '].suggestion"/><br/>' +
+								'</span>');
+					}
 				});
 				
 				$('#minus').click(function() {
-					if(counter != 0) {
+					if(counter != -1) {
 						var exactMatching = "#exactMatching" + counter;
 						$(exactMatching).remove();
 						counter = counter - 1;
 					}
-				})
+				});
 			});
 		</script>
 		<title>Cadastrar nova Regra de estilo</title>
@@ -80,31 +82,31 @@
 							</c:forEach>
 						</select>
 					</div>
-					
+					<br />
 					<div class="single_form_element">
 						<b>Lema:</b><br />
 						<div class="indent">
 							<label class="label" for="lemmaPattern">Padrão incorreto</label>
 							<br />
-							<input id="lemmaPattern" class="input_border width400" type="text" maxlength=200 name="newRule.lemmaElement.pattern" />
+							<input id="lemmaPattern" class="input_border width450" type="text" maxlength=200 name="newRule.lemmaElement.pattern" />
 							<br />
 							<label class="label" for="lemmaSuggestion">Sugestão</label>
 							<br />
-							<input id="lemmaSuggestion" class="input_border width400" type="text" maxlength=200 name="newRule.lemmaElement.suggestion" />
+							<input id="lemmaSuggestion" class="input_border width450" type="text" maxlength=200 name="newRule.lemmaElement.suggestion" />
 							<br />
 						</div>
 					</div>
-					
+					<br />
 					<b>Expressões exatas:</b><br />
 					<div class="single_form_element">
 						<div id="exactMatchingsDiv" class="indent">
 							<label class="label" for="exactPattern">Padrão incorreto</label>
 							<br />
-							<input id="exactPattern" class="input_border width400" type="text" maxlength=200 name="exactMatchings[0].pattern"/>
+							<input id="exactPattern" class="input_border width450" type="text" maxlength=200 name="newRule.exactMatchingElement.pattern"/>
 							<br />
 							<label class="label" for="exactSuggestion">Sugestão</label>
 							<br />
-							<input id="exactSuggestion" class="input_border width400" type="text" maxlength=200 name="exactMatchings[0].suggestion"/>
+							<input id="exactSuggestion" class="input_border width450" type="text" maxlength=200 name="newRule.exactMatchingElement.suggestion"/>
 							<br />
 						</div>
 					</div>
@@ -114,12 +116,13 @@
 						<span id="minus" class="change_form_element">[-]</span>
 						</div>
 					</div>
-					
+					<br />
 					<div class="single_form_element">
 						<label class="label" for="explanation">Explicação</label>
 						<br />
 						<textarea id="explanation" style="width: 600px; height: 100px !important" class="input_border" maxlength=400
 							name="newRule.explanation"></textarea>
+						<br />
 					</div>
 					
 					<input class="button" type="submit" value="Cadastrar">

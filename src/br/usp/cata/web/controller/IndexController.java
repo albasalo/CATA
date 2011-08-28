@@ -174,4 +174,5 @@ public class IndexController {
     	
     	result.redirectTo(IndexController.class).index();
     }
+    
 }

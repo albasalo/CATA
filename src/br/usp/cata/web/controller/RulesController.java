@@ -1,6 +1,7 @@
 package br.usp.cata.web.controller;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import br.com.caelum.vraptor.Get;
@@ -16,22 +17,37 @@ import br.usp.cata.model.RuleCategories;
 import br.usp.cata.model.Source;
 import br.usp.cata.model.TypesOfRules;
 import br.usp.cata.model.TypesOfSources;
+import br.usp.cata.service.RuleService;
 import br.usp.cata.service.SourceService;
+import br.usp.cata.web.interceptor.Transactional;
 
 @Resource
 public class RulesController {
 	
 	private final Result result;
 	private final Validator validator;
+	private final RuleService ruleService;
 	private final SourceService sourceService;
 	private final UserSession userSession;
 	
 	public RulesController(final Result result, final Validator validator,
-			final SourceService sourceService, final UserSession userSession) {
+		final RuleService ruleService, final SourceService sourceService, final UserSession userSession) {
 		this.result = result;
 		this.validator = validator;
+		this.ruleService = ruleService;
 		this.sourceService = sourceService;
 		this.userSession = userSession;
+	}
+	
+	@Get
+	@Path("/rules")
+	public void index() {
+		result.include("rules", ruleService.findAll());
+	}
+	
+	@Get
+	@Path("/rules/viewrule/{rule.ruleID}")
+	public void viewrule(Rule rule) {
 	}
 	
 	@Get
@@ -44,6 +60,29 @@ public class RulesController {
 	@Post
 	@Path("rules/newrule")
 	public void newrule(Rule newRule, List<PatternSuggestionElement> exactMatchings) {
+		
+		if(newRule.getExplanation().equals(""))
+			newRule.setExplanation(null);
+		if(newRule.getLemmaElement().getPattern().equals(""))
+			newRule.setLemmaElement(null);
+		if(newRule.getExactMatchingElement().getPattern().equals(""))
+			newRule.setExactMatchingElement(null);
+		
+		if(exactMatchings != null) {
+			HashSet<PatternSuggestionElement> exactMatchingElements = new HashSet<PatternSuggestionElement>();
+			for(PatternSuggestionElement exactMatching : exactMatchings)
+				exactMatchingElements.add(exactMatching);
+			newRule.setExactMatchingElements(exactMatchingElements);
+		}
+		
+		newRule.setUser(userSession.getUser());
+		newRule.setDate(new Date());
+		newRule.setDefaultRule(true);
+		
+		ruleService.save(newRule);
+		
+		// TODO redirecionar para uma pagina de regras
+		result.redirectTo(HomeController.class).index();
 	}
 	
 	@Get
@@ -69,6 +108,9 @@ public class RulesController {
 					source.setUrl(null);
 				}
 				
+				if(source.getMoreInformation().equals(""))
+					source.setMoreInformation(null);
+				
 				break;
 				
 			case BOOK:
@@ -86,6 +128,9 @@ public class RulesController {
 					source.setInstitution(null);
 					source.setUrl(null);
 				}
+				
+				if(source.getMoreInformation().equals(""))
+					source.setMoreInformation(null);
 				
 				break;
 				
@@ -108,6 +153,9 @@ public class RulesController {
 					source.setInstitution(null);
 					source.setPublisher(null);
 				}
+				
+				if(source.getMoreInformation().equals(""))
+					source.setMoreInformation(null);
 				
 				break;
 				
@@ -136,6 +184,7 @@ public class RulesController {
 	
 	@Post
 	@Path("/rules/newsource")
+	@Transactional
 	public void newsource(Source newSource) {
 		validateSource(newSource);
 		result.include("selectedType", newSource.getType());

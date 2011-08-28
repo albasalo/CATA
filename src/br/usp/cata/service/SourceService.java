@@ -30,4 +30,7 @@ public class SourceService {
 		return sourceDAO.findAll();
 	}
 
+	public Source findByID(Long sourceID) {
+		return sourceDAO.findByID(sourceID);
+	}
 }

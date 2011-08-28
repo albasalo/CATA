@@ -32,6 +32,10 @@ public class RulesTrees {
 				lemmasTree.add(rule.getLemmaElement().getTokenizedPatternBytes(),
 						new RuleInstance(rule, rule.getLemmaElement()));
 			
+			if(rule.getExactMatchingElement() != null)
+				matchingsTree.add(rule.getExactMatchingElement().getTokenizedPatternBytes(),
+						new RuleInstance(rule, rule.getExactMatchingElement()));
+			
 			for(PatternSuggestionElement patternSuggestion : rule.getExactMatchingElements())
 				matchingsTree.add(patternSuggestion.getTokenizedPatternBytes(),
 						new RuleInstance(rule, patternSuggestion));
