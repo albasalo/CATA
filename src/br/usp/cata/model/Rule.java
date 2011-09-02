@@ -61,7 +61,6 @@ public class Rule implements Serializable {
     
     @ManyToOne
     @JoinColumn(name="sourceID", referencedColumnName="sourceID")
-    @Cascade({CascadeType.ALL})
 	private Source source;
     
     @Column
@@ -70,7 +69,6 @@ public class Rule implements Serializable {
     
     @ManyToOne
     @JoinColumn(name="userID", referencedColumnName="userID")
-    @Cascade({CascadeType.ALL})
 	private User user;
     
     public Rule() {

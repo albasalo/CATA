@@ -13,10 +13,10 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery.dataTables.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$('#rules').dataTable( {
+				$('#rules').dataTable({
 					"aaSorting": [[ 0, "asc" ]]
-				} );
-			} );
+				});
+			});
 		</script>
 		
 		<title>Regras e sugestões de estilo</title>
@@ -40,6 +40,7 @@
 				<p>
 				Confira abaixo todas as regras cadastradas atualmente no CATA:
 				</p>
+				<div class="grid">
 				<table cellpadding="0" cellspacing="0" border="0" class="display" id="rules">
 					<thead>
 						<tr>
@@ -48,7 +49,7 @@
 							<th>Categoria</th>
 							<th>Erro</th>
 							<th>Sugestão</th>
-							<th>Usuário</th>
+							<th>Cadastrada por</th>
 							<th>Mais informações</th>
 						</tr>
 					</thead>
@@ -64,8 +65,8 @@
 										<td class="center"><c:out value="${rule.lemmaElement.suggestion}"/></td>
 									</c:when>
 									<c:otherwise>
-										<td class="center"><c:out value="${rule.exactMatching.pattern}"/></td>
-										<td class="center"><c:out value="${rule.exactMatching.suggestion}"/></td>
+										<td class="center"><c:out value="${rule.exactMatchingElement.pattern}"/></td>
+										<td class="center"><c:out value="${rule.exactMatchingElement.suggestion}"/></td>
 									</c:otherwise>
 								</c:choose>
 								<td class="center">${rule.user.name}</td>
@@ -74,7 +75,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<br /><br />
+				<div class="spacer"></div>
+				</div>
+				
 				<button class="button" onclick="window.location.href='<c:url value='/rules/newrule'/>'">Cadastrar nova regra</button>
 			</div>
 		</div>

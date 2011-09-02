@@ -146,6 +146,10 @@ a:hover {
 	float: center;
 }
 
+.indentation {
+	margin-left: 12px;
+}
+
 
 /* Messages */
 .error-messages {
@@ -153,7 +157,7 @@ a:hover {
 }
 
 .messages {
-	color: #2975a5;
+	color: #1d5274;
 }
 
 
@@ -240,6 +244,7 @@ a:hover {
 .width500 {width: 500px;}
 .width510 {width: 510px;}
 .width650 {width: 650px;}
+.width700 {width: 700px;}
 .width710 {width: 710px;}
 
 /* Alignment */

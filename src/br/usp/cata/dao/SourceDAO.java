@@ -8,6 +8,7 @@ import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
 import br.com.caelum.vraptor.util.hibernate.SessionCreator;
 import br.usp.cata.model.Source;
+import br.usp.cata.model.TypesOfSources;
 
 
 @Component
@@ -22,6 +23,10 @@ public class SourceDAO extends AbstractDAO<Long,Source> {
 		List<Source> sources = findByCriteria(Restrictions.eq("sourceID", sourceID));
 		
 		return (sources.isEmpty() ? null : sources.get(0));
+	}
+	
+	public List<Source> findByType(TypesOfSources type) {
+		return findByCriteria(Restrictions.eq("type", type));
 	}
 	
 }

@@ -325,8 +325,18 @@ div.box {
 	background-color: #E5E5FF;
 }
 
+.grid {
+	margin: auto;
+	padding: 5px 5px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #bbbbbb;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+}
+
 input {
-	height: 22px;
 	font-size: 1.0em;
 	border: 2px solid #bbbbbb;
 	-moz-border-radius: 7px;
@@ -344,4 +354,8 @@ select {
 		border: 2px solid #bbbbbb;
 	-moz-border-radius: 7px;
 	-webkit-border-radius: 7px;
+}
+
+select:focus {
+	border: 2px solid #2975a5;
 }

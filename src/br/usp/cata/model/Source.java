@@ -12,9 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 
 @Entity
 public class Source implements Serializable {
@@ -55,7 +52,6 @@ public class Source implements Serializable {
     
     @ManyToOne
     @JoinColumn(name="userID", referencedColumnName="userID")
-    @Cascade({CascadeType.ALL})
     private User user;
 	
 	public Source() {

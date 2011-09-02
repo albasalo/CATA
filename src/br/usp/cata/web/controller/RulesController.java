@@ -21,6 +21,7 @@ import br.usp.cata.service.RuleService;
 import br.usp.cata.service.SourceService;
 import br.usp.cata.web.interceptor.Transactional;
 
+
 @Resource
 public class RulesController {
 	
@@ -51,15 +52,30 @@ public class RulesController {
 	}
 	
 	@Get
+	@Path("/rules/viewsource/{source.sourceID}")
+	public void viewsource(Source source) {
+		// TODO arrumar para quando não existe source com o id
+		
+		result.include("source", sourceService.findByID(source.getSourceID()));
+	}
+	
+	@Get
 	@Path("/rules/newrule")
 	public void newrule() {
 		result.include("ruleCategories", RuleCategories.values());
 		result.include("typesOfRules", TypesOfRules.values());
+		result.include("typesOfSources", TypesOfSources.values());
+		result.include("academics", sourceService.findByType(TypesOfSources.ACADEMIC_PUBLISHING));
+		result.include("books", sourceService.findByType(TypesOfSources.BOOK));
+		result.include("handbooks", sourceService.findByType(TypesOfSources.HANDBOOK));
+		result.include("urls", sourceService.findByType(TypesOfSources.INTERNET));
+		result.include("others", sourceService.findByType(TypesOfSources.OTHER));
 	}
 	
 	@Post
 	@Path("rules/newrule")
-	public void newrule(Rule newRule, List<PatternSuggestionElement> exactMatchings) {
+	public void newrule(Rule newRule, List<PatternSuggestionElement> lemmas,
+			List<PatternSuggestionElement> exactMatchings, Source source) {
 		
 		if(newRule.getExplanation().equals(""))
 			newRule.setExplanation(null);
@@ -75,13 +91,22 @@ public class RulesController {
 			newRule.setExactMatchingElements(exactMatchingElements);
 		}
 		
+		if(lemmas != null) {
+			HashSet<PatternSuggestionElement> lemmaElements = new HashSet<PatternSuggestionElement>();
+			for(PatternSuggestionElement lemma : lemmaElements)
+				lemmaElements.add(lemma);
+			newRule.setExactMatchingElements(lemmaElements);			
+		}
+		
 		newRule.setUser(userSession.getUser());
 		newRule.setDate(new Date());
 		newRule.setDefaultRule(true);
 		
+		newRule.setSource(sourceService.findByID(source.getSourceID()));
+		
 		ruleService.save(newRule);
 		
-		// TODO redirecionar para uma pagina de regras
+		// TODO adicionar mensagem de nova regra adicionada com sucesso
 		result.redirectTo(HomeController.class).index();
 	}
 	
@@ -108,6 +133,10 @@ public class RulesController {
 					source.setUrl(null);
 				}
 				
+				if(source.getInstitution().equals(""))
+					source.setInstitution(null);				
+				if(source.getDate().equals(""))
+					source.setDate(null);			
 				if(source.getMoreInformation().equals(""))
 					source.setMoreInformation(null);
 				
@@ -129,6 +158,10 @@ public class RulesController {
 					source.setUrl(null);
 				}
 				
+				if(source.getPublisher().equals(""))
+					source.setPublisher(null);				
+				if(source.getDate().equals(""))
+					source.setDate(null);				
 				if(source.getMoreInformation().equals(""))
 					source.setMoreInformation(null);
 				
@@ -166,7 +199,7 @@ public class RulesController {
 				
 				if((!source.getAuthors().equals("")) || (!source.getInstitution().equals("")) ||
 						(!source.getPublisher().equals("")) || (!source.getTitle().equals("")) ||
-						(!source.getUrl().equals("")))
+						(!source.getUrl().equals("")) || (!source.getDate().equals("")))
 					validator.add(new ValidationMessage("Erro inesperado", "Erro"));
 				else {
 					source.setAuthors(null);
@@ -174,6 +207,7 @@ public class RulesController {
 					source.setPublisher(null);
 					source.setTitle(null);
 					source.setUrl(null);
+					source.setDate(null);
 				}
 				break;
 				
@@ -192,12 +226,12 @@ public class RulesController {
 		
 		newSource.setUser(userSession.getUser());
 		newSource.setRegistrationDate(new Date());
+		
 		sourceService.save(newSource);
 		
 		result.include("messages", "A Referência foi cadastrada com sucesso");
 
-		// TODO redirecionar para uma pagina de regras
-		result.redirectTo(HomeController.class).index();
+		result.redirectTo(RulesController.class).newrule();
 	}
 
 }

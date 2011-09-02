@@ -7,6 +7,7 @@ import br.com.caelum.vraptor.ioc.RequestScoped;
 
 import br.usp.cata.dao.SourceDAO;
 import br.usp.cata.model.Source;
+import br.usp.cata.model.TypesOfSources;
 
 
 @RequestScoped
@@ -32,5 +33,9 @@ public class SourceService {
 
 	public Source findByID(Long sourceID) {
 		return sourceDAO.findByID(sourceID);
+	}
+	
+	public List<Source> findByType(TypesOfSources type) {
+		return sourceDAO.findByType(type);
 	}
 }
