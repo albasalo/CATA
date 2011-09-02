@@ -16,30 +16,69 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
+				var lastID = 0;
+				var newID = 0;
+				
+				function newSourceIDForm() {
+					if(lastID > 0) {
+						var lastRowID = "#row" + lastID;
+						$(lastRowID).removeClass("selected");
+						
+						var rowID = "#row" + lastID;
+						var lastSelectedSource = "#selectedSourceID" + lastID;
+						$("#inputSourceID").remove(lastSelectedSource);
+					}
+					lastID = newID;
+					var newRowID = "#row" + newID;
+					$(newRowID).addClass("selected");					
+					
+					$("#inputSourceID").append('<input id="selectedSourceID' + newID + '" name="source.sourceID" value="' + newID + '" style="display:none" />');
+				};
+				
 				$('#academics').dataTable({
 					"aaSorting": [[ 0, "asc" ]]
+				});
+				$('#academics tbody tr').live('click', function() {
+					var nTds = $('td', this);
+					newID = $(nTds[0]).text();
+					newSourceIDForm();
 				});
 				
 				$('#books').dataTable({
 					"aaSorting": [[ 0, "asc" ]]
 				});
+				$('#books tbody tr').live('click', function() {
+					var nTds = $('td', this);
+					newID = $(nTds[0]).text();
+					newSourceIDForm();
+				});				
 				
 				$('#handbooks').dataTable({
 					"aaSorting": [[ 0, "asc" ]]
 				});
+				$('#handbooks tbody tr').live('click', function() {
+					var nTds = $('td', this);
+					newID = $(nTds[0]).text();
+					newSourceIDForm();
+				});	
 				
 				$('#urls').dataTable({
 					"aaSorting": [[ 0, "asc" ]]
 				});
-				$('#urls tbody tr').live('click', function () {
+				$('#urls tbody tr').live('click', function() {
 					var nTds = $('td', this);
-					var urlID = $(nTds[0]).text();
-					$("#inputSourceID").append('<input name="source.sourceID" value="' + urlID + '" style="display:none" />');
-				});
+					newID = $(nTds[0]).text();
+					newSourceIDForm();
+				});	
 				
 				$('#others').dataTable({
 					"aaSorting": [[ 0, "asc" ]]
 				});
+				$('#others tbody tr').live('click', function() {
+					var nTds = $('td', this);
+					newID = $(nTds[0]).text();
+					newSourceIDForm();
+				});	
 			});
 		</script>
 		<script type="text/javascript">
@@ -130,6 +169,7 @@
 				showTable();
 			});
 		</script>
+		
 		<script type="text/javascript">
 			$(document).ready(function() {
 				if($('#modal').length > 0) {
@@ -169,7 +209,7 @@
 		
 		<div id="page">
 			<div id="content">
-				<form id="custom_form" class="width650" action="<c:url value='/rules/newrule'/>" method="post">
+				<form id="custom_form" class="width800" action="<c:url value='/rules/newrule'/>" method="post">
 				<fieldset>
 					<legend>Cadastrar nova Regra de estilo</legend>
 					
@@ -261,6 +301,7 @@
 							<table cellpadding="0" cellspacing="0" border="0" class="display" id="academics">
 								<thead>
 									<tr>
+										<th>ID</th>
 										<th>Título</th>
 										<th>Autor</th>
 										<th>Mais informações</th>
@@ -268,7 +309,8 @@
 								</thead>
 								<tbody>
 									<c:forEach var="academic" items="${academics}">
-										<tr>
+										<tr id="row${academic.sourceID}">
+											<td><c:out value="${academic.sourceID}" /></td>
 											<td><c:out value="${academic.title}" /></td>
 											<td><c:out value="${academic.authors}" /></td>
 											<td class="center"><a href="<c:url value='/rules/viewsource/${academic.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
@@ -285,6 +327,7 @@
 							<table cellpadding="0" cellspacing="0" border="0" class="display" id="books">
 								<thead>
 									<tr>
+										<th>ID</th>
 										<th>Título</th>
 										<th>Autor</th>
 										<th>Mais informações</th>
@@ -292,7 +335,8 @@
 								</thead>
 								<tbody>
 									<c:forEach var="book" items="${books}">
-										<tr>
+										<tr id="row${book.sourceID}">
+											<td><c:out value="${book.sourceID}" /></td>
 											<td><c:out value="${book.title}" /></td>
 											<td><c:out value="${book.authors}" /></td>
 											<td class="center"><a href="<c:url value='/rules/viewsource/${book.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
@@ -309,6 +353,7 @@
 							<table cellpadding="0" cellspacing="0" border="0" class="display" id="handbooks">
 								<thead>
 									<tr>
+										<th>ID</th>
 										<th>Título</th>
 										<th>Autor</th>
 										<th>Mais informações</th>
@@ -316,7 +361,8 @@
 								</thead>
 								<tbody>
 									<c:forEach var="handbook" items="${handbooks}">
-										<tr>
+										<tr id="row${handbook.sourceID}">
+											<td><c:out value="${handbook.sourceID}" /></td>
 											<td><c:out value="${handbook.title}" /></td>
 											<td><c:out value="${handbook.authors}" /></td>
 											<td class="center"><a href="<c:url value='/rules/viewsource/${handbook.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
@@ -334,13 +380,13 @@
 								<thead>
 									<tr>
 										<th>ID</th>
-										<th>URL</th>
+										<th>Disponível em</th>
 										<th>Mais informações</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="url" items="${urls}">
-										<tr>
+										<tr id="row${url.sourceID}">
 											<td><c:out value="${url.sourceID}"/></td>
 											<td><a href="${url.url}"><c:out value="${url.title}"/></a></td>
 											<td class="center"><a href="<c:url value='/rules/viewsource/${url.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
@@ -357,13 +403,15 @@
 							<table cellpadding="0" cellspacing="0" border="0" class="display" id="others">
 								<thead>
 									<tr>
+										<th>ID</th>
 										<th>Descrição</th>
 										<th>Mais informações</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="other" items="${others}">
-										<tr>
+										<tr id="row${other.sourceID}">
+											<td><c:out value="${other.sourceID}" /></td>
 											<td><c:out value="${other.moreInformation}" /></td>
 											<td class="center"><a href="<c:url value='/rules/viewsource/${other.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
 										</tr>

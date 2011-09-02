@@ -72,42 +72,76 @@ public class RulesController {
 		result.include("others", sourceService.findByType(TypesOfSources.OTHER));
 	}
 	
+	private void validateRule(Rule newRule, List<PatternSuggestionElement> lemmas,
+			List<PatternSuggestionElement> exactMatchings, Source source) {
+		
+		PatternSuggestionElement lemma = newRule.getLemmaElement();
+		PatternSuggestionElement exactMatching = newRule.getExactMatchingElement();
+		
+		if(lemma.getPattern().equals("") && lemma.getSuggestion().equals("") &&
+				exactMatching.getPattern().equals("") && exactMatching.getSuggestion().equals(""))
+			validator.add(new ValidationMessage(
+					"Você deve cadastrar pelo menos um Lema ou uma Expressão exata.",
+					"Lema ou Expressão exata"));
+		else {
+			if(lemma.getPattern().equals("") != lemma.getSuggestion().equals(""))
+				validator.add(new ValidationMessage(
+						"Você deve cadastrar os dois campos - padrão incorreto e sugestão.",
+						"Lema"));
+			if(exactMatching.getPattern().equals("") != exactMatching.getSuggestion().equals(""))
+				validator.add(new ValidationMessage(
+						"Você deve cadastrar os dois campos - padrão incorreto e sugestão.",
+						"Expressão exata"));
+		}
+		
+		if(source.getSourceID() == null)
+			validator.add(new ValidationMessage(
+    				"Você deve associar uma referência à regra.", "Referência"));
+	}
+	
 	@Post
 	@Path("rules/newrule")
 	public void newrule(Rule newRule, List<PatternSuggestionElement> lemmas,
 			List<PatternSuggestionElement> exactMatchings, Source source) {
 		
+		validateRule(newRule, lemmas, exactMatchings, source);
+		validator.onErrorRedirectTo(RulesController.class).newrule();
+		
 		if(newRule.getExplanation().equals(""))
 			newRule.setExplanation(null);
-		if(newRule.getLemmaElement().getPattern().equals(""))
-			newRule.setLemmaElement(null);
-		if(newRule.getExactMatchingElement().getPattern().equals(""))
-			newRule.setExactMatchingElement(null);
 		
 		if(exactMatchings != null) {
 			HashSet<PatternSuggestionElement> exactMatchingElements = new HashSet<PatternSuggestionElement>();
 			for(PatternSuggestionElement exactMatching : exactMatchings)
-				exactMatchingElements.add(exactMatching);
-			newRule.setExactMatchingElements(exactMatchingElements);
+				if(!exactMatching.getPattern().equals("") && !exactMatching.getSuggestion().equals(""))
+					exactMatchingElements.add(exactMatching);
+			
+			if(exactMatchingElements.size() > 0)
+				newRule.setExactMatchingElements(exactMatchingElements);
 		}
 		
 		if(lemmas != null) {
 			HashSet<PatternSuggestionElement> lemmaElements = new HashSet<PatternSuggestionElement>();
 			for(PatternSuggestionElement lemma : lemmaElements)
-				lemmaElements.add(lemma);
-			newRule.setExactMatchingElements(lemmaElements);			
+				if(!lemma.getPattern().equals("") && !lemma.getSuggestion().equals(""))
+					lemmaElements.add(lemma);
+			
+			if(lemmaElements.size() > 0)
+				newRule.setExactMatchingElements(lemmaElements);			
 		}
 		
 		newRule.setUser(userSession.getUser());
 		newRule.setDate(new Date());
+		//TODO Mudar para false: as novas regras não devem ser default do sistema
 		newRule.setDefaultRule(true);
 		
 		newRule.setSource(sourceService.findByID(source.getSourceID()));
 		
 		ruleService.save(newRule);
 		
-		// TODO adicionar mensagem de nova regra adicionada com sucesso
-		result.redirectTo(HomeController.class).index();
+		result.include("messages", "A Regra foi cadastrada com sucesso.");
+		
+		result.redirectTo(RulesController.class).index();
 	}
 	
 	@Get
@@ -229,7 +263,7 @@ public class RulesController {
 		
 		sourceService.save(newSource);
 		
-		result.include("messages", "A Referência foi cadastrada com sucesso");
+		result.include("messages", "A Referência foi cadastrada com sucesso.");
 
 		result.redirectTo(RulesController.class).newrule();
 	}
