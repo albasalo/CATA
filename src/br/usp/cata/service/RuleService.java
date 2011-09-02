@@ -41,4 +41,5 @@ public class RuleService {
 	public List<Rule> findDefault() {
 		return ruleDAO.findDefault();
 	}
+	
 }

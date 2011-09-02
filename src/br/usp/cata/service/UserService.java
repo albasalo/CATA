@@ -60,4 +60,5 @@ public class UserService {
     public void deauthenticate() {
         userSession.setUser(null);
     }
+    
 }

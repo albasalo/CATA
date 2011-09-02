@@ -16,4 +16,5 @@ public enum TypesOfRules {
 	public String getTypeDescription() {
 		return typesOfRules.get(this.ordinal());
 	}
+	
 }

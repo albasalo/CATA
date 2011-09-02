@@ -15,4 +15,5 @@ public class HomeController {
 	@Path("/home")
 	public void index() {
 	}
+	
 }

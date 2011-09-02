@@ -39,5 +39,6 @@ public class LoginInterceptor implements Interceptor {
         return (method.getMethod().isAnnotationPresent(IrrestrictAccess.class) ||
         		method.getResource().getType().isAnnotationPresent(IrrestrictAccess.class));
     }
+    
 }
 

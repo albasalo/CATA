@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 
 import br.usp.cata.model.Position;
 
+
 public class TextAnalyzer {
 	
 	private ArrayList<String> text;
@@ -74,4 +75,5 @@ public class TextAnalyzer {
 		for(int i = 0; i < lemmatizedText.size(); i++)
 			lemmatizedTextBytes[i] = lemmatizedText.get(i);
 	}
+	
 }

@@ -52,4 +52,5 @@ public class RulesTrees {
 	public Iterator<?> searchLemmas(byte[] text) {
 		return lemmasTree.search(text);
 	}
+	
 }

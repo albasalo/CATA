@@ -26,4 +26,5 @@ public class LoginController {
 		
 		result.redirectTo(IndexController.class).index();
 	}
+	
 }

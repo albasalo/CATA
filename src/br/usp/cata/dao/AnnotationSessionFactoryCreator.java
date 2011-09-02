@@ -29,8 +29,8 @@ public class AnnotationSessionFactoryCreator implements ComponentFactory<Session
     public void create() {
     	// FIXME: deprecation
 		final AnnotationConfiguration cfg = new AnnotationConfiguration();
+		cfg.addAnnotatedClass(User.class);
 		cfg.addAnnotatedClass(PatternSuggestionElement.class);
-        cfg.addAnnotatedClass(User.class);
         cfg.addAnnotatedClass(Rule.class);
         cfg.addAnnotatedClass(Source.class);
         factory = cfg.buildSessionFactory();

@@ -94,8 +94,7 @@ public class NewUserService {
         return SignupResult.SUCCESS;
     }
     
-    public SignupResult activate(String activationKey)
-    {
+    public SignupResult activate(String activationKey) {
     	final User userToBeActivated = userDAO.findByActivationKey(activationKey);
     	
     	if(userToBeActivated == null)

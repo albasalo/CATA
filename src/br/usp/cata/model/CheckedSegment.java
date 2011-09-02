@@ -28,4 +28,5 @@ public class CheckedSegment {
 	public void setMistakes(ArrayList<Mistake> mistakes) {
 		this.mistakes = mistakes;
 	}
+	
 }
