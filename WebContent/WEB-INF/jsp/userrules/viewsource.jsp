@@ -21,8 +21,12 @@
 			<div id="content">
 				<h2>Detalhes da referência</h2>
 				<br />
-				<div class="indentation grid width750">
+				<div class="indentation grid">
 					<table>
+						<tr>
+							<td><b>ID:</b></td>
+							<td><c:out value="${source.sourceID}" /></td>
+						</tr>
 						<c:choose>
 							<c:when test="${source.type == 'ACADEMIC_PUBLISHING'}">
 									<tr>

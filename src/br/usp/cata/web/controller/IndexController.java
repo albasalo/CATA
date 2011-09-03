@@ -103,7 +103,9 @@ public class IndexController {
 	@Get
 	@Path("/rules/viewrule/{rule.ruleID}")
 	public void viewrule(Rule rule) {
-		// TODO
+		// TODO caso em que não há regra com o id passado
+		
+		result.include("rule", ruleService.findByID(rule.getRuleID()));
 	}
     
     @Get

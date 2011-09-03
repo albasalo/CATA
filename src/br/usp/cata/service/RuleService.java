@@ -22,6 +22,7 @@ public class RuleService {
 	}
 
 	public void save(Rule rule) {
+		//FIXME Consertar - não está salvando direito
 		if(rule.getLemmaElement() != null)
 			patternSuggestionElementService.tokenizePattern(rule.getLemmaElement());
 		if(rule.getExactMatchingElement() != null)
@@ -36,6 +37,10 @@ public class RuleService {
 	
 	public List<Rule> findAll() {
 		return ruleDAO.findAll();
+	}
+	
+	public Rule findByID(Long ruleID) {
+		return ruleDAO.findByID(ruleID);
 	}
 	
 	public List<Rule> findDefault() {
