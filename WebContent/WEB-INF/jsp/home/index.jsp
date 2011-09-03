@@ -7,6 +7,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/home.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript">
@@ -23,7 +25,29 @@
 		
 		<div id="page">
 			<div id="content">
-				Home
+				<h1>CATA: Collaborative Academic Text Advisor</h1>
+				Um verificador de estilo para textos acadêmicos de Computação.<br />
+				<br />
+				
+				<div id="advice">
+					<h2>Verifique o estilo de seus textos</h2>
+					<form action="<c:url value="/advice"/>" enctype="multipart/form-data" method="post">
+						<center>
+							Selecione um arquivo .txt para análise:<br>
+							<div class="single_form_element">
+								<input type="file" name="file" size="30"><br>
+							</div>
+							<input class="button" type="submit" value="Enviar">
+							<div class="small">
+								Por padrão, apenas algumas regras cadastradas no Sistema serão aplicadas ao seu texto. Para
+								configurar a análise de seus arquivos, use a opção<br>
+								<a href=#>Verificação Avançada</a>.
+							</div>
+						</center>
+					</form>
+				</div>
+				
+				<div class="spacer"></div>
 			</div>
 		</div>
 		

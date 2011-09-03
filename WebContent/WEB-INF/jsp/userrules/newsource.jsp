@@ -182,7 +182,7 @@
 							name="newSource.moreInformation"></textarea>
 					</div>		
 										
-					<input class="button" type="submit" value="Cadastrar">	
+					<input class="button" type="submit" value="Cadastrar">&nbsp;&nbsp;<button class="button" onclick="window.location.href='<c:url value='/userrules/newrule#source'/>'">Voltar</button>
 				</fieldset>
 				</form>
 			</div>
