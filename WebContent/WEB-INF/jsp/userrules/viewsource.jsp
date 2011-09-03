@@ -95,7 +95,7 @@
 						</tr>
 					</table>
 				</div>
-				<button class="button" onclick="window.location.href='<c:url value='/rules/newrule#source'/>'">Voltar</button>
+				<button class="button" onclick="window.location.href='<c:url value='/userrules/newrule#source'/>'">Voltar</button>
 			</div>
 		</div>
 		

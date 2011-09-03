@@ -9,8 +9,8 @@
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
-		<link href="<c:url value='/css/table.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/table.css'/>" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.dataTables.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
@@ -209,7 +209,7 @@
 		
 		<div id="page">
 			<div id="content">
-				<form id="custom_form" class="width800" action="<c:url value='/rules/newrule'/>" method="post">
+				<form id="custom_form" class="width800" action="<c:url value='/userrules/newrule'/>" method="post">
 				<fieldset>
 					<legend>Cadastrar nova Regra de estilo</legend>
 					
@@ -313,7 +313,7 @@
 											<td><c:out value="${academic.sourceID}" /></td>
 											<td><c:out value="${academic.title}" /></td>
 											<td><c:out value="${academic.authors}" /></td>
-											<td class="center"><a href="<c:url value='/rules/viewsource/${academic.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
+											<td class="center"><a href="<c:url value='/userrules/viewsource/${academic.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -339,7 +339,7 @@
 											<td><c:out value="${book.sourceID}" /></td>
 											<td><c:out value="${book.title}" /></td>
 											<td><c:out value="${book.authors}" /></td>
-											<td class="center"><a href="<c:url value='/rules/viewsource/${book.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
+											<td class="center"><a href="<c:url value='/userrules/viewsource/${book.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -365,7 +365,7 @@
 											<td><c:out value="${handbook.sourceID}" /></td>
 											<td><c:out value="${handbook.title}" /></td>
 											<td><c:out value="${handbook.authors}" /></td>
-											<td class="center"><a href="<c:url value='/rules/viewsource/${handbook.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
+											<td class="center"><a href="<c:url value='/userrules/viewsource/${handbook.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -389,7 +389,7 @@
 										<tr id="row${url.sourceID}">
 											<td><c:out value="${url.sourceID}"/></td>
 											<td><a href="${url.url}"><c:out value="${url.title}"/></a></td>
-											<td class="center"><a href="<c:url value='/rules/viewsource/${url.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
+											<td class="center"><a href="<c:url value='/userrules/viewsource/${url.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -413,7 +413,7 @@
 										<tr id="row${other.sourceID}">
 											<td><c:out value="${other.sourceID}" /></td>
 											<td><c:out value="${other.moreInformation}" /></td>
-											<td class="center"><a href="<c:url value='/rules/viewsource/${other.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
+											<td class="center"><a href="<c:url value='/userrules/viewsource/${other.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -424,7 +424,7 @@
 						
 						<br />
 						<div class="small">Não encontrou a referência para sua regra?
-							<a href="<c:url value='/rules/newsource'/>">Cadastre uma nova referência</a>.</div>
+							<a href="<c:url value='/userrules/newsource'/>">Cadastre uma nova referência</a>.</div>
 					</div>
 					<br /><br />
 				

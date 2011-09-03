@@ -7,12 +7,15 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
-		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/table.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.dataTables.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
+				$("#rules-menu").addClass('selected');
+				
 				$('#rules').dataTable({
 					"aaSorting": [[ 0, "asc" ]]
 				});
@@ -24,6 +27,7 @@
 	
 	<body>
 		<%@ include file="../shared/header.jsp"%>
+		
 		<%@ include file="../shared/user-menu.jsp"%>
 		
 		<div id="page">
@@ -78,7 +82,17 @@
 				<div class="spacer"></div>
 				</div>
 				
-				<button class="button" onclick="window.location.href='<c:url value='/rules/newrule'/>'">Cadastrar nova regra</button>
+				<c:choose>
+					<c:when test="${userSession.user != null}">
+						<button class="button" onclick="window.location.href='<c:url value='/userrules/newrule'/>'">Cadastrar nova regra</button>
+					</c:when>
+					<c:otherwise>
+						<br />
+						<div class="small">
+							<a href="<c:url value='/signup'/>">Registre-se</a> no Sistema CATA para poder cadastrar novas regras.
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 		

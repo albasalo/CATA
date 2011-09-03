@@ -7,6 +7,7 @@
 		<div id="menu" class="nav_bar">
 			<ul>
 				<li><a id="index-menu" href="<c:url value='/'/>" title='Início'>Início</a></li>
+				<li><a id="rules-menu" href="<c:url value='/rules'/>" title='Regras'>Regras</a></li>
 				<li><a id="about-menu" href="<c:url value='/about'/>" title='Sobre'>Sobre</a></li>
 			</ul>	
 		</div>

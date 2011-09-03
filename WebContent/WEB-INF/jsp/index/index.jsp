@@ -16,12 +16,9 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/login-form.js'/>"></script>
 		<script type="text/javascript">
-			$(document).ready(function () {
-				$("#index-menu").addClass('selected');
-			});
-		</script>
-		<script type="text/javascript">
 			$(document).ready(function() {
+				$("#index-menu").addClass('selected');
+				
 				$('#coin-slider').coinslider({ width: 950, navigation: true, delay: 5000 });
 			});
 		</script>

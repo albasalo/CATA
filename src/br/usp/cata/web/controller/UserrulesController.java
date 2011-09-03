@@ -23,7 +23,7 @@ import br.usp.cata.web.interceptor.Transactional;
 
 
 @Resource
-public class RulesController {
+public class UserrulesController {
 	
 	private final Result result;
 	private final Validator validator;
@@ -31,7 +31,7 @@ public class RulesController {
 	private final SourceService sourceService;
 	private final UserSession userSession;
 	
-	public RulesController(final Result result, final Validator validator,
+	public UserrulesController(final Result result, final Validator validator,
 		final RuleService ruleService, final SourceService sourceService, final UserSession userSession) {
 		this.result = result;
 		this.validator = validator;
@@ -41,18 +41,7 @@ public class RulesController {
 	}
 	
 	@Get
-	@Path("/rules")
-	public void index() {
-		result.include("rules", ruleService.findAll());
-	}
-	
-	@Get
-	@Path("/rules/viewrule/{rule.ruleID}")
-	public void viewrule(Rule rule) {
-	}
-	
-	@Get
-	@Path("/rules/viewsource/{source.sourceID}")
+	@Path("/userrules/viewsource/{source.sourceID}")
 	public void viewsource(Source source) {
 		// TODO arrumar para quando não existe source com o id
 		
@@ -60,7 +49,7 @@ public class RulesController {
 	}
 	
 	@Get
-	@Path("/rules/newrule")
+	@Path("/userrules/newrule")
 	public void newrule() {
 		result.include("ruleCategories", RuleCategories.values());
 		result.include("typesOfRules", TypesOfRules.values());
@@ -100,12 +89,12 @@ public class RulesController {
 	}
 	
 	@Post
-	@Path("rules/newrule")
+	@Path("userrules/newrule")
 	public void newrule(Rule newRule, List<PatternSuggestionElement> lemmas,
 			List<PatternSuggestionElement> exactMatchings, Source source) {
 		
 		validateRule(newRule, lemmas, exactMatchings, source);
-		validator.onErrorRedirectTo(RulesController.class).newrule();
+		validator.onErrorRedirectTo(UserrulesController.class).newrule();
 		
 		if(newRule.getExplanation().equals(""))
 			newRule.setExplanation(null);
@@ -118,8 +107,7 @@ public class RulesController {
 			
 			if(exactMatchingElements.size() > 0)
 				newRule.setExactMatchingElements(exactMatchingElements);
-		}
-		
+		}	
 		if(lemmas != null) {
 			HashSet<PatternSuggestionElement> lemmaElements = new HashSet<PatternSuggestionElement>();
 			for(PatternSuggestionElement lemma : lemmaElements)
@@ -141,11 +129,11 @@ public class RulesController {
 		
 		result.include("messages", "A Regra foi cadastrada com sucesso.");
 		
-		result.redirectTo(RulesController.class).index();
+		result.redirectTo(IndexController.class).rules();
 	}
 	
 	@Get
-	@Path("/rules/newsource")
+	@Path("/userrules/newsource")
 	public void newsource() {
 		result.include("typesOfSources", TypesOfSources.values());
 	}
@@ -251,12 +239,12 @@ public class RulesController {
 	}
 	
 	@Post
-	@Path("/rules/newsource")
+	@Path("/userrules/newsource")
 	@Transactional
 	public void newsource(Source newSource) {
 		validateSource(newSource);
 		result.include("selectedType", newSource.getType());
-		validator.onErrorRedirectTo(RulesController.class).newsource();
+		validator.onErrorRedirectTo(UserrulesController.class).newsource();
 		
 		newSource.setUser(userSession.getUser());
 		newSource.setRegistrationDate(new Date());
@@ -265,7 +253,7 @@ public class RulesController {
 		
 		result.include("messages", "A Referência foi cadastrada com sucesso.");
 
-		result.redirectTo(RulesController.class).newrule();
+		result.redirectTo(UserrulesController.class).newrule();
 	}
 
 }

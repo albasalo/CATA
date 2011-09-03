@@ -20,9 +20,7 @@
 	<body>
 		<%@ include file="../shared/header.jsp"%>
 		
-		<c:if test="${userSession.user != null}">
-			<%@ include file="../shared/user-menu.jsp"%>
-		</c:if>
+		<%@ include file="../shared/user-menu.jsp"%>
 		
 		<div id="page">
 			<div id="content">

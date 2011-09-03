@@ -12,9 +12,11 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.ValidationMessage;
+import br.usp.cata.model.Rule;
 import br.usp.cata.model.User;
 import br.usp.cata.service.NewUserService;
 import br.usp.cata.service.NewUserService.SignupResult;
+import br.usp.cata.service.RuleService;
 import br.usp.cata.service.UserService;
 import br.usp.cata.web.interceptor.IrrestrictAccess;
 import br.usp.cata.web.interceptor.Transactional;
@@ -28,15 +30,17 @@ public class IndexController {
 	private final Validator validator;
 	private final UserService userService;
 	private final NewUserService newUserService;
+	private final RuleService ruleService;
 	private final int PASSWORD_MIN_LENGTH = 6;
 	private final int PASSWORD_MAX_LENGTH = 32;
 	
 	public IndexController(Result result, Validator validator,
-			UserService userService, NewUserService newUserService) {
+			UserService userService, NewUserService newUserService, RuleService ruleService) {
 		this.result = result;
 		this.validator = validator;
 		this.userService = userService;
 		this.newUserService = newUserService;
+		this.ruleService = ruleService;
 	}
 
 	@Get
@@ -86,8 +90,20 @@ public class IndexController {
 	}
 	
 	@Get
+	@Path("/rules")
+	public void rules() {
+		result.include("rules", ruleService.findAll());
+	}
+	
+	@Get
 	@Path("/about")
 	public void about() {
+	}
+	
+	@Get
+	@Path("/rules/viewrule/{rule.ruleID}")
+	public void viewrule(Rule rule) {
+		// TODO
 	}
     
     @Get

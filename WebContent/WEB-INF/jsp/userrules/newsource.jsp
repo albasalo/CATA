@@ -7,12 +7,12 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
-		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
-		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />	
+		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.1.js'/>"></script>
-		<script type="text/javascript" src="<c:url value='/js/newsource-form.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='js/jquery.simplemodal.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/newsource-form.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("[name='newSource.type']").change(createForm);
@@ -105,11 +105,12 @@
 	<body>
 		<%@ include file="../shared/header.jsp"%>
 		<%@ include file="../shared/messages.jsp"%>
+		
 		<%@ include file="../shared/user-menu.jsp"%>
 		
 		<div id="page">
 			<div id="content">
-				<form id="custom_form" class="width650" action="<c:url value='/rules/newsource'/>" method="post">
+				<form id="custom_form" class="width650" action="<c:url value='/userrules/newsource'/>" method="post">
 				<fieldset>
 					<legend>Cadastrar nova Referência</legend>
 					
