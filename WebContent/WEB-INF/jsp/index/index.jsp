@@ -55,6 +55,7 @@
 
 	<body>
 		<%@ include file="../shared/header.jsp"%>
+		
 		<%@ include file="../shared/messages.jsp"%>
 		
 		<div id="page">

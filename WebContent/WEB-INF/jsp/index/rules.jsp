@@ -108,40 +108,10 @@
 									<img onclick="showModal(${rule.ruleID});" src="<c:url value='/css/images/plus-icon.png'/>">
 									<div id="rule${rule.ruleID}" class="popup_block" style="display:none">
 										<div style="text-align: left">
-											<b>Tipo: </b><c:out value="${rule.type.typeDescription}"/><br />
-											<b>Categoria: </b><c:out value="${rule.category.categoryDescription}" /><br />
-											<b>Sugestões:</b><br />
-											<c:if test="${rule.lemmaElement != null}">
-												<div class="indent">
-												<b>Lemas</b><br />
-												<div class="indent">
-												<b>Problema: </b><c:out value="${rule.lemmaElement.pattern}"/><br />
-												<b>Sugestão: </b><c:out value="${rule.lemmaElement.suggestion}"/><br />
-												<c:forEach items="${rule.lemmaElements}" var="lemmaElement">
-													<b>Problema</b><c:out value="${lemmaElement.pattern}"/><br />
-													<b>Sugestão</b><c:out value="${lemmaElement.suggestion}"/><br />
-												</c:forEach>
-												</div></div>
-											</c:if>
-											<c:if test="${rule.exactMatchingElement != null}">
-												<div class="indent">
-												<b>Padrões exatos</b><br />
-												<div class="indent">
-													<b>Problema: </b><c:out value="${rule.exactMatchingElement.pattern}"/><br />
-													<b>Sugestão: </b><c:out value="${rule.exactMatchingElement.suggestion}"/><br />
-												<c:forEach items="${rule.exactMatchingElements}" var="exactMatchingElement">
-													<b>Problema</b><c:out value="${exactMatchingElement.pattern}"/><br />
-													<b>Sugestão</b><c:out value="${exactMatchingElement.suggestion}"/><br />
-												</c:forEach>
-												</div></div>
-											</c:if>
-										<c:if test="${rule.explanation != null}">
-												<b>Explicacao: </b> <c:out value="${rule.explanation}"/><br />
-										</c:if>
-										<b>Cadastrada por: </b><c:out value="${rule.user.name}"/><br />
-										<b>Referência bibliográfica</b>
+											TODO: Colocar as informações completas da regra, todos os termos capturados por ela
+											e sua referência bibliográfica.
+										</div>	
 									</div>
-								</div>
 								</td>								
 							</tr>
 						</c:forEach>

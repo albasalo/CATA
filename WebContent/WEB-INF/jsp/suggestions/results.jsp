@@ -9,6 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/css/advice.css'/>" rel="stylesheet" type="text/css" />
+	<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 	
 	<title>Sugestões de Estilo</title>
     <script type="text/javascript" src="<c:url value='js/jquery-1.3.1.min.js'/>"></script>
@@ -77,6 +78,8 @@
 <body>
 	<%@ include file="../shared/header.jsp"%>
 	
+	<%@ include file="../shared/user-menu.jsp"%>
+	
 	<div id="page">
 		<div id="content">
 			<h1>Sugestões</h1>
@@ -112,6 +115,7 @@
 												<td>${mistake.brokenRule.patternSuggestionElement.suggestion}</td>
 											</tr>
 											</c:forEach>
+											TODO: Colocar as informações completas das regras
 										</table>
 										</span>
 										</div>

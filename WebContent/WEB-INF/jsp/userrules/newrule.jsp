@@ -198,6 +198,36 @@
 				return false;
 			});
 		</script>
+		
+		<script type="text/javascript">
+			function showModal(ruleID) {
+				var modal = "#source" + ruleID;
+				if($(modal).length > 0) {
+				    $(modal).fadeIn().css({ 'width': Number(450)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+				
+				    var popMargTop = ($(modal).height() + 80) / 2;
+				    var popMargLeft = ($(modal).width() + 80) / 2;
+				
+				    $(modal).css({
+				        'margin-top' : -popMargTop,
+				        'margin-left' : -popMargLeft
+				    });
+				
+				    $('body').append('<div id="fade"></div>');
+				    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
+				
+				    return false;
+				}
+			};
+			
+			$('a.close, #fade').live('click', function() {
+				$('#fade , .popup_block').fadeOut( function() {
+				    $('#fade, a.close').remove();
+				});
+				return false;
+			});
+		</script>
+		
 		<title>Cadastrar nova Regra de estilo</title>
 	</head>
 	
@@ -313,7 +343,14 @@
 											<td><c:out value="${academic.sourceID}" /></td>
 											<td><c:out value="${academic.title}" /></td>
 											<td><c:out value="${academic.authors}" /></td>
-											<td class="center"><a href="<c:url value='/userrules/viewsource/${academic.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
+											<td class="center">
+												<img onclick="showModal(${academic.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
+												<div id="source${academic.sourceID}" class="popup_block" style="display:none">
+													<div style="text-align: left">
+														TODO: Colocar as informações completas da referência bibliográfica.
+													</div>	
+												</div>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -339,7 +376,14 @@
 											<td><c:out value="${book.sourceID}" /></td>
 											<td><c:out value="${book.title}" /></td>
 											<td><c:out value="${book.authors}" /></td>
-											<td class="center"><a href="<c:url value='/userrules/viewsource/${book.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
+											<td class="center">
+												<img onclick="showModal(${book.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
+												<div id="source${book.sourceID}" class="popup_block" style="display:none">
+													<div style="text-align: left">
+														TODO: Colocar as informações completas da referência bibliográfica.
+													</div>	
+												</div>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -365,7 +409,14 @@
 											<td><c:out value="${handbook.sourceID}" /></td>
 											<td><c:out value="${handbook.title}" /></td>
 											<td><c:out value="${handbook.authors}" /></td>
-											<td class="center"><a href="<c:url value='/userrules/viewsource/${handbook.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
+											<td class="center">
+												<img onclick="showModal(${handbook.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
+												<div id="source${handbook.sourceID}" class="popup_block" style="display:none">
+													<div style="text-align: left">
+														TODO: Colocar as informações completas da referência bibliográfica.
+													</div>	
+												</div>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -388,8 +439,15 @@
 									<c:forEach var="url" items="${urls}">
 										<tr id="row${url.sourceID}">
 											<td><c:out value="${url.sourceID}"/></td>
-											<td><a href="${url.url}"><c:out value="${url.title}"/></a></td>
-											<td class="center"><a href="<c:url value='/userrules/viewsource/${url.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
+											<td><a href="${url.url}" target="_blank"><c:out value="${url.title}"/></a></td>
+											<td class="center">
+												<img onclick="showModal(${url.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
+												<div id="source${url.sourceID}" class="popup_block" style="display:none">
+													<div style="text-align: left">
+														TODO: Colocar as informações completas da referência bibliográfica.
+													</div>	
+												</div>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -413,7 +471,14 @@
 										<tr id="row${other.sourceID}">
 											<td><c:out value="${other.sourceID}" /></td>
 											<td><c:out value="${other.moreInformation}" /></td>
-											<td class="center"><a href="<c:url value='/userrules/viewsource/${other.sourceID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
+											<td class="center">
+												<img onclick="showModal(${other.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
+												<div id="source${other.sourceID}" class="popup_block" style="display:none">
+													<div style="text-align: left">
+														TODO: Colocar as informações completas da referência bibliográfica.
+													</div>	
+												</div>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
