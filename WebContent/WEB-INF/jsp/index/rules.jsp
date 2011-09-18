@@ -8,10 +8,12 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />	
 		<link href="<c:url value='/css/table.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.dataTables.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#rules-menu").addClass('selected');
@@ -19,6 +21,34 @@
 				$('#rules').dataTable({
 					"aaSorting": [[ 0, "asc" ]]
 				});
+			});
+		</script>
+		<script type="text/javascript">
+			function showModal(ruleID) {
+				var modal = "#rule" + ruleID;
+				if($(modal).length > 0) {
+				    $(modal).fadeIn().css({ 'width': Number(450)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+				
+				    var popMargTop = ($(modal).height() + 80) / 2;
+				    var popMargLeft = ($(modal).width() + 80) / 2;
+				
+				    $(modal).css({
+				        'margin-top' : -popMargTop,
+				        'margin-left' : -popMargLeft
+				    });
+				
+				    $('body').append('<div id="fade"></div>');
+				    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
+				
+				    return false;
+				}
+			};
+			
+			$('a.close, #fade').live('click', function() {
+				$('#fade , .popup_block').fadeOut( function() {
+				    $('#fade, a.close').remove();
+				});
+				return false;
 			});
 		</script>
 		
@@ -73,8 +103,46 @@
 										<td class="center"><c:out value="${rule.exactMatchingElement.suggestion}"/></td>
 									</c:otherwise>
 								</c:choose>
-								<td class="center">${rule.user.name}</td>
-								<td class="center"><a href="<c:url value='/rules/viewrule/${rule.ruleID}'/>"><img src="<c:url value='/css/images/plus-icon.png'/>"></a></td>
+								<td class="center"><c:out value="${rule.user.name}"/></td>
+								<td class="center">
+									<img onclick="showModal(${rule.ruleID});" src="<c:url value='/css/images/plus-icon.png'/>">
+									<div id="rule${rule.ruleID}" class="popup_block" style="display:none">
+										<div style="text-align: left">
+											<b>Tipo: </b><c:out value="${rule.type.typeDescription}"/><br />
+											<b>Categoria: </b><c:out value="${rule.category.categoryDescription}" /><br />
+											<b>Sugestões:</b><br />
+											<c:if test="${rule.lemmaElement != null}">
+												<div class="indent">
+												<b>Lemas</b><br />
+												<div class="indent">
+												<b>Problema: </b><c:out value="${rule.lemmaElement.pattern}"/><br />
+												<b>Sugestão: </b><c:out value="${rule.lemmaElement.suggestion}"/><br />
+												<c:forEach items="${rule.lemmaElements}" var="lemmaElement">
+													<b>Problema</b><c:out value="${lemmaElement.pattern}"/><br />
+													<b>Sugestão</b><c:out value="${lemmaElement.suggestion}"/><br />
+												</c:forEach>
+												</div></div>
+											</c:if>
+											<c:if test="${rule.exactMatchingElement != null}">
+												<div class="indent">
+												<b>Padrões exatos</b><br />
+												<div class="indent">
+													<b>Problema: </b><c:out value="${rule.exactMatchingElement.pattern}"/><br />
+													<b>Sugestão: </b><c:out value="${rule.exactMatchingElement.suggestion}"/><br />
+												<c:forEach items="${rule.exactMatchingElements}" var="exactMatchingElement">
+													<b>Problema</b><c:out value="${exactMatchingElement.pattern}"/><br />
+													<b>Sugestão</b><c:out value="${exactMatchingElement.suggestion}"/><br />
+												</c:forEach>
+												</div></div>
+											</c:if>
+										<c:if test="${rule.explanation != null}">
+												<b>Explicacao: </b> <c:out value="${rule.explanation}"/><br />
+										</c:if>
+										<b>Cadastrada por: </b><c:out value="${rule.user.name}"/><br />
+										<b>Referência bibliográfica</b>
+									</div>
+								</div>
+								</td>								
 							</tr>
 						</c:forEach>
 					</tbody>

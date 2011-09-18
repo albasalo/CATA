@@ -228,6 +228,12 @@ a:hover {
 }
 
 
+.indent {
+	margin-top: 4px;
+	margin-left: 15px;
+}
+
+
 /* Width */
 .width20 {width: 20px;}
 .width60 {width: 60px;}
