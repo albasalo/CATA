@@ -86,6 +86,12 @@ public class UserrulesController {
 		if(source.getSourceID() == null)
 			validator.add(new ValidationMessage(
     				"Você deve associar uma referência à regra.", "Referência"));
+		
+		//FIXME Gambiarra: arrumar isso
+		if(lemma.getPattern().equals("") || lemma.getSuggestion().equals(""))
+			newRule.setLemmaElement(null);
+		if(exactMatching.getPattern().equals("") || exactMatching.getSuggestion().equals(""))
+			newRule.setExactMatchingElement(null);
 	}
 	
 	@Post
