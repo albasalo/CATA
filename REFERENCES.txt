@@ -2,7 +2,7 @@ Referências bibliográficas e bibliotecas usadas na construção deste projeto
 
 *Tradução de Textos de Computação e Informática para o Português
 	http://www.ime.usp.br/~kon/ResearchStudents/traducao.html
-	Foi utilizado para a construção do dicionário de termos e sugestões.
+	As regras 'default' do Sistema foram retiradas desta referência.
 
 	
 *V|Raptor
@@ -71,7 +71,7 @@ Referências bibliográficas e bibliotecas usadas na construção deste projeto
 	
 	
 *Biblioteca Aho-Corasick
-	Foi utilizado para a busca dos termos do dicionário no texto. Sem alterações.
+	Foi utilizado para a busca dos termos das regras. Sem alterações.
 	https://hkn.eecs.berkeley.edu/~dyoo/java/index.html
 	
 	Copyright (c) 2005, 2008 Danny Yoo
@@ -106,7 +106,7 @@ Referências bibliográficas e bibliotecas usadas na construção deste projeto
 	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 	OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-	
+
 *Ideias para o layout
 	Algumas ideias para layout (css) foram extraídas daqui:	
 	http://www.freelayouts.com/websites
@@ -356,8 +356,9 @@ Referências bibliográficas e bibliotecas usadas na construção deste projeto
 	
 	« Back to Commons Deed <./>
 	
+
 *Grid para mostrar regras e referências
-http://www.datatables.net/index
+	http://www.datatables.net/index
 			    GNU GENERAL PUBLIC LICENSE
 			       Version 2, June 1991
 	
@@ -698,13 +699,31 @@ http://www.datatables.net/index
 	library.  If this is what you want to do, use the GNU Lesser General
 	Public License instead of this License.
 	
+
 *Modal window para apresentar erros e mensagens
 http://www.sohtanaka.com/web-design/inline-modal-window-w-css-and-jquery/
 
-*Etiquetador morfológico e lematizador
+
+*Etiquetador morfológico e lematizador (forma)
 http://www.inf.pucrs.br/~gonzalez/tr+/forma/
 http://www.inf.pucrs.br/~linatural/projetos.html
-	
+Gonzalez, M.; Lima, V. L. S. de; Lima, J. V. de. Tools for Nominalization: an Alternative
+for Lexical Normalization. In: WORKSHOP ON COMP. PROC. OF THE PORTUGUESE LANG. - WRITTEN AND SPOKEN,
+7; PROPOR, 2006. Proceedings [S.l.]: Springer-Verlag, 2006. p.100-109. (Lectures Notes in AI, 3960).
+
+- Os arquivos contidos em 'br.usp.cata.resources.lemmatizer' foram retirados de
+http://www.inf.pucrs.br/%7Egonzalez/docs/forma_1_1.zip sem alterações.
+- As classes de 'br.usp.cata.component.lemmatizer' e de 'br.usp.cata.util.lemmatizer'
+foram desenvolvidas com base em http://www.inf.pucrs.br/%7Egonzalez/docs/forma_1_1.zip e
+no supracitado artigo 'Tools for Nominalization: an Alternative for Lexical Normalization'.
+O algoritmo "em si" foi mantido, mas foram feitas algumas modificações devidas à mudança
+de linguagem e devido ao uso particular que tem no Sistema CATA.
+
+
+*Projeto Ingresso na Pós
+http://code.google.com/p/ingresso-na-pos/
+
+
 // TODO Acrescentar as licenças!
 http://net.tutsplus.com/tutorials/javascript-ajax/build-a-better-tooltip-with-jquery-awesomeness/
 http://www.google.com/imgres?imgurl=http://lunenburg.org/github.png&imgrefurl=http://www.lunenburg.org/&usg=__brLPpTg1X_8bVKkMCqM-vrjIeCs=&h=300&w=300&sz=39&hl=en&start=19&zoom=1&tbnid=A25Xg-b7Tcj-3M:&tbnh=140&tbnw=140&ei=qjrkTZa1OYfpgQfZzJzQBg&prev=/search%3Fq%3Dgithub%26um%3D1%26hl%3Den%26client%3Dubuntu%26sa%3DN%26channel%3Dfs%26biw%3D1440%26bih%3D660%26tbm%3Disch&um=1&itbs=1&iact=hc&vpx=1022&vpy=238&dur=699&hovh=225&hovw=225&tx=118&ty=120&page=2&ndsp=19&ved=1t:429,r:11,s:19&biw=1440&bih=660

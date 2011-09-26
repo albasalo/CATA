@@ -306,8 +306,8 @@
 					<div class="single_form_element">
 						<label class="label" for="explanation">Explicação</label>
 						<br />
-						<textarea id="explanation" style="width: 600px; height: 100px !important" class="input_border" maxlength=400
-							name="newRule.explanation"></textarea>
+						<textarea id="explanation" style="width: 600px; height: 100px !important"
+							class="input_border" maxlength=400 name="newRule.explanation"></textarea>
 						<br />
 					</div>
 					<br />

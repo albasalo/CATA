@@ -19,6 +19,7 @@ import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 public class FileProcessor {
 	
 	private String fileName;
+	// Each element in the list is a line of the text
 	private ArrayList<String> text;
 	
 	public FileProcessor(UploadedFile file) {

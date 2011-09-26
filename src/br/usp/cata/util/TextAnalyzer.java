@@ -6,6 +6,7 @@ import java.util.HashMap;
 import javax.servlet.ServletContext;
 
 import br.usp.cata.model.Position;
+import br.usp.cata.util.lemmatizer.Lemmatizer;
 
 
 public class TextAnalyzer {
@@ -55,7 +56,7 @@ public class TextAnalyzer {
 	
 	private void analyzeText(ServletContext servletContext) {
 		Tokenizer tokenizer = new Tokenizer(servletContext);
-		Lemmatizer lemmatizer = new Lemmatizer();
+		//Lemmatizer lemmatizer = new Lemmatizer(new ArrayList<String>());
 		
 		ArrayList<Byte> tokenizedText = new ArrayList<Byte>();
 		ArrayList<Byte> lemmatizedText = new ArrayList<Byte>();
@@ -70,7 +71,7 @@ public class TextAnalyzer {
 		for(int i = 0; i < tokenizedText.size(); i++)
 			tokenizedTextBytes[i] = tokenizedText.get(i);
 		
-		lemmatizer.lemmatize(text, lemmatizedText, startsLemmatized, endsLemmatized);
+		//lemmatizer.lemmatize(text, lemmatizedText, startsLemmatized, endsLemmatized);
 		lemmatizedTextBytes = new byte[lemmatizedText.size()];
 		for(int i = 0; i < lemmatizedText.size(); i++)
 			lemmatizedTextBytes[i] = lemmatizedText.get(i);

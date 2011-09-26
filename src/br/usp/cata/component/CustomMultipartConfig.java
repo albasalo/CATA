@@ -11,7 +11,7 @@ public class CustomMultipartConfig extends DefaultMultipartConfig {
 	
 	@Override
     public long getSizeLimit() {
-        return 10 * 1024 * 1024; // 10MB
+        return (5 * 1024 * 1024); // 5MB
     }
     
 }

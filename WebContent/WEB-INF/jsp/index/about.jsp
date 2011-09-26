@@ -26,8 +26,8 @@
 			<div id="content">
 				<h1>Sobre</h1>
 				<b>CATA (Collaborative Academic Text Advisor)</b> é o Trabalho de Formatura Supervisionado da aluna Ana Luiza
-				Domingues Fernandez Basalo para o <a href="http://www.ime.usp.br" target="_blank"/>Instituto de Matemática e Estatística</a>
-				da <a href="http://www.usp.br" target="_blank"/>Universidade de São Paulo (USP)</a>.<br>
+				Domingues Fernandez Basalo para o <a href="http://www.ime.usp.br" target="_blank">Instituto de Matemática e Estatística</a>
+				da <a href="http://www.usp.br" target="_blank">Universidade de São Paulo (USP)</a>.<br>
 				<p>
 					<h3>Um verificador de estilo</h3>
 					CATA tem por finalidade detectar problemas de estilo em textos
@@ -45,7 +45,7 @@
 				<p>
 					<h3>CATA é Software Livre</h3>
 					O código-fonte do Sistema CATA está hospedado no GitHub, acessível a partir deste
-					<a href="http://www.github.com/albasalo/CATA" target="_blank"/>link</a>.
+					<a href="http://www.github.com/albasalo/CATA" target="_blank">link</a>.
 				</p>
 			</div>
 		</div>	

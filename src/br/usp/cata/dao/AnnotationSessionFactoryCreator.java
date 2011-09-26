@@ -15,6 +15,7 @@ import br.usp.cata.model.Source;
 import br.usp.cata.model.User;
 
 
+@SuppressWarnings("deprecation")
 @RequestScoped
 @Component
 public class AnnotationSessionFactoryCreator implements ComponentFactory<SessionFactory> {

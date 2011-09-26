@@ -175,7 +175,7 @@
 						<br />
 					</div>			
 					
-					<div id=fieldInfo" class="single_form_element">
+					<div id="fieldInfo" class="single_form_element">
 						<label class="label" for="info">Mais informações<span id="mandatoryInfo" style="display: none">*</span></label>
 						<br />
 						<textarea id="info" style="width: 600px; height: 100px !important" class="input_border" maxlength=400
