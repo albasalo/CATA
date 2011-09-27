@@ -6,14 +6,13 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import br.usp.cata.model.Position;
 import br.usp.pcs.lta.cogroo.configuration.LegacyRuntimeConfiguration;
 import br.usp.pcs.lta.cogroo.configuration.RuntimeConfigurationI;
 import br.usp.pcs.lta.cogroo.entity.Sentence;
 import br.usp.pcs.lta.cogroo.entity.Token;
 import br.usp.pcs.lta.cogroo.tools.sentencedetector.SentenceDetectorME;
 import br.usp.pcs.lta.cogroo.tools.tokenizer.CogrooTokenizer;
-
-import br.usp.cata.model.Position;
 
 
 public class Tokenizer {
@@ -30,11 +29,15 @@ public class Tokenizer {
 	}
 	
 	public void tokenize(ArrayList<String> text, ArrayList<Byte> tokenizedText, 
-			HashMap<Integer, Position> starts, HashMap<Integer, Position> ends) {
+			HashMap<Integer, Position> starts, HashMap<Integer, Position> ends,
+			HashMap<Integer, Position> startsList, HashMap<Integer, Position> endsList,
+			List<ArrayList<String>> tokensList) {
 		
 		int lineNum = 0;
+		int tokensListLength = 0;
 		
 		for(String line : text) {
+			ArrayList<String> sentenceTokensList = new ArrayList<String>();
 			List<Sentence> sentences;
 			byte[] tokenBytes;
 			int start, startToken, end, endToken;
@@ -51,15 +54,22 @@ public class Tokenizer {
 					end = offSet + token.getSpan().getEnd();
 					
 					startToken = tokenizedText.size();
-					tokenBytes = (" " + line.substring(start, end)).toLowerCase().getBytes();				
+					String substring = line.substring(start, end).toLowerCase();
+					sentenceTokensList.add(substring);
+					tokenBytes = (" " + substring).getBytes();				
 					for(byte tokenByte : tokenBytes)
 						tokenizedText.add(tokenByte);			
 					endToken = tokenizedText.size() + blankBytesLength;
 					
 					starts.put(startToken, new Position(lineNum, start));
 					ends.put(endToken, new Position(lineNum, end));
+					
+					startsList.put(tokensListLength, new Position(lineNum, start));
+					endsList.put(tokensListLength, new Position(lineNum, end));
+					tokensListLength++;
 				}
 			}
+			tokensList.add(sentenceTokensList);
 			lineNum++;
 		}	
     	for(byte b : " ".getBytes())

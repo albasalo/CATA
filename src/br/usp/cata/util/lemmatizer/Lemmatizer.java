@@ -1,8 +1,11 @@
 package br.usp.cata.util.lemmatizer;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+
 import br.usp.cata.component.lemmatizer.LemmatizerTrees;
+import br.usp.cata.model.Position;
 
 
 public class Lemmatizer {
@@ -24,21 +27,42 @@ public class Lemmatizer {
 	
 	private List<String> tokenizedText;
 	private int tokenizedTextIndex;
+	private int offset;
+	private HashMap<Integer, Position> startsList;
+	private HashMap<Integer, Position> endsList;
+	private HashMap<Integer, Position> startsLemmatized;
+	private HashMap<Integer, Position> endsLemmatized;
+	private List<Byte> lemmatizedText;
+	private int blankBytesLength = " ".getBytes().length;
 
-	public Lemmatizer(List<String> tokenizedText) {
-		this.tokenizedText = tokenizedText;
-		this.tokenizedTextIndex = 0;
-		
+	public Lemmatizer() {
 		this.sfxLemma = new String[LemmatizerConstants.numberOfTags];
 		this.sfxTag = new double[LemmatizerConstants.numberOfTags];
-		combined = false;
 		
 		accentsRoot = LemmatizerTrees.getAccentsRoot();
 		expressionsRoot = LemmatizerTrees.getExpressionsRoot();
 		suffixesRoot = LemmatizerTrees.getSuffixesRoot();
+	}
+	
+	public void lemmatize(List<String> tokenizedText, int offset, List<Byte> lemmatizedText,
+			HashMap<Integer, Position> startsList, HashMap<Integer, Position> endsList,
+			HashMap<Integer, Position> startsLemmatized, HashMap<Integer, Position> endsLemmatized) {
+		this.tokenizedText = tokenizedText;
+		this.offset = offset;
+		this.tokenizedTextIndex = 0;
+		this.lemmatizedText = lemmatizedText;
+		this.startsList = startsList;
+		this.endsList = endsList;
+		this.startsLemmatized = startsLemmatized;
+		this.endsLemmatized = endsLemmatized;
+		
+		for(int i = 0; i < LemmatizerConstants.numberOfTags; i++) {
+			sfxLemma[i] = "";
+			sfxTag[i] = 0.00;
+		}
 
 		createCircularList();		
-		tagAndLemmatize();
+		tagAndLemmatize();		
 	}
 	
 	private void createCircularList() {
@@ -97,9 +121,24 @@ public class Lemmatizer {
 						tkReady.getTag() != LemmatizerConstants.notPrintable)
 					analyzeTkReady();
 				
-				if(tkReady.isPrintable())
-					// TODO: Armazenar isso, em vez de imprimir
-					System.out.println(">> " + tkReady.getResult());
+				if(tkReady.isPrintable()) {
+					//System.out.println(">> " + tkReady.getResult());
+					Position start = startsList.get(tkReady.getIndex());
+					Position end = endsList.get(tkReady.getIndex());
+					
+					int startLemma = lemmatizedText.size();
+					byte[] lemmaBytes;
+					if(!tkReady.getLemma().equals("")) 
+						lemmaBytes = (" " + tkReady.getLemma()).getBytes();
+					else
+						lemmaBytes = (" " + tkReady.getWord()).getBytes();
+					for(byte lemmaByte : lemmaBytes)
+						lemmatizedText.add(lemmaByte);
+					int endLemma = lemmatizedText.size() + blankBytesLength;
+					
+					startsLemmatized.put(startLemma, start);
+					endsLemmatized.put(endLemma, end);
+				}
 				
 				if(combined)
 					combined = false;
@@ -192,6 +231,7 @@ public class Lemmatizer {
 			t.setWord(".EOF");
 		else {
 			t.reset();
+			t.setIndex(tokenizedTextIndex + offset);
 			t.setPrintable(true);
 			t.setWord(tokenizedText.get(tokenizedTextIndex++));
 			t.setLemma("");
@@ -208,10 +248,12 @@ public class Lemmatizer {
 			tkReading.setResult(
 					prevWord + " " + prevLemma + " " + LemmatizerTags.getTag(prevTag));
 		
-		tkReading.setWord(prevWord);
-		tkReading.setLemma(prevLemma);
-		tkReading.setSWordS(prevSWordS);
-		tkReading.setTag(prevTag);
+		if(prevWord.length() > 0) {
+			tkReading.setWord(prevWord);
+			tkReading.setLemma(prevLemma);
+			tkReading.setSWordS(prevSWordS);
+			tkReading.setTag(prevTag);
+		}
 		
 		if(nextTag >= 0)
 			tkReading.getNext().setResult(
@@ -220,11 +262,13 @@ public class Lemmatizer {
 			tkReading.getNext().setResult(
 					nextWord + " " + nextLemma + " _UN");
 		
-		tkReading.getNext().setPrintable(true);
-		tkReading.getNext().setWord(nextWord);
-		tkReading.getNext().setLemma(nextLemma);
-		tkReading.getNext().setSWordS(nextSWordS);
-		tkReading.getNext().setTag(nextTag);
+		if(nextWord.length() > 0) {
+			tkReading.getNext().setPrintable(true);
+			tkReading.getNext().setWord(nextWord);
+			tkReading.getNext().setLemma(nextLemma);
+			tkReading.getNext().setSWordS(nextSWordS);
+			tkReading.getNext().setTag(nextTag);
+		}
 		
 		for(int i = 0; i < LemmatizerConstants.numberOfTags; i++) {
 			tkReading.getNext().getPrevs()[i] = 0.00;
@@ -340,8 +384,11 @@ public class Lemmatizer {
 				tkReading.setSWordS(tkReading.getSWordS().substring(0, y + 1));
 				if(equalsList(sWordS, Arrays.asList(" me ", " te ", " se ", " nos ",
 						" vos ", " lha ", " lhe ", "lhes "))) {
-					word += line.substring(w+1);
-					tkReading.setSWordS(tkReading.getSWordS() + line.substring(w + 1));
+					String lineSubstring = "";
+					if((w >= 0) && (w + 1 <= line.length() - 1))
+						lineSubstring = line.substring(w+1);
+					word += lineSubstring;
+					tkReading.setSWordS(tkReading.getSWordS() + lineSubstring);
 				}
 				else {
 					if(w != - 1 && w != x) {
@@ -364,13 +411,15 @@ public class Lemmatizer {
 						combination(word, tkReading.getSWordS(), "",
 								LemmatizerConstants.undefinedTag, nextWord, " me ", "me", 15);
 					if(tkReading.getWord().charAt(tkReading.getWord().length() - 1) == 's') {
-						String palavraPrev = tkReading.getPrev().getWord();
-						int length = palavraPrev.length() - 1;
-						if(palavraPrev.charAt(length) == 'a' ||
-								palavraPrev.charAt(length) == 'e' ||
-								palavraPrev.charAt(length) == 'o') {
-							tkReading.getPrev().setWord(palavraPrev.substring(0, word.length()) + "s");
-							tkReading.getSfxTags()[6] = -9999;
+						String prevWord = tkReading.getPrev().getWord();
+						if(prevWord.length() > 0) {
+							int length = prevWord.length() - 1;
+							if(prevWord.charAt(length) == 'a' ||
+									prevWord.charAt(length) == 'e' ||
+									prevWord.charAt(length) == 'o') {
+								tkReading.getPrev().setWord(prevWord.substring(0, word.length()) + "s");
+								tkReading.getSfxTags()[6] = -9999;
+							}
 						}
 					}
 					for(x = 0; x < LemmatizerConstants.numberOfTags; x++)
@@ -435,7 +484,7 @@ public class Lemmatizer {
 		if(word.length() == 1) {
 			if(analyzeTkCurrentAux(word,
 					Arrays.asList(".", "!", "?", "¿", ":", "[", "]", "{", "}", "=",
-							"*", "§", "#", "<", ">"), 14, word, "_PN"));
+							"*", "§", "#", "<", ">", "-"), 14, word, "_PN"));
 			
 			else if(analyzeTkCurrentAux(word,
 					Arrays.asList(",", ";", "(", ")"), 20, word, "_VG"));
@@ -579,8 +628,12 @@ public class Lemmatizer {
 		if(longestSuffix.getExactTag() != LemmatizerConstants.undefinedTag &&
 				cut == 0) {
 			sfxTag[longestSuffix.getExactTag()] = 1.0;
-			sfxLemma[longestSuffix.getExactTag()] =
-				longestSuffix.getLemma()[longestSuffix.getExactTag()];
+			if(longestSuffix.getLemma()[longestSuffix.getExactTag()] == null)
+				sfxLemma[longestSuffix.getExactTag()] = "";
+			else {
+				sfxLemma[longestSuffix.getExactTag()] =
+					longestSuffix.getLemma()[longestSuffix.getExactTag()];
+			}
 		}
 		else {
 			initialPortion = toNoAccentLowerCase(word.substring(0, cut));
@@ -749,8 +802,9 @@ public class Lemmatizer {
 		int i, u;
 		
 		if(tkReady.getNext().getSfxTags()[6] == -9999) {
-			String palavra = tkReady.getWord();
-			tkReady.setWord(palavra.substring(0, palavra.length() - 1));
+			String word = tkReady.getWord();
+			if(word.length() > 0)
+				tkReady.setWord(word.substring(0, word.length() - 1));
 		}
 		
 		i = tkReady.getPrev().getTag();

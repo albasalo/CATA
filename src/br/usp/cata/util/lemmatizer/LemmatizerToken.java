@@ -4,6 +4,7 @@ public class LemmatizerToken {
 	
 	private String result;
 	private boolean printable;
+	private int index;
 	private String word;
 	// space + word + space
 	private String sWordS;
@@ -46,6 +47,14 @@ public class LemmatizerToken {
 
 	public void setPrintable(boolean printable) {
 		this.printable = printable;
+	}
+	
+	public int getIndex() {
+		return index;
+	}
+	
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 	public String getWord() {

@@ -2,9 +2,7 @@ package br.usp.cata.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import javax.servlet.ServletContext;
-
 import br.usp.cata.model.Position;
 import br.usp.cata.util.lemmatizer.Lemmatizer;
 
@@ -15,7 +13,9 @@ public class TextAnalyzer {
 	private byte[] tokenizedTextBytes;
 	private HashMap<Integer, Position> startsTokenized, endsTokenized;
 	private byte[] lemmatizedTextBytes;
+	private HashMap<Integer, Position> startsList, endsList;
 	private HashMap<Integer, Position> startsLemmatized, endsLemmatized;
+	private ArrayList<ArrayList<String>> listOfTokens;
 	
 	public TextAnalyzer(ArrayList<String> text, ServletContext servletContext) {
 		this.text = text;		
@@ -56,22 +56,35 @@ public class TextAnalyzer {
 	
 	private void analyzeText(ServletContext servletContext) {
 		Tokenizer tokenizer = new Tokenizer(servletContext);
-		//Lemmatizer lemmatizer = new Lemmatizer(new ArrayList<String>());
+		Lemmatizer lemmatizer = new Lemmatizer();
 		
 		ArrayList<Byte> tokenizedText = new ArrayList<Byte>();
 		ArrayList<Byte> lemmatizedText = new ArrayList<Byte>();
 		
 		startsTokenized = new HashMap<Integer, Position>();
 		endsTokenized = new HashMap<Integer, Position>();
-		startsLemmatized = new HashMap<Integer, Position>();
-		endsLemmatized = new HashMap<Integer, Position>();
+		startsList = new HashMap<Integer, Position>();
+		endsList = new HashMap<Integer, Position>();
+		listOfTokens = new ArrayList<ArrayList<String>>();
 		
-		tokenizer.tokenize(text, tokenizedText, startsTokenized, endsTokenized);
+		tokenizer.tokenize(text, tokenizedText, startsTokenized, endsTokenized,
+				startsList, endsList, listOfTokens);
+		//FIXME
 		tokenizedTextBytes = new byte[tokenizedText.size()];
 		for(int i = 0; i < tokenizedText.size(); i++)
 			tokenizedTextBytes[i] = tokenizedText.get(i);
 		
-		//lemmatizer.lemmatize(text, lemmatizedText, startsLemmatized, endsLemmatized);
+		startsLemmatized = new HashMap<Integer, Position>();
+		endsLemmatized = new HashMap<Integer, Position>();
+		
+		int offset = 0;
+		for(ArrayList<String> tokens : listOfTokens) {
+			lemmatizer.lemmatize(tokens, offset, lemmatizedText, startsList, endsList,
+					startsLemmatized, endsLemmatized);
+			offset += tokens.size();
+		}
+		for(byte b : " ".getBytes())
+			lemmatizedText.add(b);
 		lemmatizedTextBytes = new byte[lemmatizedText.size()];
 		for(int i = 0; i < lemmatizedText.size(); i++)
 			lemmatizedTextBytes[i] = lemmatizedText.get(i);
