@@ -193,4 +193,17 @@ public class IndexController {
     	result.redirectTo(IndexController.class).index();
     }
     
+    @Get
+    @Path("/recover")
+    public void recover() {
+    	if(userService.isAuthenticatedUser())
+			result.redirectTo(HomeController.class).index();
+    }
+    
+    @Post
+    @Path("/recover")
+    public void recover(String email) {
+    }
+    }
+    
 }

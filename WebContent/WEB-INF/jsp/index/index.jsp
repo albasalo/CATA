@@ -110,7 +110,7 @@
 								<label class="label" for="pass">Senha</label>
 								<br />
 								<input id="pass" class="input_border width285" type="password" maxlength=100 name="user.password"/>
-								<div class="small align-right"><a href=#>Esqueci a senha</a></div>
+								<div class="small align-right"><a href="<c:url value='/recover'/>">Esqueci a senha</a></div>
 							</div>
 							<center>
 								<input class="button" type="submit" value="Entrar">
