@@ -718,6 +718,7 @@ foram desenvolvidas com base em http://www.inf.pucrs.br/%7Egonzalez/docs/forma_1
 no supracitado artigo 'Tools for Nominalization: an Alternative for Lexical Normalization'.
 O algoritmo "em si" foi mantido, mas foram feitas algumas modificações devidas à mudança
 de linguagem e devido ao uso particular que tem no Sistema CATA.
+- NOTA: Obtive a autorização do autor para fazer o uso que aqui apresentei da ferramenta 'forma'.
 
 
 *Projeto Ingresso na Pós
