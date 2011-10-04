@@ -204,6 +204,5 @@ public class IndexController {
     @Path("/recover")
     public void recover(String email) {
     }
-    }
     
 }
