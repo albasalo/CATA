@@ -14,6 +14,7 @@ import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.ValidationMessage;
 import br.usp.cata.model.Rule;
 import br.usp.cata.model.User;
+import br.usp.cata.service.EmailService.EmailResult;
 import br.usp.cata.service.NewUserService;
 import br.usp.cata.service.NewUserService.SignupResult;
 import br.usp.cata.service.RuleService;
@@ -202,7 +203,27 @@ public class IndexController {
     
     @Post
     @Path("/recover")
+    @Transactional
     public void recover(String email) {
+    	User user = userService.findByEmail(email);
+    	
+    	if(user == null)
+    		validator.add(new ValidationMessage(
+    				"E-mail inexistente na base de usuários.", "E-mail"));
+    	else {
+    		EmailResult emailResult = userService.recoverPassword(user);
+    		if(emailResult.equals(EmailResult.NO_EMAIL_SENT))
+    			validator.add(new ValidationMessage(
+    					"Não foi possível enviar o e-mail de ativação de conta para o endereço " + email + ". " +
+    							"Tente novamente mais tarde.", "E-mail de renovação de senha"));
+    		else
+    			result.include("messages", "Um e-mail com instruções para renovação da senha foi" +
+    					" enviado para o endereço " + email + ".");
+    			
+    	}
+  	
+    	validator.onErrorRedirectTo(IndexController.class).recover();   	
+    	result.redirectTo(IndexController.class).index();
     }
     
 }

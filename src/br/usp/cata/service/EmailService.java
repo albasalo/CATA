@@ -25,6 +25,11 @@ import br.usp.cata.model.EmailException;
 @SessionScoped
 public class EmailService implements Serializable {
 	
+	public static enum EmailResult {
+		NO_EMAIL_SENT,
+		EMAIL_SENT
+	}
+	
     private static final long serialVersionUID = 7886620811055669211L;
 
     public static String PROP_MAIL_SMTP_FROM = "mail.smtp.from";

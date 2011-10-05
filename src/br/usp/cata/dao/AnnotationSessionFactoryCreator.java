@@ -9,6 +9,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.ComponentFactory;
 import br.com.caelum.vraptor.ioc.RequestScoped;
+
 import br.usp.cata.model.PatternSuggestionElement;
 import br.usp.cata.model.Rule;
 import br.usp.cata.model.Source;
@@ -22,8 +23,7 @@ public class AnnotationSessionFactoryCreator implements ComponentFactory<Session
     
 	private SessionFactory factory;
 
-    public AnnotationSessionFactoryCreator()
-    {
+    public AnnotationSessionFactoryCreator() {
     }
 
     @PostConstruct

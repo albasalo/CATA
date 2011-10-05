@@ -41,6 +41,9 @@ public class User implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date registrationDate;
     
+    @Column
+    private String newPasswordKey;
+    
     public User() {
     }
 
@@ -105,5 +108,13 @@ public class User implements Serializable {
         builder.append(userID).append(registrationDate);
         setActivationKey(CryptoService.generateMd5(builder.toString()));
     }
-    
+
+	public String getNewPasswordKey() {
+		return newPasswordKey;
+	}
+
+	public void setNewPasswordKey(String newPasswordKey) {
+		this.newPasswordKey = newPasswordKey;
+	}
+	
 }

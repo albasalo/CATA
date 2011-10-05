@@ -8,9 +8,37 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />	
 		<script type="text/javascript" src="<c:url value='js/jquery-1.4.1.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='js/recover-form.js'/>"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				if($('#modal').length > 0) {
+				    $('#modal').fadeIn().css({ 'width': Number(450)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+				
+				    var popMargTop = ($('#modal').height() + 80) / 2;
+				    var popMargLeft = ($('#modal').width() + 80) / 2;
+				
+				    $('#modal').css({
+				        'margin-top' : -popMargTop,
+				        'margin-left' : -popMargLeft
+				    });
+				
+				    $('body').append('<div id="fade"></div>');
+				    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
+				
+				    return false;
+				}
+			});
+			
+			$('a.close, #fade').live('click', function() {
+				$('#fade , .popup_block').fadeOut( function() {
+				    $('#fade, a.close').remove();
+				});
+				return false;
+			});
+		</script>
 		<title>Recuperar senha</title>
 	</head>
 	
@@ -24,7 +52,7 @@
 				<fieldset>
 					<legend>Esqueceu sua senha?</legend>
 						<div class="single_form_element">
-							<label class="label" for="email">Um link com instruções para recuperar seu acesso
+							<label class="label" for="email">Um <i>link</i> com instruções para recuperar seu acesso
 								será enviado ao e-mail que você digitar abaixo:</label>
 							<br /><br />
 							<input id="email" class="input_border width285" type="text" maxlength=100 name="email" /><br />
