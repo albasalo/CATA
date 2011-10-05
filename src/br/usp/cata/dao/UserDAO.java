@@ -64,4 +64,14 @@ public class UserDAO extends AbstractDAO<Long,User> {
         return (users.isEmpty() ? null : users.get(0));
     }
     
+    public User findByNewPasswordKey(final String newPasswordKey) {
+    	final List<User> users = findByCriteria(Restrictions.eq("newPasswordKey", newPasswordKey));
+    	
+    	if(users.size() > 1)
+            throw new IllegalStateException(
+                "There is more than one user with the same new password key: " + newPasswordKey + ".");
+    	
+    	return (users.isEmpty() ? null : users.get(0));
+    }
+    
 }

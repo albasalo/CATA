@@ -43,6 +43,10 @@ public class UserService {
         userDAO.save(user);
     }
     
+    public void update(final User user) {
+    	userDAO.saveOrUpdate(user);
+    }
+    
     public List<User> findAll() {
     	return userDAO.findAll();
     }
@@ -53,6 +57,10 @@ public class UserService {
     
     public User findByEmail(String email) {
     	return userDAO.findByEmail(email);
+    }
+    
+    public User findByNewPasswordKey(String newPasswordKey) {
+    	return userDAO.findByNewPasswordKey(newPasswordKey);
     }
 
     public boolean authenticate(final String email, String password) {

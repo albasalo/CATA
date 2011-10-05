@@ -12,11 +12,13 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.ValidationMessage;
+
 import br.usp.cata.model.Rule;
 import br.usp.cata.model.User;
 import br.usp.cata.service.EmailService.EmailResult;
 import br.usp.cata.service.NewUserService;
 import br.usp.cata.service.NewUserService.SignupResult;
+import br.usp.cata.service.CryptoService;
 import br.usp.cata.service.RuleService;
 import br.usp.cata.service.UserService;
 import br.usp.cata.web.interceptor.IrrestrictAccess;
@@ -223,6 +225,53 @@ public class IndexController {
     	}
   	
     	validator.onErrorRedirectTo(IndexController.class).recover();   	
+    	result.redirectTo(IndexController.class).index();
+    }
+  
+    @Get
+    @Path("/recover/newpassword/{newPasswordKey}")
+    @Transactional
+    public void newPassword(String newPasswordKey)
+    {
+    	User user = userService.findByNewPasswordKey(newPasswordKey);
+    	
+    	if(user == null)
+    		result.redirectTo(IndexController.class).index();
+    	
+    	result.include("newPasswordKey", newPasswordKey);
+    	result.forwardTo(IndexController.class).newpassword();
+    }
+    
+    @Post
+    @Path("/newpassword")
+    public void newpassword() {
+    }
+    
+    @Post
+    @Path("/changepassword")
+    @Transactional
+    public void changepassword(String email, String password, String password2, String newPasswordKey) {
+    	User user = userService.findByNewPasswordKey(newPasswordKey);
+    	
+    	if(user == null || !user.getEmail().equals(email) ||
+    			!user.getNewPasswordKey().equals(newPasswordKey)) {
+    		validator.add(new ValidationMessage("Não houve alteração de senha",
+    				"Você não possui autorização:"));
+    		validator.onErrorRedirectTo(IndexController.class).index();
+    	}
+    		
+    	if(!password.equals(password2)) {
+    		validator.add(new ValidationMessage("As senhas digitadas não coincidem", "Senhas:"));
+    		result.include(newPasswordKey);
+    		validator.onErrorRedirectTo(IndexController.class).newpassword();
+    	}
+    	
+    	user.setPassword(CryptoService.generateMd5(password));
+    	user.setNewPasswordKey(null);
+    	userService.update(user);
+    	
+    	result.include("messages", "Sua senha foi alterada com sucesso.");
+    	
     	result.redirectTo(IndexController.class).index();
     }
     
