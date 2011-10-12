@@ -8,7 +8,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
-		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />		
+		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />	
+			
 		<script type="text/javascript" src="<c:url value='js/jquery-1.4.1.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='js/signup-form.js'/>"></script>
@@ -39,6 +40,7 @@
 				return false;
 			});
 		</script>
+		
 		<title>Cadastre-se</title>		
 	</head>
 	<body>	
@@ -74,6 +76,7 @@
 							<input id="pass2" class="input_border width285" type="password" maxlength=32 name="password" /><br />
 							<span id="pass2Info" class="description">Confirme sua senha</span>
 						</div>
+					<button type="button" class="button" onclick="javascript:history.go(-1);return false;">Voltar</button>
 					<input class="button" type="submit" value="Criar minha conta">	
 				</fieldset>
 				</form>

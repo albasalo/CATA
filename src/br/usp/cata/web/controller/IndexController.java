@@ -125,19 +125,19 @@ public class IndexController {
     {
     	if(newUser.getName().equals(""))
     		validator.add(new ValidationMessage(
-    				"O campo não pode ser vazio", "Nome"));
+    				"O campo não pode ser vazio.", "Nome"));
     	if(newUser.getEmail().equals(""))
     		validator.add(new ValidationMessage(
-    				"O campo não pode ser vazio", "E-mail"));
+    				"O campo não pode ser vazio.", "E-mail"));
     	if(newUser.getPassword().length() < PASSWORD_MIN_LENGTH)
     		validator.add(new ValidationMessage(
-    				"A senha deve ter 6 caracteres no mínimo", "Senha"));
+    				"A senha deve ter, no mínimo, 6 caracteres.", "Senha"));
     	if(newUser.getPassword().length() > PASSWORD_MAX_LENGTH)
     		validator.add(new ValidationMessage(
-    				"A senha deve ter 32 caracteres no máximo", "Senha"));
+    				"A senha deve ter, no máximo, 32 caracteres", "Senha"));
     	if(!newUser.getPassword().equals(password))
         	validator.add(new ValidationMessage(
-        			"As senhas digitadas não são idênticas", "Senhas"));
+        			"As senhas digitadas não são idênticas.", "Senhas"));
         
     	validator.onErrorRedirectTo(IndexController.class).signup();
         
@@ -145,12 +145,13 @@ public class IndexController {
     	
     	switch(signupResult) {
     		case SUCCESS:
-    			result.include("messages", "Sua conta foi criada. " +
-    					"Um e-mail de ativação foi enviado para o endereço " + newUser.getEmail() + ".");
+    			result.include("messages", "Seu acesso foi criado. " +
+    					"Siga as instruções enviadas para o endereço " + newUser.getEmail() +
+    					" para ativar sua conta.");
     			break;
     		case USER_ALREADY_REGISTERED_ACTIVE:
     			validator.add(new ValidationMessage(
-            			"Já existe um usuário cadastrado com este e-mail no sistema", "E-mail"));
+            			"Já existe um usuário cadastrado com este e-mail no sistema.", "E-mail"));
     			break;
     		case USER_ALREADY_REGISTERED_INACTIVE:
     			result.include("messages",

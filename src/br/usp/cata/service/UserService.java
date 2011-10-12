@@ -102,7 +102,7 @@ public class UserService {
 
         final String subject = "CATA: Nova senha";
         final String body = "Clique " + linkBuilder.toString()  + " para definir uma nova senha " +
-        		"de acesso ao Sistema CATA";
+        		"de acesso ao Sistema CATA.";
 
         return emailService.buildEmail(subject, body, email);
     }
