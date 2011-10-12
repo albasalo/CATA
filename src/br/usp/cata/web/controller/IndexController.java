@@ -61,17 +61,16 @@ public class IndexController {
     	
     	if(user.getEmail().equals(""))
     		validator.add(new ValidationMessage(
-    				"O campo não pode ser vazio", "E-mail"));
+    				"O campo não pode ser vazio.", "E-mail"));
     	if(user.getPassword().equals(""))
     		validator.add(new ValidationMessage(
-    				"O campo não pode ser vazio", "Senha"));
-    	
+    				"O campo não pode ser vazio.", "Senha"));    	
     	validator.onErrorRedirectTo(IndexController.class).index();
 
         final boolean success = userService.authenticate(user.getEmail(), user.getPassword());
 
         if(!success) {
-        	validator.add(new ValidationMessage("valores inválidos", "E-mail ou senha"));
+        	validator.add(new ValidationMessage("Valores inválidos.", "E-mail ou senha"));
             validator.onErrorRedirectTo(IndexController.class).index();
         }
         

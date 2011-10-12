@@ -65,10 +65,11 @@ public class UserService {
 
     public boolean authenticate(final String email, String password) {
         String encryptedPassword = CryptoService.generateMd5(password);
-
-        final User user = userDAO.findActiveUsersByEmailAndPassword(email, encryptedPassword);
-
+        
         final boolean success;
+        
+        final User user = userDAO.findActiveUsersByEmailAndPassword(email, encryptedPassword);
+        
         if(user == null)
             success = false;
         else {
