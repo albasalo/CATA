@@ -6,19 +6,20 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/coin-slider-styles.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/index.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />
+		
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/coin-slider.min.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/login-form.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$("#index-menu").addClass('selected');
-				
+				$("#index-menu").addClass('selected');			
 				$('#coin-slider').coinslider({ width: 950, navigation: true, delay: 5000 });
 			});
 		</script>
@@ -54,8 +55,7 @@
 	</head>
 
 	<body>
-		<%@ include file="../shared/header.jsp"%>
-		
+		<%@ include file="../shared/header.jsp"%>		
 		<%@ include file="../shared/messages.jsp"%>
 		
 		<div id="page">
@@ -65,15 +65,15 @@
 				<br />
 				
 				<div id='coin-slider'>
-					<a href="<c:url value='#'/>">
+					<a href="<c:url value='/#checkYourTexts'/>">
 						<img src="<c:url value='/css/images/txt-file.png'/>">
 						<span>
 							<b>Envie um arquivo .txt</b><br>
 							Selecione um arquivo de texto sem formatação e envie para verificação.
 						</span>
 					</a>
-					<a href="<c:url value='#'/>">
-						<img src="<c:url value='/css/images/test.png'/>">
+					<a href="<c:url value='/#checkYourTexts'/>">
+						<img src="<c:url value='/css/images/advice.png'/>">
 						<span>
 							<b>Alternativas aos problemas de estilo</b><br>
 							CATA marca os problemas de estilo encontrados em seu texto e
@@ -121,7 +121,7 @@
 				</div>
 				
 				<div id="advice">
-					<h2>Verifique o estilo de seus textos</h2>
+					<h2><a name="checkYourTexts">Verifique o estilo de seus textos</a></h2>
 					<form action="<c:url value="/advice"/>" enctype="multipart/form-data" method="post">
 						Selecione um arquivo .txt para análise:<br>
 						<div class="single_form_element">

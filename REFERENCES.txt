@@ -725,6 +725,10 @@ de linguagem e devido ao uso particular que tem no Sistema CATA.
 http://code.google.com/p/ingresso-na-pos/
 
 
+*Imagem para a página inicial
+http://cdn.tipb.com/images/stories/2010/04/iphone_4_notes_spell_check.PNG
+
+
 // TODO Acrescentar as licenças!
 http://net.tutsplus.com/tutorials/javascript-ajax/build-a-better-tooltip-with-jquery-awesomeness/
 http://www.google.com/imgres?imgurl=http://lunenburg.org/github.png&imgrefurl=http://www.lunenburg.org/&usg=__brLPpTg1X_8bVKkMCqM-vrjIeCs=&h=300&w=300&sz=39&hl=en&start=19&zoom=1&tbnid=A25Xg-b7Tcj-3M:&tbnh=140&tbnw=140&ei=qjrkTZa1OYfpgQfZzJzQBg&prev=/search%3Fq%3Dgithub%26um%3D1%26hl%3Den%26client%3Dubuntu%26sa%3DN%26channel%3Dfs%26biw%3D1440%26bih%3D660%26tbm%3Disch&um=1&itbs=1&iact=hc&vpx=1022&vpy=238&dur=699&hovh=225&hovw=225&tx=118&ty=120&page=2&ndsp=19&ved=1t:429,r:11,s:19&biw=1440&bih=660
