@@ -30,6 +30,7 @@ $(document).ready(function(){
 			return true;
 		}
 	}
+	
 	function validatePass() {
 		if(pass.val().length < 6) {
 			pass.removeClass("input_border");

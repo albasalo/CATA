@@ -51,6 +51,7 @@
 				return false;
 			});
 		</script>
+		
 		<title>CATA: Collaborative Academic Text Advisor</title>
 	</head>
 

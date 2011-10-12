@@ -10,12 +10,14 @@
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/home.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
+		
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("#index-menu").addClass('selected');
 			});
 		</script>
+		
 		<title>CATA: Collaborative Academic Text Advisor</title>
 	</head>
 	

@@ -8,12 +8,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
+		
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("#about-menu").addClass('selected');
 			});
 		</script>
+		
 		<title>Sobre</title>
 	</head>
 	

@@ -53,13 +53,13 @@
 				<fieldset>
 					<legend>Esqueceu sua senha?</legend>
 						<div class="single_form_element">
-							<label class="label" for="email">Um <i>link</i> com instruções para recuperar seu acesso
-								será enviado ao e-mail que você digitar abaixo:</label>
+							<label class="label" for="email">Digite o e-mail que você usa para autenticar-se no CATA.
+								Um <i>link</i> com instruções para recuperar seu acesso será enviado.</label>
 							<br /><br />
 							<input id="email" class="input_border width285" type="text" maxlength=100 name="email" /><br />
 						</div>
-					<input class="button" type="submit" value="Enviar instruções">
 					<button type="button" class="button" onclick="javascript:history.go(-1);return false;">Voltar</button>
+					<input class="button" type="submit" value="Enviar instruções">
 				</fieldset>
 				</form>
 			</div>

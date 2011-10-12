@@ -29,21 +29,22 @@ import br.usp.cata.web.interceptor.Transactional;
 @IrrestrictAccess
 public class IndexController {
 
-	private final Result result;
-	private final Validator validator;
-	private final UserService userService;
-	private final NewUserService newUserService;
-	private final RuleService ruleService;
 	private final int PASSWORD_MIN_LENGTH = 6;
 	private final int PASSWORD_MAX_LENGTH = 32;
 	
+	private final Result result;
+	private final Validator validator;
+	private final NewUserService newUserService;
+	private final RuleService ruleService;
+	private final UserService userService;
+	
 	public IndexController(Result result, Validator validator,
-			UserService userService, NewUserService newUserService, RuleService ruleService) {
+			NewUserService newUserService, RuleService ruleService, UserService userService) {
 		this.result = result;
 		this.validator = validator;
-		this.userService = userService;
 		this.newUserService = newUserService;
 		this.ruleService = ruleService;
+		this.userService = userService;
 	}
 
 	@Get
@@ -223,8 +224,8 @@ public class IndexController {
     					" enviado para o endereço " + email + ".");
     			
     	}
-  	
-    	validator.onErrorRedirectTo(IndexController.class).recover();   	
+  	   	validator.onErrorRedirectTo(IndexController.class).recover();
+  	   	
     	result.redirectTo(IndexController.class).index();
     }
   
@@ -255,13 +256,12 @@ public class IndexController {
     	
     	if(user == null || !user.getEmail().equals(email) ||
     			!user.getNewPasswordKey().equals(newPasswordKey)) {
-    		validator.add(new ValidationMessage("Não houve alteração de senha",
-    				"Você não possui autorização:"));
+    		validator.add(new ValidationMessage("Não houve alteração de senha.",
+    				"Você não possui autorização"));
     		validator.onErrorRedirectTo(IndexController.class).index();
-    	}
-    		
+    	}    		
     	if(!password.equals(password2)) {
-    		validator.add(new ValidationMessage("As senhas digitadas não coincidem", "Senhas:"));
+    		validator.add(new ValidationMessage("As senhas digitadas não coincidem.", "Senhas"));
     		result.include(newPasswordKey);
     		validator.onErrorRedirectTo(IndexController.class).newpassword();
     	}
