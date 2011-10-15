@@ -8,10 +8,10 @@ import br.com.caelum.vraptor.ioc.Component;
 @Component
 @ApplicationScoped
 public class CustomMultipartConfig extends DefaultMultipartConfig {
-	
-	@Override
+
+@Override
     public long getSizeLimit() {
-        return (5 * 1024 * 1024); // 5MB
+        return Long.MAX_VALUE;
     }
     
 }

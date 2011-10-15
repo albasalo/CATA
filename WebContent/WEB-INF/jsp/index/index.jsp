@@ -17,6 +17,7 @@
 		<script type="text/javascript" src="<c:url value='/js/coin-slider.min.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/login-form.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/advice-form.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#index-menu").addClass('selected');			
@@ -123,10 +124,10 @@
 				
 				<div id="advice">
 					<h2><a name="checkYourTexts">Verifique o estilo de seus textos</a></h2>
-					<form action="<c:url value="/advice"/>" enctype="multipart/form-data" method="post">
+					<form id="advice_form" action="<c:url value="/advice"/>" enctype="multipart/form-data" method="post">
 						Selecione um arquivo .txt para análise:<br>
 						<div class="single_form_element">
-							<input type="file" name="file" size="30"><br>
+							<input id="file" type="file" name="file" size="30"><br>
 						</div>
 						<center>
 							<input class="button" type="submit" value="Enviar">

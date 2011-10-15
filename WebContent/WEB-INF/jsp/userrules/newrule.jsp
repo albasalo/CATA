@@ -233,8 +233,7 @@
 	
 	<body>
 		<%@ include file="../shared/header.jsp"%>
-		<%@ include file="../shared/messages.jsp"%>
-		
+		<%@ include file="../shared/messages.jsp"%>		
 		<%@ include file="../shared/user-menu.jsp"%>
 		
 		<div id="page">

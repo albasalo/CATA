@@ -4,6 +4,8 @@
  */
 package br.usp.cata.web.controller;
 
+import org.apache.commons.io.IOUtils;
+
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
@@ -12,13 +14,12 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.ValidationMessage;
-
 import br.usp.cata.model.Rule;
 import br.usp.cata.model.User;
+import br.usp.cata.service.CryptoService;
 import br.usp.cata.service.EmailService.EmailResult;
 import br.usp.cata.service.NewUserService;
 import br.usp.cata.service.NewUserService.SignupResult;
-import br.usp.cata.service.CryptoService;
 import br.usp.cata.service.RuleService;
 import br.usp.cata.service.UserService;
 import br.usp.cata.web.interceptor.IrrestrictAccess;
@@ -31,6 +32,7 @@ public class IndexController {
 
 	private final int PASSWORD_MIN_LENGTH = 6;
 	private final int PASSWORD_MAX_LENGTH = 32;
+	private final int FILE_MAX_SIZE = 5 * 1024 * 1024;
 	
 	private final Result result;
 	private final Validator validator;
@@ -79,7 +81,7 @@ public class IndexController {
 
 	@Post
 	@Path("/advice")
-	public void advice(UploadedFile file) {
+	public void advice(UploadedFile file) throws Exception {
 		if(file == null)
 			validator.add(new ValidationMessage(
     				"Selecione um arquivo no formato .txt", "Nenhum arquivo selecionado"));
@@ -87,7 +89,11 @@ public class IndexController {
 			validator.add(new ValidationMessage(
 					"O arquivo deve estar no formato .txt", "Formato do arquivo"));
 		}
-		validator.onErrorUsePageOf(IndexController.class).index();
+		else if(IOUtils.toByteArray(file.getFile()).length > FILE_MAX_SIZE) {
+			validator.add(new ValidationMessage(
+					"O arquivo deve ter, no máximo, 5MB.", "Tamanho do arquivo"));
+		}
+		validator.onErrorRedirectTo(IndexController.class).index();
 		
 		result.forwardTo(SuggestionsController.class).results(file);
 	}

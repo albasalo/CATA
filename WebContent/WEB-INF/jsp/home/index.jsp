@@ -9,12 +9,44 @@
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/home.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/advice-form.js'/>"></script>
+		
 		<script type="text/javascript">
 			$(document).ready(function () {
 				$("#index-menu").addClass('selected');
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				if($('#modal').length > 0) {
+				    $('#modal').fadeIn().css({ 'width': Number(500)})
+				    	.prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+				
+				    var popMargTop = ($('#modal').height() + 80) / 2;
+				    var popMargLeft = ($('#modal').width() + 80) / 2;
+				
+				    $('#modal').css({
+				        'margin-top' : -popMargTop,
+				        'margin-left' : -popMargLeft
+				    });
+				
+				    $('body').append('<div id="fade"></div>');
+				    $('#fade').css({ 'filter': 'alpha(opacity=80)'}).fadeIn(); 
+				
+				    return false;
+				}
+			});
+			
+			$('a.close, #fade').live('click', function() {
+				$('#fade , .popup_block').fadeOut( function() {
+				    $('#fade, a.close').remove();
+				});
+				return false;
 			});
 		</script>
 		
@@ -23,6 +55,7 @@
 	
 	<body>
 		<%@ include file="../shared/header.jsp"%>
+		<%@ include file="../shared/messages.jsp"%>
 		<%@ include file="../shared/user-menu.jsp"%>
 		
 		<div id="page">
@@ -33,11 +66,11 @@
 				
 				<div id="advice">
 					<h2>Verifique o estilo de seus textos</h2>
-					<form action="<c:url value="/advice"/>" enctype="multipart/form-data" method="post">
+					<form id="advice_form" action="<c:url value="/advice"/>" enctype="multipart/form-data" method="post">
 						<center>
 							Selecione um arquivo .txt para análise:<br>
 							<div class="single_form_element">
-								<input type="file" name="file" size="30"><br>
+								<input id="file" type="file" name="file" size="30"><br>
 							</div>
 							<input class="button" type="submit" value="Enviar">
 							<div class="small">
