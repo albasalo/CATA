@@ -10,68 +10,10 @@
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
+		
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.1.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/newsource-form.js'/>"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("[name='newSource.type']").change(createForm);
-				
-				function createForm() {
-					if($("[name='newSource.type'] option:selected").val() == "ACADEMIC_PUBLISHING") {
-						$("#fieldURL").hide();
-						$("#fieldPublisher").hide();
-						$("#dateBook").hide();
-						$("#dateInternet").hide();
-						$("#mandatoryInfo").hide();
-						$("#fieldTitle").show();
-						$("#fieldAuthors").show();
-						$("#fieldInstitution").show();
-						$("#fieldDate").show();
-						$("#dateAcademic").show();
-					}
-					else if($("[name='newSource.type'] option:selected").val() == "BOOK" ||
-							$("[name='newSource.type'] option:selected").val() == "HANDBOOK") {
-						$("#fieldURL").hide();
-						$("#fieldInstitution").hide();
-						$("#dateAcademic").hide();
-						$("#dateInternet").hide();
-						$("#mandatoryInfo").hide();
-						$("#fieldTitle").show();
-						$("#fieldAuthors").show();
-						$("#fieldPublisher").show();
-						$("#fieldDate").show();
-						$("#dateBook").show();
-					}
-					else if($("[name='newSource.type'] option:selected").val() == "INTERNET") {
-						$("#fieldAuthors").hide();
-						$("#fieldPublisher").hide();
-						$("#fieldInstitution").hide();
-						$("#dateAcademic").hide();
-						$("#dateBook").hide();
-						$("#mandatoryInfo").hide();
-						$("#fieldTitle").show();
-						$("#fieldURL").show();
-						$("#fieldDate").show();
-						$("#dateInternet").show();
-					}
-					else {
-						$("#fieldTitle").hide();
-						$("#fieldAuthors").hide();
-						$("#fieldURL").hide();
-						$("#fieldPublisher").hide();
-						$("#fieldInstitution").hide();
-						$("#dateAcademic").hide();
-						$("#dateBook").hide();
-						$("#dateInternet").hide();
-						$("#fieldDate").hide();
-						$("#mandatoryInfo").show();
-					}
-				}
-				
-				createForm();
-			});
-		</script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				if($('#modal').length > 0) {
@@ -99,6 +41,7 @@
 				return false;
 			});
 		</script>
+		
 		<title>Cadastrar nova Referência</title>
 	</head>
 	
@@ -181,8 +124,8 @@
 						<textarea id="info" style="width: 600px; height: 100px !important" class="input_border" maxlength=400
 							name="newSource.moreInformation"></textarea>
 					</div>		
-										
-					<input class="button" type="submit" value="Cadastrar">&nbsp;&nbsp;<button class="button" onclick="window.location.href='<c:url value='/userrules/newrule#source'/>'">Voltar</button>
+					<button type="button" class="button" onclick="javascript:history.go(-1);return false;">Voltar</button>					
+					<input class="button" type="submit" value="Cadastrar">
 				</fieldset>
 				</form>
 			</div>

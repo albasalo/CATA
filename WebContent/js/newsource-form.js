@@ -1,4 +1,60 @@
 $(document).ready(function() {
+	$("[name='newSource.type']").change(createForm);
+	
+	function createForm() {
+		if($("[name='newSource.type'] option:selected").val() == "ACADEMIC_PUBLISHING") {
+			$("#fieldURL").hide();
+			$("#fieldPublisher").hide();
+			$("#dateBook").hide();
+			$("#dateInternet").hide();
+			$("#mandatoryInfo").hide();
+			$("#fieldTitle").show();
+			$("#fieldAuthors").show();
+			$("#fieldInstitution").show();
+			$("#fieldDate").show();
+			$("#dateAcademic").show();
+		}
+		else if($("[name='newSource.type'] option:selected").val() == "BOOK" ||
+				$("[name='newSource.type'] option:selected").val() == "HANDBOOK") {
+			$("#fieldURL").hide();
+			$("#fieldInstitution").hide();
+			$("#dateAcademic").hide();
+			$("#dateInternet").hide();
+			$("#mandatoryInfo").hide();
+			$("#fieldTitle").show();
+			$("#fieldAuthors").show();
+			$("#fieldPublisher").show();
+			$("#fieldDate").show();
+			$("#dateBook").show();
+		}
+		else if($("[name='newSource.type'] option:selected").val() == "INTERNET") {
+			$("#fieldAuthors").hide();
+			$("#fieldPublisher").hide();
+			$("#fieldInstitution").hide();
+			$("#dateAcademic").hide();
+			$("#dateBook").hide();
+			$("#mandatoryInfo").hide();
+			$("#fieldTitle").show();
+			$("#fieldURL").show();
+			$("#fieldDate").show();
+			$("#dateInternet").show();
+		}
+		else {
+			$("#fieldTitle").hide();
+			$("#fieldAuthors").hide();
+			$("#fieldURL").hide();
+			$("#fieldPublisher").hide();
+			$("#fieldInstitution").hide();
+			$("#dateAcademic").hide();
+			$("#dateBook").hide();
+			$("#dateInternet").hide();
+			$("#fieldDate").hide();
+			$("#mandatoryInfo").show();
+		}
+	}
+	
+	createForm();
+	
 	var form = $("#custom_form");
 	var title = $("#title");
 	var url = $("#url");
