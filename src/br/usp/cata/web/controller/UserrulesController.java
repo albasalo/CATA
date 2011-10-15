@@ -41,14 +41,6 @@ public class UserrulesController {
 	}
 	
 	@Get
-	@Path("/userrules/viewsource/{source.sourceID}")
-	public void viewsource(Source source) {
-		// TODO arrumar para quando não existe source com o id
-		
-		result.include("source", sourceService.findByID(source.getSourceID()));
-	}
-	
-	@Get
 	@Path("/userrules/newrule")
 	public void newrule() {
 		result.include("ruleCategories", RuleCategories.values());
@@ -149,13 +141,13 @@ public class UserrulesController {
 			case ACADEMIC_PUBLISHING:
 				if(source.getTitle().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio", "Título"));
+		    				"O campo não pode ser vazio.", "Título"));
 				if(source.getAuthors().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio", "Autor(es)"));
+		    				"O campo não pode ser vazio.", "Autor(es)"));
 				
 				if((!source.getPublisher().equals("")) || (!source.getUrl().equals("")))
-					validator.add(new ValidationMessage("Erro inesperado", "Erro"));
+					validator.add(new ValidationMessage("Erro inesperado.", "Erro"));
 				else {
 					source.setPublisher(null);
 					source.setUrl(null);
@@ -174,10 +166,10 @@ public class UserrulesController {
 			case HANDBOOK:
 				if(source.getTitle().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio", "Título"));
+		    				"O campo não pode ser vazio.", "Título"));
 				if(source.getAuthors().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio", "Autor(es)"));
+		    				"O campo não pode ser vazio.", "Autor(es)"));
 				
 				if((!source.getInstitution().equals("")) || (!source.getUrl().equals("")))
 					validator.add(new ValidationMessage("Erro inesperado", "Erro"));
@@ -198,17 +190,17 @@ public class UserrulesController {
 			case INTERNET:
 				if(source.getTitle().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio", "Título"));
+		    				"O campo não pode ser vazio.", "Título"));
 				if(source.getUrl().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio", "URL"));	
+		    				"O campo não pode ser vazio.", "URL"));	
 				if(source.getDate().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio", "Data de acesso"));
+		    				"O campo não pode ser vazio.", "Data de acesso"));
 				
 				if(!(source.getAuthors().equals("")) || !(source.getInstitution().equals("")) ||
 						!(source.getPublisher().equals("")))
-					validator.add(new ValidationMessage("Erro inesperado", "Erro"));
+					validator.add(new ValidationMessage("Erro inesperado.", "Erro"));
 				else {
 					source.setAuthors(null);
 					source.setInstitution(null);
@@ -223,12 +215,12 @@ public class UserrulesController {
 			case OTHER:
 				if(source.getMoreInformation().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio", "Mais informações"));
+		    				"O campo não pode ser vazio.", "Mais informações"));
 				
 				if((!source.getAuthors().equals("")) || (!source.getInstitution().equals("")) ||
 						(!source.getPublisher().equals("")) || (!source.getTitle().equals("")) ||
 						(!source.getUrl().equals("")) || (!source.getDate().equals("")))
-					validator.add(new ValidationMessage("Erro inesperado", "Erro"));
+					validator.add(new ValidationMessage("Erro inesperado.", "Erro"));
 				else {
 					source.setAuthors(null);
 					source.setInstitution(null);

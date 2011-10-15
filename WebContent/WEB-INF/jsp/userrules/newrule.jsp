@@ -9,167 +9,14 @@
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/modal-table.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/table.css'/>" rel="stylesheet" type="text/css" />
+		
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.dataTables.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				var lastID = 0;
-				var newID = 0;
-				
-				function newSourceIDForm() {
-					if(lastID > 0) {
-						var lastRowID = "#row" + lastID;
-						$(lastRowID).removeClass("selected");
-						
-						var rowID = "#row" + lastID;
-						var lastSelectedSource = "#selectedSourceID" + lastID;
-						$("#inputSourceID").remove(lastSelectedSource);
-					}
-					lastID = newID;
-					var newRowID = "#row" + newID;
-					$(newRowID).addClass("selected");					
-					
-					$("#inputSourceID").append('<input id="selectedSourceID' + newID + '" name="source.sourceID" value="' + newID + '" style="display:none" />');
-				};
-				
-				$('#academics').dataTable({
-					"aaSorting": [[ 0, "asc" ]]
-				});
-				$('#academics tbody tr').live('click', function() {
-					var nTds = $('td', this);
-					newID = $(nTds[0]).text();
-					newSourceIDForm();
-				});
-				
-				$('#books').dataTable({
-					"aaSorting": [[ 0, "asc" ]]
-				});
-				$('#books tbody tr').live('click', function() {
-					var nTds = $('td', this);
-					newID = $(nTds[0]).text();
-					newSourceIDForm();
-				});				
-				
-				$('#handbooks').dataTable({
-					"aaSorting": [[ 0, "asc" ]]
-				});
-				$('#handbooks tbody tr').live('click', function() {
-					var nTds = $('td', this);
-					newID = $(nTds[0]).text();
-					newSourceIDForm();
-				});	
-				
-				$('#urls').dataTable({
-					"aaSorting": [[ 0, "asc" ]]
-				});
-				$('#urls tbody tr').live('click', function() {
-					var nTds = $('td', this);
-					newID = $(nTds[0]).text();
-					newSourceIDForm();
-				});	
-				
-				$('#others').dataTable({
-					"aaSorting": [[ 0, "asc" ]]
-				});
-				$('#others tbody tr').live('click', function() {
-					var nTds = $('td', this);
-					newID = $(nTds[0]).text();
-					newSourceIDForm();
-				});	
-			});
-		</script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				var counterLemma = -1;
-				var counter = -1;
-				
-				$("#plus-lemma").click(function() {
-					if(counterLemma < 200) {
-						counterLemma = counterLemma + 1;
-						$("#lemmasDiv").append('<span id="lemma' + counterLemma + '">' +
-								'<br /><label class="label">Padrão incorreto</label><br />' +
-								'<input class="input_border width450" type="text" maxlength=200 name="lemmas[' + counterLemma + '].pattern"/><br/>' +
-								'<label class="label">Sugestão</label><br />' +
-								'<input class="input_border width450" type="text" maxlength=200 name="lemmas[' + counterLemma + '].suggestion"/><br/>' +
-								'</span>');
-					}
-				});
-				
-				$('#minus-lemma').click(function() {
-					if(counterLemma != -1) {
-						var lemma = "#lemma" + counterLemma;
-						$(lemma).remove();
-						counterLemma = counterLemma - 1;
-					}
-				});
-				
-				$("#plus-exact").click(function() {
-					if(counter < 200) {
-						counter = counter + 1;
-						$("#exactMatchingsDiv").append('<span id="exactMatching' + counter + '">' +
-								'<br /><label class="label">Padrão incorreto</label><br />' +
-								'<input class="input_border width450" type="text" maxlength=200 name="exactMatchings[' + counter + '].pattern"/><br/>' +
-								'<label class="label">Sugestão</label><br />' +
-								'<input class="input_border width450" type="text" maxlength=200 name="exactMatchings[' + counter + '].suggestion"/><br/>' +
-								'</span>');
-					}
-				});
-				
-				$('#minus-exact').click(function() {
-					if(counter != -1) {
-						var exactMatching = "#exactMatching" + counter;
-						$(exactMatching).remove();
-						counter = counter - 1;
-					}
-				});
-				
-				$("[name='source.type']").change(showTable);
-				
-				function showTable() {
-					if($("[name='source.type'] option:selected").val() == "ACADEMIC_PUBLISHING") {
-						$("#booksDiv").hide();
-						$("#handbooksDiv").hide();
-						$("#urlsDiv").hide();
-						$("#othersDiv").hide();
-						$("#academicsDiv").show();
-					}
-					else if($("[name='source.type'] option:selected").val() == "BOOK") {
-						$("#academicsDiv").hide();
-						$("#handbooksDiv").hide();
-						$("#urlsDiv").hide();
-						$("#othersDiv").hide();
-						$("#booksDiv").show();
-					}
-					else if($("[name='source.type'] option:selected").val() == "HANDBOOK") {
-						$("#booksDiv").hide();
-						$("#urlsDiv").hide();
-						$("#othersDiv").hide();
-						$("#academicsDiv").hide();
-						$("#handbooksDiv").show();
-					}
-					else if($("[name='source.type'] option:selected").val() == "INTERNET") {
-						$("#booksDiv").hide();
-						$("#handbooksDiv").hide();
-						$("#othersDiv").hide();
-						$("#academicsDiv").hide();
-						$("#urlsDiv").show();
-					}
-					else {
-						$("#booksDiv").hide();
-						$("#handbooksDiv").hide();
-						$("#urlsDiv").hide();
-						$("#academicsDiv").hide();
-						$("#othersDiv").show();
-					}
-				};
-				
-				showTable();
-			});
-		</script>
-		
+		<script type="text/javascript" src="<c:url value='/js/newrule-form.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				if($('#modal').length > 0) {
@@ -197,13 +44,12 @@
 				});
 				return false;
 			});
-		</script>
-		
+		</script>		
 		<script type="text/javascript">
 			function showModal(ruleID) {
 				var modal = "#source" + ruleID;
 				if($(modal).length > 0) {
-				    $(modal).fadeIn().css({ 'width': Number(450)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+				    $(modal).fadeIn().css({ 'width': Number(550)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
 				
 				    var popMargTop = ($(modal).height() + 80) / 2;
 				    var popMargLeft = ($(modal).width() + 80) / 2;
@@ -228,7 +74,7 @@
 			});
 		</script>
 		
-		<title>Cadastrar nova Regra de estilo</title>
+		<title>Cadastrar nova Regra de Estilo</title>
 	</head>
 	
 	<body>
@@ -240,7 +86,7 @@
 			<div id="content">
 				<form id="custom_form" class="width800" action="<c:url value='/userrules/newrule'/>" method="post">
 				<fieldset>
-					<legend>Cadastrar nova Regra de estilo</legend>
+					<legend>Cadastrar nova Regra de Estilo</legend>
 					
 					<div class="single_form_element">
 						<label class="label" for="name">Categoria*</label>
@@ -332,7 +178,7 @@
 									<tr>
 										<th>ID</th>
 										<th>Título</th>
-										<th>Autor</th>
+										<th>Autor(es)</th>
 										<th>Mais informações</th>
 									</tr>
 								</thead>
@@ -346,7 +192,40 @@
 												<img onclick="showModal(${academic.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${academic.sourceID}" class="popup_block" style="display:none">
 													<div style="text-align: left">
-														TODO: Colocar as informações completas da referência bibliográfica.
+														<b>Mais informações sobre a referência selecionada</b><br />
+														<br />
+														<table class="modal-table">
+															<tr>
+																<td><b>Título:</b></td>
+																<td><c:out value="${academic.title}" /></td>
+															</tr>
+															<tr>
+																<td><b>Autor(es):</b></td>
+																<td><c:out value="${academic.authors}" /></td>
+															</tr>
+															<c:if test = "${academic.institution != null}">
+																<tr>
+																	<td><b>Instituição:</b></td>
+																	<td><c:out value="${academic.institution}" /></td>
+																</tr>
+															</c:if>
+															<c:if test = "${academic.date != null}">
+															<tr>
+																<td><b>Data:</b></td>
+																<td><c:out value="${academic.date}" /></td>
+															</tr>
+															</c:if>
+															<c:if test = "${academic.moreInformation != null}">
+															<tr>
+																<td><b>Descrição:</b> </td>
+																<td><c:out value="${academic.moreInformation}" /></td>
+															</tr>
+															</c:if>
+															<tr>
+																<td><b>Usuário:</b> </td>
+																<td><i><c:out value="${academic.user.name}" /></i> cadastrou esta referência</td>
+															</tr>
+														</table>
 													</div>	
 												</div>
 											</td>
@@ -365,7 +244,7 @@
 									<tr>
 										<th>ID</th>
 										<th>Título</th>
-										<th>Autor</th>
+										<th>Autor(es)</th>
 										<th>Mais informações</th>
 									</tr>
 								</thead>
@@ -379,7 +258,40 @@
 												<img onclick="showModal(${book.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${book.sourceID}" class="popup_block" style="display:none">
 													<div style="text-align: left">
-														TODO: Colocar as informações completas da referência bibliográfica.
+														<b>Mais informações sobre a referência selecionada</b><br />
+														<br />
+														<table class="modal-table">
+															<tr>
+																<td><b>Título:</b></td>
+																<td><c:out value="${book.title}" /></td>
+															</tr>
+															<tr>
+																<td><b>Autor(es):</b></td>
+																<td><c:out value="${book.authors}" /></td>
+															</tr>
+															<c:if test = "${book.publisher != null}">
+																<tr>
+																	<td><b>Editora:</b></td>
+																	<td><c:out value="${book.publisher}" /></td>
+																</tr>
+															</c:if>
+															<c:if test = "${book.date != null}">
+															<tr>
+																<td><b>Data:</b></td>
+																<td><c:out value="${book.date}" /></td>
+															</tr>
+															</c:if>
+															<c:if test = "${book.moreInformation != null}">
+															<tr>
+																<td><b>Descrição:</b> </td>
+																<td><c:out value="${book.moreInformation}" /></td>
+															</tr>
+															</c:if>
+															<tr>
+																<td><b>Usuário:</b> </td>
+																<td><i><c:out value="${book.user.name}" /></i> cadastrou esta referência</td>
+															</tr>
+														</table>
 													</div>	
 												</div>
 											</td>
@@ -398,7 +310,7 @@
 									<tr>
 										<th>ID</th>
 										<th>Título</th>
-										<th>Autor</th>
+										<th>Autor(es)</th>
 										<th>Mais informações</th>
 									</tr>
 								</thead>
@@ -412,7 +324,40 @@
 												<img onclick="showModal(${handbook.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${handbook.sourceID}" class="popup_block" style="display:none">
 													<div style="text-align: left">
-														TODO: Colocar as informações completas da referência bibliográfica.
+														<b>Mais informações sobre a referência selecionada</b><br />
+														<br />
+														<table class="modal-table">
+															<tr>
+																<td><b>Título:</b></td>
+																<td><c:out value="${handbook.title}" /></td>
+															</tr>
+															<tr>
+																<td><b>Autor(es):</b></td>
+																<td><c:out value="${handbook.authors}" /></td>
+															</tr>
+															<c:if test = "${handbook.publisher != null}">
+																<tr>
+																	<td><b>Editora:</b></td>
+																	<td><c:out value="${handbook.publisher}" /></td>
+																</tr>
+															</c:if>
+															<c:if test = "${handbook.date != null}">
+															<tr>
+																<td><b>Data:</b></td>
+																<td><c:out value="${handbook.date}" /></td>
+															</tr>
+															</c:if>
+															<c:if test = "${handbook.moreInformation != null}">
+															<tr>
+																<td><b>Descrição:</b> </td>
+																<td><c:out value="${handbook.moreInformation}" /></td>
+															</tr>
+															</c:if>
+															<tr>
+																<td><b>Usuário:</b> </td>
+																<td><i><c:out value="${handbook.user.name}" /></i> cadastrou esta referência</td>
+															</tr>
+														</table>
 													</div>	
 												</div>
 											</td>
@@ -438,12 +383,33 @@
 									<c:forEach var="url" items="${urls}">
 										<tr id="row${url.sourceID}">
 											<td><c:out value="${url.sourceID}"/></td>
-											<td><a href="${url.url}" target="_blank"><c:out value="${url.title}"/></a></td>
+											<td><a href="<c:out value="${url.url}" />" target="_blank"><c:out value="${url.title}"/></a></td>
 											<td class="center">
 												<img onclick="showModal(${url.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${url.sourceID}" class="popup_block" style="display:none">
 													<div style="text-align: left">
-														TODO: Colocar as informações completas da referência bibliográfica.
+														<b>Mais informações sobre a referência selecionada</b><br />
+														<br />
+														<table class="modal-table">
+															<tr>
+																<td><b>URL:</b></td>
+																<td><a href="<c:out value="${url.url}" />" target="_blank"><c:out value="${url.title}"/></a></td>
+															</tr>
+															<tr>
+																<td><b>Data:</b></td>
+																<td><c:out value="${url.date}" /></td>
+															</tr>
+															<c:if test = "${url.moreInformation != null}">
+															<tr>
+																<td><b>Descrição:</b> </td>
+																<td><c:out value="${url.moreInformation}" /></td>
+															</tr>
+															</c:if>
+															<tr>
+																<td><b>Usuário:</b> </td>
+																<td><i><c:out value="${url.user.name}" /></i> cadastrou esta referência</td>
+															</tr>
+														</table>
 													</div>	
 												</div>
 											</td>
@@ -474,7 +440,14 @@
 												<img onclick="showModal(${other.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${other.sourceID}" class="popup_block" style="display:none">
 													<div style="text-align: left">
-														TODO: Colocar as informações completas da referência bibliográfica.
+														<b>Mais informações sobre a referência selecionada</b><br />
+														<br />
+														<table class="modal-table">
+															<tr>
+																<td><b>Descrição:</b> </td>
+																<td><c:out value="${other.moreInformation}" /></td>
+															</tr>
+														</table>
 													</div>	
 												</div>
 											</td>

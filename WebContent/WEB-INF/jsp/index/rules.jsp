@@ -11,6 +11,7 @@
 		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />	
 		<link href="<c:url value='/css/table.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
+		
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.dataTables.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='js/jquery.simplemodal.js'/>"></script>
@@ -56,8 +57,7 @@
 	</head>
 	
 	<body>
-		<%@ include file="../shared/header.jsp"%>
-		
+		<%@ include file="../shared/header.jsp"%>		
 		<%@ include file="../shared/user-menu.jsp"%>
 		
 		<div id="page">

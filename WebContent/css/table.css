@@ -90,6 +90,7 @@ table.display tfoot th {
 }
 
 table.display tr.heading2 td {
+	vertical-align: top;
 	border-bottom: 1px solid #aaa;
 }
 

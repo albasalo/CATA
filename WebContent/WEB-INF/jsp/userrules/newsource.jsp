@@ -47,8 +47,7 @@
 	
 	<body>
 		<%@ include file="../shared/header.jsp"%>
-		<%@ include file="../shared/messages.jsp"%>
-		
+		<%@ include file="../shared/messages.jsp"%>		
 		<%@ include file="../shared/user-menu.jsp"%>
 		
 		<div id="page">
@@ -119,7 +118,7 @@
 					</div>			
 					
 					<div id="fieldInfo" class="single_form_element">
-						<label class="label" for="info">Mais informações<span id="mandatoryInfo" style="display: none">*</span></label>
+						<label class="label" for="info">Descrição (mais informações)<span id="mandatoryInfo" style="display: none">*</span></label>
 						<br />
 						<textarea id="info" style="width: 600px; height: 100px !important" class="input_border" maxlength=400
 							name="newSource.moreInformation"></textarea>
