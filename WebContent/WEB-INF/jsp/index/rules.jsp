@@ -15,6 +15,7 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.dataTables.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='js/jquery.simplemodal.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='js/modal-table.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#rules-menu").addClass('selected');
@@ -28,7 +29,7 @@
 			function showModal(ruleID) {
 				var modal = "#rule" + ruleID;
 				if($(modal).length > 0) {
-				    $(modal).fadeIn().css({ 'width': Number(450)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+				    $(modal).fadeIn().css({ 'width': Number(550)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
 				
 				    var popMargTop = ($(modal).height() + 80) / 2;
 				    var popMargLeft = ($(modal).width() + 80) / 2;
@@ -94,23 +95,98 @@
 								<td class="center"><c:out value="${rule.type.typeDescription}"/></td>
 								<td class="center"><c:out value="${rule.category.categoryDescription}"/></td>
 								<c:choose>
-									<c:when test="${rule.lemmaElement != null}">
-										<td class="center"><c:out value="${rule.lemmaElement.pattern}"/></td>
-										<td class="center"><c:out value="${rule.lemmaElement.suggestion}"/></td>
+									<c:when test="${!empty rule.lemmas}">
+										<c:forEach items="${rule.lemmas}" var="lemma">
+											<c:if test="${lemma.pair.defaultPair == true}">
+												<td class="center"><c:out value="${lemma.pair.pattern}"/></td>
+												<td class="center"><c:out value="${lemma.pair.suggestion}"/></td>
+											</c:if>
+										</c:forEach>
 									</c:when>
 									<c:otherwise>
-										<td class="center"><c:out value="${rule.exactMatchingElement.pattern}"/></td>
-										<td class="center"><c:out value="${rule.exactMatchingElement.suggestion}"/></td>
+										<c:forEach items="${rule.exactMatchings}" var="exactMatching">
+											<c:if test="${exactMatching.pair.defaultPair == true}">
+												<td class="center"><c:out value="${exactMatching.pair.pattern}"/></td>
+												<td class="center"><c:out value="${exactMatching.pair.suggestion}"/></td>
+											</c:if>
+										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 								<td class="center"><c:out value="${rule.user.name}"/></td>
 								<td class="center">
 									<img onclick="showModal(${rule.ruleID});" src="<c:url value='/css/images/plus-icon.png'/>">
 									<div id="rule${rule.ruleID}" class="popup_block" style="display:none">
-										<div style="text-align: left">
-											TODO: Colocar as informações completas da regra, todos os termos capturados por ela
-											e sua referência bibliográfica.
-										</div>	
+										<div class="popup_content" style="text-align: left">
+											<b>Mais informações sobre a Regra de Estilo</b><br />
+											<br />
+											<b><c:out value="${rule.category.categoryDescription}" />:</b> <c:out value="${rule.type.typeDescription}" />
+											<br />
+											<c:if test = "${!empty rule.lemmas}">
+											<b>Lemas:</b><br />
+											<div class="indentation">
+												<table class="modal-table">
+													<tr><td><b>Padrão Incorreto</b></td><td><b>Sugestão</b></td></tr>
+													<c:forEach items="${rule.lemmas}" var="lemma">
+														<tr>
+															<td><c:out value="${lemma.pair.pattern}" /></td>
+															<td><c:out value="${lemma.pair.suggestion}" /></td>
+														</tr>
+													</c:forEach>
+												</table>
+											</div>
+											</c:if>
+											<c:if test = "${!empty rule.exactMatchings}">
+											<b>Expressões exatas:</b><br />
+											<div class="indentation">
+												<table class="modal-table">
+													<tr><td><b>Padrão Incorreto</b></td><td><b>Sugestão</b></td></tr>
+													<c:forEach items="${rule.exactMatchings}" var="exactMatching">
+														<tr>
+															<td><c:out value="${exactMatching.pair.pattern}" /></td>
+															<td><c:out value="${exactMatching.pair.suggestion}" /></td>
+														</tr>
+													</c:forEach>
+												</table>
+											</div>
+											</c:if>
+											<c:if test = "${rule.explanation != null}">
+												<b>Explicação:</b><br />
+												<div class="indentation">
+													<table>
+														<tr><td><c:out value="${rule.explanation}"/></td></tr>
+													</table>
+												</div>
+											</c:if>
+											<b>Referência Bibliográfica:</b><br />
+											<div class="indentation">
+												<table>
+												<c:if test = "${rule.source.type == 'ACADEMIC_PUBLISHING'}">
+													<tr><td><c:out value="${rule.source.authors}"/>, <i><c:out value="${rule.source.title}"/></i><br />
+													<c:out value="${rule.source.institution}"/>, <c:out value="${rule.source.date}"/><br />
+													<c:out value="${rule.source.moreInformation}"/></td></tr>
+												</c:if>
+												<c:if test = "${rule.source.type == 'BOOK'}">
+													<tr><c:out value="${rule.source.authors}"/>, <i><c:out value="${rule.source.title}"/></i></tr>
+													<tr><c:out value="${rule.source.publisher}"/>, <c:out value="${rule.source.date}"/></tr>
+													<tr><c:out value="${rule.source.moreInformation}"/></tr>
+												</c:if>
+												<c:if test = "${rule.source.type == 'HANDBOOK'}">
+													<tr><c:out value="${rule.source.authors}"/>, <i><c:out value="${rule.source.title}"/></i></tr>
+													<tr><c:out value="${rule.source.publisher}"/>, <c:out value="${rule.source.date}"/></tr>
+													<tr><c:out value="${rule.source.moreInformation}"/></tr>
+												</c:if>
+												<c:if test = "${rule.source.type == 'INTERNET'}">
+													<tr><td><a href="<c:out value="${rule.source.url}" />" target="_blank"><c:out value="${rule.source.title}"/></a></td></tr>
+													<tr><td><c:out value="${rule.source.moreInformation}"/></td></tr>
+												</c:if>
+												<c:if test = "${rule.source.type == 'OTHER'}">
+													<tr><c:out value="${rule.source.moreInformation}"/></tr>
+												</c:if>
+												</table>
+											</div>
+											<br />											
+											Esta regra foi cadastrada por <i><c:out value="${rule.user.name}"/></i>
+										</div>
 									</div>
 								</td>								
 							</tr>

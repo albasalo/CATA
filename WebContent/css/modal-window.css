@@ -40,6 +40,12 @@ img.btn_close {
 	margin: 5px 0;
 }
 
+.popup_content {
+	font-size: 0.9em;
+	max-height: 450px;
+	overflow-x: auto;
+}
+
 /*--Making IE6 Understand Fixed Positioning--*/
 *html #fade {
 	position: absolute;

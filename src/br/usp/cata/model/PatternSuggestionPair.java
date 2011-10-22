@@ -9,13 +9,13 @@ import javax.persistence.Id;
 
 
 @Entity
-public class PatternSuggestionElement implements Serializable {
+public class PatternSuggestionPair implements Serializable {
 	
 	private static final long serialVersionUID = 1937378649265L;
 
 	@Id
 	@GeneratedValue
-	private Long patternSuggestionElementID;
+	private Long patternSuggestionPairID;
 	
 	@Column(length=1000)
 	private byte[] tokenizedPatternBytes;
@@ -26,15 +26,18 @@ public class PatternSuggestionElement implements Serializable {
 	@Column(length=200)
 	private String suggestion;
 	
-	public PatternSuggestionElement() {
+	@Column
+	private boolean defaultPair;
+	
+	public PatternSuggestionPair() {
 	}
 
-	public Long getPatternSuggestionElementID() {
-		return patternSuggestionElementID;
+	public Long getPatternSuggestionPairID() {
+		return patternSuggestionPairID;
 	}
 
-	public void setPatternSuggestionElementID(Long patternSuggestionElementID) {
-		this.patternSuggestionElementID = patternSuggestionElementID;
+	public void setPatternSuggestionPairID(Long patternSuggestionPairID) {
+		this.patternSuggestionPairID = patternSuggestionPairID;
 	}
 
 	public byte[] getTokenizedPatternBytes() {
@@ -59,6 +62,14 @@ public class PatternSuggestionElement implements Serializable {
 
 	public void setSuggestion(String suggestion) {
 		this.suggestion = suggestion;
+	}
+
+	public boolean isDefaultPair() {
+		return defaultPair;
+	}
+
+	public void setDefaultPair(boolean defaultPair) {
+		this.defaultPair = defaultPair;
 	}
 	
 }

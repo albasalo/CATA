@@ -71,7 +71,8 @@ public abstract class AbstractDAO<ID extends Serializable, T> implements BasicDA
         for(Criterion c : criterion)
             crit.add(c);       
         if(order != null)
-            crit.addOrder(order);
+            crit.addOrder(order);       
+        crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 
         return (List<T>)crit.list();
     }

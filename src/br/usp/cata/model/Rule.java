@@ -6,11 +6,12 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -36,25 +37,13 @@ public class Rule implements Serializable {
     @Column
 	private RuleCategories category;
     
-    @ManyToOne
-    @JoinColumn(name="lemmaElementID", referencedColumnName="patternSuggestionElementID")
+    @OneToMany(mappedBy="rule", fetch=FetchType.EAGER)
     @Cascade({CascadeType.ALL})
-	private PatternSuggestionElement lemmaElement;
-    
-    @ManyToMany
-    @JoinColumn(name="lemmaElementsID", referencedColumnName="patternSuggestionElementID")
-    @Cascade({CascadeType.ALL})
-    private Set<PatternSuggestionElement> lemmaElements;
-    
-    @ManyToOne
-    @JoinColumn(name="exactMacthingElementID", referencedColumnName="patternSuggestionElementID")
-    @Cascade({CascadeType.ALL})
-	private PatternSuggestionElement exactMatchingElement;
+    private Set<Lemma> lemmas;
 
-    @ManyToMany
-    @JoinColumn(name="exactMatchingElementsID", referencedColumnName="patternSuggestionElementID")
+    @OneToMany(mappedBy="rule", fetch=FetchType.EAGER)
     @Cascade({CascadeType.ALL})
-	private Set<PatternSuggestionElement> exactMatchingElements;
+	private Set<ExactMatching> exactMatchings;
     
     @Column(length=400)
 	private String explanation;
@@ -105,38 +94,21 @@ public class Rule implements Serializable {
 	public void setCategory(RuleCategories category) {
 		this.category = category;
 	}
-
-	public PatternSuggestionElement getLemmaElement() {
-		return lemmaElement;
-	}
-
-	public void setLemmaElement(PatternSuggestionElement lemmaElement) {
-		this.lemmaElement = lemmaElement;
-	}
 	
-	public Set<PatternSuggestionElement> getLemmaElements() {
-		return lemmaElements;
-	}
-	
-	public void setLemmaElements(Set<PatternSuggestionElement> lemmaElements) {
-		this.lemmaElements = lemmaElements;
-	}
-	
-	public PatternSuggestionElement getExactMatchingElement() {
-		return exactMatchingElement;
-	}
-	
-	public void setExactMatchingElement(PatternSuggestionElement exactMatchingElement) {
-		this.exactMatchingElement = exactMatchingElement;
+	public Set<Lemma> getLemmas() {
+		return lemmas;
 	}
 
-	public Set<PatternSuggestionElement> getExactMatchingElements() {
-		return exactMatchingElements;
+	public void setLemmas(Set<Lemma> lemmas) {
+		this.lemmas = lemmas;
 	}
 
-	public void setExactMatchingElements(
-			Set<PatternSuggestionElement> exactMatchingElements) {
-		this.exactMatchingElements = exactMatchingElements;
+	public Set<ExactMatching> getExactMatchings() {
+		return exactMatchings;
+	}
+
+	public void setExactMatchings(Set<ExactMatching> exactMatchings) {
+		this.exactMatchings = exactMatchings;
 	}
 
 	public String getExplanation() {

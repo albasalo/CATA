@@ -1,10 +1,10 @@
 $(document).ready(function() {
-				var lastID = 0;
-				var newID = 0;
+	var lastID = 0;
+	var newID = 0;
 				
-				function newSourceIDForm() {
-					if(lastID > 0) {
-						var lastRowID = "#row" + lastID;
+	function newSourceIDForm() {
+		if(lastID > 0) {
+			var lastRowID = "#row" + lastID;
 			$(lastRowID).removeClass("selected");
 			
 			var rowID = "#row" + lastID;
@@ -70,11 +70,11 @@ $(document).ready(function() {
 		if(counterLemma < 200) {
 			counterLemma = counterLemma + 1;
 			$("#lemmasDiv").append('<span id="lemma' + counterLemma + '">' +
-					'<br /><label class="label">Padrão incorreto</label><br />' +
+					'<label class="label">Padrão incorreto</label><br />' +
 					'<input class="input_border width450" type="text" maxlength=200 name="lemmas[' + counterLemma + '].pattern"/><br/>' +
 					'<label class="label">Sugestão</label><br />' +
 					'<input class="input_border width450" type="text" maxlength=200 name="lemmas[' + counterLemma + '].suggestion"/><br/>' +
-					'</span>');
+					'<br /></span>');
 		}
 	});
 	
@@ -90,11 +90,11 @@ $(document).ready(function() {
 		if(counter < 200) {
 			counter = counter + 1;
 			$("#exactMatchingsDiv").append('<span id="exactMatching' + counter + '">' +
-					'<br /><label class="label">Padrão incorreto</label><br />' +
+					'<label class="label">Padrão incorreto</label><br />' +
 					'<input class="input_border width450" type="text" maxlength=200 name="exactMatchings[' + counter + '].pattern"/><br/>' +
 					'<label class="label">Sugestão</label><br />' +
 					'<input class="input_border width450" type="text" maxlength=200 name="exactMatchings[' + counter + '].suggestion"/><br/>' +
-					'</span>');
+					'<br /></span>');
 		}
 	});
 	

@@ -108,17 +108,9 @@
 						</select>
 					</div>
 					<br />
-					<b>Lemas:</b><br />
+					<b>Lemas:</b>
 					<div class="single_form_element">
 						<div id="lemmasDiv" class="indent">
-							<label class="label" for="lemmaPattern">Padrão incorreto</label>
-							<br />
-							<input id="lemmaPattern" class="input_border width450" type="text" maxlength=200 name="newRule.lemmaElement.pattern" />
-							<br />
-							<label class="label" for="lemmaSuggestion">Sugestão</label>
-							<br />
-							<input id="lemmaSuggestion" class="input_border width450" type="text" maxlength=200 name="newRule.lemmaElement.suggestion" />
-							<br />
 						</div>
 					</div>
 					<div class="single_form_element">
@@ -131,14 +123,6 @@
 					<b>Expressões exatas:</b><br />
 					<div class="single_form_element">
 						<div id="exactMatchingsDiv" class="indent">
-							<label class="label" for="exactPattern">Padrão incorreto</label>
-							<br />
-							<input id="exactPattern" class="input_border width450" type="text" maxlength=200 name="newRule.exactMatchingElement.pattern"/>
-							<br />
-							<label class="label" for="exactSuggestion">Sugestão</label>
-							<br />
-							<input id="exactSuggestion" class="input_border width450" type="text" maxlength=200 name="newRule.exactMatchingElement.suggestion"/>
-							<br />
 						</div>
 					</div>
 					<div class="single_form_element">
@@ -191,7 +175,7 @@
 											<td class="center">
 												<img onclick="showModal(${academic.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${academic.sourceID}" class="popup_block" style="display:none">
-													<div style="text-align: left">
+													<div class="popup_content" style="text-align: left">
 														<b>Mais informações sobre a referência selecionada</b><br />
 														<br />
 														<table class="modal-table">
@@ -257,7 +241,7 @@
 											<td class="center">
 												<img onclick="showModal(${book.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${book.sourceID}" class="popup_block" style="display:none">
-													<div style="text-align: left">
+													<div class="popup_content" style="text-align: left">
 														<b>Mais informações sobre a referência selecionada</b><br />
 														<br />
 														<table class="modal-table">
@@ -323,7 +307,7 @@
 											<td class="center">
 												<img onclick="showModal(${handbook.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${handbook.sourceID}" class="popup_block" style="display:none">
-													<div style="text-align: left">
+													<div class="popup_content" style="text-align: left">
 														<b>Mais informações sobre a referência selecionada</b><br />
 														<br />
 														<table class="modal-table">
@@ -387,7 +371,7 @@
 											<td class="center">
 												<img onclick="showModal(${url.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${url.sourceID}" class="popup_block" style="display:none">
-													<div style="text-align: left">
+													<div class="popup_content" style="text-align: left">
 														<b>Mais informações sobre a referência selecionada</b><br />
 														<br />
 														<table class="modal-table">
@@ -439,7 +423,7 @@
 											<td class="center">
 												<img onclick="showModal(${other.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${other.sourceID}" class="popup_block" style="display:none">
-													<div style="text-align: left">
+													<div class="popup_content" style="text-align: left">
 														<b>Mais informações sobre a referência selecionada</b><br />
 														<br />
 														<table class="modal-table">

@@ -11,7 +11,9 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
-import br.usp.cata.model.PatternSuggestionElement;
+import br.usp.cata.model.ExactMatching;
+import br.usp.cata.model.Lemma;
+import br.usp.cata.model.PatternSuggestionPair;
 import br.usp.cata.model.Rule;
 import br.usp.cata.model.RuleCategories;
 import br.usp.cata.model.Source;
@@ -53,43 +55,46 @@ public class UserrulesController {
 		result.include("others", sourceService.findByType(TypesOfSources.OTHER));
 	}
 	
-	private void validateRule(Rule newRule, List<PatternSuggestionElement> lemmas,
-			List<PatternSuggestionElement> exactMatchings, Source source) {
+	private void validateRule(Rule newRule, List<PatternSuggestionPair> lemmas,
+			List<PatternSuggestionPair> exactMatchings, Source source) {
 		
-		PatternSuggestionElement lemma = newRule.getLemmaElement();
-		PatternSuggestionElement exactMatching = newRule.getExactMatchingElement();
-		
-		if(lemma.getPattern().equals("") && lemma.getSuggestion().equals("") &&
-				exactMatching.getPattern().equals("") && exactMatching.getSuggestion().equals(""))
+		if(lemmas == null && exactMatchings == null) {
 			validator.add(new ValidationMessage(
-					"Você deve cadastrar pelo menos um Lema ou uma Expressão exata.",
-					"Lema ou Expressão exata"));
+    				"Você deve cadastrar pelo menos um Lema ou Expressão Exata.", "Lema ou Expressão Exata"));
+		}
 		else {
-			if(lemma.getPattern().equals("") != lemma.getSuggestion().equals(""))
-				validator.add(new ValidationMessage(
-						"Você deve cadastrar os dois campos - padrão incorreto e sugestão.",
-						"Lema"));
-			if(exactMatching.getPattern().equals("") != exactMatching.getSuggestion().equals(""))
-				validator.add(new ValidationMessage(
-						"Você deve cadastrar os dois campos - padrão incorreto e sugestão.",
-						"Expressão exata"));
+			if(lemmas != null) {
+				for(PatternSuggestionPair pair : lemmas) {
+					if(pair.getPattern().equals("") ||
+							pair.getSuggestion().equals("")) {
+						validator.add(new ValidationMessage(
+			    				"Você deve cadastrar um padrão e sugestões para cada Lema.", "Lema"));
+						break;
+					}
+				}
+			}
+			if(exactMatchings != null) {
+				for(PatternSuggestionPair pair : exactMatchings) {
+					if(pair.getPattern().equals("") ||
+							pair.getSuggestion().equals("")) {
+						validator.add(new ValidationMessage(
+			    				"Você deve cadastrar um padrão e sugestões para cada Expressão Exata.", "Expressão Exata"));
+						break;
+					}
+				}
+			}
 		}
 		
 		if(source.getSourceID() == null)
 			validator.add(new ValidationMessage(
     				"Você deve associar uma referência à regra.", "Referência"));
 		
-		//FIXME Gambiarra: arrumar isso
-		if(lemma.getPattern().equals("") || lemma.getSuggestion().equals(""))
-			newRule.setLemmaElement(null);
-		if(exactMatching.getPattern().equals("") || exactMatching.getSuggestion().equals(""))
-			newRule.setExactMatchingElement(null);
 	}
 	
 	@Post
 	@Path("userrules/newrule")
-	public void newrule(Rule newRule, List<PatternSuggestionElement> lemmas,
-			List<PatternSuggestionElement> exactMatchings, Source source) {
+	public void newrule(Rule newRule, List<PatternSuggestionPair> lemmas,
+			List<PatternSuggestionPair> exactMatchings, Source source) {
 		
 		validateRule(newRule, lemmas, exactMatchings, source);
 		validator.onErrorRedirectTo(UserrulesController.class).newrule();
@@ -97,23 +102,27 @@ public class UserrulesController {
 		if(newRule.getExplanation().equals(""))
 			newRule.setExplanation(null);
 		
-		if(exactMatchings != null) {
-			HashSet<PatternSuggestionElement> exactMatchingElements = new HashSet<PatternSuggestionElement>();
-			for(PatternSuggestionElement exactMatching : exactMatchings)
-				if(!exactMatching.getPattern().equals("") && !exactMatching.getSuggestion().equals(""))
-					exactMatchingElements.add(exactMatching);
-			
-			if(exactMatchingElements.size() > 0)
-				newRule.setExactMatchingElements(exactMatchingElements);
-		}	
 		if(lemmas != null) {
-			HashSet<PatternSuggestionElement> lemmaElements = new HashSet<PatternSuggestionElement>();
-			for(PatternSuggestionElement lemma : lemmaElements)
-				if(!lemma.getPattern().equals("") && !lemma.getSuggestion().equals(""))
-					lemmaElements.add(lemma);
-			
-			if(lemmaElements.size() > 0)
-				newRule.setExactMatchingElements(lemmaElements);			
+			newRule.setLemmas(new HashSet<Lemma>());
+			for(PatternSuggestionPair pair : lemmas) {
+				pair.setDefaultPair(false);
+				Lemma lemma = new Lemma();
+				lemma.setRule(newRule);
+				lemma.setPair(pair);
+				newRule.getLemmas().add(lemma);
+			}
+			lemmas.get(0).setDefaultPair(true);
+		}
+		if(exactMatchings != null) {
+			newRule.setExactMatchings(new HashSet<ExactMatching>());
+			for(PatternSuggestionPair pair : exactMatchings) {
+				pair.setDefaultPair(false);
+				ExactMatching exactMatching = new ExactMatching();
+				exactMatching.setRule(newRule);
+				exactMatching.setPair(pair);
+				newRule.getExactMatchings().add(exactMatching);
+			}
+			exactMatchings.get(0).setDefaultPair(true);
 		}
 		
 		newRule.setUser(userSession.getUser());

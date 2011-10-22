@@ -40,7 +40,7 @@ public class Source implements Serializable {
     @Column(length=100)
     private String institution;
     
-    @Column(length=20)
+    @Column(length=40)
     private String date;
     
     @Column(length=400)

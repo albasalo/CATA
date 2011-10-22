@@ -5,7 +5,8 @@ import java.util.List;
 
 import org.arabidopsis.ahocorasick.AhoCorasick;
 
-import br.usp.cata.model.PatternSuggestionElement;
+import br.usp.cata.model.ExactMatching;
+import br.usp.cata.model.Lemma;
 import br.usp.cata.model.Rule;
 import br.usp.cata.model.RuleInstance;
 import br.usp.cata.service.RuleService;
@@ -28,17 +29,12 @@ public class RulesTrees {
 		matchingsTree = new AhoCorasick();
 		
 		for(Rule rule : defaultRules) {
-			if(rule.getLemmaElement() != null)
-				lemmasTree.add(rule.getLemmaElement().getTokenizedPatternBytes(),
-						new RuleInstance(rule, rule.getLemmaElement()));
-			
-			if(rule.getExactMatchingElement() != null)
-				matchingsTree.add(rule.getExactMatchingElement().getTokenizedPatternBytes(),
-						new RuleInstance(rule, rule.getExactMatchingElement()));
-			
-			for(PatternSuggestionElement patternSuggestion : rule.getExactMatchingElements())
-				matchingsTree.add(patternSuggestion.getTokenizedPatternBytes(),
-						new RuleInstance(rule, patternSuggestion));
+			for(Lemma lemma : rule.getLemmas())
+				matchingsTree.add(lemma.getPair().getTokenizedPatternBytes(),
+						new RuleInstance(rule, lemma.getPair()));
+			for(ExactMatching exactMatching : rule.getExactMatchings())
+				matchingsTree.add(exactMatching.getPair().getTokenizedPatternBytes(),
+						new RuleInstance(rule, exactMatching.getPair()));
 		}
 		
 		lemmasTree.prepare();

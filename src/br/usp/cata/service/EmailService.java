@@ -55,9 +55,9 @@ public class EmailService implements Serializable {
 	    	final Context envCtx = (Context) initCtx.lookup(CONTEXT_ENV);
 		    this.session = (Session) envCtx.lookup(CONTEXT_MAIL_SESSION);
 		    this.transport = session.getTransport(SMTP_PROTOCOL);
-	    } catch( NamingException e) {
+	    } catch(NamingException e) {
             throw new EmailException(e);
-        } catch( NoSuchProviderException e) {
+        } catch(NoSuchProviderException e) {
             throw new EmailException(e);
         }
     }
@@ -66,7 +66,7 @@ public class EmailService implements Serializable {
     	try {
             this.session = session;
             this.transport = session.getTransport(SMTP_PROTOCOL);
-        } catch( NoSuchProviderException e) {
+        } catch(NoSuchProviderException e) {
             throw new EmailException(e);
         }
     }

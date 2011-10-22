@@ -19,8 +19,7 @@ public class RuleDAO extends AbstractDAO<Long, Rule>{
 	}
 	
 	public Rule findByID(Long ruleID) {
-		List<Rule> rules = findByCriteria(Restrictions.eq("ruleID", ruleID));
-		
+		List<Rule> rules = findByCriteria(Restrictions.eq("ruleID", ruleID));		
 		return (rules.isEmpty() ? null : rules.get(0));
 	}
 

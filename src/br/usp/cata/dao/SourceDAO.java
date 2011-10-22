@@ -20,8 +20,7 @@ public class SourceDAO extends AbstractDAO<Long,Source> {
 	}
 	
 	public Source findByID(Long sourceID) {
-		List<Source> sources = findByCriteria(Restrictions.eq("sourceID", sourceID));
-		
+		List<Source> sources = findByCriteria(Restrictions.eq("sourceID", sourceID));		
 		return (sources.isEmpty() ? null : sources.get(0));
 	}
 	

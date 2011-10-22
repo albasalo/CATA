@@ -4,11 +4,11 @@ package br.usp.cata.model;
 public class RuleInstance {
 	
 	private Rule rule;
-	private PatternSuggestionElement patternSuggestionElement;
+	private PatternSuggestionPair patternSuggestionPair;
 	
-	public RuleInstance(Rule rule, PatternSuggestionElement pattern) {
+	public RuleInstance(Rule rule, PatternSuggestionPair pattern) {
 		this.rule = rule;
-		this.patternSuggestionElement = pattern;
+		this.patternSuggestionPair = pattern;
 	}
 
 	public Rule getRule() {
@@ -19,13 +19,13 @@ public class RuleInstance {
 		this.rule = rule;
 	}
 
-	public PatternSuggestionElement getPatternSuggestionElement() {
-		return patternSuggestionElement;
+	public PatternSuggestionPair getPatternSuggestionPair() {
+		return patternSuggestionPair;
 	}
 
-	public void setPatternSuggestionElement(
-			PatternSuggestionElement patternSuggestionElement) {
-		this.patternSuggestionElement = patternSuggestionElement;
+	public void setPatternSuggestionPair(
+			PatternSuggestionPair patternSuggestionPair) {
+		this.patternSuggestionPair = patternSuggestionPair;
 	}
 	
 }

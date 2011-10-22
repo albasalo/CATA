@@ -38,7 +38,7 @@ public class Checker {
 			
 			int lastIndex = searchResult.getLastIndex();
 			int firstIndex = lastIndex - 
-				brokenRule.getPatternSuggestionElement().getTokenizedPatternBytes().length;
+				brokenRule.getPatternSuggestionPair().getTokenizedPatternBytes().length;
 			Position start = starts.get(firstIndex);
 			Position end = ends.get(lastIndex);
 			
