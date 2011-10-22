@@ -40,7 +40,7 @@ $(document).ready(function(){
 			name.removeClass("error");
 			name.addClass("input_border");
 			nameInfo.removeClass("description_error");
-			nameInfo.text("Você poderá mudar este campo depois");
+			nameInfo.text("Como você será identificado pelos outros usuários");
 			return true;
 		}
 	}

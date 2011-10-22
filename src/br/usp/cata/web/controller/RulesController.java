@@ -25,7 +25,7 @@ import br.usp.cata.web.interceptor.Transactional;
 
 
 @Resource
-public class UserrulesController {
+public class RulesController {
 	
 	private final Result result;
 	private final Validator validator;
@@ -33,7 +33,7 @@ public class UserrulesController {
 	private final SourceService sourceService;
 	private final UserSession userSession;
 	
-	public UserrulesController(final Result result, final Validator validator,
+	public RulesController(final Result result, final Validator validator,
 		final RuleService ruleService, final SourceService sourceService, final UserSession userSession) {
 		this.result = result;
 		this.validator = validator;
@@ -43,7 +43,7 @@ public class UserrulesController {
 	}
 	
 	@Get
-	@Path("/userrules/newrule")
+	@Path("/rules/newrule")
 	public void newrule() {
 		result.include("ruleCategories", RuleCategories.values());
 		result.include("typesOfRules", TypesOfRules.values());
@@ -92,12 +92,12 @@ public class UserrulesController {
 	}
 	
 	@Post
-	@Path("userrules/newrule")
+	@Path("rules/newrule")
 	public void newrule(Rule newRule, List<PatternSuggestionPair> lemmas,
 			List<PatternSuggestionPair> exactMatchings, Source source) {
 		
 		validateRule(newRule, lemmas, exactMatchings, source);
-		validator.onErrorRedirectTo(UserrulesController.class).newrule();
+		validator.onErrorRedirectTo(RulesController.class).newrule();
 		
 		if(newRule.getExplanation().equals(""))
 			newRule.setExplanation(null);
@@ -140,7 +140,7 @@ public class UserrulesController {
 	}
 	
 	@Get
-	@Path("/userrules/newsource")
+	@Path("/rules/newsource")
 	public void newsource() {
 		result.include("typesOfSources", TypesOfSources.values());
 	}
@@ -244,12 +244,12 @@ public class UserrulesController {
 	}
 	
 	@Post
-	@Path("/userrules/newsource")
+	@Path("/rules/newsource")
 	@Transactional
 	public void newsource(Source newSource) {
 		validateSource(newSource);
 		result.include("selectedType", newSource.getType());
-		validator.onErrorRedirectTo(UserrulesController.class).newsource();
+		validator.onErrorRedirectTo(RulesController.class).newsource();
 		
 		newSource.setUser(userSession.getUser());
 		newSource.setRegistrationDate(new Date());
@@ -258,7 +258,7 @@ public class UserrulesController {
 		
 		result.include("messages", "A Referência foi cadastrada com sucesso.");
 
-		result.redirectTo(UserrulesController.class).newrule();
+		result.redirectTo(RulesController.class).newrule();
 	}
 
 }

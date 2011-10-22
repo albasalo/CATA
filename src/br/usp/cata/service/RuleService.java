@@ -8,6 +8,7 @@ import br.usp.cata.dao.RuleDAO;
 import br.usp.cata.model.ExactMatching;
 import br.usp.cata.model.Lemma;
 import br.usp.cata.model.Rule;
+import br.usp.cata.model.User;
 
 
 @RequestScoped
@@ -41,6 +42,10 @@ public class RuleService {
 	
 	public Rule findByID(Long ruleID) {
 		return ruleDAO.findByID(ruleID);
+	}
+	
+	public List<Rule> findByUser(User user) {
+		return ruleDAO.findByUser(user);
 	}
 	
 	public List<Rule> findDefault() {

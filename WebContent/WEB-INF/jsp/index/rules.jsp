@@ -198,7 +198,7 @@
 				
 				<c:choose>
 					<c:when test="${userSession.user != null}">
-						<button class="button" onclick="window.location.href='<c:url value='/userrules/newrule'/>'">Cadastrar nova regra</button>
+						<button class="button" onclick="window.location.href='<c:url value='/rules/newrule'/>'">Cadastrar nova regra</button>
 					</c:when>
 					<c:otherwise>
 						<br />

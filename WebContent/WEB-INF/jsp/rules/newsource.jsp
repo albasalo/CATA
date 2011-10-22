@@ -52,7 +52,7 @@
 		
 		<div id="page">
 			<div id="content">
-				<form id="custom_form" class="width650" action="<c:url value='/userrules/newsource'/>" method="post">
+				<form id="custom_form" class="width650" action="<c:url value='/rules/newsource'/>" method="post">
 				<fieldset>
 					<legend>Cadastrar nova Referência</legend>
 					

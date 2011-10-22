@@ -56,7 +56,7 @@
 							<label class="label" for="name">Nome*</label>
 							<br />
 							<input id="name" class="input_border width285" type="text" maxlength=100 name="newUser.name" /><br />
-							<span id="nameInfo" class="description">Você poderá mudar este campo depois</span>
+							<span id="nameInfo" class="description">Como você será identificado pelos outros usuários</span>
 						</div>
 						<div class="single_form_element">
 							<label class="label" for="email">E-mail*</label>

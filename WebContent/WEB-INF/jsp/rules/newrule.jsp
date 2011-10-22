@@ -75,7 +75,7 @@
 		</script>
 		
 		<title>Cadastrar nova Regra de Estilo</title>
-	</head>
+	</head><link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />	
 	
 	<body>
 		<%@ include file="../shared/header.jsp"%>
@@ -84,7 +84,7 @@
 		
 		<div id="page">
 			<div id="content">
-				<form id="custom_form" class="width800" action="<c:url value='/userrules/newrule'/>" method="post">
+				<form id="custom_form" class="width800" action="<c:url value='/rules/newrule'/>" method="post">
 				<fieldset>
 					<legend>Cadastrar nova Regra de Estilo</legend>
 					
@@ -441,7 +441,7 @@
 						
 						<br />
 						<div class="small">Não encontrou a referência para sua regra?
-							<a href="<c:url value='/userrules/newsource'/>">Cadastre uma nova referência</a>.</div>
+							<a href="<c:url value='/rules/newsource'/>">Cadastre uma nova referência</a>.</div>
 					</div>
 					<br /><br />
 				

@@ -13,7 +13,7 @@ $(document).ready(function() {
 		}
 		lastID = newID;
 		var newRowID = "#row" + newID;
-		$(newRowID).addClass("selected");					
+		$(newRowID).addClass("selected");			
 		
 		$("#inputSourceID").append('<input id="selectedSourceID' + newID + '" name="source.sourceID" value="' + newID + '" style="display:none" />');
 	};
