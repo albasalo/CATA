@@ -379,10 +379,6 @@
 																<td><b>URL:</b></td>
 																<td><a href="<c:out value="${url.url}" />" target="_blank"><c:out value="${url.title}"/></a></td>
 															</tr>
-															<tr>
-																<td><b>Data:</b></td>
-																<td><c:out value="${url.date}" /></td>
-															</tr>
 															<c:if test = "${url.moreInformation != null}">
 															<tr>
 																<td><b>Descrição:</b> </td>

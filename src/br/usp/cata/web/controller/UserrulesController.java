@@ -202,18 +202,16 @@ public class UserrulesController {
 		    				"O campo não pode ser vazio.", "Título"));
 				if(source.getUrl().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio.", "URL"));	
-				if(source.getDate().equals(""))
-		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio.", "Data de acesso"));
+		    				"O campo não pode ser vazio.", "URL"));
 				
 				if(!(source.getAuthors().equals("")) || !(source.getInstitution().equals("")) ||
-						!(source.getPublisher().equals("")))
+						!(source.getPublisher().equals("") || !(source.getDate().equals(""))))
 					validator.add(new ValidationMessage("Erro inesperado.", "Erro"));
 				else {
 					source.setAuthors(null);
 					source.setInstitution(null);
 					source.setPublisher(null);
+					source.setDate(null);
 				}
 				
 				if(source.getMoreInformation().equals(""))

@@ -6,7 +6,6 @@ $(document).ready(function() {
 			$("#fieldURL").hide();
 			$("#fieldPublisher").hide();
 			$("#dateBook").hide();
-			$("#dateInternet").hide();
 			$("#mandatoryInfo").hide();
 			$("#fieldTitle").show();
 			$("#fieldAuthors").show();
@@ -19,7 +18,6 @@ $(document).ready(function() {
 			$("#fieldURL").hide();
 			$("#fieldInstitution").hide();
 			$("#dateAcademic").hide();
-			$("#dateInternet").hide();
 			$("#mandatoryInfo").hide();
 			$("#fieldTitle").show();
 			$("#fieldAuthors").show();
@@ -33,11 +31,10 @@ $(document).ready(function() {
 			$("#fieldInstitution").hide();
 			$("#dateAcademic").hide();
 			$("#dateBook").hide();
+			$("#fieldDate").hide();
 			$("#mandatoryInfo").hide();
 			$("#fieldTitle").show();
 			$("#fieldURL").show();
-			$("#fieldDate").show();
-			$("#dateInternet").show();
 		}
 		else {
 			$("#fieldTitle").hide();
@@ -47,7 +44,6 @@ $(document).ready(function() {
 			$("#fieldInstitution").hide();
 			$("#dateAcademic").hide();
 			$("#dateBook").hide();
-			$("#dateInternet").hide();
 			$("#fieldDate").hide();
 			$("#mandatoryInfo").show();
 		}
@@ -65,17 +61,15 @@ $(document).ready(function() {
 	title.blur(validateTitle);
 	url.blur(validateURL);
 	authors.blur(validateAuthors);
-	date.blur(validateDate);
 	info.blur(validateInfo);
 	
 	title.keyup(validateTitle);
 	url.keyup(validateURL);
 	authors.keyup(validateAuthors);
-	date.keyup(validateDate);
 	info.keyup(validateInfo);
 	
 	form.submit(function() {
-		if(validateTitle() & validateURL() & validateAuthors() & validateDate() & validateInfo()) {
+		if(validateTitle() & validateURL() & validateAuthors() & validateInfo()) {
 			return true;
 		}
 		else {
@@ -140,26 +134,6 @@ $(document).ready(function() {
 		else {
 			authors.removeClass("error");
 			authors.addClass("input_border");
-			return true;			
-		}
-	}
-	
-	function validateDate() {
-		if($("[name='newSource.type'] option:selected").val() == "INTERNET") {
-			if(date.val().length == 0) {
-				date.removeClass("input_border");
-				date.addClass("error");
-				return false;
-			}
-			else {
-				date.removeClass("error");
-				date.addClass("input_border");
-				return true;
-			}
-		}
-		else {
-			date.removeClass("error");
-			date.addClass("input_border");
 			return true;			
 		}
 	}

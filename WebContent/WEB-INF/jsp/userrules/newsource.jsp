@@ -111,7 +111,6 @@
 					<div id="fieldDate" class="single_form_element" style="display: none">
 						<label id="dateAcademic" class="label" for="date">Data</label>
 						<label id="dateBook" class="label" for="date" style="display: none">Data de publicação</label>
-						<label id="dateInternet" class="label" for="date" style="display: none">Data de acesso*</label>
 						<br />
 						<input id="date" class="input_border width250" type="text" maxlength=40 name="newSource.date" />
 						<br />
