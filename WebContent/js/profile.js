@@ -6,8 +6,7 @@ $(document).ready(function() {
 		if(lastID > 0) {
 			var lastRowID = "#row" + lastID;
 			$(lastRowID).removeClass("selected");
-			
-			var rowID = "#row" + lastID;
+
 			var lastSelectedSource = "#selectedRuleID" + lastID;
 			$("#inputRuleID").remove(lastSelectedSource);
 		}
@@ -15,7 +14,7 @@ $(document).ready(function() {
 		var newRowID = "#row" + newID;
 		$(newRowID).addClass("selected");					
 		
-		$("#inputSourceID").append('<input id="selectedRuleID' + newID + '" name="rule.ruleID" value="' + newID + '" style="display:none" />');
+		$("#inputRuleID").append('<input id="selectedRuleID' + newID + '" name="rule.ruleID" value="' + newID + '" style="display:none" />');
 	};
 	
 	$('#rules tbody tr').live('click', function() {

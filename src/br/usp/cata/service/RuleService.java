@@ -18,7 +18,8 @@ public class RuleService {
 	private final RuleDAO ruleDAO;
 	private final PatternSuggestionPairService patternSuggestionPairService;
 	
-	public RuleService(final RuleDAO ruleDAO, final PatternSuggestionPairService patternSuggestionPairService) {
+	public RuleService(final RuleDAO ruleDAO,
+			final PatternSuggestionPairService patternSuggestionPairService) {
 		this.ruleDAO = ruleDAO;
 		this.patternSuggestionPairService = patternSuggestionPairService;
 	}

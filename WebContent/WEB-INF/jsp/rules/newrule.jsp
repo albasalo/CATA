@@ -46,8 +46,8 @@
 			});
 		</script>		
 		<script type="text/javascript">
-			function showModal(ruleID) {
-				var modal = "#source" + ruleID;
+			function showModal(sourceID) {
+				var modal = "#source" + sourceID;
 				if($(modal).length > 0) {
 				    $(modal).fadeIn().css({ 'width': Number(550)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
 				

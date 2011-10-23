@@ -48,9 +48,19 @@ public class UserDAO extends AbstractDAO<Long,User> {
     	
     	if(users.size() > 1)
     		throw new IllegalStateException(
-    				"There is more than one user with the same e-mail: " + email );
+    				"There is more than one user with the same e-mail: " + email);
     	
     	return (users.isEmpty() ? null : users.get(0)); 
+    }
+    
+    public User findByName(final String name) {
+    	final List<User> users = findByCriteria(Restrictions.eq("name", name));
+    	
+    	if(users.size() > 1)
+    		throw new IllegalStateException(
+    				"There is more than one user with the same name: " + name);
+    	
+    	return (users.isEmpty() ? null : users.get(0));
     }
     
     public User findByActivationKey(final String activationKey) {

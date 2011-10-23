@@ -19,7 +19,8 @@ public class NewUserService {
 	
 	public static enum SignupResult {
 		SUCCESS,
-		USER_ALREADY_REGISTERED_ACTIVE,
+		USER_ALREADY_REGISTERED_ACTIVE_EMAIL,
+		USER_ALREADY_REGISTERED_NAME,
 		USER_ALREADY_REGISTERED_INACTIVE,
 		NO_EMAIL_SENT_INACTIVE,
 		NO_EMAIL_SENT,
@@ -64,9 +65,12 @@ public class NewUserService {
     public SignupResult register(final User newUser)  { 	
     	String email = newUser.getEmail();
     	
-    	final User activeUser = userDAO.findByEmailAndStatus(email, true);
-    	if(activeUser != null)
-    		return SignupResult.USER_ALREADY_REGISTERED_ACTIVE;
+    	final User activeUserSameEmail = userDAO.findByEmailAndStatus(email, true);
+    	if(activeUserSameEmail != null)
+    		return SignupResult.USER_ALREADY_REGISTERED_ACTIVE_EMAIL;
+    	final User userSameName = userDAO.findByName(newUser.getName());
+    	if(userSameName != null)
+    		return SignupResult.USER_ALREADY_REGISTERED_NAME;
     	
     	final User inactiveUser = userDAO.findByEmailAndStatus(email, false);
     	if(inactiveUser != null) {
@@ -100,7 +104,7 @@ public class NewUserService {
     	if(userToBeActivated == null)
     		return SignupResult.ACTIVATION_KEY_NOT_FOUND;
     	else if(userToBeActivated.isActive())
-    		return SignupResult.USER_ALREADY_REGISTERED_ACTIVE;
+    		return SignupResult.USER_ALREADY_REGISTERED_ACTIVE_EMAIL;
     	
     	userToBeActivated.setActive(true);
     	

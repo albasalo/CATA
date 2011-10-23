@@ -19,6 +19,33 @@
 		<script type="text/javascript" src="<c:url value='/js/profile.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
+				if($('#modal').length > 0) {
+				    $('#modal').fadeIn().css({ 'width': Number(450)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+				
+				    var popMargTop = ($('#modal').height() + 80) / 2;
+				    var popMargLeft = ($('#modal').width() + 80) / 2;
+				
+				    $('#modal').css({
+				        'margin-top' : -popMargTop,
+				        'margin-left' : -popMargLeft
+				    });
+				
+				    $('body').append('<div id="fade"></div>');
+				    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
+				
+				    return false;
+				}
+			});
+			
+			$('a.close, #fade').live('click', function() {
+				$('#fade , .popup_block').fadeOut( function() {
+				    $('#fade, a.close').remove();
+				});
+				return false;
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() {
 				$('#rules').dataTable({
 					"aaSorting": [[ 0, "asc" ]]
 				});
@@ -66,7 +93,7 @@
 				<h2>(<c:out value="${userSession.user.email}"/>)</h2>
 				<div class="indentation">
 					<br />
-					<button type="button" class="button" onclick="window.location.href='<c:url value='/home/changepassword'/>'">Mudar senha</button><br />
+					<button type="button" class="button" onclick="window.location.href='<c:url value='/user/changepassword'/>'">Alterar senha</button><br />
 					<br />
 					<b>Regras cadastradas por você</b><br />
 					<div class="grid">

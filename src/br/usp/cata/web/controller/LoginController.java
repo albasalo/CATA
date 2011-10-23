@@ -22,8 +22,7 @@ public class LoginController {
 	@Get
 	@Path("/logout")
 	public void logout() {
-		userService.deauthenticate();
-		
+		userService.deauthenticate();		
 		result.redirectTo(IndexController.class).index();
 	}
 	

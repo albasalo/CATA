@@ -6,8 +6,7 @@ $(document).ready(function() {
 		if(lastID > 0) {
 			var lastRowID = "#row" + lastID;
 			$(lastRowID).removeClass("selected");
-			
-			var rowID = "#row" + lastID;
+
 			var lastSelectedSource = "#selectedSourceID" + lastID;
 			$("#inputSourceID").remove(lastSelectedSource);
 		}

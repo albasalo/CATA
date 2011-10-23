@@ -14,7 +14,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.ValidationMessage;
-import br.usp.cata.model.Rule;
+import br.usp.cata.model.CataConstraints;
 import br.usp.cata.model.User;
 import br.usp.cata.service.CryptoService;
 import br.usp.cata.service.EmailService.EmailResult;
@@ -29,10 +29,6 @@ import br.usp.cata.web.interceptor.Transactional;
 @Resource
 @IrrestrictAccess
 public class IndexController {
-
-	private final int PASSWORD_MIN_LENGTH = 6;
-	private final int PASSWORD_MAX_LENGTH = 32;
-	private final int FILE_MAX_SIZE = 5 * 1024 * 1024;
 	
 	private final Result result;
 	private final Validator validator;
@@ -89,7 +85,7 @@ public class IndexController {
 			validator.add(new ValidationMessage(
 					"O arquivo deve estar no formato .txt", "Formato do arquivo"));
 		}
-		else if(IOUtils.toByteArray(file.getFile()).length > FILE_MAX_SIZE) {
+		else if(IOUtils.toByteArray(file.getFile()).length > CataConstraints.FILE_MAX_SIZE) {
 			validator.add(new ValidationMessage(
 					"O arquivo deve ter, no máximo, 5MB.", "Tamanho do arquivo"));
 		}
@@ -107,14 +103,6 @@ public class IndexController {
 	@Get
 	@Path("/about")
 	public void about() {
-	}
-	
-	@Get
-	@Path("/rules/viewrule/{rule.ruleID}")
-	public void viewrule(Rule rule) {
-		// TODO caso em que não há regra com o id passado
-		
-		result.include("rule", ruleService.findByID(rule.getRuleID()));
 	}
     
     @Get
@@ -135,10 +123,10 @@ public class IndexController {
     	if(newUser.getEmail().equals(""))
     		validator.add(new ValidationMessage(
     				"O campo não pode ser vazio.", "E-mail"));
-    	if(newUser.getPassword().length() < PASSWORD_MIN_LENGTH)
+    	if(newUser.getPassword().length() < CataConstraints.PASSWORD_MIN_LENGTH)
     		validator.add(new ValidationMessage(
     				"A senha deve ter, no mínimo, 6 caracteres.", "Senha"));
-    	if(newUser.getPassword().length() > PASSWORD_MAX_LENGTH)
+    	if(newUser.getPassword().length() > CataConstraints.PASSWORD_MAX_LENGTH)
     		validator.add(new ValidationMessage(
     				"A senha deve ter, no máximo, 32 caracteres", "Senha"));
     	if(!newUser.getPassword().equals(password))
@@ -155,10 +143,13 @@ public class IndexController {
     					"Siga as instruções enviadas para o endereço " + newUser.getEmail() +
     					" para ativar sua conta.");
     			break;
-    		case USER_ALREADY_REGISTERED_ACTIVE:
+    		case USER_ALREADY_REGISTERED_ACTIVE_EMAIL:
     			validator.add(new ValidationMessage(
             			"Já existe um usuário cadastrado com este e-mail no sistema.", "E-mail"));
     			break;
+    		case USER_ALREADY_REGISTERED_NAME:
+    			validator.add(new ValidationMessage(
+    					"Já existe um usuário cadastrado com este nome no sistema.", "Nome"));
     		case USER_ALREADY_REGISTERED_INACTIVE:
     			result.include("messages",
     					"Já existe um usuário cadastrado com este e-mail no sistema - mas está inativo. " + 
@@ -188,12 +179,12 @@ public class IndexController {
     		case SUCCESS:
     			result.include("messages", "Sua conta foi ativada com sucesso.");
     			break;
-    		case USER_ALREADY_REGISTERED_ACTIVE:
+    		case USER_ALREADY_REGISTERED_ACTIVE_EMAIL:
     			result.include("messages", "Sua conta já está ativada.");
     			break;
     		case ACTIVATION_KEY_NOT_FOUND:
     			validator.add(new ValidationMessage(
-        				"Não ocorreu ativação de nenhuma conta porque o link é inválido", "Link inválido"));
+        				"Não ocorreu ativação de nenhuma conta porque o link é inválido.", "Link inválido"));
     			break;
     		default:
     			throw new IllegalStateException("Unexpected activation result");

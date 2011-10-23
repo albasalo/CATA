@@ -119,7 +119,6 @@ public class UserService {
     
     public EmailResult recoverPassword(User user) {
     	user.setNewPasswordKey(CryptoService.generateMd5(user.getPassword() + (new Date()).toString()));
-
     	return sendRecoverPasswordEmail(user);
     }
     
