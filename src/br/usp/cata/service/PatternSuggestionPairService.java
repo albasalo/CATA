@@ -4,6 +4,7 @@ import javax.servlet.ServletContext;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
+
 import br.usp.cata.model.PatternSuggestionPair;
 import br.usp.cata.util.Tokenizer;
 

@@ -22,7 +22,7 @@ import org.hibernate.annotations.CascadeType;
 @Entity
 public class Rule implements Serializable {
 
-	private static final long serialVersionUID = 8581290083742L;
+	private static final long serialVersionUID = 943210483745025L;
 	
     @Id
     @GeneratedValue

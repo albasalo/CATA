@@ -16,7 +16,7 @@ import org.hibernate.annotations.CascadeType;
 @Entity
 public class Lemma implements Serializable {
 	
-	private static final long serialVersionUID = 373780490657L;
+	private static final long serialVersionUID = 943210483745023L;
 	
 	@Id
 	@GeneratedValue

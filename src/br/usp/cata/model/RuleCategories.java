@@ -14,4 +14,5 @@ public enum RuleCategories {
 	public String getCategoryDescription() {
 		return ruleCategories.get(this.ordinal());
 	}
+	
 }

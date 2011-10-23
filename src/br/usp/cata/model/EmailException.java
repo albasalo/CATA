@@ -2,7 +2,7 @@ package br.usp.cata.model;
 
 public class EmailException extends Exception {
 
-    private static final long serialVersionUID = 1178465478071609418L;
+    private static final long serialVersionUID = 943210483745021L;
 
     public EmailException() {
         super();

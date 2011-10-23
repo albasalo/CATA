@@ -30,7 +30,7 @@ public class EmailService implements Serializable {
 		EMAIL_SENT
 	}
 	
-    private static final long serialVersionUID = 7886620811055669211L;
+    private static final long serialVersionUID = 943210483745027L;
 
     public static String PROP_MAIL_SMTP_FROM = "mail.smtp.from";
     public static String PROP_MAIL_SMTP_HOST = "mail.smtp.host";
@@ -98,8 +98,7 @@ public class EmailService implements Serializable {
     }
 
     public Email buildEmail(final String subject, final String body,
-        final String... receivers)
-    {
+        final String... receivers) {
         final Email email = new Email();
         email.setFromAddress(session.getProperty(PROP_MAIL_SMTP_FROM));
         email.setHostname(session.getProperty(PROP_MAIL_SMTP_HOST));

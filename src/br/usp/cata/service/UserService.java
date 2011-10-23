@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
+
 import br.usp.cata.dao.UserDAO;
 import br.usp.cata.model.Email;
 import br.usp.cata.model.EmailException;
@@ -66,8 +67,7 @@ public class UserService {
     public boolean authenticate(final String email, String password) {
         String encryptedPassword = CryptoService.generateMd5(password);
         
-        final boolean success;
-        
+        final boolean success;        
         final User user = userDAO.findActiveUsersByEmailAndPassword(email, encryptedPassword);
         
         if(user == null)

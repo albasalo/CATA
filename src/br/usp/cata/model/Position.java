@@ -1,7 +1,7 @@
 package br.usp.cata.model;
 
 
-public class Position {
+public class Position implements Comparable<Position> {
 
 	private int lineNumber;
 	private int charIndex;

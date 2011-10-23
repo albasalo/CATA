@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 
 import br.usp.cata.model.Position;
+
 import br.usp.pcs.lta.cogroo.configuration.LegacyRuntimeConfiguration;
 import br.usp.pcs.lta.cogroo.configuration.RuntimeConfigurationI;
 import br.usp.pcs.lta.cogroo.entity.Sentence;
@@ -21,9 +22,11 @@ public class Tokenizer {
 	private SentenceDetectorME sentenceDetector;
 	private CogrooTokenizer tokenizer;
 	
+	private final String resourcesPath = "/WEB-INF/classes/br/usp/cata/resources";
+	
 	public Tokenizer(ServletContext servletContext) {
 		config = new LegacyRuntimeConfiguration(
-				servletContext.getRealPath("/WEB-INF/classes/br/usp/cata/resources"));
+				servletContext.getRealPath(resourcesPath));
 		sentenceDetector = config.getSentenceDetector();
 		tokenizer = config.getTokenizer();
 	}

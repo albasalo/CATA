@@ -6,4 +6,6 @@ public class CataConstraints {
 	public static final int PASSWORD_MAX_LENGTH = 32;
 	public static final int FILE_MAX_SIZE = 5 * 1024 * 1024;
 	
+	public static final String emptyField = "O campo não pode ser vazio.";
+	
 }

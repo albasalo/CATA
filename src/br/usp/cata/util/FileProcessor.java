@@ -35,7 +35,7 @@ public class FileProcessor {
 		return text;
 	}
 	
-	// FIXME achar um metodo melhor para determinar o Encoding
+	// FIXME find a better way to guess file encoding
 	private Charset guessEncoding(byte[] fileBytes) {
 		String[] charsetNames = { "UTF-8", "ISO-8859-1", "US-ASCII", 
 				"ISO-8859-15", "cp1252", "UTF-16BE", "UTF-16LE", "UTF-16", "UTF-32" };		
@@ -77,11 +77,11 @@ public class FileProcessor {
 		    	while((line = br.readLine()) != null)
 		    		text.add(line);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
+	
 }
 
 	

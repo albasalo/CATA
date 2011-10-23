@@ -7,6 +7,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
 import br.com.caelum.vraptor.util.hibernate.SessionCreator;
+
 import br.usp.cata.model.User;
 
 
@@ -18,7 +19,6 @@ public class UserDAO extends AbstractDAO<Long,User> {
 		super(sessionCreator);
 	}
 
-	// FIXME Tirar status do nome do metodo
     public User findByEmailAndStatus(final String email, final boolean active) {
         final List<User> users = findByCriteria(Restrictions.and(
         		Restrictions.eq("email", email), Restrictions.eq("active", active)));

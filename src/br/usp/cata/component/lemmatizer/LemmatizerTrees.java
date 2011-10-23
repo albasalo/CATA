@@ -7,6 +7,7 @@ import java.nio.charset.Charset;
 
 import br.com.caelum.vraptor.ioc.ApplicationScoped;
 import br.com.caelum.vraptor.ioc.Component;
+
 import br.usp.cata.util.lemmatizer.AccentsChar;
 import br.usp.cata.util.lemmatizer.AccentsLemmaTagChar;
 import br.usp.cata.util.lemmatizer.ExpressionsChar;
@@ -18,15 +19,15 @@ import br.usp.cata.util.lemmatizer.SuffixesChar;
 @Component
 @ApplicationScoped
 public class LemmatizerTrees {
-
-	private static AccentsChar accentsRoot;
-	private static ExpressionsChar expressionsRoot;
-	private static SuffixesChar suffixesRoot;
 	
 	private final String accentsFile = "/br/usp/cata/resources/lemmatizer/accents.txt";
 	private final String expressionsFile = "/br/usp/cata/resources/lemmatizer/expressions.txt";
 	private final String suffixesFile = "/br/usp/cata/resources/lemmatizer/suffixes.txt";
 	private final String suffixesFile2 = "/br/usp/cata/resources/lemmatizer/suffixes-b.txt";
+
+	private static AccentsChar accentsRoot;
+	private static ExpressionsChar expressionsRoot;
+	private static SuffixesChar suffixesRoot;
 	
 	public LemmatizerTrees() {
 		readAccentsFile();
@@ -46,9 +47,7 @@ public class LemmatizerTrees {
 		return suffixesRoot;
 	}
 
-	private AccentsChar insertAccentsTree(String word, int col, String lemma,
-			int tag, AccentsChar root) {
-		
+	private AccentsChar insertAccentsTree(String word, int col, String lemma, int tag, AccentsChar root) {		
 		if(root == null) {
 			root = new AccentsChar();
 			root.setCharacter(word.charAt(col));
@@ -110,14 +109,12 @@ public class LemmatizerTrees {
 			}
 			br.close();
 			accents.close();
-		} catch (Exception e) { //FIXME
+		} catch (Exception e) { // FIXME
 			e.printStackTrace();
 		}
 	}
 	
-	private ExpressionsChar insertExpressionsTree(String word, int col, int tag,
-			ExpressionsChar root) {
-		
+	private ExpressionsChar insertExpressionsTree(String word, int col, int tag, ExpressionsChar root) {		
 		if (root == null) {
 			root = new ExpressionsChar();
 			root.setCharacter(word.charAt(col));
@@ -142,11 +139,9 @@ public class LemmatizerTrees {
 				
 				else if(col < word.length() - 1)
 					root.setEqual(insertExpressionsTree(word, col + 1, tag, root.getEqual()));
-			}
-			
+			}		
 			else if(word.charAt(col) < root.getCharacter())
-				root.setLess(insertExpressionsTree(word, col, tag, root.getLess()));
-			
+				root.setLess(insertExpressionsTree(word, col, tag, root.getLess()));			
 			else
 				root.setGreater(insertExpressionsTree(word, col, tag, root.getGreater()));
 		}
@@ -170,7 +165,7 @@ public class LemmatizerTrees {
 			}
 			br.close();
 			expressions.close();
-		} catch (Exception e) { //FIXME
+		} catch (Exception e) { // FIXME
 			e.printStackTrace();
 		}
 	}
@@ -282,7 +277,7 @@ public class LemmatizerTrees {
 				br.close();
 				suffixes.close();
 			}
-		} catch (Exception e) { //FIXME
+		} catch (Exception e) { // FIXME
 			e.printStackTrace();
 		}
 	}

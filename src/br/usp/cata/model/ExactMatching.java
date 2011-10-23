@@ -16,7 +16,7 @@ import org.hibernate.annotations.CascadeType;
 @Entity
 public class ExactMatching implements Serializable {
 	
-	private static final long serialVersionUID = 373786492656L;
+	private static final long serialVersionUID = 943210483745022L;
 	
 	@Id
 	@GeneratedValue

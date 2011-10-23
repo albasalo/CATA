@@ -11,6 +11,8 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
+
+import br.usp.cata.model.CataConstraints;
 import br.usp.cata.model.ExactMatching;
 import br.usp.cata.model.Lemma;
 import br.usp.cata.model.PatternSuggestionPair;
@@ -27,29 +29,29 @@ import br.usp.cata.web.interceptor.Transactional;
 
 
 @Resource
-public class RulesController {
+public class RulesController { // TODO This class really needs some refactoring
 	
 	private final Result result;
 	private final Validator validator;
+	private final ExactMatchingService exactMatchingService;
+	private final LemmaService lemmaService;
 	private final RuleService ruleService;
 	private final SourceService sourceService;
 	private final UserSession userSession;
-	private final LemmaService lemmaService;
-	private final ExactMatchingService exactMatchingService;
 	
 	public RulesController(final Result result, final Validator validator,
-		final RuleService ruleService, final SourceService sourceService, final UserSession userSession,
-		final LemmaService lemmaService, ExactMatchingService exactMatchingService) {
+		final ExactMatchingService exactMatchingService, final LemmaService lemmaService,
+		final RuleService ruleService, final SourceService sourceService, final UserSession userSession) {
 		this.result = result;
 		this.validator = validator;
+		this.exactMatchingService = exactMatchingService;
+		this.lemmaService = lemmaService;
 		this.ruleService = ruleService;
 		this.sourceService = sourceService;
 		this.userSession = userSession;
-		this.lemmaService = lemmaService;
-		this.exactMatchingService = exactMatchingService;
 	}
 	
-	public void includeInformation() {
+	private void includeInformation() {
 		result.include("ruleCategories", RuleCategories.values());
 		result.include("typesOfRules", TypesOfRules.values());
 		result.include("typesOfSources", TypesOfSources.values());
@@ -96,61 +98,68 @@ public class RulesController {
 			}
 		}
 		
-		if(source.getSourceID() == null)
+		if(source == null || source.getSourceID() == null)
 			validator.add(new ValidationMessage(
     				"Você deve associar uma referência à regra.", "Referência"));
+		else {
+			Source dbSource = sourceService.findByID(source.getSourceID());
+			if(dbSource == null)
+				validator.add(new ValidationMessage(
+	    				"Referência Bibliográfica inválida.", "Referência"));
+		}
 		
+	}
+	
+	private void setLemmasAndExactMatchings(Rule rule, List<PatternSuggestionPair> lemmas,
+			List<PatternSuggestionPair> exactMatchings) {		
+		if(lemmas != null) {
+			for(PatternSuggestionPair pair : lemmas) {
+				pair.setDefaultPair(false);
+				Lemma lemma = new Lemma();
+				lemma.setRule(rule);
+				lemma.setPair(pair);
+				rule.getLemmas().add(lemma);
+			}
+			lemmas.get(0).setDefaultPair(true);
+		}
+		if(exactMatchings != null) {
+			for(PatternSuggestionPair pair : exactMatchings) {
+				pair.setDefaultPair(false);
+				ExactMatching exactMatching = new ExactMatching();
+				exactMatching.setRule(rule);
+				exactMatching.setPair(pair);
+				rule.getExactMatchings().add(exactMatching);
+			}
+			exactMatchings.get(0).setDefaultPair(true);
+		}
 	}
 	
 	@Post
 	@Path("rules/newrule")
-	public void newrule(Rule newRule, List<PatternSuggestionPair> lemmas,
-			List<PatternSuggestionPair> exactMatchings, Source source) {
-		
+	public void newrule(Rule newRule, List<PatternSuggestionPair> lemmas, 
+			List<PatternSuggestionPair> exactMatchings, Source source) {		
 		validateRule(newRule, lemmas, exactMatchings, source);
-		Source dbSource = sourceService.findByID(source.getSourceID());
-		if(dbSource == null)
-			validator.add(new ValidationMessage(
-    				"Referência Bibliográfica inválida.", "Referência"));
 		validator.onErrorRedirectTo(RulesController.class).newrule();
 		
 		if(newRule.getExplanation().equals(""))
 			newRule.setExplanation(null);
 		
-		if(lemmas != null) {
-			newRule.setLemmas(new HashSet<Lemma>());
-			for(PatternSuggestionPair pair : lemmas) {
-				pair.setDefaultPair(false);
-				Lemma lemma = new Lemma();
-				lemma.setRule(newRule);
-				lemma.setPair(pair);
-				newRule.getLemmas().add(lemma);
-			}
-			lemmas.get(0).setDefaultPair(true);
-		}
-		if(exactMatchings != null) {
-			newRule.setExactMatchings(new HashSet<ExactMatching>());
-			for(PatternSuggestionPair pair : exactMatchings) {
-				pair.setDefaultPair(false);
-				ExactMatching exactMatching = new ExactMatching();
-				exactMatching.setRule(newRule);
-				exactMatching.setPair(pair);
-				newRule.getExactMatchings().add(exactMatching);
-			}
-			exactMatchings.get(0).setDefaultPair(true);
-		}
+		newRule.setLemmas(new HashSet<Lemma>());
+		newRule.setExactMatchings(new HashSet<ExactMatching>());
+		setLemmasAndExactMatchings(newRule, lemmas, exactMatchings);
 		
 		newRule.setUser(userSession.getUser());
+		
 		newRule.setDate(new Date());
-		//TODO Mudar para false: as novas regras não devem ser default do sistema
+		
+		//TODO Shoulde be 'false': rules registered by users won't be default rules
 		newRule.setDefaultRule(true);
 		
-		newRule.setSource(dbSource);
+		newRule.setSource(sourceService.findByID(source.getSourceID()));
 		
 		ruleService.save(newRule);
 		
-		result.include("messages", "A Regra foi cadastrada com sucesso.");
-		
+		result.include("messages", "A Regra foi cadastrada com sucesso.");		
 		result.redirectTo(IndexController.class).rules();
 	}
 	
@@ -165,10 +174,10 @@ public class RulesController {
 			case ACADEMIC_PUBLISHING:
 				if(source.getTitle().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio.", "Título"));
+		    				CataConstraints.emptyField, "Título"));
 				if(source.getAuthors().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio.", "Autor(es)"));
+		    				CataConstraints.emptyField, "Autor(es)"));
 				
 				if((!source.getPublisher().equals("")) || (!source.getUrl().equals("")))
 					validator.add(new ValidationMessage("Erro inesperado.", "Erro"));
@@ -190,10 +199,10 @@ public class RulesController {
 			case HANDBOOK:
 				if(source.getTitle().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio.", "Título"));
+		    				CataConstraints.emptyField, "Título"));
 				if(source.getAuthors().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio.", "Autor(es)"));
+		    				CataConstraints.emptyField, "Autor(es)"));
 				
 				if((!source.getInstitution().equals("")) || (!source.getUrl().equals("")))
 					validator.add(new ValidationMessage("Erro inesperado", "Erro"));
@@ -214,10 +223,10 @@ public class RulesController {
 			case INTERNET:
 				if(source.getTitle().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio.", "Título"));
+		    				CataConstraints.emptyField, "Título"));
 				if(source.getUrl().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio.", "URL"));
+		    				CataConstraints.emptyField, "URL"));
 				
 				if(!(source.getAuthors().equals("")) || !(source.getInstitution().equals("")) ||
 						!(source.getPublisher().equals("") || !(source.getDate().equals(""))))
@@ -237,7 +246,7 @@ public class RulesController {
 			case OTHER:
 				if(source.getMoreInformation().equals(""))
 		    		validator.add(new ValidationMessage(
-		    				"O campo não pode ser vazio.", "Mais informações"));
+		    				CataConstraints.emptyField, "Mais informações"));
 				
 				if((!source.getAuthors().equals("")) || (!source.getInstitution().equals("")) ||
 						(!source.getPublisher().equals("")) || (!source.getTitle().equals("")) ||
@@ -267,13 +276,18 @@ public class RulesController {
 		validator.onErrorRedirectTo(RulesController.class).newsource();
 		
 		newSource.setUser(userSession.getUser());
+		
 		newSource.setRegistrationDate(new Date());
 		
 		sourceService.save(newSource);
 		
 		result.include("messages", "A Referência foi cadastrada com sucesso.");
-
 		result.redirectTo(RulesController.class).newrule();
+	}
+	
+	private boolean userIsAuthorizedToChangeRule(Long ruleID) {
+		Rule rule = ruleService.findByID(ruleID);		
+		return rule.getUser().getUserID().equals(userSession.getUserID());
 	}
 	
 	@Get
@@ -281,18 +295,16 @@ public class RulesController {
 	@Path("rules/editrule")
 	@Transactional
 	public void editrule(Rule ruleToBeUpdated) {
-		if(ruleToBeUpdated == null)
+		if(ruleToBeUpdated == null || ruleToBeUpdated.getRuleID() == null)
 			result.redirectTo(UserController.class).profile();
 		
-		Rule rule = ruleService.findByID(ruleToBeUpdated.getRuleID());
-		
-		if(!rule.getUser().getUserID().equals(userSession.getUserID()))
+		if(!userIsAuthorizedToChangeRule(ruleToBeUpdated.getRuleID()))
 			validator.add(new ValidationMessage(
     				"Você não possui autorização.", "Erro"));
 		validator.onErrorRedirectTo(UserController.class).profile();
 		
 		includeInformation();
-		result.include("rule", rule);
+		result.include("rule", ruleService.findByID(ruleToBeUpdated.getRuleID()));
 	}
 
 	@Post
@@ -300,35 +312,33 @@ public class RulesController {
 	@Transactional
 	public void updaterule(Rule updatedRule, List<PatternSuggestionPair> lemmas,
 			List<PatternSuggestionPair> exactMatchings, Source source) {
+		if(updatedRule == null || updatedRule.getRuleID() == null)
+			result.redirectTo(UserController.class).profile();
 		
-		Rule rule = ruleService.findByID(updatedRule.getRuleID());		
-		if(!rule.getUser().getUserID().equals(userSession.getUserID())) {
+		if(!userIsAuthorizedToChangeRule(updatedRule.getRuleID()))
 			validator.add(new ValidationMessage(
     				"Você não possui autorização.", "Erro"));
-		}
 		validator.onErrorRedirectTo(UserController.class).profile();
 		
-		Source ruleSource;
-		if(source != null && source.getSourceID() != null)
-			ruleSource = sourceService.findByID(source.getSourceID());
-		else {
-			ruleSource = rule.getSource();
-			source.setSourceID(ruleSource.getSourceID());
+		Rule rule = ruleService.findByID(updatedRule.getRuleID());
+		if(source == null || source.getSourceID() == null) {
+			source = new Source();
+			source.setSourceID(rule.getSource().getSourceID());
 		}
+		
 		validateRule(updatedRule, lemmas, exactMatchings, source);
-		if(ruleSource == null) {
-			validator.add(new ValidationMessage(
-    				"Referência Bibliográfica inválida.", "Referência"));
-		}
 		validator.onErrorRedirectTo(RulesController.class).editrule(rule);
 		
+		// FIXME
 		for(Lemma lemma : rule.getLemmas())
 			lemmaService.delete(lemma);
 		for(ExactMatching exactMatching : rule.getExactMatchings())
 			exactMatchingService.delete(exactMatching);
-				
+			
 		rule.setCategory(updatedRule.getCategory());
+				
 		rule.setType(updatedRule.getType());
+		
 		if(updatedRule.getExplanation().equals(""))
 			rule.setExplanation(null);
 		else
@@ -336,28 +346,12 @@ public class RulesController {
 		
 		rule.setLemmas(new HashSet<Lemma>());
 		rule.setExactMatchings(new HashSet<ExactMatching>());
+		
 		ruleService.update(rule);
 		
-		if(lemmas != null) {
-			for(PatternSuggestionPair pair : lemmas) {
-				pair.setDefaultPair(false);
-				Lemma lemma = new Lemma();
-				lemma.setRule(rule);
-				lemma.setPair(pair);
-				rule.getLemmas().add(lemma);
-			}
-			lemmas.get(0).setDefaultPair(true);
-		}
-		if(exactMatchings != null) {
-			for(PatternSuggestionPair pair : exactMatchings) {
-				pair.setDefaultPair(false);
-				ExactMatching exactMatching = new ExactMatching();
-				exactMatching.setRule(rule);
-				exactMatching.setPair(pair);
-				rule.getExactMatchings().add(exactMatching);
-			}
-			exactMatchings.get(0).setDefaultPair(true);
-		}
+		setLemmasAndExactMatchings(rule, lemmas, exactMatchings);
+		
+		rule.setSource(sourceService.findByID(source.getSourceID()));
 		
 		ruleService.update(rule);
 		
@@ -369,14 +363,16 @@ public class RulesController {
 	@Path("rules/deleterule")
 	@Transactional
 	public void deleterule(Rule ruleToBeDeleted) {
-		Rule rule = ruleService.findByID(ruleToBeDeleted.getRuleID());		
-		if(!rule.getUser().getUserID().equals(userSession.getUserID())) {
+		if(ruleToBeDeleted == null || ruleToBeDeleted.getRuleID() == null)
+			result.redirectTo(UserController.class).profile();
+		
+		if(!userIsAuthorizedToChangeRule(ruleToBeDeleted.getRuleID()))
 			validator.add(new ValidationMessage(
     				"Você não possui autorização.", "Erro"));
-		}
 		validator.onErrorRedirectTo(UserController.class).profile();
 		
-		ruleService.delete(rule);
+		ruleService.delete(ruleService.findByID(ruleToBeDeleted.getRuleID()));
+		
 		result.include("messages", "A Regra foi removida com sucesso.");
 		result.redirectTo(UserController.class).profile();
 	}

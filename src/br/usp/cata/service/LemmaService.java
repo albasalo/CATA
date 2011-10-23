@@ -2,6 +2,7 @@ package br.usp.cata.service;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
+
 import br.usp.cata.dao.LemmaDAO;
 import br.usp.cata.model.Lemma;
 

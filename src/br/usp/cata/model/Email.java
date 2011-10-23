@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Email implements Serializable {
 
-    private static final long serialVersionUID = 3958432897058634763L;
+    private static final long serialVersionUID = 943210483745020L;
 
     private String subject;
     private String body;

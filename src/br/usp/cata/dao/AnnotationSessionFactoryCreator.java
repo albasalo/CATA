@@ -9,6 +9,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.ComponentFactory;
 import br.com.caelum.vraptor.ioc.RequestScoped;
+
 import br.usp.cata.model.ExactMatching;
 import br.usp.cata.model.Lemma;
 import br.usp.cata.model.PatternSuggestionPair;

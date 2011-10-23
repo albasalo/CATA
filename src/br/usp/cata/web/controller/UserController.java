@@ -7,6 +7,7 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
+
 import br.usp.cata.model.CataConstraints;
 import br.usp.cata.model.User;
 import br.usp.cata.service.CryptoService;
@@ -72,4 +73,5 @@ public class UserController {
     	result.include("messages", "Sua senha foi alterada com sucesso.");
     	result.redirectTo(UserController.class).profile();
 	}
+	
 }

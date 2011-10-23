@@ -14,6 +14,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.ValidationMessage;
+
 import br.usp.cata.model.CataConstraints;
 import br.usp.cata.model.User;
 import br.usp.cata.service.CryptoService;
@@ -59,10 +60,10 @@ public class IndexController {
     	
     	if(user.getEmail().equals(""))
     		validator.add(new ValidationMessage(
-    				"O campo não pode ser vazio.", "E-mail"));
+    				CataConstraints.emptyField, "E-mail"));
     	if(user.getPassword().equals(""))
     		validator.add(new ValidationMessage(
-    				"O campo não pode ser vazio.", "Senha"));    	
+    				CataConstraints.emptyField, "Senha"));    	
     	validator.onErrorRedirectTo(IndexController.class).index();
 
         final boolean success = userService.authenticate(user.getEmail(), user.getPassword());
@@ -80,10 +81,10 @@ public class IndexController {
 	public void advice(UploadedFile file) throws Exception {
 		if(file == null)
 			validator.add(new ValidationMessage(
-    				"Selecione um arquivo no formato .txt", "Nenhum arquivo selecionado"));
+    				"Selecione um arquivo no formato .txt.", "Nenhum arquivo selecionado"));
 		else if(!file.getContentType().equals("text/plain")) {
 			validator.add(new ValidationMessage(
-					"O arquivo deve estar no formato .txt", "Formato do arquivo"));
+					"O arquivo deve estar no formato .txt.", "Formato do arquivo"));
 		}
 		else if(IOUtils.toByteArray(file.getFile()).length > CataConstraints.FILE_MAX_SIZE) {
 			validator.add(new ValidationMessage(
@@ -119,10 +120,10 @@ public class IndexController {
     {
     	if(newUser.getName().equals(""))
     		validator.add(new ValidationMessage(
-    				"O campo não pode ser vazio.", "Nome"));
+    				CataConstraints.emptyField, "Nome"));
     	if(newUser.getEmail().equals(""))
     		validator.add(new ValidationMessage(
-    				"O campo não pode ser vazio.", "E-mail"));
+    				CataConstraints.emptyField, "E-mail"));
     	if(newUser.getPassword().length() < CataConstraints.PASSWORD_MIN_LENGTH)
     		validator.add(new ValidationMessage(
     				"A senha deve ter, no mínimo, 6 caracteres.", "Senha"));
@@ -131,8 +132,7 @@ public class IndexController {
     				"A senha deve ter, no máximo, 32 caracteres", "Senha"));
     	if(!newUser.getPassword().equals(password))
         	validator.add(new ValidationMessage(
-        			"As senhas digitadas não são idênticas.", "Senhas"));
-        
+        			"As senhas digitadas não são idênticas.", "Senhas"));       
     	validator.onErrorRedirectTo(IndexController.class).signup();
         
     	SignupResult signupResult = newUserService.register(newUser);

@@ -1,5 +1,6 @@
 package br.usp.cata.util.lemmatizer;
 
+
 public class SuffixesChar {
 	
 	private char character;

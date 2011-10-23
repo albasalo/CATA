@@ -11,7 +11,7 @@ import javax.persistence.Id;
 @Entity
 public class PatternSuggestionPair implements Serializable {
 	
-	private static final long serialVersionUID = 1937378649265L;
+	private static final long serialVersionUID = 943210483745024L;
 
 	@Id
 	@GeneratedValue

@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
+
 import br.usp.cata.dao.RuleDAO;
 import br.usp.cata.model.ExactMatching;
 import br.usp.cata.model.Lemma;

@@ -1,5 +1,6 @@
 package br.usp.cata.util.lemmatizer;
 
+
 public class ExpressionsChar {
 	
 	private char character;

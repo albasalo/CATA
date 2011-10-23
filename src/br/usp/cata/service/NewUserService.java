@@ -56,7 +56,7 @@ public class NewUserService {
 
         final String subject = "CATA: Ativação de conta";
         final String body = "Obrigado por se cadastrar no Sistema CATA de verificação" +
-        		" de estilo para textos acadêmicos. Clique " +
+        		" de estilo para textos acadêmicos de Computação. Clique " +
         		linkBuilder.toString()  + " para ativar sua conta.";
 
         return emailService.buildEmail(subject, body, newUser.getEmail());
@@ -68,6 +68,7 @@ public class NewUserService {
     	final User activeUserSameEmail = userDAO.findByEmailAndStatus(email, true);
     	if(activeUserSameEmail != null)
     		return SignupResult.USER_ALREADY_REGISTERED_ACTIVE_EMAIL;
+    	
     	final User userSameName = userDAO.findByName(newUser.getName());
     	if(userSameName != null)
     		return SignupResult.USER_ALREADY_REGISTERED_NAME;

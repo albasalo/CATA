@@ -12,6 +12,7 @@ import br.usp.cata.model.Mistake;
 import br.usp.cata.model.Position;
 import br.usp.cata.model.RuleInstance;
 
+
 public class Checker {
 	
 	private ArrayList<ArrayList<CheckedSegment>> checkedText;

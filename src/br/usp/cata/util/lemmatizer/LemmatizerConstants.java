@@ -1,5 +1,6 @@
 package br.usp.cata.util.lemmatizer;
 
+
 public class LemmatizerConstants {
 
 	public static final int undefinedTag = -1;
@@ -61,4 +62,5 @@ public class LemmatizerConstants {
 	
 	public static final double[] negNextNeighbour =
 		{0.07,0.00,0.02,0.00,0.00,0.01,0.00,0.01,0.01,0.00,0.62,0.01,0.03,0.03,0.00,0.00,0.00,0.00,0.00,0.00,0.00};
+	
 }

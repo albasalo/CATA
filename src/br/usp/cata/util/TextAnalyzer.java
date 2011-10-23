@@ -2,7 +2,9 @@ package br.usp.cata.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import javax.servlet.ServletContext;
+
 import br.usp.cata.model.Position;
 import br.usp.cata.util.lemmatizer.Lemmatizer;
 
