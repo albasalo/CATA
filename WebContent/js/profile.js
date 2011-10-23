@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	var lastID = 0;
 	var newID = 0;
+	var isSelected = false;
 				
 	function selectRule() {
 		if(lastID > 0) {
@@ -18,8 +19,19 @@ $(document).ready(function() {
 	};
 	
 	$('#rules tbody tr').live('click', function() {
+		isSelected = true;
 		var nTds = $('td', this);
 		newID = $(nTds[0]).text();
 		selectRule();
+	});
+	
+	$("#editrule-form").submit(function() {
+		if(isSelected) {
+			return true;
+		}
+		else {
+			showEditModal();
+			return false;
+		}
 	});
 });

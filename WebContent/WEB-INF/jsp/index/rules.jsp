@@ -198,6 +198,9 @@
 				
 				<c:choose>
 					<c:when test="${userSession.user != null}">
+						<br />
+						<div class="small">Deseja editar uma regra cadastrada por você?
+						Vá até seu <a href="<c:url value='/user/profile'/>">Perfil</a>.</div>
 						<button class="button" onclick="window.location.href='<c:url value='/rules/newrule'/>'">Cadastrar nova regra</button>
 					</c:when>
 					<c:otherwise>

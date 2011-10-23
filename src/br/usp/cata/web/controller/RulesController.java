@@ -260,5 +260,11 @@ public class RulesController {
 
 		result.redirectTo(RulesController.class).newrule();
 	}
+	
+	@Post
+	@Path("rules/editrule")
+	@Transactional
+	public void editrule(Rule rule) {
+	}
 
 }

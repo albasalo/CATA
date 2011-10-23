@@ -79,6 +79,34 @@
 				return false;
 			});
 		</script>
+		<script type="text/javascript">
+			function showEditModal() {
+				var modal = "#edit-modal";
+				if($(modal).length > 0) {
+				    $(modal).fadeIn().css({ 'width': Number(450)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+				
+				    var popMargTop = ($(modal).height() + 80) / 2;
+				    var popMargLeft = ($(modal).width() + 80) / 2;
+				
+				    $(modal).css({
+				        'margin-top' : -popMargTop,
+				        'margin-left' : -popMargLeft
+				    });
+				
+				    $('body').append('<div id="fade"></div>');
+				    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
+				
+				    return false;
+				}
+			};
+			
+			$('a.close, #fade').live('click', function() {
+				$('#fade , .popup_block').fadeOut( function() {
+				    $('#fade, a.close').remove();
+				});
+				return false;
+			});
+		</script>
 		<title>Perfil</title>
 	</head>
 	
@@ -210,9 +238,15 @@
 					</table>
 					<div class="spacer"></div>
 					</div>
-					<form action="<c:url value='/rules/editrule'/>" method="post">
+					<form action="<c:url value='/rules/editrule'/>" method="post" id="editrule-form">
 						<div id="inputRuleID"></div>
 						<input class="single_form_element button" type="submit" value="Editar regra">
+						<div id="edit-modal" class="popup_block" style="display:none">
+							<div class="error-messages">
+								<h2>Erro!</h2>
+								Selecione uma Regra para editar.
+							</div>
+						</div>
 						<button class="button" onclick="window.location.href='<c:url value='/rules/newrule'/>';return false;">Cadastrar nova regra</button>
 					</form>
 					<br />
