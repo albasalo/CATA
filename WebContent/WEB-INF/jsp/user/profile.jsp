@@ -92,9 +92,7 @@
 				<h1><c:out value="${userSession.user.name}"/></h1>
 				<h2>(<c:out value="${userSession.user.email}"/>)</h2>
 				<div class="indentation">
-					<br />
 					<button type="button" class="button" onclick="window.location.href='<c:url value='/user/changepassword'/>'">Alterar senha</button><br />
-					<br />
 					<b>Regras cadastradas por você</b><br />
 					<div class="grid">
 					<table cellpadding="0" cellspacing="0" border="0" class="display" id="rules">
@@ -212,14 +210,13 @@
 					</table>
 					<div class="spacer"></div>
 					</div>
-					<br />
 					<form action="<c:url value='/rules/editrule'/>" method="post">
 						<div id="inputRuleID"></div>
 						<input class="single_form_element button" type="submit" value="Editar regra">
+						<button class="button" onclick="window.location.href='<c:url value='/rules/newrule'/>';return false;">Cadastrar nova regra</button>
 					</form>
 					<br />
 				</div>
-				<br />
 				<button type="button" class="button" onclick="javascript:history.go(-1);return false;">Voltar</button>
 			</div>
 		</div>
