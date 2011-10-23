@@ -24,7 +24,7 @@ public class PatternSuggestionPair implements Serializable {
 	private String pattern;
 	
 	@Column(length=200)
-	private String suggestion;
+	private String suggestions;
 	
 	@Column
 	private boolean defaultPair;
@@ -56,12 +56,12 @@ public class PatternSuggestionPair implements Serializable {
 		this.pattern = pattern;
 	}
 
-	public String getSuggestion() {
-		return suggestion;
+	public String getSuggestions() {
+		return suggestions;
 	}
 
-	public void setSuggestion(String suggestion) {
-		this.suggestion = suggestion;
+	public void setSuggestions(String suggestions) {
+		this.suggestions = suggestions;
 	}
 
 	public boolean isDefaultPair() {

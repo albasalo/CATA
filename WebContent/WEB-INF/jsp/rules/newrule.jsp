@@ -102,8 +102,54 @@
 					<legend>Cadastrar nova Regra de Estilo</legend>
 					<span class="change_form_element" style="float:right" onclick="showHelp()">[?]</span>
 					<div id="help" class="popup_block " style="display:none">
-						<div class="popup_content">
-							Ajuda para Cadastrar a regra
+						<div class="popup_content" align="justify">
+							<h2>Ajuda</h2>
+							<div style="padding:6px">
+								<p>
+									Para cadastrar uma nova regra no Sistema CATA, é preciso, obrigatoriamente, fornecer
+									as seguintes informações: <a href="#Category"><b>Categoria</b></a>, <a href="#Type"><b>Tipo</b></a>,
+									um <a href="#Patterns"> <b>Lema</b></a> ou <a href="#Patterns"><b>Expressão Exata</b></a> e uma
+									<a href="#Source"><b>Referência Bibliográfica</b></a>. Opcionalmente, você poderá fornecer mais
+									<a href="#Patterns"><b>Lemas</b></a> e <a href="#Patterns"><b>Expressões Exatas</b></a>, assim
+									como uma breve <a href="#Explanation"><b>Explicação</b></a> sobre a regra.
+								</p>
+								<p>
+									<a name="Category"></a>A <b>Categoria</b> da regra deve ser selecionada dentre as opções apresentadas:
+									pode-se escolher entre <i>Problema</i> e <i>Possível Problema</i> - o segundo caso deve ser usado para
+									indicar que a regra pode não fazer sentido em alguns contextos.
+								</p>
+								<p>
+									<a name="Type"></a>O <b>Tipo</b> da regra é uma breve descrição sobre qual é o grupo de problemas de estilo
+									ao qual o erro cadastrado pertence. Deve ser selecionado entre as opções: <i>Clichê</i>,
+									<i>Estrangeirismo</i>, <i>Tradução Incorreta</i> ou <i>Outro</i>.
+								</p>
+								<p>
+									<a name="Patterns"></a>Os erros e sugestões propriamente ditos devem ser cadastrados nos campos <b>Lemas</b> ou
+									<b>Expressões Exatas</b>. Cada padrão incorreto deve ser cadastrado separadamente. Por exemplo,
+									se você deseja que sua regra capture os padrões "deploy" e "deployment", você deverá inserir
+									cada um deles num campo "Padrão Incorreto" diferente. Outro detalhe importante é que, para cada
+									"Padrão Incorreto", você deverá cadastrar sugestões correspondentes (i.e., não é permitido preencher
+									apenas o campo "Padrão Incorreto" e deixar o campo "Sugestões" em branco).<br />
+									Agora resta saber se você deve cadastrar um padrão em <b>Lemas</b> ou em <b>Expressões Exatas</b>.
+									Isso está relacionado à forma como o Sistema irá aplicar a sua regra. Um "lema" é, basicamente, uma
+									palavra em sua forma "não flexionada". Por exemplo, o lema de "meninas" é "menino", assim como o
+									lema de "comprei" é "comprar". Assim, se você cadastrar um padrão incorreto e suas respectivas sugestões
+									em <b>Lemas</b>, o Sistema irá aplicar essa regra para todas as flexões do padrão incorreto. Por exemplo,
+									se você cadastrou, em <b>Lemas</b>, o padrão "debugar", com a sugestão "depurar", o Sistema irá marcar como
+									problemas todas as flexões de "debugar": "debuguei", "debugamos", "debugaríamos" serão todos marcados como
+									erro de estilo. Já para o caso das <b>Expressões Exatas</b>, o sistema irá marcar como erro somente se
+									for encontrado um termo exatamente igual ao cadastrado como "padrão incorreto". Por exemplo, se você
+									cadastrar, em <b>Expressões Exatas</b>, "softwares" como "padrão incorreto", então o termo "software" não
+									será capturado (apenas o termo "softwares" mesmo).
+								</p>
+								<p>
+									<a name="Explanation"></a>Uma <b>Explicação</b> sobre a regra pode ser incluída, mas não é obrigatória.
+								</p>
+								<p>
+									<a name="Source"></a>A regra deve possuir, necessariamente, uma <b>Referência Bibliográfica</b>. Selecione uma
+									dentre as que já estão cadastradas no Sistema ou cadastre uma nova Referência.
+								</p>
+							</div>
 						</div>
 					</div>
 					<div class="single_form_element">

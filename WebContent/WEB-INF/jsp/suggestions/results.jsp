@@ -50,8 +50,8 @@
 													<td>${mistake.brokenRule.patternSuggestionElement.pattern}</td>
 												</tr>
 												<tr>
-													<td><b>Sugestão:</b></td>
-													<td>${mistake.brokenRule.patternSuggestionElement.suggestion}</td>
+													<td><b>Sugestões:</b></td>
+													<td>${mistake.brokenRule.patternSuggestionElement.suggestions}</td>
 												</tr>
 												</c:forEach>
 												TODO: Colocar as informações completas das regras

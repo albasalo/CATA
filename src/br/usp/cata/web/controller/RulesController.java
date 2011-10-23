@@ -66,7 +66,7 @@ public class RulesController {
 			if(lemmas != null) {
 				for(PatternSuggestionPair pair : lemmas) {
 					if(pair.getPattern().equals("") ||
-							pair.getSuggestion().equals("")) {
+							pair.getSuggestions().equals("")) {
 						validator.add(new ValidationMessage(
 			    				"Você deve cadastrar um padrão e sugestões para cada Lema.", "Lema"));
 						break;
@@ -76,7 +76,7 @@ public class RulesController {
 			if(exactMatchings != null) {
 				for(PatternSuggestionPair pair : exactMatchings) {
 					if(pair.getPattern().equals("") ||
-							pair.getSuggestion().equals("")) {
+							pair.getSuggestions().equals("")) {
 						validator.add(new ValidationMessage(
 			    				"Você deve cadastrar um padrão e sugestões para cada Expressão Exata.", "Expressão Exata"));
 						break;

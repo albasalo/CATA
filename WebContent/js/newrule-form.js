@@ -71,8 +71,8 @@ $(document).ready(function() {
 			$("#lemmasDiv").append('<span id="lemma' + counterLemma + '">' +
 					'<label class="label">Padrão incorreto</label><br />' +
 					'<input class="input_border width450" type="text" maxlength=200 name="lemmas[' + counterLemma + '].pattern"/><br/>' +
-					'<label class="label">Sugestão</label><br />' +
-					'<input class="input_border width450" type="text" maxlength=200 name="lemmas[' + counterLemma + '].suggestion"/><br/>' +
+					'<label class="label">Sugestões</label><br />' +
+					'<input class="input_border width450" type="text" maxlength=200 name="lemmas[' + counterLemma + '].suggestions"/><br/>' +
 					'<br /></span>');
 		}
 	});
@@ -91,8 +91,8 @@ $(document).ready(function() {
 			$("#exactMatchingsDiv").append('<span id="exactMatching' + counter + '">' +
 					'<label class="label">Padrão incorreto</label><br />' +
 					'<input class="input_border width450" type="text" maxlength=200 name="exactMatchings[' + counter + '].pattern"/><br/>' +
-					'<label class="label">Sugestão</label><br />' +
-					'<input class="input_border width450" type="text" maxlength=200 name="exactMatchings[' + counter + '].suggestion"/><br/>' +
+					'<label class="label">Sugestões</label><br />' +
+					'<input class="input_border width450" type="text" maxlength=200 name="exactMatchings[' + counter + '].suggestions"/><br/>' +
 					'<br /></span>');
 		}
 	});

@@ -102,7 +102,7 @@
 								<th>Tipo</th>
 								<th>Categoria</th>
 								<th>Erro</th>
-								<th>Sugestão</th>
+								<th>Sugestões</th>
 								<th>Mais informações</th>
 							</tr>
 						</thead>
@@ -117,7 +117,7 @@
 											<c:forEach items="${rule.lemmas}" var="lemma">
 												<c:if test="${lemma.pair.defaultPair == true}">
 													<td class="center"><c:out value="${lemma.pair.pattern}"/></td>
-													<td class="center"><c:out value="${lemma.pair.suggestion}"/></td>
+													<td class="center"><c:out value="${lemma.pair.suggestions}"/></td>
 												</c:if>
 											</c:forEach>
 										</c:when>
@@ -125,7 +125,7 @@
 											<c:forEach items="${rule.exactMatchings}" var="exactMatching">
 												<c:if test="${exactMatching.pair.defaultPair == true}">
 													<td class="center"><c:out value="${exactMatching.pair.pattern}"/></td>
-													<td class="center"><c:out value="${exactMatching.pair.suggestion}"/></td>
+													<td class="center"><c:out value="${exactMatching.pair.suggestions}"/></td>
 												</c:if>
 											</c:forEach>
 										</c:otherwise>
@@ -142,11 +142,11 @@
 												<b>Lemas:</b><br />
 												<div class="indentation">
 													<table class="modal-table">
-														<tr><td><b>Padrão Incorreto</b></td><td><b>Sugestão</b></td></tr>
+														<tr><td><b>Padrão Incorreto</b></td><td><b>Sugestões</b></td></tr>
 														<c:forEach items="${rule.lemmas}" var="lemma">
 															<tr>
 																<td><c:out value="${lemma.pair.pattern}" /></td>
-																<td><c:out value="${lemma.pair.suggestion}" /></td>
+																<td><c:out value="${lemma.pair.suggestions}" /></td>
 															</tr>
 														</c:forEach>
 													</table>
@@ -156,11 +156,11 @@
 												<b>Expressões exatas:</b><br />
 												<div class="indentation">
 													<table class="modal-table">
-														<tr><td><b>Padrão Incorreto</b></td><td><b>Sugestão</b></td></tr>
+														<tr><td><b>Padrão Incorreto</b></td><td><b>Sugestões</b></td></tr>
 														<c:forEach items="${rule.exactMatchings}" var="exactMatching">
 															<tr>
 																<td><c:out value="${exactMatching.pair.pattern}" /></td>
-																<td><c:out value="${exactMatching.pair.suggestion}" /></td>
+																<td><c:out value="${exactMatching.pair.suggestions}" /></td>
 															</tr>
 														</c:forEach>
 													</table>
