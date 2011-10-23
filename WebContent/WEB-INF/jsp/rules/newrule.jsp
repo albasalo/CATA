@@ -66,12 +66,25 @@
 				}
 			};
 			
-			$('a.close, #fade').live('click', function() {
-				$('#fade , .popup_block').fadeOut( function() {
-				    $('#fade, a.close').remove();
-				});
-				return false;
-			});
+			function showHelp(sourceID) {
+				var modal = "#help";
+				if($(modal).length > 0) {
+				    $(modal).fadeIn().css({ 'width': Number(550)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+				
+				    var popMargTop = ($(modal).height() + 80) / 2;
+				    var popMargLeft = ($(modal).width() + 80) / 2;
+				
+				    $(modal).css({
+				        'margin-top' : -popMargTop,
+				        'margin-left' : -popMargLeft
+				    });
+				
+				    $('body').append('<div id="fade"></div>');
+				    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
+				
+				    return false;
+				}
+			};
 		</script>
 		
 		<title>Cadastrar nova Regra de Estilo</title>
@@ -87,7 +100,12 @@
 				<form id="custom_form" class="width800" action="<c:url value='/rules/newrule'/>" method="post">
 				<fieldset>
 					<legend>Cadastrar nova Regra de Estilo</legend>
-					
+					<span class="change_form_element" style="float:right" onclick="showHelp()">[?]</span>
+					<div id="help" class="popup_block " style="display:none">
+						<div class="popup_content">
+							Ajuda para Cadastrar a regra
+						</div>
+					</div>
 					<div class="single_form_element">
 						<label class="label" for="name">Categoria*</label>
 						<br />
@@ -109,11 +127,11 @@
 					</div>
 					<br />
 					<b>Lemas:</b>
-					<div class="single_form_element">
+					<div class="single_form_element" style="display:inline">
 						<div id="lemmasDiv" class="indent">
 						</div>
 					</div>
-					<div class="single_form_element">
+					<div class="single_form_element" style="display:inline">
 						<div class="indent">
 							<span id="plus-lemma" class="change_form_element">[+]</span>
 							<span id="minus-lemma" class="change_form_element">[-]</span>
@@ -121,11 +139,11 @@
 					</div>
 					<br />
 					<b>Expressões exatas:</b><br />
-					<div class="single_form_element">
+					<div class="single_form_element" style="display:inline">
 						<div id="exactMatchingsDiv" class="indent">
 						</div>
 					</div>
-					<div class="single_form_element">
+					<div class="single_form_element" style="display:inline">
 						<div class="indent">
 							<span id="plus-exact" class="change_form_element">[+]</span>
 							<span id="minus-exact" class="change_form_element">[-]</span>
@@ -142,7 +160,8 @@
 					<br />
 									
 					<div class="single_form_element">
-						<label class="label" for="source"><a name="source">Referência*</a></label>
+						<label class="label" for="source"><a name="source">Referência*</a></label><br />
+						Selecione uma Referência Bibliográfica para sua Regra
 						<div id="inputSourceID"></div>
 					</div>
 					<div class="indent">	
@@ -438,13 +457,11 @@
 							<div class="spacer"></div>
 							</div>
 						</div>
-						
-						<br />
 						<div class="small">Não encontrou a referência para sua regra?
 							<a href="<c:url value='/rules/newsource'/>">Cadastre uma nova referência</a>.</div>
 					</div>
-					<br /><br />
-				
+					<br />
+					<button type="button" class="button" onclick="javascript:history.go(-1);return false;">Voltar</button>
 					<input class="single_form_element button" type="submit" value="Cadastrar">
 				</fieldset>
 				</form>
