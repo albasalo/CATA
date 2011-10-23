@@ -45,6 +45,10 @@ public class RuleService {
 		ruleDAO.saveOrUpdate(rule);
 	}
 	
+	public void delete(Rule rule) {
+		ruleDAO.delete(rule);
+	}
+	
 	public List<Rule> findAll() {
 		return ruleDAO.findAll();
 	}

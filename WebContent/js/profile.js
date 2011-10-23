@@ -30,7 +30,19 @@ $(document).ready(function() {
 			return true;
 		}
 		else {
-			showEditModal();
+			showModalById("#edit-modal");
+			return false;
+		}
+	});
+	
+	$("#deleteRule").click(function() {
+		if(isSelected) {
+			$("#deleterule-form").append('<input id="selectedRuleID' + newID + '" name="ruleToBeDeleted.ruleID" value="' + newID + '" style="display:none" />');
+			$("#deleterule-form").submit();
+			return false;
+		}
+		else {
+			showModalById("#delete-modal");
 			return false;
 		}
 	});

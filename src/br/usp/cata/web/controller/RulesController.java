@@ -364,4 +364,21 @@ public class RulesController {
 		result.include("messages", "A Regra foi editada com sucesso.");
 		result.redirectTo(UserController.class).profile();
 	}
+	
+	@Post
+	@Path("rules/deleterule")
+	@Transactional
+	public void deleterule(Rule ruleToBeDeleted) {
+		Rule rule = ruleService.findByID(ruleToBeDeleted.getRuleID());		
+		if(!rule.getUser().getUserID().equals(userSession.getUserID())) {
+			validator.add(new ValidationMessage(
+    				"Você não possui autorização.", "Erro"));
+		}
+		validator.onErrorRedirectTo(UserController.class).profile();
+		
+		ruleService.delete(rule);
+		result.include("messages", "A Regra foi removida com sucesso.");
+		result.redirectTo(UserController.class).profile();
+	}
+	
 }

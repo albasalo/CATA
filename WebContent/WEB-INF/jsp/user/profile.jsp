@@ -80,8 +80,7 @@
 			});
 		</script>
 		<script type="text/javascript">
-			function showEditModal() {
-				var modal = "#edit-modal";
+			function showModalById(modal) {
 				if($(modal).length > 0) {
 				    $(modal).fadeIn().css({ 'width': Number(450)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
 				
@@ -247,8 +246,16 @@
 								Selecione uma Regra para editar.
 							</div>
 						</div>
+						<button id="deleteRule" class="button">Remover regra</button>
 						<button class="button" onclick="window.location.href='<c:url value='/rules/newrule'/>';return false;">Cadastrar nova regra</button>
 					</form>
+					<form action="<c:url value='/rules/deleterule'/>" method="post" id="deleterule-form" style="display:none"></form>
+					<div id="delete-modal" class="popup_block" style="display:none">
+							<div class="error-messages">
+								<h2>Erro!</h2>
+								Selecione uma Regra para remover.
+							</div>
+						</div>
 					<br />
 				</div>
 				<button type="button" class="button" onclick="javascript:history.go(-1);return false;">Voltar</button>
