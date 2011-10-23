@@ -165,7 +165,7 @@
 					<div class="single_form_element">
 						<label class="label" for="name">Tipo*</label>
 						<br />
-						<select id="selectType" name="newRule.type" class="input_border width250">
+						<select id="selectRuleType" name="newRule.type" class="input_border width250">
 							<c:forEach var="type" items="${typesOfRules}"  >
 									<option value="${type}">${type.typeDescription}</option>									
 							</c:forEach>

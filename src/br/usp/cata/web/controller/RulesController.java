@@ -42,9 +42,7 @@ public class RulesController {
 		this.userSession = userSession;
 	}
 	
-	@Get
-	@Path("/rules/newrule")
-	public void newrule() {
+	public void includeInformation() {
 		result.include("ruleCategories", RuleCategories.values());
 		result.include("typesOfRules", TypesOfRules.values());
 		result.include("typesOfSources", TypesOfSources.values());
@@ -53,6 +51,12 @@ public class RulesController {
 		result.include("handbooks", sourceService.findByType(TypesOfSources.HANDBOOK));
 		result.include("urls", sourceService.findByType(TypesOfSources.INTERNET));
 		result.include("others", sourceService.findByType(TypesOfSources.OTHER));
+	}
+	
+	@Get
+	@Path("/rules/newrule")
+	public void newrule() {
+		includeInformation();
 	}
 	
 	private void validateRule(Rule newRule, List<PatternSuggestionPair> lemmas,
@@ -265,6 +269,23 @@ public class RulesController {
 	@Path("rules/editrule")
 	@Transactional
 	public void editrule(Rule rule) {
+		Rule dbRule = ruleService.findByID(rule.getRuleID());
+		
+		if(!dbRule.getUser().getUserID().equals(userSession.getUserID()))
+			validator.add(new ValidationMessage(
+    				"Você não possui autorização.", "Erro"));
+		validator.onErrorRedirectTo(UserController.class).profile();
+		
+		includeInformation();
+		result.include("rule", dbRule);
 	}
 
+	@Post
+	@Path("rules/updaterule")
+	@Transactional
+	public void updaterule(Rule updatedRule, List<PatternSuggestionPair> lemmas,
+			List<PatternSuggestionPair> exactMatchings, Source source) {
+		result.include("messages", "A Regra foi editada com sucesso.");
+		result.redirectTo(UserController.class).profile();
+	}
 }
