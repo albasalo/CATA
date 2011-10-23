@@ -17,4 +17,5 @@ public class ExactMatchingDAO extends AbstractDAO<Long, ExactMatching> {
 	public void delete(ExactMatching exactMatching) {
 		super.delete(exactMatching);
 	}
+	
 }

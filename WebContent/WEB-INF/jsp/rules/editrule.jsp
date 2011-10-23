@@ -9,11 +9,41 @@
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/table.css'/>" rel="stylesheet" type="text/css" />
 		
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.dataTables.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/editrule-form.js'/>"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				if($('#modal').length > 0) {
+				    $('#modal').fadeIn().css({ 'width': Number(500)})
+				    	.prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+				
+				    var popMargTop = ($('#modal').height() + 80) / 2;
+				    var popMargLeft = ($('#modal').width() + 80) / 2;
+				
+				    $('#modal').css({
+				        'margin-top' : -popMargTop,
+				        'margin-left' : -popMargLeft
+				    });
+				
+				    $('body').append('<div id="fade"></div>');
+				    $('#fade').css({ 'filter': 'alpha(opacity=80)'}).fadeIn(); 
+				
+				    return false;
+				}
+			});
+			
+			$('a.close, #fade').live('click', function() {
+				$('#fade , .popup_block').fadeOut( function() {
+				    $('#fade, a.close').remove();
+				});
+				return false;
+			});
+		</script>	
 
 		<title>Editar regra</title>
 	</head>
@@ -29,6 +59,7 @@
 				<fieldset>
 					<legend>Editar Regra de Estilo</legend>
 					<b>ID da Regra: </b><c:out value="${rule.ruleID}"/>
+					<input name="updatedRule.ruleID" value="${rule.ruleID}" style="display:none">
 					<br /><br />
 					<div class="single_form_element">
 						<label class="label" for="name">Categoria*</label>

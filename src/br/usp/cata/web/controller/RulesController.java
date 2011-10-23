@@ -19,6 +19,8 @@ import br.usp.cata.model.RuleCategories;
 import br.usp.cata.model.Source;
 import br.usp.cata.model.TypesOfRules;
 import br.usp.cata.model.TypesOfSources;
+import br.usp.cata.service.ExactMatchingService;
+import br.usp.cata.service.LemmaService;
 import br.usp.cata.service.RuleService;
 import br.usp.cata.service.SourceService;
 import br.usp.cata.web.interceptor.Transactional;
@@ -32,14 +34,19 @@ public class RulesController {
 	private final RuleService ruleService;
 	private final SourceService sourceService;
 	private final UserSession userSession;
+	private final LemmaService lemmaService;
+	private final ExactMatchingService exactMatchingService;
 	
 	public RulesController(final Result result, final Validator validator,
-		final RuleService ruleService, final SourceService sourceService, final UserSession userSession) {
+		final RuleService ruleService, final SourceService sourceService, final UserSession userSession,
+		final LemmaService lemmaService, ExactMatchingService exactMatchingService) {
 		this.result = result;
 		this.validator = validator;
 		this.ruleService = ruleService;
 		this.sourceService = sourceService;
 		this.userSession = userSession;
+		this.lemmaService = lemmaService;
+		this.exactMatchingService = exactMatchingService;
 	}
 	
 	public void includeInformation() {
@@ -101,6 +108,10 @@ public class RulesController {
 			List<PatternSuggestionPair> exactMatchings, Source source) {
 		
 		validateRule(newRule, lemmas, exactMatchings, source);
+		Source dbSource = sourceService.findByID(source.getSourceID());
+		if(dbSource == null)
+			validator.add(new ValidationMessage(
+    				"Referência Bibliográfica inválida.", "Referência"));
 		validator.onErrorRedirectTo(RulesController.class).newrule();
 		
 		if(newRule.getExplanation().equals(""))
@@ -134,7 +145,7 @@ public class RulesController {
 		//TODO Mudar para false: as novas regras não devem ser default do sistema
 		newRule.setDefaultRule(true);
 		
-		newRule.setSource(sourceService.findByID(source.getSourceID()));
+		newRule.setSource(dbSource);
 		
 		ruleService.save(newRule);
 		
@@ -265,19 +276,23 @@ public class RulesController {
 		result.redirectTo(RulesController.class).newrule();
 	}
 	
+	@Get
 	@Post
 	@Path("rules/editrule")
 	@Transactional
-	public void editrule(Rule rule) {
-		Rule dbRule = ruleService.findByID(rule.getRuleID());
+	public void editrule(Rule ruleToBeUpdated) {
+		if(ruleToBeUpdated == null)
+			result.redirectTo(UserController.class).profile();
 		
-		if(!dbRule.getUser().getUserID().equals(userSession.getUserID()))
+		Rule rule = ruleService.findByID(ruleToBeUpdated.getRuleID());
+		
+		if(!rule.getUser().getUserID().equals(userSession.getUserID()))
 			validator.add(new ValidationMessage(
     				"Você não possui autorização.", "Erro"));
 		validator.onErrorRedirectTo(UserController.class).profile();
 		
 		includeInformation();
-		result.include("rule", dbRule);
+		result.include("rule", rule);
 	}
 
 	@Post
@@ -285,6 +300,67 @@ public class RulesController {
 	@Transactional
 	public void updaterule(Rule updatedRule, List<PatternSuggestionPair> lemmas,
 			List<PatternSuggestionPair> exactMatchings, Source source) {
+		
+		Rule rule = ruleService.findByID(updatedRule.getRuleID());		
+		if(!rule.getUser().getUserID().equals(userSession.getUserID())) {
+			validator.add(new ValidationMessage(
+    				"Você não possui autorização.", "Erro"));
+		}
+		validator.onErrorRedirectTo(UserController.class).profile();
+		
+		Source ruleSource;
+		if(source != null && source.getSourceID() != null)
+			ruleSource = sourceService.findByID(source.getSourceID());
+		else {
+			ruleSource = rule.getSource();
+			source.setSourceID(ruleSource.getSourceID());
+		}
+		validateRule(updatedRule, lemmas, exactMatchings, source);
+		if(ruleSource == null) {
+			validator.add(new ValidationMessage(
+    				"Referência Bibliográfica inválida.", "Referência"));
+		}
+		validator.onErrorRedirectTo(RulesController.class).editrule(rule);
+		
+		for(Lemma lemma : rule.getLemmas())
+			lemmaService.delete(lemma);
+		for(ExactMatching exactMatching : rule.getExactMatchings())
+			exactMatchingService.delete(exactMatching);
+				
+		rule.setCategory(updatedRule.getCategory());
+		rule.setType(updatedRule.getType());
+		if(updatedRule.getExplanation().equals(""))
+			rule.setExplanation(null);
+		else
+			rule.setExplanation(updatedRule.getExplanation());
+		
+		rule.setLemmas(new HashSet<Lemma>());
+		rule.setExactMatchings(new HashSet<ExactMatching>());
+		ruleService.update(rule);
+		
+		if(lemmas != null) {
+			for(PatternSuggestionPair pair : lemmas) {
+				pair.setDefaultPair(false);
+				Lemma lemma = new Lemma();
+				lemma.setRule(rule);
+				lemma.setPair(pair);
+				rule.getLemmas().add(lemma);
+			}
+			lemmas.get(0).setDefaultPair(true);
+		}
+		if(exactMatchings != null) {
+			for(PatternSuggestionPair pair : exactMatchings) {
+				pair.setDefaultPair(false);
+				ExactMatching exactMatching = new ExactMatching();
+				exactMatching.setRule(rule);
+				exactMatching.setPair(pair);
+				rule.getExactMatchings().add(exactMatching);
+			}
+			exactMatchings.get(0).setDefaultPair(true);
+		}
+		
+		ruleService.update(rule);
+		
 		result.include("messages", "A Regra foi editada com sucesso.");
 		result.redirectTo(UserController.class).profile();
 	}

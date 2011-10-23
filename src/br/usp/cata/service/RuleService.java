@@ -23,8 +23,8 @@ public class RuleService {
 		this.ruleDAO = ruleDAO;
 		this.patternSuggestionPairService = patternSuggestionPairService;
 	}
-
-	public void save(Rule rule) {
+	
+	private void tokenizeLemmasAndMatchings(Rule rule) {	
 		if(rule.getLemmas() != null) {
 			for(Lemma lemma : rule.getLemmas())
 				patternSuggestionPairService.tokenizePattern(lemma.getPair());
@@ -33,8 +33,16 @@ public class RuleService {
 			for(ExactMatching exactMatching : rule.getExactMatchings())
 				patternSuggestionPairService.tokenizePattern(exactMatching.getPair());
 		}
-		
+	}
+
+	public void save(Rule rule) {
+		tokenizeLemmasAndMatchings(rule);
 		ruleDAO.save(rule);
+	}
+	
+	public void update(Rule rule) {
+		tokenizeLemmasAndMatchings(rule);
+		ruleDAO.saveOrUpdate(rule);
 	}
 	
 	public List<Rule> findAll() {
