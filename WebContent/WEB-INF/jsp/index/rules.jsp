@@ -6,6 +6,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />	
@@ -15,7 +16,7 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.dataTables.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='js/jquery.simplemodal.js'/>"></script>
-		<script type="text/javascript" src="<c:url value='js/modal-table.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='js/custom-modal.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#rules-menu").addClass('selected');
@@ -26,32 +27,10 @@
 			});
 		</script>
 		<script type="text/javascript">
-			function showModal(ruleID) {
+			function showRuleModal(ruleID) {
 				var modal = "#rule" + ruleID;
-				if($(modal).length > 0) {
-				    $(modal).fadeIn().css({ 'width': Number(550)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
-				
-				    var popMargTop = ($(modal).height() + 80) / 2;
-				    var popMargLeft = ($(modal).width() + 80) / 2;
-				
-				    $(modal).css({
-				        'margin-top' : -popMargTop,
-				        'margin-left' : -popMargLeft
-				    });
-				
-				    $('body').append('<div id="fade"></div>');
-				    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
-				
-				    return false;
-				}
+				showCustomModal(modal, '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
 			};
-			
-			$('a.close, #fade').live('click', function() {
-				$('#fade , .popup_block').fadeOut( function() {
-				    $('#fade, a.close').remove();
-				});
-				return false;
-			});
 		</script>
 		
 		<title>Regras e sugestões de estilo</title>
@@ -114,7 +93,7 @@
 								</c:choose>
 								<td class="center"><c:out value="${rule.user.name}"/></td>
 								<td class="center">
-									<img onclick="showModal(${rule.ruleID});" src="<c:url value='/css/images/plus-icon.png'/>">
+									<img onclick="showRuleModal(${rule.ruleID});" src="<c:url value='/css/images/plus-icon.png'/>">
 									<div id="rule${rule.ruleID}" class="popup_block" style="display:none">
 										<div class="popup_content" style="text-align: left">
 											<b>Mais informações sobre a Regra de Estilo</b><br />

@@ -16,40 +16,14 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/coin-slider.min.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
-		<script type="text/javascript" src="<c:url value='/js/login-form.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/messages-modal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/advice-form.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/login-form.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#index-menu").addClass('selected');			
 				$('#coin-slider').coinslider({ width: 950, navigation: true, delay: 5000 });
-			});
-		</script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				if($('#modal').length > 0) {
-				    $('#modal').fadeIn().css({ 'width': Number(500)})
-				    	.prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
-				
-				    var popMargTop = ($('#modal').height() + 80) / 2;
-				    var popMargLeft = ($('#modal').width() + 80) / 2;
-				
-				    $('#modal').css({
-				        'margin-top' : -popMargTop,
-				        'margin-left' : -popMargLeft
-				    });
-				
-				    $('body').append('<div id="fade"></div>');
-				    $('#fade').css({ 'filter': 'alpha(opacity=80)'}).fadeIn(); 
-				
-				    return false;
-				}
-			});
-			
-			$('a.close, #fade').live('click', function() {
-				$('#fade , .popup_block').fadeOut( function() {
-				    $('#fade, a.close').remove();
-				});
-				return false;
+				showModal("#modal", '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
 			});
 		</script>
 		

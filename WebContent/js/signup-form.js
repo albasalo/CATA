@@ -44,6 +44,7 @@ $(document).ready(function(){
 			return true;
 		}
 	}
+	
 	function validateEmail() {
 		var a = $("#email").val();
 		var filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
@@ -62,6 +63,7 @@ $(document).ready(function(){
 			return false;
 		}
 	}
+	
 	function validatePass1() {
 		if(pass1.val().length < 6) {
 			pass1.removeClass("input_border");

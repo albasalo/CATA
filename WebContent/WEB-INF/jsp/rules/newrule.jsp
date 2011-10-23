@@ -6,6 +6,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
@@ -16,74 +17,22 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.dataTables.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/messages-modal.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/custom-modal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/newrule-form.js'/>"></script>
 		<script type="text/javascript">
-			$(document).ready(function() {
-				if($('#modal').length > 0) {
-				    $('#modal').fadeIn().css({ 'width': Number(500)})
-				    	.prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
-				
-				    var popMargTop = ($('#modal').height() + 80) / 2;
-				    var popMargLeft = ($('#modal').width() + 80) / 2;
-				
-				    $('#modal').css({
-				        'margin-top' : -popMargTop,
-				        'margin-left' : -popMargLeft
-				    });
-				
-				    $('body').append('<div id="fade"></div>');
-				    $('#fade').css({ 'filter': 'alpha(opacity=80)'}).fadeIn(); 
-				
-				    return false;
-				}
-			});
-			
-			$('a.close, #fade').live('click', function() {
-				$('#fade , .popup_block').fadeOut( function() {
-				    $('#fade, a.close').remove();
-				});
-				return false;
+			$(document).ready(function () {
+				showModal("#modal", '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
 			});
 		</script>		
 		<script type="text/javascript">
-			function showModal(sourceID) {
+			function showSourceModal(sourceID) {
 				var modal = "#source" + sourceID;
-				if($(modal).length > 0) {
-				    $(modal).fadeIn().css({ 'width': Number(550)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
-				
-				    var popMargTop = ($(modal).height() + 80) / 2;
-				    var popMargLeft = ($(modal).width() + 80) / 2;
-				
-				    $(modal).css({
-				        'margin-top' : -popMargTop,
-				        'margin-left' : -popMargLeft
-				    });
-				
-				    $('body').append('<div id="fade"></div>');
-				    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
-				
-				    return false;
-				}
+				showCustomModal(modal, '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
 			};
 			
-			function showHelp(sourceID) {
-				var modal = "#help";
-				if($(modal).length > 0) {
-				    $(modal).fadeIn().css({ 'width': Number(550)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
-				
-				    var popMargTop = ($(modal).height() + 80) / 2;
-				    var popMargLeft = ($(modal).width() + 80) / 2;
-				
-				    $(modal).css({
-				        'margin-top' : -popMargTop,
-				        'margin-left' : -popMargLeft
-				    });
-				
-				    $('body').append('<div id="fade"></div>');
-				    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
-				
-				    return false;
-				}
+			function showHelp() {
+				showCustomModal("#help", '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
 			};
 		</script>
 		
@@ -238,7 +187,7 @@
 											<td><c:out value="${academic.title}" /></td>
 											<td><c:out value="${academic.authors}" /></td>
 											<td class="center">
-												<img onclick="showModal(${academic.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
+												<img onclick="showSourceModal(${academic.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${academic.sourceID}" class="popup_block" style="display:none">
 													<div class="popup_content" style="text-align: left">
 														<b>Mais informações sobre a referência selecionada</b><br />
@@ -304,7 +253,7 @@
 											<td><c:out value="${book.title}" /></td>
 											<td><c:out value="${book.authors}" /></td>
 											<td class="center">
-												<img onclick="showModal(${book.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
+												<img onclick="showSourceModal(${book.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${book.sourceID}" class="popup_block" style="display:none">
 													<div class="popup_content" style="text-align: left">
 														<b>Mais informações sobre a referência selecionada</b><br />
@@ -370,7 +319,7 @@
 											<td><c:out value="${handbook.title}" /></td>
 											<td><c:out value="${handbook.authors}" /></td>
 											<td class="center">
-												<img onclick="showModal(${handbook.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
+												<img onclick="showSourceModal(${handbook.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${handbook.sourceID}" class="popup_block" style="display:none">
 													<div class="popup_content" style="text-align: left">
 														<b>Mais informações sobre a referência selecionada</b><br />
@@ -434,7 +383,7 @@
 											<td><c:out value="${url.sourceID}"/></td>
 											<td><a href="<c:out value="${url.url}" />" target="_blank"><c:out value="${url.title}"/></a></td>
 											<td class="center">
-												<img onclick="showModal(${url.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
+												<img onclick="showSourceModal(${url.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${url.sourceID}" class="popup_block" style="display:none">
 													<div class="popup_content" style="text-align: left">
 														<b>Mais informações sobre a referência selecionada</b><br />
@@ -482,7 +431,7 @@
 											<td><c:out value="${other.sourceID}" /></td>
 											<td><c:out value="${other.moreInformation}" /></td>
 											<td class="center">
-												<img onclick="showModal(${other.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
+												<img onclick="showSourceModal(${other.sourceID});" src="<c:url value='/css/images/plus-icon.png'/>">
 												<div id="source${other.sourceID}" class="popup_block" style="display:none">
 													<div class="popup_content" style="text-align: left">
 														<b>Mais informações sobre a referência selecionada</b><br />
