@@ -4,18 +4,16 @@ $(document).ready(function() {
 	var isSelected = false;
 				
 	function selectRule() {
+		isSelected = true;
 		if(lastID > 0) {
 			var lastRowID = "#row" + lastID;
 			$(lastRowID).removeClass("selected");
-
-			var lastSelectedSource = "#selectedRuleID" + lastID;
-			$("#inputRuleID").remove(lastSelectedSource);
 		}
 		lastID = newID;
 		var newRowID = "#row" + newID;
 		$(newRowID).addClass("selected");					
 		
-		$("#inputRuleID").append('<input id="selectedRuleID' + newID + '" name="ruleToBeUpdated.ruleID" value="' + newID + '" style="display:none" />');
+		$("#selectedRuleID").val(newID);
 	};
 	
 	$('#rules tbody tr').live('click', function() {
@@ -30,7 +28,7 @@ $(document).ready(function() {
 			return true;
 		}
 		else {
-			showModalById("#edit-modal");
+			showModalByID("#edit-modal");
 			return false;
 		}
 	});

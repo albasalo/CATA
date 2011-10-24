@@ -147,30 +147,10 @@
 					
 					<b>Referência:</b><br />
 					<div class="indentation">
-						<table>
-						<c:if test = "${rule.source.type == 'ACADEMIC_PUBLISHING'}">
-							<tr><td><c:out value="${rule.source.authors}"/>, <i><c:out value="${rule.source.title}"/></i><br />
-							<c:out value="${rule.source.institution}"/>, <c:out value="${rule.source.date}"/><br />
-							<c:out value="${rule.source.moreInformation}"/></td></tr>
-						</c:if>
-						<c:if test = "${rule.source.type == 'BOOK'}">
-							<tr><c:out value="${rule.source.authors}"/>, <i><c:out value="${rule.source.title}"/></i></tr>
-							<tr><c:out value="${rule.source.publisher}"/>, <c:out value="${rule.source.date}"/></tr>
-							<tr><c:out value="${rule.source.moreInformation}"/></tr>
-						</c:if>
-						<c:if test = "${rule.source.type == 'HANDBOOK'}">
-							<tr><c:out value="${rule.source.authors}"/>, <i><c:out value="${rule.source.title}"/></i></tr>
-							<tr><c:out value="${rule.source.publisher}"/>, <c:out value="${rule.source.date}"/></tr>
-							<tr><c:out value="${rule.source.moreInformation}"/></tr>
-						</c:if>
-						<c:if test = "${rule.source.type == 'INTERNET'}">
-							<tr><td><a href="<c:out value="${rule.source.url}" />" target="_blank"><c:out value="${rule.source.title}"/></a></td></tr>
-							<tr><td><c:out value="${rule.source.moreInformation}"/></td></tr>
-						</c:if>
-						<c:if test = "${rule.source.type == 'OTHER'}">
-							<tr><c:out value="${rule.source.moreInformation}"/></tr>
-						</c:if>
-						</table>
+						<div id="inputSourceID"  style="display:none">
+							<input id="selectedSourceID" name="source.sourceID" value="0">
+						</div>
+						<%@ include file="../shared/table-sources.jsp"%>
 						<button id="changeSource" type="button" class="button">Alterar Referência</button>
 						
 						<div id="selectSource" class="indent" style="display:none">	

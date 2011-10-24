@@ -6,15 +6,12 @@ $(document).ready(function() {
 		if(lastID > 0) {
 			var lastRowID = "#row" + lastID;
 			$(lastRowID).removeClass("selected");
-
-			var lastSelectedSource = "#selectedSourceID" + lastID;
-			$("#inputSourceID").remove(lastSelectedSource);
 		}
 		lastID = newID;
 		var newRowID = "#row" + newID;
 		$(newRowID).addClass("selected");			
 		
-		$("#inputSourceID").append('<input id="selectedSourceID' + newID + '" name="source.sourceID" value="' + newID + '" style="display:none" />');
+		$("#selectedSourceID").val(newID);
 	};
 	
 	$('#academics').dataTable({

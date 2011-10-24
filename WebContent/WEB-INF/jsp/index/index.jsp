@@ -97,7 +97,8 @@
 				</div>
 				
 				<div id="advice">
-					<h2><a name="checkYourTexts">Verifique o estilo de seus textos</a></h2>
+					<a name="checkYourTexts"></a>
+					<h2>Verifique o estilo de seus textos</h2>
 					<form id="advice_form" action="<c:url value="/advice"/>" enctype="multipart/form-data" method="post">
 						Selecione um arquivo .txt para análise:<br>
 						<div class="single_form_element">

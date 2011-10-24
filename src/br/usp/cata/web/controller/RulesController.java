@@ -98,7 +98,7 @@ public class RulesController { // TODO This class really needs some refactoring
 			}
 		}
 		
-		if(source == null || source.getSourceID() == null)
+		if(source == null || source.getSourceID() == null || source.getSourceID() == 0)
 			validator.add(new ValidationMessage(
     				"Você deve associar uma referência à regra.", "Referência"));
 		else {
@@ -295,7 +295,8 @@ public class RulesController { // TODO This class really needs some refactoring
 	@Path("rules/editrule")
 	@Transactional
 	public void editrule(Rule ruleToBeUpdated) {
-		if(ruleToBeUpdated == null || ruleToBeUpdated.getRuleID() == null)
+		if(ruleToBeUpdated == null || ruleToBeUpdated.getRuleID() == null ||
+				ruleToBeUpdated.getRuleID() == 0)
 			result.redirectTo(UserController.class).profile();
 		
 		if(!userIsAuthorizedToChangeRule(ruleToBeUpdated.getRuleID()))
@@ -321,7 +322,7 @@ public class RulesController { // TODO This class really needs some refactoring
 		validator.onErrorRedirectTo(UserController.class).profile();
 		
 		Rule rule = ruleService.findByID(updatedRule.getRuleID());
-		if(source == null || source.getSourceID() == null) {
+		if(source == null || source.getSourceID() == null || source.getSourceID() == 0) {
 			source = new Source();
 			source.setSourceID(rule.getSource().getSourceID());
 		}
@@ -363,7 +364,8 @@ public class RulesController { // TODO This class really needs some refactoring
 	@Path("rules/deleterule")
 	@Transactional
 	public void deleterule(Rule ruleToBeDeleted) {
-		if(ruleToBeDeleted == null || ruleToBeDeleted.getRuleID() == null)
+		if(ruleToBeDeleted == null || ruleToBeDeleted.getRuleID() == null ||
+				ruleToBeDeleted.getRuleID() == 0)
 			result.redirectTo(UserController.class).profile();
 		
 		if(!userIsAuthorizedToChangeRule(ruleToBeDeleted.getRuleID()))

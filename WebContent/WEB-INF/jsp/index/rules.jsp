@@ -15,11 +15,13 @@
 		
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.dataTables.js'/>"></script>
-		<script type="text/javascript" src="<c:url value='js/jquery.simplemodal.js'/>"></script>
-		<script type="text/javascript" src="<c:url value='js/custom-modal.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/messages-modal.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/custom-modal.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#rules-menu").addClass('selected');
+				showModal("#modal", '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
 				
 				$('#rules').dataTable({
 					"aaSorting": [[ 0, "asc" ]]
@@ -37,7 +39,8 @@
 	</head>
 	
 	<body>
-		<%@ include file="../shared/header.jsp"%>		
+		<%@ include file="../shared/header.jsp"%>
+		<%@ include file="../shared/messages.jsp"%>		
 		<%@ include file="../shared/user-menu.jsp"%>
 		
 		<div id="page">
@@ -138,30 +141,7 @@
 											</c:if>
 											<b>Referência Bibliográfica:</b><br />
 											<div class="indentation">
-												<table>
-												<c:if test = "${rule.source.type == 'ACADEMIC_PUBLISHING'}">
-													<tr><td><c:out value="${rule.source.authors}"/>, <i><c:out value="${rule.source.title}"/></i><br />
-													<c:out value="${rule.source.institution}"/>, <c:out value="${rule.source.date}"/><br />
-													<c:out value="${rule.source.moreInformation}"/></td></tr>
-												</c:if>
-												<c:if test = "${rule.source.type == 'BOOK'}">
-													<tr><c:out value="${rule.source.authors}"/>, <i><c:out value="${rule.source.title}"/></i></tr>
-													<tr><c:out value="${rule.source.publisher}"/>, <c:out value="${rule.source.date}"/></tr>
-													<tr><c:out value="${rule.source.moreInformation}"/></tr>
-												</c:if>
-												<c:if test = "${rule.source.type == 'HANDBOOK'}">
-													<tr><c:out value="${rule.source.authors}"/>, <i><c:out value="${rule.source.title}"/></i></tr>
-													<tr><c:out value="${rule.source.publisher}"/>, <c:out value="${rule.source.date}"/></tr>
-													<tr><c:out value="${rule.source.moreInformation}"/></tr>
-												</c:if>
-												<c:if test = "${rule.source.type == 'INTERNET'}">
-													<tr><td><a href="<c:out value="${rule.source.url}" />" target="_blank"><c:out value="${rule.source.title}"/></a></td></tr>
-													<tr><td><c:out value="${rule.source.moreInformation}"/></td></tr>
-												</c:if>
-												<c:if test = "${rule.source.type == 'OTHER'}">
-													<tr><c:out value="${rule.source.moreInformation}"/></tr>
-												</c:if>
-												</table>
+												<%@ include file="../shared/table-sources.jsp"%>
 											</div>
 											<br />											
 											Esta regra foi cadastrada por <i><c:out value="${rule.user.name}"/></i>

@@ -157,7 +157,9 @@
 					<div class="single_form_element">
 						<label class="label" for="source"><a name="source">Referência*</a></label><br />
 						Selecione uma Referência Bibliográfica para sua Regra
-						<div id="inputSourceID"></div>
+						<div id="inputSourceID"  style="display:none">
+							<input id="selectedSourceID" name="source.sourceID" value="0">
+						</div>
 					</div>
 					<div class="indent">	
 						<div class="single_form_element">

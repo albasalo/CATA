@@ -11,8 +11,8 @@
 		<link href="<c:url value='/css/advice.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		
-		<script type="text/javascript" src="<c:url value='js/jquery-1.3.1.min.js'/>"></script>
-	    <script type="text/javascript" src="<c:url value='js/popup.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery-1.3.1.min.js'/>"></script>
+	    <script type="text/javascript" src="<c:url value='/js/popup.js'/>"></script>
 		
 		<title>Sugestões de Estilo</title>
 	</head>

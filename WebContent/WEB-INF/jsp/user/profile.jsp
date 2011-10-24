@@ -6,6 +6,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />	
@@ -16,33 +17,24 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.dataTables.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/messages-modal.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/custom-modal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/profile.js'/>"></script>
 		<script type="text/javascript">
-			$(document).ready(function() {
-				if($('#modal').length > 0) {
-				    $('#modal').fadeIn().css({ 'width': Number(450)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
-				
-				    var popMargTop = ($('#modal').height() + 80) / 2;
-				    var popMargLeft = ($('#modal').width() + 80) / 2;
-				
-				    $('#modal').css({
-				        'margin-top' : -popMargTop,
-				        'margin-left' : -popMargLeft
-				    });
-				
-				    $('body').append('<div id="fade"></div>');
-				    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
-				
-				    return false;
-				}
+			$(document).ready(function () {
+				showModal("#modal", '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
 			});
-			
-			$('a.close, #fade').live('click', function() {
-				$('#fade , .popup_block').fadeOut( function() {
-				    $('#fade, a.close').remove();
-				});
-				return false;
-			});
+		</script>
+		<script type="text/javascript">
+			function showRuleModal(ruleID) {
+				var modal = "#rule" + ruleID;
+				showCustomModal(modal, '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+			};
+		</script>
+		<script type="text/javascript">
+			function showModalByID(modalID) {
+				showModal(modalID, '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+			};			
 		</script>
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -51,61 +43,7 @@
 				});
 			});
 		</script>
-		<script type="text/javascript">
-			function showModal(ruleID) {
-				var modal = "#rule" + ruleID;
-				if($(modal).length > 0) {
-				    $(modal).fadeIn().css({ 'width': Number(550)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
-				
-				    var popMargTop = ($(modal).height() + 80) / 2;
-				    var popMargLeft = ($(modal).width() + 80) / 2;
-				
-				    $(modal).css({
-				        'margin-top' : -popMargTop,
-				        'margin-left' : -popMargLeft
-				    });
-				
-				    $('body').append('<div id="fade"></div>');
-				    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
-				
-				    return false;
-				}
-			};
-			
-			$('a.close, #fade').live('click', function() {
-				$('#fade , .popup_block').fadeOut( function() {
-				    $('#fade, a.close').remove();
-				});
-				return false;
-			});
-		</script>
-		<script type="text/javascript">
-			function showModalById(modal) {
-				if($(modal).length > 0) {
-				    $(modal).fadeIn().css({ 'width': Number(450)}).prepend('<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
-				
-				    var popMargTop = ($(modal).height() + 80) / 2;
-				    var popMargLeft = ($(modal).width() + 80) / 2;
-				
-				    $(modal).css({
-				        'margin-top' : -popMargTop,
-				        'margin-left' : -popMargLeft
-				    });
-				
-				    $('body').append('<div id="fade"></div>');
-				    $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn();
-				
-				    return false;
-				}
-			};
-			
-			$('a.close, #fade').live('click', function() {
-				$('#fade , .popup_block').fadeOut( function() {
-				    $('#fade, a.close').remove();
-				});
-				return false;
-			});
-		</script>
+		
 		<title>Perfil</title>
 	</head>
 	
@@ -158,7 +96,7 @@
 										</c:otherwise>
 									</c:choose>
 									<td class="center">
-										<img onclick="showModal(${rule.ruleID});" src="<c:url value='/css/images/plus-icon.png'/>">
+										<img onclick="showRuleModal(${rule.ruleID});" src="<c:url value='/css/images/plus-icon.png'/>">
 										<div id="rule${rule.ruleID}" class="popup_block" style="display:none">
 											<div class="popup_content" style="text-align: left">
 												<b>Mais informações sobre a Regra de Estilo</b><br />
@@ -203,30 +141,7 @@
 												</c:if>
 												<b>Referência Bibliográfica:</b><br />
 												<div class="indentation">
-													<table>
-													<c:if test = "${rule.source.type == 'ACADEMIC_PUBLISHING'}">
-														<tr><td><c:out value="${rule.source.authors}"/>, <i><c:out value="${rule.source.title}"/></i><br />
-														<c:out value="${rule.source.institution}"/>, <c:out value="${rule.source.date}"/><br />
-														<c:out value="${rule.source.moreInformation}"/></td></tr>
-													</c:if>
-													<c:if test = "${rule.source.type == 'BOOK'}">
-														<tr><c:out value="${rule.source.authors}"/>, <i><c:out value="${rule.source.title}"/></i></tr>
-														<tr><c:out value="${rule.source.publisher}"/>, <c:out value="${rule.source.date}"/></tr>
-														<tr><c:out value="${rule.source.moreInformation}"/></tr>
-													</c:if>
-													<c:if test = "${rule.source.type == 'HANDBOOK'}">
-														<tr><c:out value="${rule.source.authors}"/>, <i><c:out value="${rule.source.title}"/></i></tr>
-														<tr><c:out value="${rule.source.publisher}"/>, <c:out value="${rule.source.date}"/></tr>
-														<tr><c:out value="${rule.source.moreInformation}"/></tr>
-													</c:if>
-													<c:if test = "${rule.source.type == 'INTERNET'}">
-														<tr><td><a href="<c:out value="${rule.source.url}" />" target="_blank"><c:out value="${rule.source.title}"/></a></td></tr>
-														<tr><td><c:out value="${rule.source.moreInformation}"/></td></tr>
-													</c:if>
-													<c:if test = "${rule.source.type == 'OTHER'}">
-														<tr><c:out value="${rule.source.moreInformation}"/></tr>
-													</c:if>
-													</table>
+													<%@ include file="../shared/table-sources.jsp"%>
 												</div>
 											</div>
 										</div>
@@ -238,7 +153,9 @@
 					<div class="spacer"></div>
 					</div>
 					<form action="<c:url value='/rules/editrule'/>" method="post" id="editrule-form">
-						<div id="inputRuleID"></div>
+						<div id="inputRuleID" style="display:none">
+							<input id="selectedRuleID" name="ruleToBeUpdated.ruleID" value="0">
+						</div>
 						<input class="single_form_element button" type="submit" value="Editar regra">
 						<div id="edit-modal" class="popup_block" style="display:none">
 							<div class="error-messages">
