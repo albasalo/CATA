@@ -30,7 +30,7 @@ public class RulesTrees {
 		
 		for(Rule rule : defaultRules) {
 			for(Lemma lemma : rule.getLemmas())
-				matchingsTree.add(lemma.getPair().getTokenizedPatternBytes(),
+				lemmasTree.add(lemma.getPair().getTokenizedPatternBytes(),
 						new RuleInstance(rule, lemma.getPair()));
 			for(ExactMatching exactMatching : rule.getExactMatchings())
 				matchingsTree.add(exactMatching.getPair().getTokenizedPatternBytes(),

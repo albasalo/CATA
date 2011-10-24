@@ -4,8 +4,6 @@
  */
 package br.usp.cata.web.controller;
 
-import org.apache.commons.io.IOUtils;
-
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
@@ -14,7 +12,6 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.ValidationMessage;
-
 import br.usp.cata.model.CataConstraints;
 import br.usp.cata.model.User;
 import br.usp.cata.service.CryptoService;
@@ -85,10 +82,6 @@ public class IndexController {
 		else if(!file.getContentType().equals("text/plain")) {
 			validator.add(new ValidationMessage(
 					"O arquivo deve estar no formato .txt.", "Formato do arquivo"));
-		}
-		else if(IOUtils.toByteArray(file.getFile()).length > CataConstraints.FILE_MAX_SIZE) {
-			validator.add(new ValidationMessage(
-					"O arquivo deve ter, no máximo, 5MB.", "Tamanho do arquivo"));
 		}
 		validator.onErrorRedirectTo(IndexController.class).index();
 		

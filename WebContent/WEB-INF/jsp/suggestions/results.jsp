@@ -8,8 +8,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
-		<link href="<c:url value='/css/advice.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/advice.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/modal-table.css'/>" rel="stylesheet" type="text/css" />
 		
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.3.1.min.js'/>"></script>
 	    <script type="text/javascript" src="<c:url value='/js/popup.js'/>"></script>
@@ -35,27 +36,55 @@
 								<c:when test="${checkedSegment.mistakes != null}">
 									<span class="popupConf">
 										<span class="highlightedText">
-											<font style="color:#950000">
-												<b><c:out value="${checkedSegment.segment}"/></b>
-											</font>
+											<b>&nbsp;<c:out value="${checkedSegment.segment}"/></b>
 										</span>
+										&nbsp;
 										<div class="popup">
 											<div class="popupTop"></div>
 											<div class="popupMid">
 											<span class="popupContent">
-											<table>
+												<%! int i = 0;
+													int getBrokenRuleIndex() { return i; }
+												%>
+												<% i = 0; %>
 												<c:forEach items="${checkedSegment.mistakes}" var="mistake">
-												<tr>
-													<td><b>Problema:</b></td>
-													<td>${mistake.brokenRule.patternSuggestionElement.pattern}</td>
-												</tr>
-												<tr>
-													<td><b>Sugestões:</b></td>
-													<td>${mistake.brokenRule.patternSuggestionElement.suggestions}</td>
-												</tr>
+													<c:set var="rule" value="${mistake.brokenRule.rule}"/>
+													<c:set var="brokenRuleIndex" value="<%= getBrokenRuleIndex()%>"/>
+														<c:if test="${brokenRuleIndex > 0}">
+															<center>
+															_______________________________<br /><br />
+															</center>
+														</c:if>
+														<% i = i + 1; %>
+														<table class="modal-table">
+															<tr>
+																<td><b>Sugestões:&nbsp;</b></td>
+																<td>
+																	<span class="suggestions">
+																		<b><c:out value="${mistake.brokenRule.patternSuggestionPair.suggestions}"/></b>
+																	</span>
+																</td>
+															</tr>
+															<tr>
+																<td><b><c:out value="${rule.category.categoryDescription}"/>: </b></td>
+																<td><c:out value="${rule.type.typeDescription}"/></td>
+															</tr>
+															<tr>
+																<td></td>
+																<td>Padrão incorreto encontrado: <i><c:out value="${mistake.brokenRule.patternSuggestionPair.pattern}"/></i>
+															</tr>
+															<c:if test="${rule.explanation != null}">
+																<tr>
+																	<td><b>Explicação: </b></td>
+																	<td><c:out value="${rule.explanation}"/></td>
+																</tr>
+															</c:if>
+															<tr>
+																<td><b>Referência: </b></td>
+																<td><%@ include file="../shared/table-sources.jsp"%></td>
+															</tr>
+														</table>
 												</c:forEach>
-												TODO: Colocar as informações completas das regras
-											</table>
 											</span>
 											</div>
 											<div class="popupBtm"></div>

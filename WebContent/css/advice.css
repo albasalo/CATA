@@ -8,6 +8,7 @@
     -moz-border-radius: 12px;
 	-webkit-border-radius: 12px;
     padding: 20px;
+    font-size: 1.1em;
 }
 
 
@@ -17,6 +18,14 @@
 }
 
 .highlightedText {
+	padding: 1px;
+	background-color: #efe564;
+	cursor: pointer;
+}
+
+.suggestions {
+	padding: 1px;
+	background-color: #9ed9ef;
 }
 
 .popup {
@@ -42,4 +51,5 @@
 }
 
 .popupContent {
+	font-size: 0.9em;
 }
