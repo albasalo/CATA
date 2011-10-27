@@ -79,9 +79,10 @@ public class IndexController {
 		if(file == null)
 			validator.add(new ValidationMessage(
     				"Selecione um arquivo no formato .txt.", "Nenhum arquivo selecionado"));
-		else if(!file.getContentType().equals("text/plain")) {
+		else if(!file.getContentType().equals("text/plain") &&
+				!file.getContentType().equals("application/pdf")) {
 			validator.add(new ValidationMessage(
-					"O arquivo deve estar no formato .txt.", "Formato do arquivo"));
+					"O arquivo deve estar em formato .txt ou .pdf.", "Formato do arquivo"));
 		}
 		validator.onErrorRedirectTo(IndexController.class).index();
 		

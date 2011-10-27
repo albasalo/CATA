@@ -12,6 +12,10 @@ import java.nio.charset.CharsetDecoder;
 import java.util.ArrayList;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.pdfbox.cos.COSDocument;
+import org.apache.pdfbox.pdfparser.PDFParser;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.util.PDFTextStripper;
 
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 
@@ -79,6 +83,41 @@ public class FileProcessor {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+		else if(file.getContentType().equals("application/pdf")) {
+			PDFParser parser = null;
+		    String parsedText = "";
+		    PDFTextStripper pdfStripper;
+		    PDDocument pdDoc = null;
+		    COSDocument cosDoc = null;
+			
+			try {
+	            parser = new PDFParser(is);
+	        } catch (Exception e) { //FIXME
+	            e.printStackTrace();
+	        }
+	        
+	        try {
+	            parser.parse();
+	            cosDoc = parser.getDocument();
+	            pdfStripper = new PDFTextStripper();
+	            pdDoc = new PDDocument(cosDoc);
+	            parsedText = pdfStripper.getText(pdDoc);
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            try {
+			    	if (cosDoc != null) cosDoc.close();
+			    	if (pdDoc != null) pdDoc.close();
+			    } catch (Exception e1) {
+	               e.printStackTrace();
+	            }
+	        }
+	        
+	        String[] textLines = parsedText.split("\n");
+	        
+	        for(String line : textLines)
+	        	text.add(line);     
 		}
 	}
 	
