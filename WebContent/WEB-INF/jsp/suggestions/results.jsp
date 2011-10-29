@@ -74,7 +74,7 @@
 															</tr>
 															<tr>
 																<td></td>
-																<td>Padrão incorreto encontrado: <i><c:out value="${mistake.brokenRule.patternSuggestionPair.pattern}"/></i>
+																<td>Padrão incorreto encontrado: <i><c:out value="${checkedSegment.segment}"/></i>
 															</tr>
 															<c:if test="${rule.explanation != null}">
 																<tr>

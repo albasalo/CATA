@@ -9,7 +9,7 @@ public enum RuleCategories {
 	WARNING;
 	
 	private final static List<String> ruleCategories =
-		Arrays.asList("Problema", "Possível problema");
+		Arrays.asList("Problema", "Atenção");
 	
 	public String getCategoryDescription() {
 		return ruleCategories.get(this.ordinal());

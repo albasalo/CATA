@@ -64,7 +64,7 @@
 								</p>
 								<p>
 									<a name="Category"></a>A <b>Categoria</b> da regra deve ser selecionada dentre as opções apresentadas:
-									pode-se escolher entre <i>Problema</i> e <i>Possível Problema</i> - o segundo caso deve ser usado para
+									pode-se escolher entre <i>Problema</i> e <i>Atenção</i> - o segundo caso deve ser usado para
 									indicar que a regra pode não fazer sentido em alguns contextos.
 								</p>
 								<p>
