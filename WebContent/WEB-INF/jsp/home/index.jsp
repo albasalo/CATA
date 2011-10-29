@@ -43,7 +43,7 @@
 					<h2>Verifique o estilo de seus textos</h2>
 					<form id="advice_form" action="<c:url value="/advice"/>" enctype="multipart/form-data" method="post">
 						<center>
-							Selecione um arquivo .txt para análise:<br>
+							Selecione um arquivo .txt ou .pdf para análise:<br>
 							<div class="single_form_element">
 								<input id="file" type="file" name="file" size="30"><br>
 							</div>

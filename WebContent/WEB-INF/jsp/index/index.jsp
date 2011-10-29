@@ -42,10 +42,10 @@
 				
 				<div id='coin-slider'>
 					<a href="<c:url value='/#checkYourTexts'/>">
-						<img src="<c:url value='/css/images/txt-file.png'/>">
+						<img src="<c:url value='/css/images/files.png'/>">
 						<span>
-							<b>Envie um arquivo .txt</b><br>
-							Selecione um arquivo de texto sem formatação e envie para verificação.
+							<b>Envie um arquivo .txt ou .pdf</b><br>
+							Selecione um arquivo de texto sem formatação ou um PDF e envie para verificação.
 						</span>
 					</a>
 					<a href="<c:url value='/#checkYourTexts'/>">
@@ -100,7 +100,7 @@
 					<a name="checkYourTexts"></a>
 					<h2>Verifique o estilo de seus textos</h2>
 					<form id="advice_form" action="<c:url value="/advice"/>" enctype="multipart/form-data" method="post">
-						Selecione um arquivo .txt para análise:<br>
+						Selecione um arquivo .txt ou .pdf para análise:<br>
 						<div class="single_form_element">
 							<input id="file" type="file" name="file" size="30"><br>
 						</div>

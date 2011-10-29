@@ -109,8 +109,8 @@ public class FileProcessor {
 	            try {
 			    	if (cosDoc != null) cosDoc.close();
 			    	if (pdDoc != null) pdDoc.close();
-			    } catch (Exception e1) {
-	               e.printStackTrace();
+			    } catch (Exception e1) { //FIXME
+	               e1.printStackTrace();
 	            }
 	        }
 	        
