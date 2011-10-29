@@ -11,45 +11,30 @@
     font-size: 1.1em;
 }
 
-
-/* Tooltip */
-.popupConf {
-	position: relative;
-}
-
 .highlightedText {
 	padding: 1px;
-	background-color: #efe564;
+	background-color: #f7a9a4;
 	cursor: pointer;
 }
 
-.suggestions {
-	padding: 1px;
-	background-color: #9ed9ef;
+/* Tooltip */
+.tooltipConf {
+	position: relative;
 }
 
-.popup {
+.tooltip {
 	position: absolute;
 	width: 480px;
     display: none;
 	z-index: 20;
 }
 
-.popupMid {
-	padding: 0px 25px 0px 25px;
-	background: transparent url(images/tipMid.png) repeat-y;
-}
-
-.popupTop {
-	background: transparent url(images/tipTop.png) no-repeat top;
-	height: 32px;	
-}
-
-.popupBtm {
-	background: transparent url(images/tipBtm.png) no-repeat bottom;
-	height: 32px;		
-}
-
-.popupContent {
+.tooltipContent {
 	font-size: 0.9em;
+}
+
+.suggestions {
+	padding: 2px;
+	background-color: #a9da65;
+	color: #335519;
 }

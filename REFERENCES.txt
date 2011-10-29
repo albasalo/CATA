@@ -701,37 +701,54 @@ Referências bibliográficas e bibliotecas usadas na construção deste projeto
 	
 
 *Modal window para apresentar erros e mensagens
-http://www.sohtanaka.com/web-design/inline-modal-window-w-css-and-jquery/
+	http://www.sohtanaka.com/web-design/inline-modal-window-w-css-and-jquery/
 
 
 *Etiquetador morfológico e lematizador (forma)
-http://www.inf.pucrs.br/~gonzalez/tr+/forma/
-http://www.inf.pucrs.br/~linatural/projetos.html
-Gonzalez, M.; Lima, V. L. S. de; Lima, J. V. de. Tools for Nominalization: an Alternative
-for Lexical Normalization. In: WORKSHOP ON COMP. PROC. OF THE PORTUGUESE LANG. - WRITTEN AND SPOKEN,
-7; PROPOR, 2006. Proceedings [S.l.]: Springer-Verlag, 2006. p.100-109. (Lectures Notes in AI, 3960).
-
-- Os arquivos contidos em 'br.usp.cata.resources.lemmatizer' foram retirados de
-http://www.inf.pucrs.br/%7Egonzalez/docs/forma_1_1.zip sem alterações.
-- As classes de 'br.usp.cata.component.lemmatizer' e de 'br.usp.cata.util.lemmatizer'
-foram desenvolvidas com base em http://www.inf.pucrs.br/%7Egonzalez/docs/forma_1_1.zip e
-no supracitado artigo 'Tools for Nominalization: an Alternative for Lexical Normalization'.
-O algoritmo "em si" foi mantido, mas foram feitas algumas modificações devidas à mudança
-de linguagem e devido ao uso particular que tem no Sistema CATA.
-- NOTA: Obtive a autorização do autor para fazer o uso que aqui apresentei da ferramenta 'forma'.
+	http://www.inf.pucrs.br/~gonzalez/tr+/forma/
+	http://www.inf.pucrs.br/~linatural/projetos.html
+	Gonzalez, M.; Lima, V. L. S. de; Lima, J. V. de. Tools for Nominalization: an Alternative
+	for Lexical Normalization. In: WORKSHOP ON COMP. PROC. OF THE PORTUGUESE LANG. - WRITTEN AND SPOKEN,
+	7; PROPOR, 2006. Proceedings [S.l.]: Springer-Verlag, 2006. p.100-109. (Lectures Notes in AI, 3960).
+	
+	- Os arquivos contidos em 'br.usp.cata.resources.lemmatizer' foram retirados de
+	http://www.inf.pucrs.br/%7Egonzalez/docs/forma_1_1.zip sem alterações.
+	- As classes de 'br.usp.cata.component.lemmatizer' e de 'br.usp.cata.util.lemmatizer'
+	foram desenvolvidas com base em http://www.inf.pucrs.br/%7Egonzalez/docs/forma_1_1.zip e
+	no supracitado artigo 'Tools for Nominalization: an Alternative for Lexical Normalization'.
+	O algoritmo "em si" foi mantido, mas foram feitas algumas modificações devidas à mudança
+	de linguagem e devido ao uso particular que tem no Sistema CATA.
+	- NOTA: Obtive a autorização do autor para fazer o uso que aqui apresentei da ferramenta 'forma'.
 
 
 *Projeto Ingresso na Pós
-http://code.google.com/p/ingresso-na-pos/
+	http://code.google.com/p/ingresso-na-pos/
 
 
-*Imagem para a página inicial
-http://cdn.tipb.com/images/stories/2010/04/iphone_4_notes_spell_check.PNG
+*Imagens para a página inicial
+	http://cdn.tipb.com/images/stories/2010/04/iphone_4_notes_spell_check.PNG
+	http://www.google.com/imgres?imgurl=http://lunenburg.org/github.png&imgrefurl=http://www.lunenburg.org/&usg=__brLPpTg1X_8bVKkMCqM-vrjIeCs=&h=300&w=300&sz=39&hl=en&start=19&zoom=1&tbnid=A25Xg-b7Tcj-3M:&tbnh=140&tbnw=140&ei=qjrkTZa1OYfpgQfZzJzQBg&prev=/search%3Fq%3Dgithub%26um%3D1%26hl%3Den%26client%3Dubuntu%26sa%3DN%26channel%3Dfs%26biw%3D1440%26bih%3D660%26tbm%3Disch&um=1&itbs=1&iact=hc&vpx=1022&vpy=238&dur=699&hovh=225&hovw=225&tx=118&ty=120&page=2&ndsp=19&ved=1t:429,r:11,s:19&biw=1440&bih=660
 
 
-// TODO Acrescentar as licenças!
-http://net.tutsplus.com/tutorials/javascript-ajax/build-a-better-tooltip-with-jquery-awesomeness/
-http://www.google.com/imgres?imgurl=http://lunenburg.org/github.png&imgrefurl=http://www.lunenburg.org/&usg=__brLPpTg1X_8bVKkMCqM-vrjIeCs=&h=300&w=300&sz=39&hl=en&start=19&zoom=1&tbnid=A25Xg-b7Tcj-3M:&tbnh=140&tbnw=140&ei=qjrkTZa1OYfpgQfZzJzQBg&prev=/search%3Fq%3Dgithub%26um%3D1%26hl%3Den%26client%3Dubuntu%26sa%3DN%26channel%3Dfs%26biw%3D1440%26bih%3D660%26tbm%3Disch&um=1&itbs=1&iact=hc&vpx=1022&vpy=238&dur=699&hovh=225&hovw=225&tx=118&ty=120&page=2&ndsp=19&ved=1t:429,r:11,s:19&biw=1440&bih=660
-http://workshop.rs/projects/coin-slider/
-http://www.webdeveloperjuice.com/2010/03/22/highly-customizable-yet-simple-form-validation-jquery-plugin/
-http://yensdesign.com/2009/01/how-validate-forms-both-sides-using-php-jquery/
+*Tooltip para as dicas de estilo
+	http://craigsworks.com/projects/qtip/
+	
+	THE MIT LICENSE
+	Copyright © 2009 Craig Thompson
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+	
+	The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+
+
+*"Slider" da página inicial
+	http://workshop.rs/projects/coin-slider/
+	The MIT License
+	
+
+*Validação dos forms
+	http://yensdesign.com/2009/01/how-validate-forms-both-sides-using-php-jquery/
+	http://www.webdeveloperjuice.com/2010/03/22/highly-customizable-yet-simple-form-validation-jquery-plugin/
+	-A validação dos forms do CATA foi inspirada nos links acima.

@@ -12,8 +12,9 @@
 		<link href="<c:url value='/css/advice.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/modal-table.css'/>" rel="stylesheet" type="text/css" />
 		
-		<script type="text/javascript" src="<c:url value='/js/jquery-1.3.1.min.js'/>"></script>
-	    <script type="text/javascript" src="<c:url value='/js/popup.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery-1.3.2.min.js'/>"></script>
+	    <script type="text/javascript" src="<c:url value='/js/jquery.qtip-1.0.0-rc3.min.js'/>"></script>
+	    <script type="text/javascript" src="<c:url value='/js/tooltip.js'/>"></script>
 		
 		<title>Sugestões de Estilo</title>
 	</head>
@@ -30,19 +31,21 @@
 					<div id="text">
 						<b>Arquivo: <c:out value="${fileName}"/></b>
 						<br /><br />
+						<%! int mistakeIndex = 0;
+							int getMistakeIndex() { return mistakeIndex; }
+						%>
+						<% mistakeIndex = 0; %>
 						<c:forEach items="${text}" var="checkedLine">
 							<c:forEach items="${checkedLine}" var="checkedSegment">
 								<c:choose>
 								<c:when test="${checkedSegment.mistakes != null}">
-									<span class="popupConf">
-										<span class="highlightedText">
+									<span class="tooltipConf">
+										<span id="mistake<%=getMistakeIndex()%>" class="highlightedText">
 											<b>&nbsp;<c:out value="${checkedSegment.segment}"/></b>
 										</span>
 										&nbsp;
-										<div class="popup">
-											<div class="popupTop"></div>
-											<div class="popupMid">
-											<span class="popupContent">
+										<div class="tooltip">
+											<span id="tooltipcontent<%=getMistakeIndex()%>" class="tooltipContent">
 												<%! int i = 0;
 													int getBrokenRuleIndex() { return i; }
 												%>
@@ -61,7 +64,7 @@
 																<td><b>Sugestões:&nbsp;</b></td>
 																<td>
 																	<span class="suggestions">
-																		<b><c:out value="${mistake.brokenRule.patternSuggestionPair.suggestions}"/></b>
+																		<b>&nbsp;<c:out value="${mistake.brokenRule.patternSuggestionPair.suggestions}"/>&nbsp;</b>
 																	</span>
 																</td>
 															</tr>
@@ -86,10 +89,9 @@
 														</table>
 												</c:forEach>
 											</span>
-											</div>
-											<div class="popupBtm"></div>
 										</div>
 									</span>
+									<% mistakeIndex = mistakeIndex + 1; %>
 								</c:when>
 								<c:otherwise>
 									<c:out value="${checkedSegment.segment}"/>
@@ -99,6 +101,7 @@
 						<br>
 						</c:forEach>
 					</div>
+					<br />
 				</c:if>
 				<button type="button" class="button" onclick="javascript:history.go(-1);return false;">Voltar</button>
 			</div>
