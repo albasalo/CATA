@@ -9,6 +9,9 @@ insert into User (userID, active, email, name) values
 insert into Source (sourceID, title, type, url, userID) values
 	(1, 'Site do Prof. Kon com dicas', 3, 'http://www.ime.usp.br/~kon/ResearchStudents/traducao.html', 1);
 
+insert into Source (sourceID, title, type, authors, publisher, date, userID) values
+	(2, 'Manual da Redação', 2, 'Folha de São Paulo', 'Publifolha', '2010', 1);
+
 
 -- Regras
 
@@ -288,10 +291,10 @@ insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern
 	values (56, True, 'customizar', 'configurar, particularizar, personalizar', ' customizar ');
 insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (41, 56, 51);
 
-insert into Rule (ruleID, category, defaultRule, explanation, type, sourceID, userID)
-	values (52, 0, True, 'Tradução incorreta do inglês ''to check''.', 2, 1, 1);
+insert into Rule (ruleID, category, defaultRule, type, sourceID, userID)
+	values (52, 0, True, 2, 1, 1);
 insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
-	values (57, True, 'debugar', 'depurar', ' depurar ');
+	values (57, True, 'debugar', 'depurar', ' debugar ');
 insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (42, 57, 52);
 
 insert into Rule (ruleID, category, defaultRule, explanation, type, sourceID, userID)
@@ -450,3 +453,18 @@ insert into Rule (ruleID, category, defaultRule, type, sourceID, userID) values 
 insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
 	values (88, True, 'trade-off', 'dicotomia (é melhor explicar a relação por extenso)', ' trade-off ');
 insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (71, 88, 82);
+
+insert into Rule (ruleID, category, defaultRule, type, sourceID, userID) values (83, 0, True, 3, 2, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (89, True, 'a grosso modo', 'grosso modo', ' a grosso modo ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (18, 89, 83);
+
+insert into Rule (ruleID, category, defaultRule, type, sourceID, userID) values (84, 0, True, 1, 2, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (90, True, 'paper', 'documento, texto acadêmico', ' paper ');
+insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (72, 90, 84);
+
+insert into Rule (ruleID, category, defaultRule, type, sourceID, userID) values (85, 0, True, 1, 2, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (91, True, 'sketch', 'esquete', ' sketch ');
+insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (73, 91, 85);
