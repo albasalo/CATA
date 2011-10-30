@@ -18,13 +18,15 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/messages-modal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/custom-modal.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/pagination.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#rules-menu").addClass('selected');
 				showModal("#modal", '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
 				
 				$('#rules').dataTable({
-					"aaSorting": [[ 0, "asc" ]]
+					"aaSorting": [[ 0, "asc" ]],
+					"sPaginationType": "four_button"
 				});
 			});
 		</script>

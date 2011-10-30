@@ -19,6 +19,7 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/messages-modal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/custom-modal.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/pagination.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/profile.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function () {
@@ -39,7 +40,8 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('#rules').dataTable({
-					"aaSorting": [[ 0, "asc" ]]
+					"aaSorting": [[ 0, "asc" ]],
+					"sPaginationType": "four_button"
 				});
 			});
 		</script>

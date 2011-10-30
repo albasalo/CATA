@@ -11,7 +11,8 @@ $(document).ready(function() {
 	});
 	
 	$('#academics').dataTable({
-		"aaSorting": [[ 0, "asc" ]]
+		"aaSorting": [[ 0, "asc" ]],
+		"sPaginationType": "four_button"
 	});
 	$('#academics tbody tr').live('click', function() {
 		var nTds = $('td', this);
@@ -20,7 +21,8 @@ $(document).ready(function() {
 	});
 	
 	$('#books').dataTable({
-		"aaSorting": [[ 0, "asc" ]]
+		"aaSorting": [[ 0, "asc" ]],
+		"sPaginationType": "four_button"
 	});
 	$('#books tbody tr').live('click', function() {
 		var nTds = $('td', this);
@@ -44,7 +46,8 @@ $(document).ready(function() {
 	};
 	
 	$('#handbooks').dataTable({
-		"aaSorting": [[ 0, "asc" ]]
+		"aaSorting": [[ 0, "asc" ]],
+		"sPaginationType": "four_button"
 	});
 	$('#handbooks tbody tr').live('click', function() {
 		var nTds = $('td', this);
@@ -53,7 +56,8 @@ $(document).ready(function() {
 	});	
 	
 	$('#urls').dataTable({
-		"aaSorting": [[ 0, "asc" ]]
+		"aaSorting": [[ 0, "asc" ]],
+		"sPaginationType": "four_button"
 	});
 	$('#urls tbody tr').live('click', function() {
 		var nTds = $('td', this);
@@ -62,7 +66,8 @@ $(document).ready(function() {
 	});	
 	
 	$('#others').dataTable({
-		"aaSorting": [[ 0, "asc" ]]
+		"aaSorting": [[ 0, "asc" ]],
+		"sPaginationType": "four_button"
 	});
 	$('#others tbody tr').live('click', function() {
 		var nTds = $('td', this);
