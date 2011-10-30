@@ -266,4 +266,8 @@ public class IndexController {
     	result.redirectTo(IndexController.class).index();
     }
     
+    @Get
+    @Path("/advanced")
+    public void advanced() {
+    }
 }
