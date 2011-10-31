@@ -52,19 +52,21 @@
 }
 
 .paginate_disabled_previous {
-	background-image: url('../images/back_disabled.jpg');
+	color: #cfcfcf;
 }
 
 .paginate_enabled_previous {
-	background-image: url('../images/back_enabled.jpg');
+	color: #1b2c5a;
+	cursor: pointer;
 }
 
 .paginate_disabled_next {
-	background-image: url('../images/forward_disabled.jpg');
+	color: #cfcfcf;
 }
 
 .paginate_enabled_next {
-	background-image: url('../images/forward_enabled.jpg');
+	color: #1b2c5a;
+	cursor: pointer;
 }
 
 
