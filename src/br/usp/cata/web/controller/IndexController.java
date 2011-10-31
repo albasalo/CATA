@@ -19,6 +19,7 @@ import br.usp.cata.service.EmailService.EmailResult;
 import br.usp.cata.service.NewUserService;
 import br.usp.cata.service.NewUserService.SignupResult;
 import br.usp.cata.service.RuleService;
+import br.usp.cata.service.SourceService;
 import br.usp.cata.service.UserService;
 import br.usp.cata.web.interceptor.IrrestrictAccess;
 import br.usp.cata.web.interceptor.Transactional;
@@ -32,14 +33,17 @@ public class IndexController {
 	private final Validator validator;
 	private final NewUserService newUserService;
 	private final RuleService ruleService;
+	private final SourceService sourceService;
 	private final UserService userService;
 	
 	public IndexController(Result result, Validator validator,
-			NewUserService newUserService, RuleService ruleService, UserService userService) {
+			NewUserService newUserService, RuleService ruleService, SourceService sourceService,
+			UserService userService) {
 		this.result = result;
 		this.validator = validator;
 		this.newUserService = newUserService;
 		this.ruleService = ruleService;
+		this.sourceService = sourceService;
 		this.userService = userService;
 	}
 
@@ -269,5 +273,7 @@ public class IndexController {
     @Get
     @Path("/advanced")
     public void advanced() {
+    	result.include("users", userService.findAll());
+    	result.include("sources", sourceService.findAll());
     }
 }
