@@ -8,11 +8,24 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		
 		<link href="<c:url value='/css/style.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/jquery-ui-1.8.16.custom.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/jquery-ui-multiselect-widget.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/jquery.multiselect.filter.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
 		
-		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery-1.5.1.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery-ui-1.8.16.custom.min.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/advanced-form.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery.multiselect.min.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery.multiselect.br.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery.multiselect.filter.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery.multiselect.filter.br.js'/>"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+			   $("#selectUser").multiselect().multiselectfilter();
+			});
+		</script>
 		
 		<title>Verificação avançada</title>
 	</head>
@@ -39,10 +52,10 @@
 							<input type="checkbox" name="regrasDefault" value="1"> <b>Incluir as regras padrão do Sistema CATA</b>
 							<br /><br />
 							
-							<div class="single_form_element">
+							<div>
 								<label class="label" for="name">Usar regras dos seguintes usuários:</label>
 								<br />
-								<select id="selectUser" class="input_border width250" name="selectedUsers">
+								<select id="selectUser" class="width500" name="selectedUsers" multiple="multiple">
 									<c:forEach var="user" items="${users}"  >
 										<option value="${user.userID}">${user.name}</option>									
 									</c:forEach>
