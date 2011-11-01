@@ -102,3 +102,12 @@ legend {
 	color: #000;
 	cursor: pointer;
 }
+
+.bordered-element {
+	margin-top: 16px;
+	margin-bottom: 4px;
+	border: 8px solid #fff;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	padding: 2px;
+}

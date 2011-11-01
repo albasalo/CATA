@@ -276,4 +276,10 @@ public class IndexController {
     	result.include("users", userService.findAll());
     	result.include("sources", sourceService.findAll());
     }
+    
+    @Post
+    @Path("/advanced")
+    public void advanced(int filter, int regrasDefault, int[] selectedUsers, int selectedSources, UploadedFile file) {
+    	// TODO
+    }
 }

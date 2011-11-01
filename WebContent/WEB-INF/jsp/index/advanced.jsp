@@ -21,11 +21,6 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery.multiselect.br.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.multiselect.filter.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.multiselect.filter.br.js'/>"></script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-			   $("#selectUser").multiselect().multiselectfilter();
-			});
-		</script>
 		
 		<title>Verificação avançada</title>
 	</head>
@@ -37,39 +32,46 @@
 		
 		<div id="page">
 			<div id="content">
-				<form id="advice_form" class="width800" action="<c:url value="/advice"/>" enctype="multipart/form-data" method="post">
+				<form id="advice_form" class="width650" action="<c:url value="/advanced"/>" enctype="multipart/form-data" method="post">
 					<fieldset>
 						<legend>Verificação avançada</legend>
 						<div class="single_form_element">
 							<select id="selectCategory" name="filter" class="input_border width250">
 								<option value="0">Todas as regras cadastradas</option>
-								<option value="1">Filtrar regras</option>
+								<option value="1">Escolher regras</option>
 							</select>
 						</div>
 						
-						<div id="filterForm" class="indentation" style="display:none">
-							<br />
-							<input type="checkbox" name="regrasDefault" value="1"> <b>Incluir as regras padrão do Sistema CATA</b>
-							<br /><br />
-							
-							<div>
-								<label class="label" for="name">Usar regras dos seguintes usuários:</label>
-								<br />
-								<select id="selectUser" class="width500" name="selectedUsers" multiple="multiple">
-									<c:forEach var="user" items="${users}"  >
-										<option value="${user.userID}">${user.name}</option>									
-									</c:forEach>
+						<div id="filterForm" class="bordered-element" style="display:none">
+							<div class="indentation" style="margin-top: 18px">
+							<div class="single_form_element">
+								<b>Escolher regras por</b>&nbsp;
+								<select id="selectFilter" name="selectedFilter" class="input_border width250">
+									<option value="0">Usuário</option>
+									<option value="1">Referência Bibliográfica</option>
 								</select>
 							</div>
 							
-							<div class="single_form_element">
-								<label class="label" for="name">Usar regras das seguintes referências bibbliográficas:</label>
+							<div id="selectUserDiv" style="display:none">
 								<br />
-								<select id="selectSource" name="selectedSources" class="input_border width250">
-									<c:forEach var="source" items="${sources}"  >
+								<select id="selectUser" class="width500" name="selectedUsers" multiple="multiple">
+									<c:forEach var="user" items="${users}">
+										<option value="${user.userID}">${user.name}</option>									
+									</c:forEach>
+								</select>
+								<br /><br />
+							</div>
+							
+							<div id="selectSourceDiv" style="display:none">
+								<br />
+								<select id="selectSource" class="width500" name="selectedSources" multiple="multiple">
+									<c:forEach var="source" items="${sources}">
 										<option value="${source.sourceID}">${source.title}</option>									
 									</c:forEach>
 								</select>
+								<br /><br />
+							</div>
+							
 							</div>
 						</div>
 						
