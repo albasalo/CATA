@@ -28,7 +28,7 @@ $(document).ready(function() {
 			return true;
 		}
 		else {
-			showModalByID("#edit-modal");
+			showEditModal();
 			return false;
 		}
 	});
@@ -40,7 +40,7 @@ $(document).ready(function() {
 			return false;
 		}
 		else {
-			showModalById("#delete-modal");
+			showDeleteModal();
 			return false;
 		}
 	});

@@ -53,7 +53,7 @@ public abstract class AbstractDAO<ID extends Serializable, T> implements BasicDA
             getSession().saveOrUpdate(t);
     }
 
-    public T findById(final ID id) {
+    public T findByID(final ID id) {
         return (T)getSession().get(classEntity, id);
     }
 

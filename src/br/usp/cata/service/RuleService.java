@@ -9,6 +9,7 @@ import br.usp.cata.dao.RuleDAO;
 import br.usp.cata.model.ExactMatching;
 import br.usp.cata.model.Lemma;
 import br.usp.cata.model.Rule;
+import br.usp.cata.model.Source;
 import br.usp.cata.model.User;
 
 
@@ -58,12 +59,16 @@ public class RuleService {
 		return ruleDAO.findByID(ruleID);
 	}
 	
-	public List<Rule> findByUser(User user) {
-		return ruleDAO.findByUser(user);
-	}
-	
 	public List<Rule> findDefault() {
 		return ruleDAO.findDefault();
+	}
+	
+	public List<Rule> findBySource(Source source) {
+		return ruleDAO.findBySource(source);
+	}
+	
+	public List<Rule> findByUser(User user) {
+		return ruleDAO.findByUser(user);
 	}
 	
 }

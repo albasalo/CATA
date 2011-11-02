@@ -23,7 +23,7 @@ $(document).ready(function() {
 	$("[name='selectedFilter']").change(showMultiselect);
 	
 	function showMultiselect() {
-		if($("[name='selectedFilter'] option:selected").val() == 0) {
+		if($("[name='selectedFilter'] option:selected").val() == 2) {
 			$("#selectSourceDiv").hide();
 			$("#selectUserDiv").show();
 		}

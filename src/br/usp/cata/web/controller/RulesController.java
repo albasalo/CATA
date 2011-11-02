@@ -148,13 +148,9 @@ public class RulesController { // TODO This class really needs some refactoring
 		newRule.setExactMatchings(new HashSet<ExactMatching>());
 		setLemmasAndExactMatchings(newRule, lemmas, exactMatchings);
 		
-		newRule.setUser(userSession.getUser());
-		
+		newRule.setUser(userSession.getUser());		
 		newRule.setDate(new Date());
-		
-		//TODO Shoulde be 'false': rules registered by users won't be default rules
-		newRule.setDefaultRule(true);
-		
+		newRule.setDefaultRule(false);		
 		newRule.setSource(sourceService.findByID(source.getSourceID()));
 		
 		ruleService.save(newRule);

@@ -13,14 +13,22 @@
 		<link href="<c:url value='/css/jquery.multiselect.filter.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />
 		
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.5.1.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery-ui-1.8.16.custom.min.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/advanced-form.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/advice-form.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.multiselect.min.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.multiselect.br.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.multiselect.filter.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.multiselect.filter.br.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/messages-modal.js'/>"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				showModal("#modal", '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+			});
+		</script>
 		
 		<title>Verificação avançada</title>
 	</head>
@@ -47,8 +55,8 @@
 							<div class="single_form_element">
 								<b>Escolher regras por</b>&nbsp;
 								<select id="selectFilter" name="selectedFilter" class="input_border width250">
-									<option value="0">Usuário</option>
-									<option value="1">Referência Bibliográfica</option>
+									<option value="2">Usuário</option>
+									<option value="3">Referência Bibliográfica</option>
 								</select>
 							</div>
 							
@@ -56,7 +64,7 @@
 								<br />
 								<select id="selectUser" class="width500" name="selectedUsers" multiple="multiple">
 									<c:forEach var="user" items="${users}">
-										<option value="${user.userID}">${user.name}</option>									
+										<option value="${user.userID}"><c:out value="${user.name}"/></option>									
 									</c:forEach>
 								</select>
 								<br /><br />
@@ -66,7 +74,17 @@
 								<br />
 								<select id="selectSource" class="width500" name="selectedSources" multiple="multiple">
 									<c:forEach var="source" items="${sources}">
-										<option value="${source.sourceID}">${source.title}</option>									
+										<c:choose>
+											<c:when test="${source.type == 'INTERNET'}">
+												<option value="${source.sourceID}"><c:out value="${source.title}"/>, <c:out value="${source.url}"/></option>
+											</c:when>
+											<c:when test="${source.type == 'OTHER'}">
+												<option value="${source.sourceID}"><c:out value="${source.moreInformation}"/></option>
+											</c:when>
+											<c:otherwise>
+												<option value="${source.sourceID}"><c:out value="${source.title}"/>, <c:out value="${source.authors}"/></option>
+											</c:otherwise>
+										</c:choose>									
 									</c:forEach>
 								</select>
 								<br /><br />

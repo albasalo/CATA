@@ -12,6 +12,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.ValidationMessage;
+import br.usp.cata.model.AdviceFilter;
 import br.usp.cata.model.CataConstraints;
 import br.usp.cata.model.User;
 import br.usp.cata.service.CryptoService;
@@ -76,11 +77,9 @@ public class IndexController {
         
         result.redirectTo(HomeController.class).index();
     }
-
-	@Post
-	@Path("/advice")
-	public void advice(UploadedFile file) throws Exception {
-		if(file == null)
+    
+    private void validateFile(UploadedFile file) {
+    	if(file == null)
 			validator.add(new ValidationMessage(
     				"Selecione um arquivo no formato .txt.", "Nenhum arquivo selecionado"));
 		else if(!file.getContentType().equals("text/plain") &&
@@ -88,10 +87,53 @@ public class IndexController {
 			validator.add(new ValidationMessage(
 					"O arquivo deve estar em formato .txt ou .pdf.", "Formato do arquivo"));
 		}
+    }
+
+	@Post
+	@Path("/advice")
+	public void advice(UploadedFile file) throws Exception {
+		validateFile(file);
 		validator.onErrorRedirectTo(IndexController.class).index();
 		
-		result.forwardTo(SuggestionsController.class).results(file);
+		result.forwardTo(SuggestionsController.class).results(file, AdviceFilter.DEFAULT, null);
 	}
+	
+	@Get
+    @Path("/advanced")
+    public void advanced() {
+    	result.include("users", userService.findAll());
+    	result.include("sources", sourceService.findAll());
+    }
+    
+    @Post
+    @Path("/advanced")
+    public void advanced(int filter, int selectedFilter, long[] selectedUsers,
+    		long[] selectedSources, UploadedFile file) {
+    	validateFile(file);
+    	
+    	if(filter == 1) {
+    		if(selectedFilter == AdviceFilter.FILTERED_BY_USER.ordinal()) {
+    			if(selectedUsers == null)
+	    			validator.add(new ValidationMessage(
+	        				"Selecione pelo menos um usuário.", "Nenhum usuário selecionado"));
+    			validator.onErrorRedirectTo(IndexController.class).advanced();
+    			
+    			result.forwardTo(SuggestionsController.class).results(file, AdviceFilter.FILTERED_BY_USER, selectedUsers); 
+    		}
+    		else {
+    			if(selectedSources == null)
+    				validator.add(new ValidationMessage(
+    						"Selecione pelo menos uma referência bibliográfica.", "Nenhuma referência bibliográfica selecionada"));
+    			validator.onErrorRedirectTo(IndexController.class).advanced();
+    			
+    			result.forwardTo(SuggestionsController.class).results(file, AdviceFilter.FILTERED_BY_SOURCE, selectedSources);
+    		}
+    	}
+    	else {
+    		validator.onErrorRedirectTo(IndexController.class).advanced();
+    		result.forwardTo(SuggestionsController.class).results(file, AdviceFilter.ALL, null);
+    	}
+    }
 	
 	@Get
 	@Path("/rules")
@@ -269,17 +311,5 @@ public class IndexController {
     	
     	result.redirectTo(IndexController.class).index();
     }
-    
-    @Get
-    @Path("/advanced")
-    public void advanced() {
-    	result.include("users", userService.findAll());
-    	result.include("sources", sourceService.findAll());
-    }
-    
-    @Post
-    @Path("/advanced")
-    public void advanced(int filter, int regrasDefault, int[] selectedUsers, int selectedSources, UploadedFile file) {
-    	// TODO
-    }
+
 }

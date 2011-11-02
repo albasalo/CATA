@@ -106,7 +106,7 @@ legend {
 .bordered-element {
 	margin-top: 16px;
 	margin-bottom: 4px;
-	border: 8px solid #fff;
+	border: 10px solid #fff;
 	-moz-border-radius: 7px;
 	-webkit-border-radius: 7px;
 	padding: 2px;

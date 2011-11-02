@@ -8,7 +8,10 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 
+import br.usp.cata.model.AdviceFilter;
 import br.usp.cata.service.RuleService;
+import br.usp.cata.service.SourceService;
+import br.usp.cata.service.UserService;
 import br.usp.cata.util.Checker;
 import br.usp.cata.util.FileProcessor;
 import br.usp.cata.util.RulesTrees;
@@ -20,20 +23,39 @@ public class SuggestionsController {
 	
 	private final Result result;
 	private final RuleService ruleService;
+	private final SourceService sourceService;
+	private final UserService userService;
 	private final ServletContext servletContext;
 
-	public SuggestionsController(Result result, final RuleService ruleService,
-			final ServletContext servletContext) {
+	public SuggestionsController(Result result, RuleService ruleService, SourceService sourceService, 
+			UserService userService, ServletContext servletContext) {
 		this.result = result;
 		this.ruleService = ruleService;
+		this.sourceService = sourceService;
+		this.userService = userService;
 		this.servletContext = servletContext;
 	}
 
 	@Post
 	@Path("/suggestions/results")
-	public void results(UploadedFile file) {
-		RulesTrees rulesTrees = new RulesTrees(ruleService);
-		rulesTrees.buildDefaultTrees();
+	public void results(UploadedFile file, AdviceFilter adviceFilter, long[] filterIDs) {
+		RulesTrees rulesTrees = new RulesTrees(ruleService, sourceService, userService);
+		switch(adviceFilter) {
+			case DEFAULT: 
+				rulesTrees.buildDefaultTrees();
+				break;
+			case ALL:
+				rulesTrees.buildAllTrees();
+				break;
+			case FILTERED_BY_USER:
+				rulesTrees.buildUsersTrees(filterIDs);
+				break;
+			case FILTERED_BY_SOURCE:
+				rulesTrees.buildSourcesTrees(filterIDs);
+				break;
+			default:
+				break;
+		}
 		
 		FileProcessor fileProcessor = new FileProcessor(file);		
 		TextAnalyzer textAnalyzer = new TextAnalyzer(fileProcessor.getText(), servletContext);

@@ -33,8 +33,13 @@
 			};
 		</script>
 		<script type="text/javascript">
-			function showModalByID(modalID) {
-				showModal(modalID, '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+			function showEditModal() {
+				showModal("#edit-modal", '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+			};			
+		</script>
+		<script type="text/javascript">
+			function showDeleteModal() {
+				showModal("#delete-modal", '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
 			};			
 		</script>
 		<script type="text/javascript">

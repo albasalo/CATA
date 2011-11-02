@@ -14,7 +14,7 @@ public interface BasicDAO<ID extends Serializable, T> {
 
     void saveOrUpdate(T... ts);
 
-    T findById(ID id);
+    T findByID(ID id);
 
     List<T> findAll();
 
