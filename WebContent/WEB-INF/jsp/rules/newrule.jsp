@@ -57,11 +57,16 @@
 							<div style="padding:6px">
 								<p>
 									Para cadastrar uma nova regra no Sistema CATA, é preciso, obrigatoriamente, fornecer
-									as seguintes informações: <a href="#Category"><b>Categoria</b></a>, <a href="#Type"><b>Tipo</b></a>,
-									um <a href="#Patterns"> <b>Lema</b></a> ou <a href="#Patterns"><b>Expressão Exata</b></a> e uma
-									<a href="#Source"><b>Referência Bibliográfica</b></a>. Opcionalmente, você poderá fornecer mais
-									<a href="#Patterns"><b>Lemas</b></a> e <a href="#Patterns"><b>Expressões Exatas</b></a>, assim
-									como uma breve <a href="#Explanation"><b>Explicação</b></a> sobre a regra.
+									as seguintes informações: <a href="#Language"><b>Idioma</b></a>, <a href="#Category"><b>Categoria</b></a>,
+									<a href="#Type"><b>Tipo</b></a>, um <a href="#Patterns"> <b>Lema</b></a> ou
+									<a href="#Patterns"><b>Expressão Exata</b></a> e uma <a href="#Source"><b>Referência Bibliográfica</b></a>.
+									Opcionalmente, você poderá fornecer mais <a href="#Patterns"><b>Lemas</b></a> e
+									<a href="#Patterns"><b>Expressões Exatas</b></a>, assim como uma breve
+									<a href="#Explanation"><b>Explicação</b></a> sobre a regra.
+								</p>
+								<p>
+									<a name="Language"></a><b>Idioma:</b> podem ser cadastradas regras para textos em <i>Português</i>
+									ou em <i>Inglês</i>.
 								</p>
 								<p>
 									<a name="Category"></a>A <b>Categoria</b> da regra deve ser selecionada dentre as opções apresentadas:
@@ -102,6 +107,12 @@
 							</div>
 						</div>
 					</div>
+					<div class="single_form_element">
+						<label class="label" for="language">Idioma*</label>
+						<br />
+						<input type="checkbox">Português <input type="checkbox">Inglês
+					</div>
+					
 					<div class="single_form_element">
 						<label class="label" for="name">Categoria*</label>
 						<br />

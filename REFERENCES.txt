@@ -1093,4 +1093,9 @@ Referências bibliográficas e bibliotecas usadas na construção deste projeto
 	PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
 	POSSIBILITY OF SUCH DAMAGES.
 	a
-	
+
+
+*Ícones "Thumb up" e "Thumb down" da página de sugestões.
+	http://www.iconfinder.com/icondetails/65222/512/
+	Creative Commons
+	http://creativecommons.org/licenses/by/3.0/	

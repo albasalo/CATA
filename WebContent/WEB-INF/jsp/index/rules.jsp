@@ -64,18 +64,20 @@
 					<thead>
 						<tr>
 							<th>ID</th>
+							<th>Idioma</th>
 							<th>Tipo</th>
 							<th>Categoria</th>
 							<th>Erro</th>
 							<th>Sugestões</th>
 							<th>Cadastrada por</th>
-							<th>Mais informações</th>
+							<th>Mais</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${rules}" var="rule">
 							<tr>
 								<td><c:out value="${rule.ruleID}"/></td>
+								<td>Português</td>
 								<td class="center"><c:out value="${rule.type.typeDescription}"/></td>
 								<td class="center"><c:out value="${rule.category.categoryDescription}"/></td>
 								<c:choose>

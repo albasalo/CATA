@@ -109,7 +109,7 @@ public class LemmatizerTrees {
 			}
 			br.close();
 			accents.close();
-		} catch (Exception e) { // FIXME
+		} catch (Exception e) { //FIXME
 			e.printStackTrace();
 		}
 	}
@@ -165,7 +165,7 @@ public class LemmatizerTrees {
 			}
 			br.close();
 			expressions.close();
-		} catch (Exception e) { // FIXME
+		} catch (Exception e) { //FIXME
 			e.printStackTrace();
 		}
 	}
@@ -277,7 +277,7 @@ public class LemmatizerTrees {
 				br.close();
 				suffixes.close();
 			}
-		} catch (Exception e) { // FIXME
+		} catch (Exception e) { //FIXME
 			e.printStackTrace();
 		}
 	}

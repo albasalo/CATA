@@ -71,7 +71,7 @@ public class TextAnalyzer {
 		
 		tokenizer.tokenize(text, tokenizedText, startsTokenized, endsTokenized,
 				startsList, endsList, listOfTokens);
-		//FIXME
+		//FIXME Get text bytes
 		tokenizedTextBytes = new byte[tokenizedText.size()];
 		for(int i = 0; i < tokenizedText.size(); i++)
 			tokenizedTextBytes[i] = tokenizedText.get(i);

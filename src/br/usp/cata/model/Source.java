@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 
 
 @Entity
-public class Source implements Serializable {
+public class Source implements Serializable { //FIXME This model needs some refactoring (inheritance?)
 
 	private static final long serialVersionUID = 748392748201L;
 

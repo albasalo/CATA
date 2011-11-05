@@ -97,6 +97,9 @@
 						Selecione um arquivo .txt ou .pdf para análise:<br>
 						<div class="single_form_element">
 							<input id="file" type="file" name="file" size="30"><br>
+							<span class="small" style="position: relative">
+								<input type="checkbox">Português <input type="checkbox">Inglês<br />
+							</span>
 						</div>
 						<button type="button" class="button" onclick="javascript:history.go(-1);return false;">Voltar</button>
 						<input class="button" type="submit" value="Verificar">

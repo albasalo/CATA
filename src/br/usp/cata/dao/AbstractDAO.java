@@ -13,7 +13,7 @@ import org.hibernate.criterion.Order;
 import br.com.caelum.vraptor.util.hibernate.SessionCreator;
 
 
-@SuppressWarnings(value = {"unchecked"})
+@SuppressWarnings(value = {"unchecked"}) //FIXME
 public abstract class AbstractDAO<ID extends Serializable, T> implements BasicDAO<ID,T> {
     
 	private final SessionCreator sessionCreator;

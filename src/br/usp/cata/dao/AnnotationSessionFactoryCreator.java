@@ -18,7 +18,7 @@ import br.usp.cata.model.Source;
 import br.usp.cata.model.User;
 
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings("deprecation") //FIXME
 @RequestScoped
 @Component
 public class AnnotationSessionFactoryCreator implements ComponentFactory<SessionFactory> {
@@ -30,7 +30,6 @@ public class AnnotationSessionFactoryCreator implements ComponentFactory<Session
 
     @PostConstruct
     public void create() {
-    	// FIXME: deprecation
 		final AnnotationConfiguration cfg = new AnnotationConfiguration();
 		cfg.addAnnotatedClass(User.class);
 		cfg.addAnnotatedClass(PatternSuggestionPair.class);

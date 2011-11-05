@@ -49,6 +49,12 @@
 					<input name="updatedRule.ruleID" value="${rule.ruleID}" style="display:none">
 					<br /><br />
 					<div class="single_form_element">
+						<label class="label" for="language">Idioma*</label>
+						<br />
+						<input type="checkbox">Português <input type="checkbox">Inglês
+					</div>
+					
+					<div class="single_form_element">
 						<label class="label" for="name">Categoria*</label>
 						<br />
 						<select id="selectCategory" name="updatedRule.category" class="input_border width250">

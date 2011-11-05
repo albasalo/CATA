@@ -98,14 +98,19 @@
 				
 				<div id="advice">
 					<a name="checkYourTexts"></a>
-					<h2>Verifique o estilo de seus textos</h2>
+					<center>
+						<h2>Verifique o estilo de seus textos</h2>
+					</center>
 					<form id="advice_form" action="<c:url value="/advice"/>" enctype="multipart/form-data" method="post">
 						Selecione um arquivo .txt ou .pdf para análise:<br>
 						<div class="single_form_element">
-							<input id="file" type="file" name="file" size="30"><br>
+							<input id="file" type="file" name="file" size="30"><br />
+							<span class="small" style="position: relative">
+								<input type="checkbox">Português <input type="checkbox">Inglês<br />
+							</span>
 						</div>
 						<center>
-							<input class="button" type="submit" value="Enviar">
+							<input class="button" style="margin-top: 0px;" type="submit" value="Enviar">
 							<div class="small">
 								Por padrão, apenas algumas regras cadastradas no Sistema serão aplicadas ao seu texto. Para
 								configurar a análise de seus arquivos, use a opção<br>

@@ -86,6 +86,17 @@
 																<td><b>Referência: </b></td>
 																<td><%@ include file="../shared/table-sources.jsp"%></td>
 															</tr>
+															<tr>
+																<td><b>Usuário:</b></td>
+																<td>Esta regra foi cadastrada por <c:out value="${rule.user.name}"/></td>
+															</tr>
+															<tr>
+																<td><b>Opine:</b></td>
+																<td>
+																	<span><img src="<c:url value='/css/images/up.png'/>"/></span>&nbsp;
+																	<span><img src="<c:url value='/css/images/down.png'/>"/></span>
+																</td>
+															</tr>
 														</table>
 												</c:forEach>
 											</span>
