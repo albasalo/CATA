@@ -24,6 +24,7 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery.multiselect.filter.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.multiselect.filter.br.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/messages-modal.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/checkbox.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				showModal("#modal", '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
@@ -98,7 +99,7 @@
 						<div class="single_form_element">
 							<input id="file" type="file" name="file" size="30"><br>
 							<span class="small" style="position: relative">
-								<input type="checkbox">Português <input type="checkbox">Inglês<br />
+								<input id="pt" name="language" value="0" type="checkbox">Português <input id="en" name="language" value="1" type="checkbox">Inglês<br />
 							</span>
 						</div>
 						<button type="button" class="button" onclick="javascript:history.go(-1);return false;">Voltar</button>

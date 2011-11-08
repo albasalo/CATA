@@ -18,6 +18,7 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/messages-modal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/advice-form.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/checkbox.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/login-form.js'/>"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -106,7 +107,7 @@
 						<div class="single_form_element">
 							<input id="file" type="file" name="file" size="30"><br />
 							<span class="small" style="position: relative">
-								<input type="checkbox">Português <input type="checkbox">Inglês<br />
+								<input id="pt" name="language" value="0" type="checkbox">Português <input id="en" name="language" value="1" type="checkbox">Inglês<br />
 							</span>
 						</div>
 						<center>

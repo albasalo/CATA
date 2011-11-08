@@ -4,9 +4,9 @@ import java.util.List;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
-
 import br.usp.cata.dao.RuleDAO;
 import br.usp.cata.model.ExactMatching;
+import br.usp.cata.model.Languages;
 import br.usp.cata.model.Lemma;
 import br.usp.cata.model.Rule;
 import br.usp.cata.model.Source;
@@ -55,20 +55,28 @@ public class RuleService {
 		return ruleDAO.findAll();
 	}
 	
+	public List<Rule> findAll(Languages language) {
+		return ruleDAO.findAll(language);
+	}
+	
 	public Rule findByID(Long ruleID) {
 		return ruleDAO.findByID(ruleID);
 	}
 	
-	public List<Rule> findDefault() {
-		return ruleDAO.findDefault();
+	public List<Rule> findDefault(Languages language) {
+		return ruleDAO.findDefault(language);
 	}
 	
-	public List<Rule> findBySource(Source source) {
-		return ruleDAO.findBySource(source);
+	public List<Rule> findBySource(Languages language, Source source) {
+		return ruleDAO.findBySource(language, source);
 	}
 	
 	public List<Rule> findByUser(User user) {
 		return ruleDAO.findByUser(user);
+	}
+	
+	public List<Rule> findByUser(Languages language, User user) {
+		return ruleDAO.findByUser(language, user);
 	}
 	
 }

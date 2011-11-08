@@ -14,6 +14,7 @@ import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.ValidationMessage;
 import br.usp.cata.model.AdviceFilter;
 import br.usp.cata.model.CataConstraints;
+import br.usp.cata.model.Languages;
 import br.usp.cata.model.User;
 import br.usp.cata.service.CryptoService;
 import br.usp.cata.service.EmailService.EmailResult;
@@ -91,11 +92,11 @@ public class IndexController {
 
 	@Post
 	@Path("/advice")
-	public void advice(UploadedFile file) throws Exception {
+	public void advice(UploadedFile file, Languages language) throws Exception {
 		validateFile(file);
 		validator.onErrorRedirectTo(IndexController.class).index();
 		
-		result.forwardTo(SuggestionsController.class).results(file, AdviceFilter.DEFAULT, null);
+		result.forwardTo(SuggestionsController.class).results(file, language, AdviceFilter.DEFAULT, null);
 	}
 	
 	@Get
@@ -108,7 +109,7 @@ public class IndexController {
     @Post
     @Path("/advanced")
     public void advanced(int filter, int selectedFilter, long[] selectedUsers,
-    		long[] selectedSources, UploadedFile file) {
+    		long[] selectedSources, UploadedFile file, Languages language) {
     	validateFile(file);
     	
     	if(filter == 1) {
@@ -118,7 +119,7 @@ public class IndexController {
 	        				"Selecione pelo menos um usuário.", "Nenhum usuário selecionado"));
     			validator.onErrorRedirectTo(IndexController.class).advanced();
     			
-    			result.forwardTo(SuggestionsController.class).results(file, AdviceFilter.FILTERED_BY_USER, selectedUsers); 
+    			result.forwardTo(SuggestionsController.class).results(file, language, AdviceFilter.FILTERED_BY_USER, selectedUsers); 
     		}
     		else {
     			if(selectedSources == null)
@@ -126,12 +127,12 @@ public class IndexController {
     						"Selecione pelo menos uma referência bibliográfica.", "Nenhuma referência bibliográfica selecionada"));
     			validator.onErrorRedirectTo(IndexController.class).advanced();
     			
-    			result.forwardTo(SuggestionsController.class).results(file, AdviceFilter.FILTERED_BY_SOURCE, selectedSources);
+    			result.forwardTo(SuggestionsController.class).results(file, language, AdviceFilter.FILTERED_BY_SOURCE, selectedSources);
     		}
     	}
     	else {
     		validator.onErrorRedirectTo(IndexController.class).advanced();
-    		result.forwardTo(SuggestionsController.class).results(file, AdviceFilter.ALL, null);
+    		result.forwardTo(SuggestionsController.class).results(file, language, AdviceFilter.ALL, null);
     	}
     }
 	

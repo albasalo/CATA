@@ -7,8 +7,8 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
-
 import br.usp.cata.model.AdviceFilter;
+import br.usp.cata.model.Languages;
 import br.usp.cata.service.RuleService;
 import br.usp.cata.service.SourceService;
 import br.usp.cata.service.UserService;
@@ -38,21 +38,21 @@ public class SuggestionsController {
 
 	@Post
 	@Path("/suggestions/results")
-	public void results(UploadedFile file, AdviceFilter adviceFilter, long[] filterIDs) {
+	public void results(UploadedFile file, Languages language, AdviceFilter adviceFilter, long[] filterIDs) {
 		RulesTrees rulesTrees = new RulesTrees(ruleService, sourceService, userService);
 		//FIXME Always rebuild trees
 		switch(adviceFilter) {
 			case DEFAULT: 
-				rulesTrees.buildDefaultTrees();
+				rulesTrees.buildDefaultTrees(language);
 				break;
 			case ALL:
-				rulesTrees.buildAllTrees();
+				rulesTrees.buildAllTrees(language);
 				break;
 			case FILTERED_BY_USER:
-				rulesTrees.buildUsersTrees(filterIDs);
+				rulesTrees.buildUsersTrees(language, filterIDs);
 				break;
 			case FILTERED_BY_SOURCE:
-				rulesTrees.buildSourcesTrees(filterIDs);
+				rulesTrees.buildSourcesTrees(language, filterIDs);
 				break;
 			default:
 				break;

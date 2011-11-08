@@ -7,6 +7,7 @@ import java.util.List;
 import org.arabidopsis.ahocorasick.AhoCorasick;
 
 import br.usp.cata.model.ExactMatching;
+import br.usp.cata.model.Languages;
 import br.usp.cata.model.Lemma;
 import br.usp.cata.model.Rule;
 import br.usp.cata.model.RuleInstance;
@@ -48,32 +49,32 @@ public class RulesTrees {
 		matchingsTree.prepare();
 	}
 	
-	public void buildDefaultTrees() {
-		List<Rule> defaultRules = ruleService.findDefault();
+	public void buildDefaultTrees(Languages language) {
+		List<Rule> defaultRules = ruleService.findDefault(language);
 		addRulesAndPrepare(defaultRules);
 	}
 	
-	public void buildAllTrees() {
-		List<Rule> allRules = ruleService.findAll();
+	public void buildAllTrees(Languages language) {
+		List<Rule> allRules = ruleService.findAll(language);
 		addRulesAndPrepare(allRules);
 	}
 	
 	// FIXME
-	public void buildUsersTrees(long[] users) {
+	public void buildUsersTrees(Languages language, long[] users) {
 		List<Rule> rules = new ArrayList<Rule>();
 		for(long userID : users) {
 			User user = userService.findByID(userID);
-			rules.addAll(ruleService.findByUser(user));
+			rules.addAll(ruleService.findByUser(language, user));
 		}
 		addRulesAndPrepare(rules);
 	}
 	
 	// FIXME
-	public void buildSourcesTrees(long[] sources) {
+	public void buildSourcesTrees(Languages language, long[] sources) {
 		List<Rule> rules = new ArrayList<Rule>();
 		for(long sourceID : sources) {
 			Source source = sourceService.findByID(sourceID);
-			rules.addAll(ruleService.findBySource(source));
+			rules.addAll(ruleService.findBySource(language, source));
 		}
 		addRulesAndPrepare(rules);
 	}

@@ -77,7 +77,7 @@
 						<c:forEach items="${rules}" var="rule">
 							<tr>
 								<td><c:out value="${rule.ruleID}"/></td>
-								<td>Português</td>
+								<td><c:out value="${rule.language.languageDescription}"/></td>
 								<td class="center"><c:out value="${rule.type.typeDescription}"/></td>
 								<td class="center"><c:out value="${rule.category.categoryDescription}"/></td>
 								<c:choose>

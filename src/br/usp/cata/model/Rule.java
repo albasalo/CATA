@@ -27,6 +27,9 @@ public class Rule implements Serializable {
     @Id
     @GeneratedValue
     private Long ruleID;
+    
+    @Column
+    private Languages language;
 	
     @Column
 	private boolean defaultRule;
@@ -69,6 +72,14 @@ public class Rule implements Serializable {
 
 	public void setRuleID(Long ruleID) {
 		this.ruleID = ruleID;
+	}
+	
+	public Languages getLanguage() {
+		return language;
+	}
+	
+	public void setLanguage(Languages language) {
+		this.language = language;
 	}
 
 	public boolean isDefaultRule() {
