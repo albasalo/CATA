@@ -1,4 +1,12 @@
 $(document).ready(function() {
+	$("#pt").click(function() {
+		$("#en").attr('checked', false);
+	});
+	
+	$("#en").click(function() {
+		$("#pt").attr('checked', false);
+	});
+	
 	function showSources() {
 		$("#changeSource").hide();
 		$("#selectSource").show();

@@ -59,7 +59,7 @@ public class SuggestionsController {
 		}
 		
 		FileProcessor fileProcessor = new FileProcessor(file);		
-		TextAnalyzer textAnalyzer = new TextAnalyzer(fileProcessor.getText(), servletContext);
+		TextAnalyzer textAnalyzer = new TextAnalyzer(fileProcessor.getText(), language, servletContext);
 		
 		Checker checker = new Checker(textAnalyzer, rulesTrees);
 		result.include("numOfMistakes", checker.getNumOfMistakes());

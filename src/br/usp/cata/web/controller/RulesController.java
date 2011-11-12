@@ -98,6 +98,10 @@ public class RulesController { // TODO This class really needs some refactoring
 			}
 		}
 		
+		if(newRule.getLanguage() == null)
+			validator.add(new ValidationMessage(
+					"Você deve selecionar um idioma para a regra (Português ou Inglês)", "Idioma"));
+		
 		if(source == null || source.getSourceID() == null || source.getSourceID() == 0)
 			validator.add(new ValidationMessage(
     				"Você deve associar uma referência à regra.", "Referência"));
@@ -331,9 +335,9 @@ public class RulesController { // TODO This class really needs some refactoring
 			lemmaService.delete(lemma);
 		for(ExactMatching exactMatching : rule.getExactMatchings())
 			exactMatchingService.delete(exactMatching);
-			
+		
+		rule.setLanguage(updatedRule.getLanguage());
 		rule.setCategory(updatedRule.getCategory());
-				
 		rule.setType(updatedRule.getType());
 		
 		if(updatedRule.getExplanation().equals(""))

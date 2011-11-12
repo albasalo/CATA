@@ -51,7 +51,14 @@
 					<div class="single_form_element">
 						<label class="label" for="language">Idioma*</label>
 						<br />
-						<input type="checkbox">Português <input type="checkbox">Inglês
+						<c:choose>
+							<c:when test="${rule.language == 'PORTUGUESE'}">
+								<input id="pt" name="updatedRule.language" value="0" type="checkbox" checked="true">Português <input id="en" name="updatedRule.language" value="1" type="checkbox">Inglês<br />
+							</c:when>
+							<c:otherwise>
+								<input id="pt" name="updatedRule.language" value="0" type="checkbox">Português <input id="en" name="updatedRule.language" value="1" type="checkbox" checked="true">Inglês<br />
+							</c:otherwise>
+						</c:choose>
 					</div>
 					
 					<div class="single_form_element">

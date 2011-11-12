@@ -19,6 +19,7 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/messages-modal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/custom-modal.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/checkbox.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/newrule-form.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/pagination.js'/>"></script>
 		<script type="text/javascript">
@@ -110,7 +111,7 @@
 					<div class="single_form_element">
 						<label class="label" for="language">Idioma*</label>
 						<br />
-						<input type="checkbox">Português <input type="checkbox">Inglês
+						<input id="pt" name="newRule.language" value="0" type="checkbox">Português <input id="en" name="newRule.language" value="1" type="checkbox">Inglês<br />
 					</div>
 					
 					<div class="single_form_element">
