@@ -122,7 +122,6 @@ public class Lemmatizer {
 					analyzeTkReady();
 				
 				if(tkReady.isPrintable()) {
-					//System.out.println(">> " + tkReady.getResult());
 					Position start = startsList.get(tkReady.getIndex());
 					Position end = endsList.get(tkReady.getIndex());
 					
@@ -288,7 +287,7 @@ public class Lemmatizer {
 		return false;
 	}
 	
-	// TODO tirar numeros magicos e colocar as enums das tags
+	// TODO remove magic numbers - use tags
 	private void combine() {
 		String word, sWordS, line, nextWord;
 		
@@ -908,7 +907,7 @@ public class Lemmatizer {
 			setResult(tkReady);
 	}
 	
-	private String toNoAccentLowerCase(String word) {
+	public static String toNoAccentLowerCase(String word) {
 		String newWord = "";
 		for(int i = 0; i < word.length(); i++) {
 			switch(word.charAt(i)) {

@@ -29,11 +29,11 @@ public class RuleService {
 	private void tokenizeLemmasAndMatchings(Rule rule) {	
 		if(rule.getLemmas() != null) {
 			for(Lemma lemma : rule.getLemmas())
-				patternSuggestionPairService.tokenizePattern(lemma.getPair());
+				patternSuggestionPairService.tokenizePattern(lemma.getPair(), rule.getLanguage());
 		}
 		if(rule.getExactMatchings() != null) {
 			for(ExactMatching exactMatching : rule.getExactMatchings())
-				patternSuggestionPairService.tokenizePattern(exactMatching.getPair());
+				patternSuggestionPairService.tokenizePattern(exactMatching.getPair(), rule.getLanguage());
 		}
 	}
 

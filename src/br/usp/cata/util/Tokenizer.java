@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 
 import br.usp.cata.model.Position;
+import br.usp.cata.util.lemmatizer.Lemmatizer;
 
 import br.usp.pcs.lta.cogroo.configuration.LegacyRuntimeConfiguration;
 import br.usp.pcs.lta.cogroo.configuration.RuntimeConfigurationI;
@@ -95,6 +96,8 @@ public class Tokenizer {
 			}
 		}
 		tokenizedText += " ";
+		
+		tokenizedText = Lemmatizer.toNoAccentLowerCase(tokenizedText);
 	
 		return tokenizedText.getBytes();
 	}

@@ -7,22 +7,22 @@ import javax.servlet.ServletContext;
 
 import br.usp.cata.model.Languages;
 import br.usp.cata.model.Position;
-import br.usp.cata.util.lemmatizer.Lemmatizer;
 
 
 public class TextAnalyzer {
 	
-	private ArrayList<String> text;
-	private byte[] tokenizedTextBytes;
-	private HashMap<Integer, Position> startsTokenized, endsTokenized;
-	private byte[] lemmatizedTextBytes;
-	private HashMap<Integer, Position> startsList, endsList;
-	private HashMap<Integer, Position> startsLemmatized, endsLemmatized;
-	private ArrayList<ArrayList<String>> listOfTokens;
+	ArrayList<String> text;
+	TextAnalyzerLanguage textAnalyzerLanguage;
 	
 	public TextAnalyzer(ArrayList<String> text, Languages language, ServletContext servletContext) {
-		this.text = text;		
-		analyzeText(language, servletContext);
+		this.text = text;
+		
+		if(language == Languages.ENGLISH)
+			textAnalyzerLanguage = new TextAnalyzerEN();
+		else
+			textAnalyzerLanguage = new TextAnalyzerPT(servletContext);
+		
+		textAnalyzerLanguage.analyze(this.text);
 	}
 
 	public ArrayList<String> getText() {
@@ -34,69 +34,27 @@ public class TextAnalyzer {
 	}
 
 	public byte[] getTokenizedTextBytes() {
-		return tokenizedTextBytes;
+		return textAnalyzerLanguage.getTokenizedTextBytes();
 	}
 
 	public HashMap<Integer, Position> getStartsTokenized() {
-		return startsTokenized;
+		return textAnalyzerLanguage.getStartsTokenized();
 	}
 
 	public HashMap<Integer, Position> getEndsTokenized() {
-		return endsTokenized;
+		return textAnalyzerLanguage.getEndsTokenized();
 	}
 
 	public byte[] getLemmatizedTextBytes() {
-		return lemmatizedTextBytes;
+		return textAnalyzerLanguage.getLemmatizedTextBytes();
 	}
 
 	public HashMap<Integer, Position> getStartsLemmatized() {
-		return startsLemmatized;
+		return textAnalyzerLanguage.getStartsLemmatized();
 	}
 
 	public HashMap<Integer, Position> getEndsLemmatized() {
-		return endsLemmatized;
-	}
-	
-	private void analyzeText(Languages language, ServletContext servletContext) {
-		Tokenizer tokenizer = new Tokenizer(servletContext);
-		ArrayList<Byte> tokenizedText = new ArrayList<Byte>();
-		
-		startsTokenized = new HashMap<Integer, Position>();
-		endsTokenized = new HashMap<Integer, Position>();
-		startsList = new HashMap<Integer, Position>();
-		endsList = new HashMap<Integer, Position>();
-		listOfTokens = new ArrayList<ArrayList<String>>();
-		
-		tokenizer.tokenize(text, tokenizedText, startsTokenized, endsTokenized,
-				startsList, endsList, listOfTokens);
-		//FIXME Get text bytes
-		tokenizedTextBytes = new byte[tokenizedText.size()];
-		for(int i = 0; i < tokenizedText.size(); i++)
-			tokenizedTextBytes[i] = tokenizedText.get(i);
-		
-		ArrayList<Byte> lemmatizedText = new ArrayList<Byte>();
-		if(language == Languages.PORTUGUESE) {
-			Lemmatizer lemmatizer = new Lemmatizer();
-
-			startsLemmatized = new HashMap<Integer, Position>();
-			endsLemmatized = new HashMap<Integer, Position>();
-			
-			int offset = 0;
-			for(ArrayList<String> tokens : listOfTokens) {
-				lemmatizer.lemmatize(tokens, offset, lemmatizedText, startsList, endsList,
-						startsLemmatized, endsLemmatized);
-				offset += tokens.size();
-			}
-			for(byte b : " ".getBytes())
-				lemmatizedText.add(b);
-			lemmatizedTextBytes = new byte[lemmatizedText.size()];
-			for(int i = 0; i < lemmatizedText.size(); i++)
-				lemmatizedTextBytes[i] = lemmatizedText.get(i);
-		}
-		else {
-			//TODO Lemmatizer for en
-			lemmatizedTextBytes = new byte[0];
-		}
+		return textAnalyzerLanguage.getEndsLemmatized();
 	}
 	
 }
