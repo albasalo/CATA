@@ -570,7 +570,7 @@ public class Lemmatizer {
 			tkCurrent.setTag(i);
 			
 			String tag;
-			if(i >= 0) {
+			if(i >= 0 && i < tkCurrent.getSfxTags().length) {
 				tkCurrent.getSfxTags()[i] = 1.00;
 				tag = LemmatizerTags.getTag(i);
 			}
@@ -626,12 +626,15 @@ public class Lemmatizer {
 		
 		if(longestSuffix.getExactTag() != LemmatizerConstants.undefinedTag &&
 				cut == 0) {
-			sfxTag[longestSuffix.getExactTag()] = 1.0;
-			if(longestSuffix.getLemma()[longestSuffix.getExactTag()] == null)
-				sfxLemma[longestSuffix.getExactTag()] = "";
-			else {
-				sfxLemma[longestSuffix.getExactTag()] =
-					longestSuffix.getLemma()[longestSuffix.getExactTag()];
+			if(longestSuffix.getExactTag() >= 0 && longestSuffix.getExactTag() < sfxTag.length)
+				sfxTag[longestSuffix.getExactTag()] = 1.0;
+			if(longestSuffix.getExactTag() >= 0 && longestSuffix.getExactTag() < longestSuffix.getLemma().length) {
+				if(longestSuffix.getLemma()[longestSuffix.getExactTag()] == null)
+					sfxLemma[longestSuffix.getExactTag()] = "";
+				else {
+					sfxLemma[longestSuffix.getExactTag()] =
+						longestSuffix.getLemma()[longestSuffix.getExactTag()];
+				}
 			}
 		}
 		else {
@@ -670,7 +673,7 @@ public class Lemmatizer {
 								break;
 							aux = equalAux.getGreater();
 							while(aux != null) {
-								if(aux.getTags()[i] > 0.0 &&
+								if(i >= 0 && aux.getTags()[i] > 0.0 &&
 										aux.getLemma()[i] != null) {
 									found = true;
 									equalAux = aux;
@@ -684,8 +687,9 @@ public class Lemmatizer {
 						}
 						
 						if(found)
-							sfxLemma[i] =
-							initialPortion + equalAux.getLemma()[i].substring(level);
+							if(i >= 0 && i < sfxLemma.length && i < equalAux.getLemma().length &&
+									level >= 0 && level < equalAux.getLemma()[i].length())
+								sfxLemma[i] = initialPortion + equalAux.getLemma()[i].substring(level);
 					}
 				}
 			}
@@ -739,8 +743,8 @@ public class Lemmatizer {
 		if(t.getPrev().getTag() != LemmatizerConstants.undefinedTag) {
 			if(t.getPrev().getTag() >= 0) {
 				for(x = 0; x < LemmatizerConstants.numberOfTags; x++) {
-					t.getPrevs()[x] =
-					LemmatizerConstants.nextNeighbour[t.getPrev().getTag()][x];
+					if(t.getPrev().getTag() >= 0)
+						t.getPrevs()[x] = LemmatizerConstants.nextNeighbour[t.getPrev().getTag()][x];
 				}
 			}
 			
@@ -752,7 +756,7 @@ public class Lemmatizer {
 			if(t.getNext().getTag() >= 0) {
 				for(x = 0; x < LemmatizerConstants.numberOfTags; x++) {
 					t.getNexts()[x] =
-					LemmatizerConstants.prevNeighbour[t.getNext().getTag()][x];
+							LemmatizerConstants.prevNeighbour[t.getNext().getTag()][x];
 				}
 			}
 		
