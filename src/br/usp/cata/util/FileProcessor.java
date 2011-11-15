@@ -119,6 +119,7 @@ public class FileProcessor {
 	        for(String line : textLines)
 	        	text.add(line);     
 		}
+		//TODO: Add more file types
 	}
 	
 }

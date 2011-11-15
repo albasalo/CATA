@@ -40,7 +40,6 @@ public class SuggestionsController {
 	@Path("/suggestions/results")
 	public void results(UploadedFile file, Languages language, AdviceFilter adviceFilter, long[] filterIDs) {
 		RulesTrees rulesTrees = new RulesTrees(ruleService, sourceService, userService);
-		//FIXME Always rebuild trees (not very efficient =/)
 		switch(adviceFilter) {
 			case DEFAULT: 
 				rulesTrees.buildDefaultTrees(language);

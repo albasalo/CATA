@@ -204,6 +204,7 @@ td.details {
 	border: 1px solid #aaa;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+	border-radius: 5px;
 	padding: 2px 5px;
 	margin: 0 3px;
 	cursor: pointer;
@@ -297,6 +298,7 @@ input {
 	border: 2px solid #bbbbbb;
 	-moz-border-radius: 7px;
 	-webkit-border-radius: 7px;
+	border-radius: 7px;
 }
 
 input:focus {
@@ -310,6 +312,7 @@ select {
 	border: 2px solid #bbbbbb;
 	-moz-border-radius: 7px;
 	-webkit-border-radius: 7px;
+	border-radius: 7px;
 }
 
 select:focus {

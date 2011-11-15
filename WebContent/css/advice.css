@@ -3,10 +3,12 @@
 	margin: auto;
     -moz-box-shadow: 0 0 10px #333333;
     -webkit-box-shadow: 0 0 10px #333333;
+    box-shadow: 0 0 10px #333333;
     border: 3px solid;
     border-color: #2975a5;
     -moz-border-radius: 12px;
 	-webkit-border-radius: 12px;
+	border-radius: 12px;
     padding: 20px;
     font-size: 1.1em;
     text-align: justify;

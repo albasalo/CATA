@@ -123,6 +123,7 @@ a:hover {
 	text-decoration: none;
 	-moz-border-radius: 12px;
 	-webkit-border-radius: 12px;
+	border-radius: 12px;
 	background: none repeat scroll 0 0 #123348;	
 	padding: 6px 10px !important;
 }
@@ -247,6 +248,7 @@ a:hover {
 .width700 {width: 700px;}
 .width710 {width: 710px;}
 .width800 {width: 800px;}
+
 
 /* Alignment */
 .align-top {vertical-align: top;}

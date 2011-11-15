@@ -54,7 +54,7 @@ public class NewUserService {
 	        linkBuilder.append("aqui");
 	        linkBuilder.append("</a>");
 
-        final String subject = "CATA: Ativação de conta";
+        final String subject = "CATA: Ativar conta";
         final String body = "Obrigado por se cadastrar no Sistema CATA de verificação" +
         		" de estilo para textos acadêmicos de Computação. Clique " +
         		linkBuilder.toString()  + " para ativar sua conta.";

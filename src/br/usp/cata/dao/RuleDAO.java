@@ -7,6 +7,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
 import br.com.caelum.vraptor.util.hibernate.SessionCreator;
+
 import br.usp.cata.model.Languages;
 import br.usp.cata.model.Rule;
 import br.usp.cata.model.Source;
