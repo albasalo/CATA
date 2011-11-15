@@ -7,6 +7,7 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
+
 import br.usp.cata.model.AdviceFilter;
 import br.usp.cata.model.Languages;
 import br.usp.cata.service.RuleService;
@@ -16,9 +17,11 @@ import br.usp.cata.util.Checker;
 import br.usp.cata.util.FileProcessor;
 import br.usp.cata.util.RulesTrees;
 import br.usp.cata.util.TextAnalyzer;
+import br.usp.cata.web.interceptor.IrrestrictAccess;
 
 
 @Resource
+@IrrestrictAccess
 public class SuggestionsController {
 	
 	private final Result result;
@@ -72,4 +75,9 @@ public class SuggestionsController {
 			result.include("output", "Não há sugestões para o texto enviado.");
 	}
 
+	@Post
+	@Path("suggestions/opinion/{data}")
+	public void opinion(String data) {
+		//TODO 
+	}
 }

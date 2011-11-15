@@ -8,6 +8,7 @@ import javax.servlet.ServletContext;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.RequestScoped;
 
+import br.usp.cata.dao.PatternSuggestionPairDAO;
 import br.usp.cata.model.Languages;
 import br.usp.cata.model.PatternSuggestionPair;
 import br.usp.cata.util.Tokenizer;
@@ -25,10 +26,13 @@ import edu.stanford.nlp.util.CoreMap;
 @Component
 public class PatternSuggestionPairService {
 	
+	private final PatternSuggestionPairDAO patternSuggestionPairDAO;
 	private final Tokenizer tokenizer;
 	private final StanfordCoreNLP pipeline;
 	
-	public PatternSuggestionPairService(ServletContext servletContext) {
+	public PatternSuggestionPairService(ServletContext servletContext, PatternSuggestionPairDAO patternSuggestionPairDAO) {
+		this.patternSuggestionPairDAO = patternSuggestionPairDAO;
+		
 		tokenizer = new Tokenizer(servletContext);
 		
 		Properties props = new Properties();
@@ -56,6 +60,10 @@ public class PatternSuggestionPairService {
 		    			
 		    patternSuggestionPair.setTokenizedPatternBytes(tokenizedText.getBytes());
 		}	
+	}
+	
+	public PatternSuggestionPair findById(Long patternSuggestionPairID) {
+		return patternSuggestionPairDAO.findByID(patternSuggestionPairID);
 	}
 
 }
