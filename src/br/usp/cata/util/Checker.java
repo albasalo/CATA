@@ -101,6 +101,8 @@ public class Checker {
 		int i = 0;
 		int lastCharIndex = 0;
 		ArrayList<CheckedSegment> checkedLine = null;
+		String line = null;
+		
 		for(int lineNum = 0; lineNum < text.size();) {
 			Position start = null;
 			Position end = null;
@@ -123,16 +125,20 @@ public class Checker {
 					lineNum++;
 				}
 				
-				checkedLine = new ArrayList<CheckedSegment>();
-				String line = text.get(lineNum);
+				if(lastCharIndex == 0) {
+					checkedLine = new ArrayList<CheckedSegment>();
+					line = text.get(lineNum);
+				}
 				
-				if(start.getCharIndex() > lastCharIndex)
+				if(start.getCharIndex() > lastCharIndex) {
 					checkedLine.add(new CheckedSegment(line.substring(lastCharIndex, start.getCharIndex()), null));
-				lastCharIndex = 0;
+					lastCharIndex = start.getCharIndex();
+				}
 				
 				if(start.getLineNumber() == end.getLineNumber()) {
 					checkedLine.add(new CheckedSegment(
 						line.substring(start.getCharIndex(), end.getCharIndex()), mistakes.get(i)));
+					lastCharIndex = end.getCharIndex();
 				}
 				else {
 					String segment = line.substring(start.getCharIndex());
@@ -151,6 +157,7 @@ public class Checker {
 				else {
 					checkedText.add(checkedLine);
 					lineNum++;
+					lastCharIndex = 0;
 				}
 			}
 			else {
