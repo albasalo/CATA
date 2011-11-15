@@ -6,6 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 
 @Entity
@@ -28,6 +32,10 @@ public class PatternSuggestionPair implements Serializable {
 	
 	@Column
 	private boolean defaultPair;
+	
+	@OneToOne
+	@Cascade({ CascadeType.ALL })
+	private Opinion opinion;
 	
 	public PatternSuggestionPair() {
 	}
@@ -70,6 +78,14 @@ public class PatternSuggestionPair implements Serializable {
 
 	public void setDefaultPair(boolean defaultPair) {
 		this.defaultPair = defaultPair;
+	}
+	
+	public void setOpinion(Opinion opinion) {
+		this.opinion = opinion;
+	}
+	
+	public Opinion getOpinion() {
+		return opinion;
 	}
 	
 }

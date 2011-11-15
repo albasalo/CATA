@@ -10,8 +10,13 @@ import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.ComponentFactory;
 import br.com.caelum.vraptor.ioc.RequestScoped;
 
+import br.usp.cata.model.Agree;
+import br.usp.cata.model.Disagree;
 import br.usp.cata.model.ExactMatching;
+import br.usp.cata.model.Keyword;
+import br.usp.cata.model.KeywordSet;
 import br.usp.cata.model.Lemma;
+import br.usp.cata.model.Opinion;
 import br.usp.cata.model.PatternSuggestionPair;
 import br.usp.cata.model.Rule;
 import br.usp.cata.model.Source;
@@ -37,6 +42,11 @@ public class AnnotationSessionFactoryCreator implements ComponentFactory<Session
 		cfg.addAnnotatedClass(ExactMatching.class);
         cfg.addAnnotatedClass(Rule.class);
         cfg.addAnnotatedClass(Source.class);
+        cfg.addAnnotatedClass(Opinion.class);
+        cfg.addAnnotatedClass(Agree.class);
+        cfg.addAnnotatedClass(Disagree.class);
+        cfg.addAnnotatedClass(KeywordSet.class);
+        cfg.addAnnotatedClass(Keyword.class);
         factory = cfg.buildSessionFactory();
     }
 
