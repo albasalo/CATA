@@ -90,11 +90,39 @@
 																<td><b>Usuário:</b></td>
 																<td>Esta regra foi cadastrada por <c:out value="${rule.user.name}"/></td>
 															</tr>
-															<tr>
+															<tr id="giveOpinion<%=getMistakeIndex()%>">
 																<td><b>Opine:</b></td>
 																<td>
-																	<span><img src="<c:url value='/css/images/up.png'/>"/></span>&nbsp;
-																	<span><img src="<c:url value='/css/images/down.png'/>"/></span>
+																	<c:choose>
+																		<c:when test="${mistake.brokenRule.patternSuggestionPair.opinion == null}">
+																			<span id="agree<%=getMistakeIndex()%>">0</span>&nbsp;
+																				<span class="hand" onclick="giveOpinion('agree', '<c:out value="${mistake.brokenRule.patternSuggestionPair.patternSuggestionPairID}"/>', <%=getMistakeIndex()%>)"><img src="<c:url value='/css/images/up.png'/>"/></span>&nbsp;&nbsp;&nbsp;
+																			<span>0</span>&nbsp;
+																				<span class="hand" onclick="giveOpinion('disagree', '<c:out value="${mistake.brokenRule.patternSuggestionPair.patternSuggestionPairID}"/>', <%=getMistakeIndex()%>)"><img src="<c:url value='/css/images/down.png'/>"/></span>
+																		</c:when>
+																		<c:otherwise>
+																			<span id="agree<%=getMistakeIndex()%>"><c:out value="${mistake.brokenRule.patternSuggestionPair.opinion.agreeSize}"/></span>&nbsp;
+																				<span class="hand" onclick="giveOpinion('agree', '<c:out value="${mistake.brokenRule.patternSuggestionPair.patternSuggestionPairID}"/>', <%=getMistakeIndex()%>)"><img src="<c:url value='/css/images/up.png'/>"/></span>&nbsp;&nbsp;&nbsp;
+																			<span><c:out value="${mistake.brokenRule.patternSuggestionPair.opinion.disagreeSize}"/></span>&nbsp;
+																				<span class="hand" onclick="giveOpinion('disagree', '<c:out value="${mistake.brokenRule.patternSuggestionPair.patternSuggestionPairID}"/>', <%=getMistakeIndex()%>)"><img src="<c:url value='/css/images/down.png'/>"/></span>
+																		</c:otherwise>
+																	</c:choose>
+																</td>
+															</tr>
+															<tr id="opinion<%=getMistakeIndex()%>" style="display: none">
+																<td><b>Opine:</b></td>
+																<td>
+																	<span id="agreed<%=getMistakeIndex()%>"></span>
+																	<span><img src="<c:url value='/css/images/up.png'/>"/></span>&nbsp;&nbsp;&nbsp;
+																	<c:choose>
+																		<c:when test="${mistake.brokenRule.patternSuggestionPair.opinion == null}">
+																			<span>0</span>&nbsp; <span><img src="<c:url value='/css/images/down.png'/>"/></span>
+																		</c:when>
+																		<c:otherwise>
+																			<span><c:out value="${mistake.brokenRule.patternSuggestionPair.opinion.disagreeSize}"/></span>&nbsp;
+																				<span><img src="<c:url value='/css/images/down.png'/>"/></span>
+																		</c:otherwise>
+																	</c:choose>
 																</td>
 															</tr>
 														</table>

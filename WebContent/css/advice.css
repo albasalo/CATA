@@ -41,3 +41,13 @@
 	background-color: #a9da65;
 	color: #335519;
 }
+
+.disagree {
+	padding: 2px;
+	background-color: #d6dbce;
+	color: #333431;
+}
+
+.hand {
+	cursor: pointer;
+}

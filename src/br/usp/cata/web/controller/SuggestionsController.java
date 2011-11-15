@@ -64,8 +64,7 @@ public class SuggestionsController {
 		result.include("numOfMistakes", checker.getNumOfMistakes());
 		
 		if(checker.getNumOfMistakes() != 0) {
-			result.include("output", "Algumas sugestões para melhorar o estilo " +
-					"do texto enviado:");
+			result.include("output", "Foram encontrados alguns problemas de estilo (estão destacados). Confira:");
 			result.include("fileName", fileProcessor.getFileName());
 			result.include("text", checker.getCheckedText());
 		}

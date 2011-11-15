@@ -53,5 +53,17 @@ public class Opinion {
 	public void setDisagree(Set<Disagree> disagree) {
 		this.disagree = disagree;
 	}
+	
+	public int getAgreeSize() {
+		if(agree != null)
+			return agree.size();
+		return 0;
+	}
 
+	public int getDisagreeSize() {
+		if(disagree != null)
+			return disagree.size();
+		return 0;
+	}
+	
 }
