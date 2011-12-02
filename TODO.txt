@@ -1,0 +1,6 @@
+Este arquivo lista algumas melhorias futuras para o Sistema CATA:
+1. Mais tipos de arquivos de entrada (.tex, .doc(x), .odf, etc.)
+2. Melhorar a eficácia/eficiência dos processos de lematização/análise dos textos
+3. Opção de "Ignorar regra"
+4. Melhorar a exibição dos problemas de estilo
+5.
