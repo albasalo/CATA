@@ -10,14 +10,20 @@ import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.pdfbox.cos.COSDocument;
 import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.util.PDFTextStripper;
 
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
+import br.usp.cata.component.FixesForLatexPDFTexts;
 
 
 public class FileProcessor {
@@ -92,6 +98,24 @@ public class FileProcessor {
 		}
 	}
 	
+	private void fixUglyLatex(ArrayList<String> text) {
+		Pattern pattern = FixesForLatexPDFTexts.getPattern();
+		Map<String, String> tokens = FixesForLatexPDFTexts.getTokens();
+		
+		for(int i = 0; i < text.size(); i++) {
+			Matcher matcher = pattern.matcher(text.get(i));
+	
+			StringBuffer sb = new StringBuffer();
+			while(matcher.find()) {
+			    matcher.appendReplacement(sb, tokens.get(matcher.group(1)));
+			}
+			matcher.appendTail(sb);
+	
+			text.remove(i);
+			text.add(i, sb.toString());
+		}
+	}
+	
 	private void getText(UploadedFile file) {
 		text = new ArrayList<String>();
 		InputStream is = file.getFile();
@@ -146,6 +170,7 @@ public class FileProcessor {
 	        	text.add(line);
 	        		
 	        this.fixHiphenation(text);
+	        this.fixUglyLatex(text);
 		}
 		//TODO: Add more file types
 	}
