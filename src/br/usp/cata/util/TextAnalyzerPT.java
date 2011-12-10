@@ -8,6 +8,7 @@ import javax.servlet.ServletContext;
 import br.usp.cata.model.Position;
 import br.usp.cata.util.lemmatizer.Lemmatizer;
 
+
 public class TextAnalyzerPT extends TextAnalyzerLanguage {
 	
 	ServletContext servletContext;

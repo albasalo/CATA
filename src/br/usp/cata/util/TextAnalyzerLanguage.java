@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import br.usp.cata.model.Position;
 
+
 public abstract class TextAnalyzerLanguage {
 
 	protected byte[] tokenizedTextBytes;

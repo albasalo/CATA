@@ -16,6 +16,7 @@ import edu.stanford.nlp.util.CoreMap;
 
 import br.usp.cata.model.Position;
 
+
 public class TextAnalyzerEN extends TextAnalyzerLanguage {
 	
 	private StanfordCoreNLP pipeline;

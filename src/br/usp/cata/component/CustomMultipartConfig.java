@@ -3,6 +3,7 @@ package br.usp.cata.component;
 import br.com.caelum.vraptor.interceptor.multipart.DefaultMultipartConfig;
 import br.com.caelum.vraptor.ioc.ApplicationScoped;
 import br.com.caelum.vraptor.ioc.Component;
+
 import br.usp.cata.model.CataConstraints;
 
 

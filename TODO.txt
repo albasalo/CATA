@@ -3,4 +3,3 @@ Este arquivo lista algumas melhorias futuras para o Sistema CATA:
 2. Melhorar a eficácia/eficiência dos processos de lematização/análise dos textos
 3. Opção de "Ignorar regra"
 4. Melhorar a exibição dos problemas de estilo
-5.
