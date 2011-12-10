@@ -66,6 +66,32 @@ public class FileProcessor {
 		return charset;
 	}
 	
+	private void fixHiphenation(ArrayList<String> text) {
+		for(int i = 0; i < text.size() - 1; i++) {
+			String line = text.get(i);
+			String nextLine = text.get(i+1);
+			
+			if(line.length() > 0 && line.charAt(line.length() - 1) == '-') {
+				String newLine = line.substring(0, line.length() - 1);
+				String newNextLine = "";
+				
+				int j;
+				for(j = 0; j < nextLine.length() && nextLine.charAt(j) != ' '; j++);
+				
+				newLine += nextLine.substring(0, j);
+				if(j < nextLine.length())
+					newNextLine = nextLine.substring(j, nextLine.length());
+				
+				text.remove(i);
+				text.add(i, newLine);
+				
+				text.remove(i+1);
+				if(!newNextLine.equals("") || nextLine.equals(""))
+					text.add(i+1, newNextLine);
+			}
+		}
+	}
+	
 	private void getText(UploadedFile file) {
 		text = new ArrayList<String>();
 		InputStream is = file.getFile();
@@ -117,7 +143,9 @@ public class FileProcessor {
 	        String[] textLines = parsedText.split("\n");
 	        
 	        for(String line : textLines)
-	        	text.add(line);     
+	        	text.add(line);
+	        		
+	        this.fixHiphenation(text);
 		}
 		//TODO: Add more file types
 	}
