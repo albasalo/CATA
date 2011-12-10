@@ -1,1 +1,6 @@
 CATA: Collaborative Academic Text Advisor.
+
+CATA (Collaborative Academic Text Advisor) tem por finalidade detectar problemas de estilo em textos
+acadêmicos de Computação, bem como sugerir possíveis correções para tais problemas.
+
+Aqui você encontra todo o código-fonte do Sistema CATA, assim como uma breve documentação.
