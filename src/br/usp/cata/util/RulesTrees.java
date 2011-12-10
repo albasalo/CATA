@@ -38,7 +38,7 @@ public class RulesTrees {
 		matchingsTree = new AhoCorasick();
 	}
 	
-	private void addRulesAndPrepare(List<Rule> rules) {
+	public void addRulesAndPrepare(List<Rule> rules) {
 		for(Rule rule : rules) {
 			for(Lemma lemma : rule.getLemmas())
 				lemmasTree.add(lemma.getPair().getTokenizedPatternBytes(),
