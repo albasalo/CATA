@@ -28,21 +28,23 @@ public class SuggestionsController {
 	private final RuleService ruleService;
 	private final SourceService sourceService;
 	private final UserService userService;
+	private final UserSession userSession;
 	private final ServletContext servletContext;
 
 	public SuggestionsController(Result result, RuleService ruleService, SourceService sourceService, 
-			UserService userService, ServletContext servletContext) {
+			UserService userService, UserSession userSession, ServletContext servletContext) {
 		this.result = result;
 		this.ruleService = ruleService;
 		this.sourceService = sourceService;
 		this.userService = userService;
+		this.userSession = userSession;
 		this.servletContext = servletContext;
 	}
 
 	@Post
 	@Path("/suggestions/results")
 	public void results(UploadedFile file, Languages language, AdviceFilter adviceFilter, long[] filterIDs) {
-		RulesTrees rulesTrees = new RulesTrees(ruleService, sourceService, userService);
+		RulesTrees rulesTrees = new RulesTrees(ruleService, sourceService, userService, userSession);
 		switch(adviceFilter) {
 			case DEFAULT: 
 				rulesTrees.buildDefaultTrees(language);

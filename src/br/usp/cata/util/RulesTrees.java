@@ -16,6 +16,7 @@ import br.usp.cata.model.User;
 import br.usp.cata.service.RuleService;
 import br.usp.cata.service.SourceService;
 import br.usp.cata.service.UserService;
+import br.usp.cata.web.controller.UserSession;
 
 
 public class RulesTrees {
@@ -25,11 +26,13 @@ public class RulesTrees {
 	private final RuleService ruleService;
 	private final SourceService sourceService;
 	private final UserService userService;
+	private final UserSession userSession;
 	
-	public RulesTrees(RuleService ruleService, SourceService sourceService, UserService userService) {
+	public RulesTrees(RuleService ruleService, SourceService sourceService, UserService userService, UserSession userSession) {
 		this.ruleService = ruleService;
 		this.sourceService = sourceService;
 		this.userService = userService;
+		this.userSession = userSession;
 		
 		lemmasTree = new AhoCorasick();
 		matchingsTree = new AhoCorasick();
@@ -51,6 +54,8 @@ public class RulesTrees {
 	
 	public void buildDefaultTrees(Languages language) {
 		List<Rule> defaultRules = ruleService.findDefault(language);
+		if(userService.isAuthenticatedUser())
+			defaultRules.addAll(ruleService.findByUser(userSession.getUser()));
 		addRulesAndPrepare(defaultRules);
 	}
 	
