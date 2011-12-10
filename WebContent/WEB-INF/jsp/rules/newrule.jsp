@@ -36,6 +36,10 @@
 			function showHelp() {
 				showCustomModal("#help", '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
 			};
+			
+			function showLemmasHelp() {
+				showCustomModal("#lemmasHelp", '<a href="#" class="close"><img src="<c:url value='/css/images/close_pop.png'/>" class="btn_close" title="Fechar" alt="Fechar" /></a>');
+			};
 		</script>
 		
 		<title>Cadastrar nova Regra de Estilo</title>
@@ -108,6 +112,20 @@
 							</div>
 						</div>
 					</div>
+					<div id="lemmasHelp" class="popup_block " style="display:none">
+						<div class="popup_content" align="justify">
+							<h2>O que é um "lema"?</h2>
+							<div style="padding:6px">
+								Um "lema" é, basicamente, uma
+								palavra em sua forma "não flexionada". Por exemplo, o lema de "meninas" é "menino", assim como o
+								lema de "comprei" é "comprar". Assim, se você cadastrar um padrão incorreto e suas respectivas sugestões
+								em <b>Lemas</b>, o Sistema irá aplicar essa regra para todas as flexões do padrão incorreto. Por exemplo,
+								se você cadastrou, em <b>Lemas</b>, o padrão "debugar", com a sugestão "depurar", o Sistema irá marcar como
+								problemas todas as flexões de "debugar": "debuguei", "debugamos", "debugaríamos" serão todos marcados como
+								erro de estilo.
+							</div>
+						</div>
+					</div>
 					<div class="single_form_element">
 						<label class="label" for="language">Idioma*</label>
 						<br />
@@ -134,7 +152,7 @@
 						</select>
 					</div>
 					<br />
-					<b>Lemas:</b>
+					<b>Lemas: </b> <span class="change_form_element" onclick="showLemmasHelp()">&nbsp;[?]</span>
 					<div class="single_form_element" style="display:inline">
 						<div id="lemmasDiv" class="indent">
 						</div>

@@ -159,7 +159,7 @@
 					</div>
 					<br />
 					
-					<b>Referência:</b><br />
+					<b>Referência</b><br />
 					<div class="indentation">
 						<div id="inputSourceID"  style="display:none">
 							<input id="selectedSourceID" name="source.sourceID" value="0">

@@ -508,7 +508,7 @@ Referências bibliográficas e bibliotecas usadas na construção deste projeto
 
 *CoGrOO
 	http://cogroo.sourceforge.net/download/current.html
-	Foi utilizada a versão 3.1.2 do CoGrOO.
+	Foi utilizada a versão 3.1.0 do CoGrOO.
 	
 				   GNU LESSER GENERAL PUBLIC LICENSE
 	                       Version 3, 29 June 2007
