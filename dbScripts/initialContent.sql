@@ -11,10 +11,17 @@ insert into Source (sourceID, title, type, url, userID) values
 
 insert into Source (sourceID, title, type, authors, publisher, date, userID) values
 	(2, 'Manual da Redação', 2, 'Folha de São Paulo', 'Publifolha', '2010', 1);
+	
+insert into Source (sourceID, title, type, url, userID) values
+	(3, 'Dicas Sobre Escrita em Inglês', 3, 'http://www.ime.usp.br/~kon/ResearchStudents/dicasIngles.html', 1);
+	
+insert into Source (sourceID, title, type, url, userID) values
+	(4, 'Scientific Writing Web Resource', 3, 'http://cgi.duke.edu/web/sciwriting/index.php', 1);
 
 
 -- Regras
 
+-- Portugues
 insert into Rule (ruleID, language, category, defaultRule, explanation, type, sourceID, userID)
 	values (1, 0, 1, True, '''Assumir'' com o sentido de ''admitir por hipótese'', tradução do inglês ''to assume'' (e.g. ''Assume x is a multi-dimensional array.'').', 2, 1, 1);
 insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
@@ -468,3 +475,125 @@ insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userI
 insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
 	values (91, True, 'sketch', 'esquete', ' sketch ');
 insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (73, 91, 85);
+
+
+-- Ingles
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (86, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (92, True, 'new initiative', 'initiative', ' new initiative ');
+insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (74, 92, 86);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (87, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (93, True, 'elucidate', 'show', ' elucidate ');
+insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (75, 93, 87);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (88, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (94, True, 'etiology', 'cause', ' etiology ');
+insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (76, 94, 88);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (89, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (95, True, 'to have the capacity to', 'can', ' have the capacity to ');
+insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (77, 95, 89);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (90, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (96, True, 'methodology', 'method', ' methodology ');
+insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (78, 96, 90);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (91, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (97, True, 'to be in agreement', 'agree', ' be in agreement ');
+insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (79, 97, 91);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (92, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (98, True, 'to play a key role in', 'be essential', ' play a key role in ');
+insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (80, 98, 92);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (93, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (99, True, 'used for fuel purposes', 'used for fuel', ' use for fuel purpose ');
+insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (81, 99, 93);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (94, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (100, True, 'utilize', 'use', ' utilize ');
+insert into Lemma (lemmaID, pair_patternSuggestionPairID, rule_ruleID) values (82, 100, 94);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (95, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (101, True, 'a large majority of', 'most', ' a large majority of ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (19, 101, 95);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (96, 1, 0, True, 3, 3, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (102, True, 'isn''t', 'is not', ' is n''t ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (20, 102, 96);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (97, 1, 0, True, 3, 3, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (103, True, 'aren''t', 'are not', ' are n''t ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (21, 103, 97);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (98, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (104, True, 'at this point in time', 'now', ' at this point in time ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (22, 104, 98);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (99, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (105, True, 'due to the fact that', 'because', ' due to the fact that ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (23, 105, 99);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (100, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (106, True, 'in a careful manner', 'carefully', ' in a careful manner ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (24, 106, 100);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (101, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (107, True, 'in the event that', 'if', ' in the event that ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (25, 107, 101);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (102, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (108, True, 'nearly unique', 'unique, rare', ' nearly unique ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (26, 108, 102);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (103, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (109, True, 'prior to', 'before', ' prior to ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (27, 109, 103);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (104, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (110, True, 'putative', 'remova este termo', ' putative ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (28, 110, 104);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (105, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (111, True, 'subsequent to', 'after', ' subsequent to ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (29, 111, 105);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (106, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (112, True, 'the question as to whether', 'whether', ' the question as to whether ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (30, 112, 106);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (107, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (113, True, 'there is no doubt but that', 'doubtless', ' there is no doubt but that ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (31, 113, 107);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (108, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (114, True, 'this is a subject that', 'this subject', ' this is a subject that ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (32, 114, 108);
+
+insert into Rule (ruleID, language, category, defaultRule, type, sourceID, userID) values (109, 1, 0, True, 3, 4, 1);
+insert into PatternSuggestionPair (patternSuggestionPairID, defaultPair, pattern, suggestions, tokenizedPatternBytes)
+	values (115, True, 'whether or not', 'whether', ' whether or not ');
+insert into ExactMatching (exactMatchingID, pair_patternSuggestionPairID, rule_ruleID) values (33, 115, 109);

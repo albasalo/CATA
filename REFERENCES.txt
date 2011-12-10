@@ -16,7 +16,7 @@ Referências bibliográficas e bibliotecas usadas na construção deste projeto
  	Muitas das regras 'default' do Sistema foram retiradas desta referência.
  	
 
-*Duke University,Scientific Writing Web Resource,
+*Duke University, Scientific Writing Web Resource,
 	http://cgi.duke.edu/web/sciwriting/index.php
 	Muitas das regras 'default' do Sistema foram retiradas desta referência.
 
