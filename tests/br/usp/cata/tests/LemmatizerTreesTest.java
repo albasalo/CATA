@@ -1,5 +1,6 @@
 package br.usp.cata.tests;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import br.usp.cata.component.lemmatizer.LemmatizerTrees;
@@ -11,6 +12,7 @@ public class LemmatizerTreesTest extends CataTestCase {
 		super(name);
 	}
 	
+	@Before
 	public void setUp() throws Exception {
 		super.setUp();
 		
