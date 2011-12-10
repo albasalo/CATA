@@ -72,6 +72,10 @@ public class SuggestionsController {
 			result.include("output", "Foram encontrados alguns problemas de estilo (estão destacados). Confira:");
 			result.include("fileName", fileProcessor.getFileName());
 			result.include("text", checker.getCheckedText());
+			String textKeywords = "";
+			for(String keyword : textAnalyzer.getKeywords())
+				textKeywords += (";" + keyword);
+			result.include("keywords", textKeywords);
 		}
 		else
 			result.include("output", "Não há sugestões para o texto enviado.");
@@ -80,6 +84,6 @@ public class SuggestionsController {
 	@Post
 	@Path("suggestions/opinion/{data}")
 	public void opinion(String data) {
-		//TODO 
+		
 	}
 }

@@ -20,12 +20,12 @@
 		    function giveOpinion(type, pairID, mistakeID) {
 		    	var mistake = "#mistake" + mistakeID;
 		    	var url = "<c:url value='/suggestions/opinion'/>";
-		    	url = url + "/dados";
+		    	url = url + "/";
 		    	if(type == "agree") {
 		    		$.ajax(
 		    		{		
 		    			type: "POST",
-		    			url: url
+		    			url: url + "agree|" + $("#keywords").text()
 		    		});
 		    		var agree = "#agree" + mistakeID;
 		    		var val = parseInt($(agree).text()) + 1;
@@ -44,7 +44,7 @@
 		    		$.ajax(
 		    		{		
 		    			type: "POST",
-		    			url: url
+		    			url: url + "disagree|" + $("#keywords").text()
 		    		});
 		    		$(mistake).qtip("destroy");
 		    		$(mistake).removeClass("highlightedText");
@@ -65,6 +65,9 @@
 				<h1>Sugestões</h1>
 				<h3>${output}</h3><br>
 				<c:if test = "${numOfMistakes != 0}">
+					<div id="keywords" style="display: none">
+						${keywords}
+					</div>
 					<div id="text">
 						<b>Arquivo: <c:out value="${fileName}"/></b>
 						<br /><br />

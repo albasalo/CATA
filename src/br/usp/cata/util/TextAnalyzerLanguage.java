@@ -2,6 +2,7 @@ package br.usp.cata.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import br.usp.cata.model.Position;
 
@@ -12,6 +13,7 @@ public abstract class TextAnalyzerLanguage {
 	protected HashMap<Integer, Position> startsTokenized, endsTokenized;
 	protected byte[] lemmatizedTextBytes;
 	protected HashMap<Integer, Position> startsLemmatized, endsLemmatized;
+	protected List<String> keywords;
 	
 	public byte[] getTokenizedTextBytes() {
 		return tokenizedTextBytes;
@@ -59,6 +61,14 @@ public abstract class TextAnalyzerLanguage {
 
 	public void setEndsLemmatized(HashMap<Integer, Position> endsLemmatized) {
 		this.endsLemmatized = endsLemmatized;
+	}
+	
+	public List<String> getKeywords() {
+		return keywords;
+	}
+	
+	public void setKeywords(List<String> keywords) {
+		this.keywords = keywords;
 	}
 
 	abstract void analyze(ArrayList<String> text);

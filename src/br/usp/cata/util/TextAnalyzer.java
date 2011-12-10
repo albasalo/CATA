@@ -2,6 +2,7 @@ package br.usp.cata.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 
@@ -55,6 +56,10 @@ public class TextAnalyzer {
 
 	public HashMap<Integer, Position> getEndsLemmatized() {
 		return textAnalyzerLanguage.getEndsLemmatized();
+	}
+	
+	public List<String> getKeywords() {
+		return textAnalyzerLanguage.getKeywords();
 	}
 	
 }

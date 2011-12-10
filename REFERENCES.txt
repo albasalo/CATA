@@ -964,6 +964,10 @@ Referências bibliográficas e bibliotecas usadas na construção deste projeto
 	« Back to Commons Deed <./>
 	
 
+*Stop words
+	http://snowball.tartarus.org/algorithms/portuguese/stop.txt
+
+
 *Grid para mostrar regras e referências
 	http://www.datatables.net/index
 			    GNU GENERAL PUBLIC LICENSE
