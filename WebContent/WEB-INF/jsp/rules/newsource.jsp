@@ -12,7 +12,7 @@
 		<link href="<c:url value='/css/modal-window.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/user-menu.css'/>" rel="stylesheet" type="text/css" />
 		
-		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.1.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery-1.5.1.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/messages-modal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/newsource-form.js'/>"></script>

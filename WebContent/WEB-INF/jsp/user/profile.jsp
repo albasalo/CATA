@@ -14,7 +14,7 @@
 		<link href="<c:url value='/css/form.css'/>" rel="stylesheet" type="text/css" />
 		<link href="<c:url value='/css/table.css'/>" rel="stylesheet" type="text/css" />
 		
-		<script type="text/javascript" src="<c:url value='/js/jquery-1.4.2.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery-1.5.1.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.dataTables.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery.simplemodal.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/messages-modal.js'/>"></script>
