@@ -19,7 +19,7 @@ public class Keyword {
 	private String word;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	private KeywordSet keywordSet;
+	private Opinion opinion;
 	
 	public Keyword() {
 	}
@@ -40,12 +40,12 @@ public class Keyword {
 		this.word = word;
 	}
 
-	public KeywordSet getKeywordSet() {
-		return keywordSet;
+	public Opinion getOpinion() {
+		return opinion;
 	}
 
-	public void setKeywordSet(KeywordSet keywordSet) {
-		this.keywordSet = keywordSet;
+	public void setOpinion(Opinion opinion) {
+		this.opinion = opinion;
 	}
 
 }

@@ -1,8 +1,12 @@
 package br.usp.cata.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cascade;
@@ -16,9 +20,9 @@ public class Opinion {
 	@GeneratedValue
 	private Long opinionID;
 	
-	@OneToOne
+	@OneToMany(mappedBy="opinion", fetch=FetchType.EAGER)
     @Cascade({CascadeType.ALL})
-	private KeywordSet keywordSet;
+    private Set<Keyword> keywords;
 	
 	@OneToOne
 	private PatternSuggestionPair patternSuggestionPair;
@@ -34,12 +38,12 @@ public class Opinion {
 		this.opinionID = opinionID;
 	}
 
-	public KeywordSet getKeywordSet() {
-		return keywordSet;
+	public Set<Keyword> getKeywords() {
+		return keywords;
 	}
 
-	public void setKeywordSet(KeywordSet keywordSet) {
-		this.keywordSet = keywordSet;
+	public void setKeywords(Set<Keyword> keywords) {
+		this.keywords = keywords;
 	}
 
 	public PatternSuggestionPair getPatternSuggestionPair() {

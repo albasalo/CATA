@@ -4,21 +4,27 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import org.arabidopsis.ahocorasick.SearchResult;
 
 import br.usp.cata.model.CheckedSegment;
+import br.usp.cata.model.Keyword;
 import br.usp.cata.model.Mistake;
+import br.usp.cata.model.Opinion;
 import br.usp.cata.model.Position;
 import br.usp.cata.model.RuleInstance;
+import br.usp.cata.service.OpinionService;
 
 
 public class Checker {
 	
 	private ArrayList<ArrayList<CheckedSegment>> checkedText;
+	private final OpinionService opinionService;
 	private int numOfMistakes;
 	
-	public Checker(TextAnalyzer textAnalyzer, RulesTrees rulesTrees) {
+	public Checker(TextAnalyzer textAnalyzer, RulesTrees rulesTrees, OpinionService opinionService) {
+		this.opinionService = opinionService;
 		checkText(textAnalyzer, rulesTrees);
 	}
 	
@@ -187,6 +193,36 @@ public class Checker {
 				textAnalyzer.getEndsTokenized(), mistakesList);
 		addMistakes(lemmasSearcher, textAnalyzer.getStartsLemmatized(), 
 				textAnalyzer.getEndsLemmatized(), mistakesList);
+		
+		List<String> thisTextKeywords = textAnalyzer.getKeywords();
+		
+		if(thisTextKeywords.size() > 15) {
+			ArrayList<Mistake> mistakesToRemove = new ArrayList<Mistake>();
+			for(Mistake mistake : mistakesList) {
+				List<Opinion> opinions = opinionService.findByPair(mistake.getBrokenRule().getPatternSuggestionPair());
+				
+				for(Opinion opinion : opinions) {
+					int similarity = 0;
+					if(opinion.getKeywords() != null) {
+						Iterator<Keyword> keywords = opinion.getKeywords().iterator();
+						
+						while(keywords.hasNext()) {
+							String keyword = keywords.next().getWord();
+							if(thisTextKeywords.contains(keyword))
+								similarity++;
+						}
+						
+						if(similarity > (thisTextKeywords.size()/2)) {
+							mistakesToRemove.add(mistake);
+							break;
+						}
+					}
+				}
+			}
+			for(Mistake mistake : mistakesToRemove)
+				mistakesList.remove(mistake);
+		}
+		
 		numOfMistakes = mistakesList.size();
 		
 		ArrayList<ArrayList<Mistake>> mistakes = new ArrayList<ArrayList<Mistake>>();

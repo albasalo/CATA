@@ -12,7 +12,6 @@ import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 
 import br.usp.cata.model.AdviceFilter;
 import br.usp.cata.model.Keyword;
-import br.usp.cata.model.KeywordSet;
 import br.usp.cata.model.Languages;
 import br.usp.cata.model.Opinion;
 import br.usp.cata.service.OpinionService;
@@ -77,7 +76,7 @@ public class SuggestionsController {
 		FileProcessor fileProcessor = new FileProcessor(file);		
 		TextAnalyzer textAnalyzer = new TextAnalyzer(fileProcessor.getText(), language, servletContext);
 		
-		Checker checker = new Checker(textAnalyzer, rulesTrees);
+		Checker checker = new Checker(textAnalyzer, rulesTrees, opinionService);
 		result.include("numOfMistakes", checker.getNumOfMistakes());
 		
 		if(checker.getNumOfMistakes() != 0) {
@@ -114,22 +113,22 @@ public class SuggestionsController {
 		i++;
 		String[] keywords = data.substring(i).split(";");
 		
-		HashSet<Keyword> keywordsSet = new HashSet<Keyword>();	
-		KeywordSet keywordSet = new KeywordSet();
+		Opinion opinion = new Opinion();
+		HashSet<Keyword> keywordSet = new HashSet<Keyword>();	
 		for(String keyword : keywords) {
 			if(!keyword.equals("")) {
 				Keyword kw = new Keyword();
 				kw.setWord(keyword);
-				kw.setKeywordSet(keywordSet);
-				keywordsSet.add(kw);
+				kw.setOpinion(opinion);
+				keywordSet.add(kw);
 			}
 		}		
-		keywordSet.setKeywords(keywordsSet);
 		
-		Opinion opinion = new Opinion();
-		opinion.setKeywordSet(keywordSet);
-		opinion.setPatternSuggestionPair(patternSuggestionPairService.findById(pairID));
-		
-		opinionService.saveOrUpdate(opinion);
+		if(!keywordSet.isEmpty()) {
+			opinion.setKeywords(keywordSet);
+			opinion.setPatternSuggestionPair(patternSuggestionPairService.findById(pairID));
+			
+			opinionService.saveOrUpdate(opinion);
+		}
 	}
 }
