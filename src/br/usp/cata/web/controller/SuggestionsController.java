@@ -1,5 +1,7 @@
 package br.usp.cata.web.controller;
 
+import java.util.HashSet;
+
 import javax.servlet.ServletContext;
 
 import br.com.caelum.vraptor.Path;
@@ -9,7 +11,12 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 
 import br.usp.cata.model.AdviceFilter;
+import br.usp.cata.model.Keyword;
+import br.usp.cata.model.KeywordSet;
 import br.usp.cata.model.Languages;
+import br.usp.cata.model.Opinion;
+import br.usp.cata.service.OpinionService;
+import br.usp.cata.service.PatternSuggestionPairService;
 import br.usp.cata.service.RuleService;
 import br.usp.cata.service.SourceService;
 import br.usp.cata.service.UserService;
@@ -25,15 +32,20 @@ import br.usp.cata.web.interceptor.IrrestrictAccess;
 public class SuggestionsController {
 	
 	private final Result result;
+	private final OpinionService opinionService;
+	private final PatternSuggestionPairService patternSuggestionPairService;
 	private final RuleService ruleService;
 	private final SourceService sourceService;
 	private final UserService userService;
 	private final UserSession userSession;
 	private final ServletContext servletContext;
 
-	public SuggestionsController(Result result, RuleService ruleService, SourceService sourceService, 
-			UserService userService, UserSession userSession, ServletContext servletContext) {
+	public SuggestionsController(Result result, OpinionService opinionService, PatternSuggestionPairService patternSuggestionPairService,
+			RuleService ruleService, SourceService sourceService, UserService userService,
+			UserSession userSession, ServletContext servletContext) {
 		this.result = result;
+		this.opinionService = opinionService;
+		this.patternSuggestionPairService = patternSuggestionPairService;
 		this.ruleService = ruleService;
 		this.sourceService = sourceService;
 		this.userService = userService;
@@ -84,6 +96,40 @@ public class SuggestionsController {
 	@Post
 	@Path("suggestions/opinion/{data}")
 	public void opinion(String data) {
+		int i;
 		
+		//FIXME
+		String type = "";
+		for(i = 0; i < data.length() && data.charAt(i) != '|'; i++)
+			type += data.charAt(i);
+		if(type == "agree")
+			return;
+		
+		i++;	
+		String id = "";
+		for(; i < data.length() && data.charAt(i) != '|'; i++)
+			id += data.charAt(i);
+		long pairID = Long.parseLong(id);
+		
+		i++;
+		String[] keywords = data.substring(i).split(";");
+		
+		HashSet<Keyword> keywordsSet = new HashSet<Keyword>();	
+		KeywordSet keywordSet = new KeywordSet();
+		for(String keyword : keywords) {
+			if(!keyword.equals("")) {
+				Keyword kw = new Keyword();
+				kw.setWord(keyword);
+				kw.setKeywordSet(keywordSet);
+				keywordsSet.add(kw);
+			}
+		}		
+		keywordSet.setKeywords(keywordsSet);
+		
+		Opinion opinion = new Opinion();
+		opinion.setKeywordSet(keywordSet);
+		opinion.setPatternSuggestionPair(patternSuggestionPairService.findById(pairID));
+		
+		opinionService.saveOrUpdate(opinion);
 	}
 }

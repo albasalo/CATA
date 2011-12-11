@@ -1,12 +1,9 @@
 package br.usp.cata.model;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -19,13 +16,12 @@ public class Opinion {
 	@GeneratedValue
 	private Long opinionID;
 	
-	@OneToMany(mappedBy="opinion", fetch=FetchType.EAGER)
+	@OneToOne
     @Cascade({CascadeType.ALL})
-	private Set<Agree> agree;
+	private KeywordSet keywordSet;
 	
-	@OneToMany(mappedBy="opinion", fetch=FetchType.EAGER)
-    @Cascade({CascadeType.ALL})
-	private Set<Disagree> disagree;
+	@OneToOne
+	private PatternSuggestionPair patternSuggestionPair;
 	
 	public Opinion() {
 	}
@@ -38,32 +34,20 @@ public class Opinion {
 		this.opinionID = opinionID;
 	}
 
-	public Set<Agree> getAgree() {
-		return agree;
+	public KeywordSet getKeywordSet() {
+		return keywordSet;
 	}
 
-	public void setAgree(Set<Agree> agree) {
-		this.agree = agree;
+	public void setKeywordSet(KeywordSet keywordSet) {
+		this.keywordSet = keywordSet;
 	}
 
-	public Set<Disagree> getDisagree() {
-		return disagree;
+	public PatternSuggestionPair getPatternSuggestionPair() {
+		return patternSuggestionPair;
 	}
 
-	public void setDisagree(Set<Disagree> disagree) {
-		this.disagree = disagree;
-	}
-	
-	public int getAgreeSize() {
-		if(agree != null)
-			return agree.size();
-		return 0;
-	}
-
-	public int getDisagreeSize() {
-		if(disagree != null)
-			return disagree.size();
-		return 0;
+	public void setPatternSuggestionPair(PatternSuggestionPair patternSuggestionPair) {
+		this.patternSuggestionPair = patternSuggestionPair;
 	}
 	
 }

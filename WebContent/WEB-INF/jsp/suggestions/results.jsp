@@ -20,12 +20,12 @@
 		    function giveOpinion(type, pairID, mistakeID) {
 		    	var mistake = "#mistake" + mistakeID;
 		    	var url = "<c:url value='/suggestions/opinion'/>";
-		    	url = url + "/";
+		    	url = url + "/" + type + "|" + pairID + "|" + $("#keywords").text();
 		    	if(type == "agree") {
 		    		$.ajax(
 		    		{		
 		    			type: "POST",
-		    			url: url + "agree|" + $("#keywords").text()
+		    			url: url
 		    		});
 		    		var agree = "#agree" + mistakeID;
 		    		var val = parseInt($(agree).text()) + 1;
@@ -44,7 +44,7 @@
 		    		$.ajax(
 		    		{		
 		    			type: "POST",
-		    			url: url + "disagree|" + $("#keywords").text()
+		    			url: url
 		    		});
 		    		$(mistake).qtip("destroy");
 		    		$(mistake).removeClass("highlightedText");

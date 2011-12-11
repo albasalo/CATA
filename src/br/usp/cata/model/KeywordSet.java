@@ -21,7 +21,7 @@ public class KeywordSet {
 	private Long keywordSetID;
 	
 	@Column
-	@OneToMany(mappedBy="keywordSet", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="keywordSetID", fetch=FetchType.EAGER)
     @Cascade({CascadeType.ALL})
 	private Set<Keyword> keywords;
 
